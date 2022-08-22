@@ -8,16 +8,41 @@
     <!-- SVG FAVICON -->
     <link rel="icon" href="images/logo/favicon.svg" sizes="any" type="image/svg+xml">
 
-    <!-- CSS BOOTSTRAP -->
+    <!-- BOOTSTRAP CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
       crossorigin="anonymous"
     />
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
+    <!-- HOME PAGE HEADER -->
     <?php include ("components/home-header.html"); ?>
+
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8">
+            abc
+          </div>
+  
+          <div class="col-sm-4">
+            cba
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDER DAS PRINCIPAIS CATEGORIAS -->
+      <?php include ("components/principais-categorias.html") ?>
+    </main>
+    
+
+    <!-- FOOTER -->
+    <?php include ("components/footer.html") ?>
 
     <!-- JS BOOTSTRAP BUNDLE -->
     <script

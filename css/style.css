@@ -1,0 +1,25 @@
+/* Montserrat Import */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;700&display=swap');
+
+:root {
+    --primary-color: #026773;
+    --text-color: #000;
+    --blue-vertical-gradient: linear-gradient(180deg, #15A0B0, #074A59);
+    --navbar-height: 72px;
+    --font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+header {
+    font-size: 18px;
+    font-weight: 700;
+    height: var(--navbar-height);
+}
+
+header .navbar {
+    height: var(--navbar-height);
+}
