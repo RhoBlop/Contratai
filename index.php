@@ -17,7 +17,7 @@
     />
 
     <!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
     <!-- HOME PAGE HEADER -->

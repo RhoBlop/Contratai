@@ -1,25 +1,75 @@
 /* Montserrat Import */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
 
+/* VARIABLES */
 :root {
-    --primary-color: #026773;
+    --primary-green: #026773;
     --text-color: #000;
     --blue-vertical-gradient: linear-gradient(180deg, #15A0B0, #074A59);
     --navbar-height: 72px;
     --font-family: 'Montserrat', sans-serif;
-}
+} /* VARIABLES */
 
 body {
     font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: antialized;
+    -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
-}
+} 
 
 header {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 500;
     height: var(--navbar-height);
 }
 
 header .navbar {
     height: var(--navbar-height);
+}
+
+header .btn {
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+.btn-login {
+    position: relative;
+    transition: color .2s ease-in-out, transform .2s ease-in-out;
+    border: none;
+}
+.btn-login:hover {
+    color: var(--primary-green);
+    border: none;
+    transform: scale(1.1);
+}
+
+/* Animation */
+.btn-login::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.1em;
+    background-color: var(--primary-green);
+    transition: opacity 300ms, transform 300ms;
+    opacity: 1;
+    transform: scale(0);
+    transform-origin: center;
+}
+.btn-login:hover::after,
+.btn-login:focus::after{
+  transform: scale(1);
+}
+
+.btn-outline-green {
+    color: var(--primary-green);
+    border: 1.8px solid var(--text-color);
+    background-color: inherit;
+    transition: color .25s ease-in-out, background-color .25s ease-in-out, border-color .15s ease-in-out;
+}
+.btn-outline-green:hover {
+    color: #fff;
+    border-color: var(--primary-green);
+    background: var(--primary-green);
 }
