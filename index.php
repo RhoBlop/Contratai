@@ -16,6 +16,9 @@
       crossorigin="anonymous"
     />
 
+    <!-- FONT AWESOME -->
+
+
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="/css/style.css">
   </head>
@@ -24,15 +27,23 @@
     <?php include ("components/home-header.html"); ?>
 
     <main>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-8">
-            abc
-          </div>
-  
-          <div class="col-sm-4">
-            cba
-          </div>
+      <div class="container d-flex align-items-center flex-wrap justify-content-center p-3 my-5">
+        <!-- CAIXA DE PESQUISA -->
+        <div class="caixa-pesquisa">
+          <h1>Ajudando você sempre!</h1>
+          <h5>Você encontrará os melhores profissionais aqui, no Contrataí!</h5>
+          <form action="" method="POST">
+            <div class="barra-pesquisa">
+              <input id="pesquisa" type="text" placeholder="O que você está procurando?">
+              <!-- ÍCONE DE PESQUISA -->
+            </div>
+            <!-- BOTÕES PARA FILTRAGEM DA PESQUISA POR SERVIÇO -->
+              <?php include ("components/filtros-servico.html") ?>
+          </form>
+        </div> <!-- /CAIXA DE PESQUISA -->
+
+        <div class="imagem-trabalhador-home ">
+          <img src="images/worker-home-gradient.svg" alt="Stock Image Trabalhador" width="100%" min-width=200px>
         </div>
       </div>
 

@@ -73,3 +73,25 @@ header .btn {
     border-color: var(--primary-green);
     background: var(--primary-green);
 }
+
+
+.caixa-pesquisa {
+    width: 60%;
+}
+
+
+.imagem-trabalhador-home {
+    width: 40%;
+    /* background: url(/images/worker-home-gradient.svg) no-repeat right top;
+    width: 466px;
+    height: 530px; */
+}
+
+@media screen and ( max-width: 768px ) {
+    .caixa-pesquisa {
+        width: 100%;
+    }
+    .imagem-trabalhador-home {
+        display: none;
+    }
+}
