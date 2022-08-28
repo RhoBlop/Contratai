@@ -1,0 +1,79 @@
+<style>
+    .card-categoria {
+        width: 30%;
+        /* min-width: 180px; */
+        max-width: 280px;
+        overflow: hidden;
+    }
+
+    .badge-avaliacao {
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        min-width: 60px;
+        border-radius: 20px;
+        height: 23px;
+    }
+
+    .avaliacao-otima {
+        background-color: #FEF3CD;
+        color: #F4BF00;
+    }
+
+    .avaliacao-media {
+
+    }
+
+    .avaliacao-ruim {
+
+    }
+</style>
+<div class="container mb-5">
+    <div class="mb-4">
+        <h2>Principais Categorias</h2>
+        <h6 class="text-muted">Veja quais são as categorias mais procuradas</h6>
+    </div>
+    <!-- FUTURE SLIDER -->
+    <div class="d-flex justify-content-between flex-wrap">
+        <div class="card card-categoria rounded-3">
+            <img src="images/temp/eletricista.png" class="card-img-top">
+            <div class="badge-avaliacao avaliacao-otima">
+                <!-- STAR ICON -->
+                <p>4.8</p>
+            </div>
+            <div class="card-body">
+              <h4>Eletricista</h4>
+              <p>100 cadastrados</p>
+              <a href="#" class="btn btn-outline-dark">Ver mais</a>
+            </div>
+        </div>
+
+        <div class="card card-categoria rounded-3">
+            <img src="images/temp/diarista.png" class="card-img-top">
+            <div class="badge-avaliacao avaliacao-media">
+                <!-- STAR ICON -->
+                3.9
+            </div>
+            <div class="card-body">
+              <h4>Diarista</h4>
+              <p>100 cadastrados</p>
+              <a href="#" class="btn btn-outline-dark">Ver mais</a>
+            </div>
+        </div>
+
+        <div class="card card-categoria rounded-3">
+            <img src="images/temp/pintor.png" class="card-img-top">
+            <div class="badge-avaliacao avaliacao-otima">
+                <!-- STAR ICON -->
+                4.5
+            </div>
+            <div class="card-body">
+              <h4>Pintor</h4>
+              <p>100 cadastrados</p>
+              <a href="#" class="btn btn-outline-dark">Ver mais</a>
+            </div>
+        </div>
+    </div> <!-- /FUTURE SLIDER -->
+</div>

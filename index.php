@@ -20,35 +20,46 @@
 
 
     <!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <!-- HOME PAGE HEADER -->
     <?php include ("components/home-header.html"); ?>
 
     <main>
-      <div class="container d-flex align-items-center flex-wrap justify-content-center p-3 my-5">
-        <!-- CAIXA DE PESQUISA -->
-        <div class="caixa-pesquisa">
-          <h1>Ajudando você sempre!</h1>
-          <h5>Você encontrará os melhores profissionais aqui, no Contrataí!</h5>
-          <form action="" method="POST">
-            <div class="barra-pesquisa">
-              <input id="pesquisa" type="text" placeholder="O que você está procurando?">
-              <!-- ÍCONE DE PESQUISA -->
-            </div>
-            <!-- BOTÕES PARA FILTRAGEM DA PESQUISA POR SERVIÇO -->
-              <?php include ("components/filtros-servico.html") ?>
-          </form>
-        </div> <!-- /CAIXA DE PESQUISA -->
-
-        <div class="imagem-trabalhador-home ">
-          <img src="images/worker-home-gradient.svg" alt="Stock Image Trabalhador" width="100%" min-width=200px>
+      <div class="container p-3 my-3">
+        <div class="row d-flex align-items-center flex-wrap justify-content-center">
+          <!-- CAIXA DE PESQUISA -->
+          <div class="col-sm-7 col-11 mb-4 mb-md-0">
+            <h1>Ajudando você sempre!</h1>
+            <h6 class="text-muted">Você encontrará os melhores profissionais aqui, no Contrataí!</h6>
+            <form action="" method="POST">
+              <div class="barra-pesquisa">
+                <input id="pesquisa" type="text" placeholder="O que você está procurando?" style="width: 75%">
+                <!-- ÍCONE DE PESQUISA -->
+              </div>
+              <!-- BOTÕES PARA FILTRAGEM DA PESQUISA POR SERVIÇO -->
+                <?php include ("components/filtros-servico.html") ?>
+            </form>
+          </div> <!-- /CAIXA DE PESQUISA -->
+  
+          <div class="col-sm-5 col-8">
+            <img src="images/worker-home-gradient.svg" alt="Stock Image Trabalhador" width="100%" min-width=200px>
+          </div>
         </div>
       </div>
 
       <!-- SLIDER DAS PRINCIPAIS CATEGORIAS -->
       <?php include ("components/principais-categorias.html") ?>
+
+      <!-- SLIDER DE AVALIAÇÕES -->
+      <?php include ("components/avaliacoes-home.html") ?>
+
+      <!-- BANNER DE LOGIN -->
+      <div class="login-banner d-flex flex-column align-items-center justify-content-center">
+        <h1 class="text-white">Gostou? Então não perca mais tempo!</h1>
+        <button class="btn btn-dark">Comece já</button>
+      </div> <!-- /BANNER DE LOGIN -->
     </main>
     
 
