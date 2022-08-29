@@ -1,26 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contrataí</title>
-
-    <!-- SVG FAVICON -->
-    <link rel="icon" href="images/logo/favicon.svg" sizes="any" type="image/svg+xml">
-
-    <!-- BOOTSTRAP CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-      crossorigin="anonymous"
-    />
-
-    <!-- FONT AWESOME -->
-
-
-    <!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <?php include ("components/head.html") ?>
   </head>
   <body>
     <!-- HOME PAGE HEADER -->
@@ -44,7 +25,7 @@
           </div> <!-- /CAIXA DE PESQUISA -->
   
           <div class="col-sm-5 col-8">
-            <img src="images/worker-home-gradient.svg" alt="Stock Image Trabalhador" width="100%" min-width=200px>
+            <img src="images/trabalhador-gradiente-home.svg" alt="Stock Image Trabalhador" width="100%" min-width=200px>
           </div>
         </div>
       </div>

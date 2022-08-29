@@ -30,7 +30,6 @@ header .navbar {
 
 header .btn {
     border-radius: 12px;
-    font-weight: 700;
 }
 
 .btn-login {
@@ -84,6 +83,7 @@ header .btn {
     justify-content: center;
     align-items: center;
     background: url(../images/banner-gradient.svg) center;
+    background-size: cover;
 }
 
 
