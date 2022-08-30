@@ -65,7 +65,7 @@
         <main>
             <div class="container-fluid">
                 <div class="form-row row">
-                    <div class="col-12 col-md-6 col-lg-5 d-flex flex-column justify-content-center align-items-center">
+                    <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center">
                         <!-- LOGO -->
                         <a class="cadastro-logo" href="index.php">
                             <img src="images/logo/blue-logo.svg" alt="Logo" height="70px">
@@ -73,7 +73,7 @@
                         
                         <!-- Título Formulário -->
                         <div class="form-title mb-5">
-                            <h1>Crie sua conta!</h1>
+                            <h2>Crie sua conta!</h2>
                             <h6>Preencha suas informações</h6>
                         </div>
 
@@ -109,7 +109,7 @@
                         </form>
                     </div>
 
-                    <div class="cadastro-side-image col-md-6 col-lg-7"></div>
+                    <div class="cadastro-side-image col-md-6"></div>
                 </div>
             </div>
         </main>
