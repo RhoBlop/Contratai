@@ -114,13 +114,23 @@ main h1.text-gradient {
     background-size: cover;
 }
 
+/* Footer */
+
+#content-area {
+    padding-bottom: 25px;
+    padding-top: 25px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #fff;
+}
+
 .socials ion-icon{
     color: white;
-    font-size: 24px;
+    font-size: 32px;
 }
 
 .socials{
     list-style: none;
+    gap: 15px;
 }
 
 @media screen and ( max-width: 768px ) {
