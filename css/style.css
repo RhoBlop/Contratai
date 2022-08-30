@@ -19,7 +19,7 @@ body {
 
 header {
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 700;
     height: var(--navbar-height);
 }
 
@@ -32,10 +32,34 @@ header .btn {
     border-radius: 12px;
 }
 
+main h1, h2 {
+    font-weight: 700;
+}
+
+main h1 {
+    font-size: 90px;
+}
+
+main h2 {
+    font-size: 48px;
+}
+
+main h1.text-gradient {
+    background: linear-gradient(180deg, #15A0B0 0%, #074A59 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-muted {
+    font-size: 24px;
+}
+
 .btn-login {
     position: relative;
     transition: color .2s ease-in-out, transform .2s ease-in-out;
     border: none;
+    font-weight: 700;
 }
 .btn-login:hover {
     color: var(--primary-green);
@@ -63,6 +87,7 @@ header .btn {
 }
 
 .btn-outline-green {
+    font-weight: 700;
     color: var(--primary-green);
     border: 1.8px solid var(--text-color);
     background-color: inherit;

@@ -12,8 +12,9 @@
         <div class="row d-flex align-items-center flex-wrap justify-content-center">
           <!-- CAIXA DE PESQUISA -->
           <div class="col-sm-7 col-11 mb-4 mb-md-0">
-            <h1>Ajudando você sempre!</h1>
-            <h6 class="text-muted">Você encontrará os melhores profissionais aqui, no Contrataí!</h6>
+            <h1>Ajudando você</h1> <h1 class="text-gradient">sempre!</h1>
+            <!-- tive que botar um <br> mesmo fodase.. -->
+            <h6 class="text-muted">Você encontrará os melhores profissionais aqui, <br>no Contrataí!</h6>
             <form action="" method="POST">
               <div class="barra-pesquisa">
                 <input id="pesquisa" type="text" placeholder="O que você está procurando?" style="width: 75%">
@@ -38,7 +39,7 @@
 
       <!-- BANNER DE LOGIN -->
       <div class="login-banner d-flex flex-column align-items-center justify-content-center">
-        <h1 class="text-white">Gostou? Então não perca mais tempo!</h1>
+        <h2 class="text-white">Gostou? Então não perca mais tempo!</h2>
         <button class="btn btn-dark">Comece já</button>
       </div> <!-- /BANNER DE LOGIN -->
     </main>
