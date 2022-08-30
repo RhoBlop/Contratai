@@ -32,6 +32,8 @@ header .btn {
     border-radius: 12px;
 }
 
+/* Coloquei o tamanho das fontes e negrito (não sei como economizar linha nesse caso mas ta aí)*/ 
+
 main h1, h2 {
     font-weight: 700;
 }
@@ -44,6 +46,7 @@ main h2 {
     font-size: 48px;
 }
 
+/* Gradient pro texto da home*/
 main h1.text-gradient {
     background: linear-gradient(180deg, #15A0B0 0%, #074A59 100%);
     -webkit-background-clip: text;
@@ -111,6 +114,14 @@ main h1.text-gradient {
     background-size: cover;
 }
 
+.socials ion-icon{
+    color: white;
+    font-size: 24px;
+}
+
+.socials{
+    list-style: none;
+}
 
 @media screen and ( max-width: 768px ) {
     .caixa-pesquisa {
