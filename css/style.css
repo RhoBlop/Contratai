@@ -125,9 +125,9 @@ footer {
 }
 
 #content-area {
-    padding-bottom: 25px;
-    padding-top: 25px;
-    margin-bottom: 25px;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    margin-bottom: 1rem;
     border-bottom: 1px solid #fff;
 }
 
