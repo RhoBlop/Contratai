@@ -25,11 +25,11 @@ header {
 
 header .navbar {
     height: var(--navbar-height);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
 }
 
 header .btn {
     border-radius: 12px;
-    font-weight: 700;
 }
 
 .btn-login {
@@ -66,26 +66,26 @@ header .btn {
     color: var(--primary-green);
     border: 1.8px solid var(--text-color);
     background-color: inherit;
-    transition: color .25s ease-in-out, background-color .25s ease-in-out, border-color .15s ease-in-out;
+    transition: color .25s ease-in-out, background-color .25s ease-in-out, border-color .15s ease-in-out, transform .15s ease-in-out;
 }
 .btn-outline-green:hover {
     color: #fff;
     border-color: var(--primary-green);
     background: var(--primary-green);
+    transform: scale(1.1);
 }
 
 
-.caixa-pesquisa {
-    width: 60%;
+.login-banner {
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url(../images/banner-gradient.svg) center;
+    background-size: cover;
 }
 
-
-.imagem-trabalhador-home {
-    width: 40%;
-    /* background: url(/images/worker-home-gradient.svg) no-repeat right top;
-    width: 466px;
-    height: 530px; */
-}
 
 @media screen and ( max-width: 768px ) {
     .caixa-pesquisa {
