@@ -124,11 +124,6 @@ footer {
     background-color: var(--grey);
 }
 
-footer p {
-    margin: 0;
-    padding-bottom: 1rem;
-}
-
 #content-area {
     padding-bottom: 25px;
     padding-top: 25px;

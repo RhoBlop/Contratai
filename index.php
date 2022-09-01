@@ -4,6 +4,10 @@
     <?php include ("components/head.html") ?>
   </head>
   <body>
+    <!-- Modal -->
+
+    <?php include ("components/modal.html")?>
+    
     <!-- HOME PAGE HEADER -->
     <?php include ("components/home-header.html"); ?>
 
