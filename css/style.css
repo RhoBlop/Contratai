@@ -15,10 +15,10 @@ body {
     -webkit-font-smoothing: antialized;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
+    font-size: 18px;
 } 
 
 header {
-    font-size: 18px;
     font-weight: 700;
     height: var(--navbar-height);
 }
@@ -44,6 +44,19 @@ main h1 {
 
 main h2 {
     font-size: 48px;
+}
+
+.card-avaliacao .text-muted{
+    font-size: 14px;
+}
+
+.card-avaliacao {
+    border: solid 1px #000;
+
+}
+
+.avaliacao-usuario {
+    gap: 20px;
 }
 
 /* Gradient pro texto da home*/

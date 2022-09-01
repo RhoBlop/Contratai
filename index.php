@@ -7,6 +7,10 @@
     <!-- HOME PAGE HEADER -->
     <?php include ("components/home-header.html"); ?>
 
+    <!-- MODAL -->
+
+    <?php include ("components/modal.html"); ?>
+
     <main>
       <div class="container p-3 my-3">
         <div class="row d-flex align-items-center flex-wrap justify-content-center">
