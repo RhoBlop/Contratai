@@ -5,6 +5,7 @@
 :root {
     --primary-green: #026773;
     --text-color: #000;
+    --grey: #202020; 
     --blue-vertical-gradient: linear-gradient(180deg, #15A0B0, #074A59);
     --navbar-height: 72px;
     --font-family: 'Montserrat', sans-serif;
@@ -118,6 +119,7 @@ main h1.text-gradient {
 
 
 .login-banner {
+    margin-bottom: 100px;
     height: 280px;
     display: flex;
     flex-direction: column;
@@ -129,11 +131,21 @@ main h1.text-gradient {
 
 /* Footer */
 
+footer {
+    margin: 0;
+    padding: 0;
+    background-color: var(--grey);
+}
+
 #content-area {
-    padding-bottom: 25px;
-    padding-top: 25px;
-    margin-bottom: 25px;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    margin-bottom: 1rem;
     border-bottom: 1px solid #fff;
+}
+
+.links {
+    text-align: center;
 }
 
 .socials ion-icon{
@@ -143,7 +155,7 @@ main h1.text-gradient {
 
 .socials{
     list-style: none;
-    gap: 15px;
+    gap: 1rem;
 }
 
 @media screen and ( max-width: 768px ) {

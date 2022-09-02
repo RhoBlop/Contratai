@@ -8,13 +8,21 @@
 
     .badge-avaliacao {
         display: flex;
-        justify-content: space-between;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
         position: absolute;
         top: 10px;
         left: 15px;
         min-width: 60px;
         border-radius: 20px;
         height: 23px;
+        backdrop-filter: blur(20px);
+    }
+
+    ion-icon {
+        font-size: 16px;
+        margin-right: 0.5rem;
     }
 
     .avaliacao-otima {
@@ -23,13 +31,10 @@
     }
 
     .avaliacao-media {
-        background-color: #fef3cd42;
+        background-color: #cdfefb4d;
         color: #026773;
     }
 
-    .avaliacao-ruim {
-
-    }
 </style>
 <div class="container mb-5">
     <div class="mb-4">
@@ -42,7 +47,8 @@
             <img src="images/temp/eletricista.png" class="card-img-top">
             <div class="badge-avaliacao avaliacao-otima">
                 <!-- STAR ICON -->
-                <p>4.8</p>
+                <ion-icon name="star"></ion-icon>
+                4.8
             </div>
             <div class="card-body">
               <h4>Eletricista</h4>
@@ -55,6 +61,7 @@
             <img src="images/temp/diarista.png" class="card-img-top">
             <div class="badge-avaliacao avaliacao-media">
                 <!-- STAR ICON -->
+                <ion-icon name="star"></ion-icon>
                 3.9
             </div>
             <div class="card-body">
@@ -68,6 +75,7 @@
             <img src="images/temp/pintor.png" class="card-img-top">
             <div class="badge-avaliacao avaliacao-otima">
                 <!-- STAR ICON -->
+                <ion-icon name="star"></ion-icon>
                 4.5
             </div>
             <div class="card-body">
