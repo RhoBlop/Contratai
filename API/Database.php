@@ -1,8 +1,4 @@
-<?php 
-    $db = new Database();
-    $result = $db->updateUserInfo(5, "Thiago N.", "thiago.neves@gmail.com", "batata@123", "11111111111", "thiago.png", "2004-03-28", "27912345678");
-    echo $result;
-
+<?php
     class Database {
         // credenciais banco de dados
         private $dsn = "pgsql:host=fanny.db.elephantsql.com;port=5432;dbname=fiutwocm";
@@ -24,7 +20,7 @@
         }
 
         // retorna usuário com o id passado por parâmetro
-        public function getUser($id) {
+        public function selectUserById($id) {
             try {
                 $sql = "SELECT * FROM usuario WHERE idusr = :id";
     
@@ -43,19 +39,48 @@
             
         }
 
-        // insere um usuário com as informações passadas por parâmetro
-        public function createBasicUser($nome, $email, $senha) {
+        public function selectUserLogin($email, $senha) {
             try {
-                $sql = "INSERT INTO usuario(nomUsr, dscEmailUsr, dscSenhaUsr) VALUES (:nome, :email, :senha)";
-    
+                $sql = "SELECT idUsr FROM usuario WHERE (dscEmailUsr = :email) AND (dscSenhaUsr = :senha)";
+
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute([
-                    ":nome" => $nome,
                     ":email" => $email,
                     ":senha" => $senha
                 ]);
 
-                return true;
+                $result = $stmt->fetch();
+                return $result;
+            } catch (PDOException $e) {
+                echo "SQL Query Failed: {$e->getMessage()}";
+
+                return false;
+            }
+        }
+
+        // insere um usuário com as informações passadas por parâmetro
+        public function insertBasicUser($nome, $email, $senha) {
+            try {
+                // verifica se já existe um usuário cadastro com esse email
+                $verifySQL = "SELECT idUsr FROM usuario WHERE dscEmailUsr = :email";
+                $verifySTMT = $this->conn->prepare($verifySQL);
+                $verifySTMT->execute([ ":email" => $email ]);
+
+                // se não existem usuários cadastrados com esse email, segue para insert
+                if ($verifySTMT->rowCount() < 1) {
+                    // insert do novo usuário
+                    $insertSQL = "INSERT INTO usuario(nomUsr, dscEmailUsr, dscSenhaUsr) VALUES (:nome, :email, :senha)";
+                    $insertSTMT = $this->conn->prepare($insertSQL);
+                    $insertSTMT->execute([
+                        ":nome" => $nome,
+                        ":email" => $email,
+                        ":senha" => $senha
+                    ]);
+
+                    return true;
+                } else {
+                    return "ja existe um usuario cadastrado com esse email";
+                }
             } catch (PDOException $e) {
                 echo "SQL Query Failed: {$e->getMessage()}";
 
