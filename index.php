@@ -24,10 +24,6 @@
             <!-- tive que botar um <br> mesmo fodase.. -->
             <h6 class="text-muted">Você encontrará os melhores profissionais aqui, <br>no Contrataí!</h6>
             <form action="" method="POST">
-              <div class="barra-pesquisa">
-                <input id="pesquisa" type="text" placeholder="O que você está procurando?" style="width: 75%">
-                <!-- ÍCONE DE PESQUISA -->
-              </div>
               <!-- BOTÕES PARA FILTRAGEM DA PESQUISA POR SERVIÇO -->
                 <?php include ("components/filtros-servico.html") ?>
             </form>

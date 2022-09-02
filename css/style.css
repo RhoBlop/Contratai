@@ -33,6 +33,11 @@ header .btn {
     border-radius: 12px;
 }
 
+#barra-pesquisa {
+    width: 75%;
+}
+
+
 /* Coloquei o tamanho das fontes e negrito (não sei como economizar linha nesse caso mas ta aí)*/ 
 
 main h1, h2 {
