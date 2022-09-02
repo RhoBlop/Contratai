@@ -23,7 +23,7 @@
         }
 
         .cadastro-side-image {
-            background: url("images/trabalhador-cadastro.png") no-repeat 0px -100px;
+            background: url("images/teste2.png") no-repeat 0px -100px;
             background-size: cover;
         }
 
