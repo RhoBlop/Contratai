@@ -1,4 +1,5 @@
 <?php
+    // echo phpinfo();
     class Database {
         // credenciais banco de dados
         private $dsn = "pgsql:host=fanny.db.elephantsql.com;port=5432;dbname=fiutwocm";
@@ -9,12 +10,14 @@
         public function __construct() {
             // tenta realizar a conexão com o banco de dados
             try {
-                $this->conn = new PDO($this->dsn, $this->username, $this->password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                $this->conn = new PDO($this->dsn, $this->username, $this->password, array(PDO::ATTR_PERSISTENT => TRUE));
                 
                 // faz com que o PDO lance uma PDOException em qualquer problema que acontecer (teoricamente) 
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                echo "Conexão criada com sucesso \n";
             } catch (PDOException $e) {
-                echo "Connection failed: {$e->getMessage()}";
+                echo "Conexão falhou: {$e->getMessage()}";
                 exit();
             }
         }
@@ -32,7 +35,7 @@
                 $result = $stmt->fetch();
                 return $result;
             } catch (PDOException $e) {
-                echo "SQL Query Failed: {$e->getMessage()}";
+                echo "Query SQL Falhou: {$e->getMessage()}";
 
                 return false;
             }
@@ -50,9 +53,13 @@
                 ]);
 
                 $result = $stmt->fetch();
-                return $result;
+                if ($result) {
+                    return $result;
+                } else {
+                    return "credenciais invalidas";
+                }
             } catch (PDOException $e) {
-                echo "SQL Query Failed: {$e->getMessage()}";
+                echo "Query SQL Falhou: {$e->getMessage()}";
 
                 return false;
             }
@@ -82,7 +89,7 @@
                     return "ja existe um usuario cadastrado com esse email";
                 }
             } catch (PDOException $e) {
-                echo "SQL Query Failed: {$e->getMessage()}";
+                echo "Query SQL Falhou: {$e->getMessage()}";
 
                 return false;
             }
@@ -111,7 +118,7 @@
 
                 return true;
             } catch(PDOException $e) {
-                echo "SQL Query Failed: {$e->getMessage()}";
+                echo "Query SQL Falhou: {$e->getMessage()}";
 
                 return false;
             }
@@ -129,7 +136,7 @@
     
                 return true;
             } catch (PDOException $e) {
-                echo "SQL Query Failed: {$e->getMessage()}";
+                echo "Query SQL Falhou: {$e->getMessage()}";
 
                 return false;
             }

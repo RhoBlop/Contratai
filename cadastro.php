@@ -77,7 +77,7 @@
                             <h6>Preencha suas informações</h6>
                         </div>
 
-                        <form id="cadastro" class="form-cadastro d-flex flex-column" action="./api/apiCadastro.php" method="POST">
+                        <form id="cadastro" class="form-cadastro d-flex flex-column">
 
                             <!-- NOME -->
                             <div class="form-group mb-3">
@@ -100,7 +100,7 @@
                             <!-- CONFIRMAÇÃO SENHA -->
                             <div class="form-group mb-1">
                                 <label for="nome" class="form-label">Confirme sua senha</label>
-                                <input type="text" class="form-control" id="nome" name="senhaConfirma" placeholder="Digite sua senha" autocomplete="off">
+                                <input type="text" class="form-control" id="senhaConfirma" name="senhaConfirma" placeholder="Digite sua senha" autocomplete="off">
                             </div>
 
                             <a class="ms-auto mb-5">Esqueci minha senha</a>
@@ -113,30 +113,22 @@
             </div>
         </main>
         <script>
-            // let form = document.querySelector("#cadastro");
-            // form.addEventListener("submit", async (e) => {
-            //     event.preventDefault();
+            let form = document.querySelector("#cadastro");
+            form.addEventListener("submit", async (e) => {
+                event.preventDefault();
 
-            //     let formData = new URLSearchParams(new FormData(e.target)).toString();
-            //     let resp = await fetch("./api/apiCadastro.php", {
-            //         method: "POST",
-            //         headers: {
-            //             "Content-Type": "application/x-www-form-urlencoded"
-            //         },
-            //         body: formData
-            //     })
-            //     try {
-            //         let data = await resp.json();
-            //         console.log(data);
-            //     } catch (e) {
-            //         console.log(await resp.text());
-            //     }
-            // })
-
-            // function sendLogin() {
-            //     let data = new FormData(form);
-            //     console.log(data);
-            // }
+                // x-www-form-urlencoded
+                let formData = new URLSearchParams(new FormData(e.target)).toString();
+                let response = await fetch("./API/apiCadastro.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: formData
+                })
+                let data = await response.text();
+                console.log(data);
+            })
         </script>
     </body>
 </html>
