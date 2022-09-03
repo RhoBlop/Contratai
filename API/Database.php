@@ -15,7 +15,7 @@
                 // faz com que o PDO lance uma PDOException em qualquer problema que acontecer (teoricamente) 
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                echo "Conexão criada com sucesso \n";
+                // echo "Conexão criada com sucesso \n";
             } catch (PDOException $e) {
                 echo "Conexão falhou: {$e->getMessage()}";
                 exit();
@@ -54,7 +54,8 @@
 
                 $result = $stmt->fetch();
                 if ($result) {
-                    return $result;
+                    // retorna ID do usuário
+                    return $result['idusr'];
                 } else {
                     return "credenciais invalidas";
                 }

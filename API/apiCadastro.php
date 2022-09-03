@@ -13,7 +13,7 @@
     
     // tratamento das possíveis respostas de insertBasicUser
     if ($result === true) {
-        $resposta = [ "resposta" => "usuario cadastrado" ];
+        $resposta = [ "resposta" => "sucesso no cadastro" ];
     } else if ($result === "ja existe um usuario cadastrado com esse email") {
         $resposta = [ "resposta" => $result ];
     } else {
