@@ -23,7 +23,7 @@
         }
 
         .cadastro-side-image {
-            background: url("images/trabalhador-cadastro.png") no-repeat 0px -100px;
+            background: url("images/teste2.png") no-repeat 0px -100px;
             background-size: cover;
         }
 
@@ -65,15 +65,15 @@
         <main>
             <div class="container-fluid">
                 <div class="form-row row">
-                    <div class="col-12 col-md-6 col-lg-5 d-flex flex-column justify-content-center align-items-center">
+                    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
                         <!-- LOGO -->
                         <a class="cadastro-logo" href="index.php">
                             <img src="images/logo/blue-logo.svg" alt="Logo" height="70px">
                         </a>
                         
                         <!-- Título Formulário -->
-                        <div class="form-title mb-5">
-                            <h1>Crie sua conta!</h1>
+                        <div class="form-title d-flex flex-column mb-5">
+                            <h2>Crie sua conta!</h2>
                             <h6>Preencha suas informações</h6>
                         </div>
 
@@ -94,13 +94,13 @@
                             <!-- SENHA -->
                             <div class="form-group mb-3">
                                 <label for="senha" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="off">
+                                <input type="password" class="form-control" id="senha" name="senha" nameplaceholder="Digite sua senha" autocomplete="off">
                             </div>
 
                             <!-- CONFIRMAÇÃO SENHA -->
                             <div class="form-group mb-1">
                                 <label for="nome" class="form-label">Confirme sua senha</label>
-                                <input type="text" class="form-control" id="senhaConfirma" name="senhaConfirma" placeholder="Digite sua senha" autocomplete="off">
+                                <input type="text" class="form-control" id="nome" name="senhaConfirma" placeholder="Digite sua senha" autocomplete="off">
                             </div>
 
                             <a class="ms-auto mb-5">Esqueci minha senha</a>
@@ -108,27 +108,26 @@
                             <button type="submit" class="btn btn-green">Cadastrar</button>
                         </form>
                     </div>
-                    <div class="cadastro-side-image col-md-6 col-lg-7"></div>
+
+                    <div class="cadastro-side-image col-md-6"></div>
                 </div>
             </div>
         </main>
         <script>
             let form = document.querySelector("#cadastro");
-            form.addEventListener("submit", async (e) => {
+            console.log(form);
+            form.addEventListener("submit", (event) => {
+                console.log(event.target);
                 event.preventDefault();
-
-                // x-www-form-urlencoded
-                let formData = new URLSearchParams(new FormData(e.target)).toString();
-                let response = await fetch("./API/apiCadastro.php", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-                    body: formData
-                })
-                let data = await response.text();
-                console.log(data);
+                sendLogin();
             })
+
+            function sendLogin() {
+                let data = new FormData(form);
+                console.log(data);
+            }
+
+
         </script>
     </body>
 </html>

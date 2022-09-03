@@ -5,6 +5,7 @@
 :root {
     --primary-green: #026773;
     --text-color: #000;
+    --grey: #202020; 
     --blue-vertical-gradient: linear-gradient(180deg, #15A0B0, #074A59);
     --navbar-height: 72px;
     --font-family: 'Montserrat', sans-serif;
@@ -15,11 +16,11 @@ body {
     -webkit-font-smoothing: antialized;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
+    font-size: 18px;
 } 
 
 header {
-    font-size: 18px;
-    font-weight: 500;
+    font-weight: 700;
     height: var(--navbar-height);
 }
 
@@ -32,10 +33,51 @@ header .btn {
     border-radius: 12px;
 }
 
+
+/* Coloquei o tamanho das fontes e negrito (não sei como economizar linha nesse caso mas ta aí)*/ 
+
+main h1, h2 {
+    font-weight: 700;
+}
+
+main h1 {
+    font-size: 90px;
+}
+
+main h2 {
+    font-size: 48px;
+}
+
+.card-avaliacao .text-muted{
+    font-size: 14px;
+}
+
+.card-avaliacao {
+    border: solid 1px #000;
+
+}
+
+.avaliacao-usuario {
+    gap: 20px;
+}
+
+/* Gradient pro texto da home*/
+main h1.text-gradient {
+    background: linear-gradient(180deg, #15A0B0 0%, #074A59 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-muted {
+    font-size: 24px;
+}
+
 .btn-login {
     position: relative;
     transition: color .2s ease-in-out, transform .2s ease-in-out;
     border: none;
+    font-weight: 700;
 }
 .btn-login:hover {
     color: var(--primary-green);
@@ -63,6 +105,7 @@ header .btn {
 }
 
 .btn-outline-green {
+    font-weight: 700;
     color: var(--primary-green);
     border: 1.8px solid var(--text-color);
     background-color: inherit;
@@ -77,6 +120,7 @@ header .btn {
 
 
 .login-banner {
+    margin-bottom: 100px;
     height: 280px;
     display: flex;
     flex-direction: column;
@@ -86,6 +130,34 @@ header .btn {
     background-size: cover;
 }
 
+/* Footer */
+
+footer {
+    margin: 0;
+    padding: 0;
+    background-color: var(--grey);
+}
+
+#content-area {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #fff;
+}
+
+.links {
+    text-align: center;
+}
+
+.socials ion-icon{
+    color: white;
+    font-size: 32px;
+}
+
+.socials{
+    list-style: none;
+    gap: 1rem;
+}
 
 @media screen and ( max-width: 768px ) {
     .caixa-pesquisa {

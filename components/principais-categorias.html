@@ -1,20 +1,20 @@
 <style>
-    .card-categoria {
-        width: 30%;
-        /* min-width: 180px; */
-        max-width: 280px;
-        overflow: hidden;
-    }
-
     .badge-avaliacao {
         display: flex;
-        justify-content: space-between;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
         position: absolute;
-        top: 10px;
-        left: 15px;
+        top: 1rem;
+        left: 1rem;
         min-width: 60px;
         border-radius: 20px;
-        height: 23px;
+        backdrop-filter: blur(20px);
+    }
+
+    ion-icon {
+        font-size: 16px;
+        margin-right: 0.5rem;
     }
 
     .avaliacao-otima {
@@ -23,57 +23,61 @@
     }
 
     .avaliacao-media {
-        background-color: #fef3cd42;
+        background-color: #cdfefb4d;
         color: #026773;
     }
 
-    .avaliacao-ruim {
-
-    }
 </style>
-<div class="container mb-5">
+<div class="container align-items-center mb-5">
     <div class="mb-4">
         <h2>Principais Categorias</h2>
         <h6 class="text-muted">Veja quais são as categorias mais procuradas</h6>
     </div>
     <!-- FUTURE SLIDER -->
-    <div class="d-flex justify-content-between flex-wrap">
-        <div class="card card-categoria rounded-3">
-            <img src="images/temp/eletricista.png" class="card-img-top">
-            <div class="badge-avaliacao avaliacao-otima">
-                <!-- STAR ICON -->
-                <p>4.8</p>
+    <div class="row g-5">
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card card-categoria">
+                <img src="images/temp/eletricista.png" class="card-img-top">
+                <div class="badge-avaliacao avaliacao-otima px-2">
+                    <!-- STAR ICON -->
+                    <ion-icon name="star"></ion-icon>
+                    4.8
+                </div>
+                <div class="card-body">
+                    <h4>Eletricista</h4>
+                    <p>100 cadastrados</p>
+                    <a href="#" class="btn btn-outline-dark">Ver mais</a>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-              <h4>Eletricista</h4>
-              <p>100 cadastrados</p>
-              <a href="#" class="btn btn-outline-dark">Ver mais</a>
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card card-categoria rounded-3">
+                <img src="images/temp/diarista.png" class="card-img-top">
+                <div class="badge-avaliacao avaliacao-media px-2">
+                    <!-- STAR ICON -->
+                    <ion-icon name="star"></ion-icon>
+                    3.9
+                </div>
+                <div class="card-body">
+                    <h4>Diarista</h4>
+                    <p>100 cadastrados</p>
+                    <a href="#" class="btn btn-outline-dark">Ver mais</a>
+                </div>
             </div>
         </div>
-
-        <div class="card card-categoria rounded-3">
-            <img src="images/temp/diarista.png" class="card-img-top">
-            <div class="badge-avaliacao avaliacao-media">
-                <!-- STAR ICON -->
-                3.9
-            </div>
-            <div class="card-body">
-              <h4>Diarista</h4>
-              <p>100 cadastrados</p>
-              <a href="#" class="btn btn-outline-dark">Ver mais</a>
-            </div>
-        </div>
-
-        <div class="card card-categoria rounded-3">
-            <img src="images/temp/pintor.png" class="card-img-top">
-            <div class="badge-avaliacao avaliacao-otima">
-                <!-- STAR ICON -->
-                4.5
-            </div>
-            <div class="card-body">
-              <h4>Pintor</h4>
-              <p>100 cadastrados</p>
-              <a href="#" class="btn btn-outline-dark">Ver mais</a>
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card card-categoria rounded-3">
+                <img src="images/temp/pintor.png" class="card-img-top">
+                <div class="badge-avaliacao avaliacao-otima px-2">
+                    <!-- STAR ICON -->
+                    <ion-icon name="star"></ion-icon>
+                    4.5
+                </div>
+                <div class="card-body">
+                <h4>Pintor</h4>
+                <p>100 cadastrados</p>
+                <a href="#" class="btn btn-outline-dark">Ver mais</a>
+                </div>
             </div>
         </div>
     </div> <!-- /FUTURE SLIDER -->
