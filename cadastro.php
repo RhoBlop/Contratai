@@ -23,7 +23,7 @@
         }
 
         .cadastro-side-image {
-            background: url("images/teste2.png") no-repeat 0px -100px;
+            background: url("images/teste2.jpg") no-repeat 0px -100px;
             background-size: cover;
         }
 
@@ -61,6 +61,9 @@
             }
         }
     </style>
+
+    <script src="js/requisicoesAPI.js"></script>
+
     <body>
         <main>
             <div class="container-fluid">
@@ -77,30 +80,30 @@
                             <h6>Preencha suas informações</h6>
                         </div>
 
-                        <form id="cadastro" class="form-cadastro d-flex flex-column">
+                        <form id="cadastro" class="form-cadastro d-flex flex-column" onsubmit="sendCadastro(event)">
 
                             <!-- NOME -->
                             <div class="form-group mb-3">
                                 <label for="nome" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome" autocomplete="off">
+                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome" autocomplete="off" required>
                             </div>
 
                             <!-- EMAIL -->
                             <div class="form-group mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
                             </div>
 
                             <!-- SENHA -->
                             <div class="form-group mb-3">
                                 <label for="senha" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="senha" name="senha" nameplaceholder="Digite sua senha" autocomplete="off">
+                                <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="off" required>
                             </div>
 
                             <!-- CONFIRMAÇÃO SENHA -->
                             <div class="form-group mb-1">
                                 <label for="nome" class="form-label">Confirme sua senha</label>
-                                <input type="text" class="form-control" id="nome" name="senhaConfirma" placeholder="Digite sua senha" autocomplete="off">
+                                <input type="password" class="form-control" id="nome" name="senhaConfirma" placeholder="Digite sua senha" autocomplete="off" required>
                             </div>
 
                             <a class="ms-auto mb-5">Esqueci minha senha</a>
@@ -113,21 +116,5 @@
                 </div>
             </div>
         </main>
-        <script>
-            let form = document.querySelector("#cadastro");
-            console.log(form);
-            form.addEventListener("submit", (event) => {
-                console.log(event.target);
-                event.preventDefault();
-                sendLogin();
-            })
-
-            function sendLogin() {
-                let data = new FormData(form);
-                console.log(data);
-            }
-
-
-        </script>
     </body>
 </html>
