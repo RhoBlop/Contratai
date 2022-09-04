@@ -5,6 +5,6 @@
         <script src="js/isAuthenticated.js"></script>
     </head>
     <body>
-        
+        <?php include ("components/login-header.html") ?>
     </body>
 </html>
