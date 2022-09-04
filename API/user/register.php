@@ -10,7 +10,7 @@
     }
 
     // classe PDO para realização de operações no BD
-    require ("../Database.php");
+    require ("../../php/Database.php");
     $db = new Database();
 
     // destructuring das variáveis recebidas pelo POST request
