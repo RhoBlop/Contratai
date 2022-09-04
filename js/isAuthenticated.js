@@ -2,12 +2,13 @@ isAuthenticated()
     .then( auth => {
         if (!auth) {
             window.location.replace("index.php");
+        } else {
+            console.log("Usuário autenticado");
         }
-        console.log("Usuário autenticado");
     });
 
 async function isAuthenticated() {
-    let response = await fetch("./API/apiAuthenticate.php", {
+    let response = await fetch("./API/authenticate.php", {
         method: "POST",
         credentials: "same-origin",
         headers: {
@@ -16,7 +17,7 @@ async function isAuthenticated() {
         }
     });
     let data = await response.json();
-    let authenticated = data.resposta;
+    let { auth } = data;
 
-    return authenticated;
+    return auth;
 }

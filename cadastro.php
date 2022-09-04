@@ -103,7 +103,7 @@
                             <!-- CONFIRMAÇÃO SENHA -->
                             <div class="form-group mb-1">
                                 <label for="nome" class="form-label">Confirme sua senha</label>
-                                <input type="password" class="form-control" id="nome" name="senhaConfirma" placeholder="Digite sua senha" autocomplete="off" required>
+                                <input type="password" class="form-control" id="nome" name="confirmSenha" placeholder="Digite sua senha" autocomplete="off" required>
                             </div>
 
                             <a class="ms-auto mb-5">Esqueci minha senha</a>

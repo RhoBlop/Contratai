@@ -5,7 +5,7 @@ async function sendCadastro(event) {
     // transforma os dados do formulário para o formato x-www-form-urlencoded
     let formData = new URLSearchParams(new FormData(event.target)).toString();
 
-    let response = await fetch("./API/apiCadastro.php", {
+    let response = await fetch("./API/user/register.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -18,7 +18,7 @@ async function sendCadastro(event) {
 }
 
 // verifica se o email já está cadastrado no banco de dados
-// adicionado ao onblur de input para comodidade do usuário (não é necessário enviar o formulário)
+// adicionado ao onblur de input para comodidade do usuário (não é necessário enviar o formulário para checar)
 async function checkIfValidEmail() {
 
 }
@@ -29,7 +29,7 @@ async function sendLogin(event) {
 
     let formData = new URLSearchParams(new FormData(event.target)).toString();
 
-    let response = await fetch("./API/apiLogin.php", {
+    let response = await fetch("./API/login.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",

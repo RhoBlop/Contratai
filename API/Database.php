@@ -128,7 +128,7 @@
         // deleta um usuário a partir do id passado por parâmetro
         public function deleteUser($id) {
             try {
-                $sql = "DELETE FROM usuario WHERE idusr=:id";
+                $sql = "DELETE FROM usuario WHERE idusr = :id";
     
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute([
