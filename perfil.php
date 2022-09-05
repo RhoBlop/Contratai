@@ -7,7 +7,7 @@
     <body>
         <?php include ("components/login-header.html") ?>
 
-        <main class="min-vh-100">
+        <main>
             <div class="container p-3 my-3">
                 <div class="row">
 

@@ -25,7 +25,7 @@
           </div> <!-- /CAIXA DE PESQUISA -->
   
           <div class="col-sm-5 col-8">
-            <img src="images/trabalhador-gradiente-home.svg" alt="Stock Image Trabalhador" width="100%" min-width=200px>
+            <img src="images\Code typing (1).gif" alt="Stock Image Trabalhador" width="100%" min-width=200px>
           </div>
         </div>
       </div>

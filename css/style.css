@@ -3,6 +3,7 @@
 
 /* VARIABLES */
 :root {
+    --background: #F8F8F8;
     --primary-green: #026773;
     --text-color: #000;
     --grey: #202020; 
@@ -12,12 +13,14 @@
 } /* VARIABLES */
 
 body {
+    background-color: var(--background);
     font-family: 'Montserrat', sans-serif;
     -webkit-font-smoothing: antialized;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
     font-size: 18px;
 } 
+
 
 header {
     font-weight: 700;
