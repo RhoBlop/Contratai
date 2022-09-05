@@ -160,6 +160,16 @@ footer {
     gap: 0.5rem;
 }
 
+/* Perfil */
+
+#profile-content {
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+table .text-muted {
+    font-size: 18px;
+}
+
 @media screen and ( max-width: 768px ) {
     .caixa-pesquisa {
         width: 100%;
