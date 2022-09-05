@@ -10,21 +10,21 @@
         <main>
             <div class="container">
                 <div class="row">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Meu perfil</a>
+                    <ul class="navbar-nav flex-column col-3 my-3 mx-0">
+                        <li class="nav-item pe-3">
+                            <a class="nav-link active" aria-current="page" href="#"><i class="fa-solid fa-user fa-fw pe-3"></i>Meu perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Notificações</a>
+                            <a class="nav-link" href="#"><i class="fa-regular fa-bell fa-fw pe-3"></i>Notificações</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Segurança</a>
+                            <a class="nav-link" href="#"><i class="fa-solid fa-shield fa-fw pe-3"></i>Segurança</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Preferências</a>
+                            <a class="nav-link" href="#"><i class="fa-solid fa-gear fa-fw pe-3"></i>Preferências</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Admin</a>
+                            <a class="nav-link" href="#"><i class="fa-solid fa-screwdriver-wrench fa-fw pe-3"></i>Admin</a>
                         </li>
                     </ul>
                 </div>
