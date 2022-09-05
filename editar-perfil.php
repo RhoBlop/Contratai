@@ -10,6 +10,9 @@
         <main>
             <div class="container p-3 my-3">
                 <div class="row">
+                    
+                    <?php include("components/modal-exclude.html")?>
+
                     <?php include("components/sidebar.html")?>
 
                     <div class="flex-column col-8 px-3" id="profile-content">
