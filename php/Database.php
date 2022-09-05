@@ -1,5 +1,4 @@
 <?php
-    // echo phpinfo();
     class Database {
         // credenciais banco de dados
         private $dsn = "pgsql:host=fanny.db.elephantsql.com;port=5432;dbname=fiutwocm";
@@ -70,12 +69,10 @@
         public function insertBasicUser($nome, $email, $senha) {
             try {
                 // verifica se já existe um usuário cadastro com esse email
-                $verifySQL = "SELECT idUsr FROM usuario WHERE dscEmailUsr = :email";
-                $verifySTMT = $this->conn->prepare($verifySQL);
-                $verifySTMT->execute([ ":email" => $email ]);
+                $validEmail = $this->checkIfValidEmail($email);
 
                 // se não existem usuários cadastrados com esse email, segue para insert
-                if ($verifySTMT->rowCount() < 1) {
+                if ($validEmail) {
                     // insert do novo usuário
                     $insertSQL = "INSERT INTO usuario(nomUsr, dscEmailUsr, dscSenhaUsr) VALUES (:nome, :email, :senha)";
                     $insertSTMT = $this->conn->prepare($insertSQL);
@@ -97,27 +94,55 @@
         }
 
         // altera as informações de um usuário com id para os dados recebidos por parâmetro
-        public function updateUserInfo($id, $nome, $email, $senha, $cpf, $imgBase64, $datNascimento, $telefone) {
+        public function updateUserInfo($id, $nome, $email, $cpf, $imgBase64, $nascimento, $telefone, $senha=null) {
             try {
-                $sql = <<<SQL
-                UPDATE usuario
-                SET nomusr = :nome, dscEmailUsr = :email, dscSenhaUsr = :senha, numCPFusr = :cpf, dscFotoUsr = :img, datNascimentoUsr = :nascimento, numTelefoneUsr = :telefone
-                WHERE idUsr = :id
-                SQL;
-    
-                $stmt = $this->conn->prepare($sql);
-                $stmt->execute([
-                    ":id" => $id,  // INT
-                    ":nome" => $nome,  // STRING
-                    ":email" => $email,  // STRING
-                    ":senha" => $senha,  // STRING
-                    ":cpf" => $cpf,  // STRING
-                    ":img" => $imgBase64,  // STRING
-                    ":nascimento" => $datNascimento,  // ?
-                    ":telefone" => $telefone,  // STRING
+                $verifySQL = "SELECT idUsr FROM usuario WHERE (dscEmailUsr = :email) AND (idUsr <> :id)";
+                $verifySTMT = $this->conn->prepare($verifySQL);
+                $verifySTMT->execute([ 
+                    ":email" => $email,
+                    ":id" => $id
                 ]);
 
-                return true;
+                if ($verifySTMT->rowCount() < 1) {
+                    $updateTable = [
+                        "nomUsr" => $nome,
+                        "dscEmailUsr" => $email,
+                        "dscSenhaUsr" => $senha,
+                        "numCPFUsr" => $cpf,
+                        "dscFotoUsr" => $imgBase64,
+                        "datNascimentoUsr" => $nascimento,
+                        "numTelefoneUsr" => $telefone
+                    ];
+
+                    // check if empty for every value on associative array
+
+
+                    
+
+                    $set = "SET nomusr = :nome, dscEmailUsr = :email, numCPFusr = :cpf, dscFotoUsr = :img, datNascimentoUsr = :nascimento, numTelefoneUsr = :telefone"; 
+    
+                    if ($senha) {
+                        $set = "{$set}, dscsenhausr = :senha";
+                    }
+    
+                    $sql = "UPDATE {$set} WHERE idusr = :id";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->execute([
+                        ":id" => $id,  // INT
+                        ":nome" => $nome,  // STRING
+                        ":email" => $email,  // STRING
+                        ":senha" => $senha,  // STRING
+                        ":cpf" => $cpf,  // STRING
+                        ":img" => $imgBase64,  // STRING
+                        ":nascimento" => $nascimento,  // ?
+                        ":telefone" => $telefone,  // STRING
+                    ]);
+    
+                    return true;
+                } else {
+                    return "ja existe um usuario cadastrado com esse email";
+                }
+
             } catch(PDOException $e) {
                 echo "Query SQL Falhou: {$e->getMessage()}";
 
@@ -146,6 +171,18 @@
 
         public function getTopCategorias() {
 
+        }
+
+        public function checkIfValidEmail($email) {
+            $verifySQL = "SELECT idUsr FROM usuario WHERE dscEmailUsr = :email";
+            $verifySTMT = $this->conn->prepare($verifySQL);
+            $verifySTMT->execute([ ":email" => $email ]);
+
+            if ($verifySTMT->rowCount() < 1) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 ?>
