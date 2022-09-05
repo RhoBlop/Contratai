@@ -37,7 +37,7 @@
       <?php include ("components/avaliacoes-home.html") ?>
 
       <!-- BANNER DE LOGIN -->
-      <div class="login-banner d-flex flex-column align-items-center justify-content-center ">
+      <div class="login-banner d-flex flex-column align-items-center justify-content-center">
         <h2 class="text-white mb-3">Gostou? Então não perca mais tempo!</h2>
         <button class="btn btn-dark mt-3">Comece já</button>
       </div> <!-- /BANNER DE LOGIN -->

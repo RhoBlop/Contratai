@@ -3,7 +3,7 @@
       <div class="container">
         <!-- HEADER LOGO -->
         <a class="navbar-brand" href="index.php">
-          <img src="images/logo/blue-logo.svg" alt="Contratai Logo" height="35px">
+          <img src="images/logo/blue-logo.svg" alt="Contratai Logo" height="32px">
         </a> <!-- /HEADER LOGO -->
         <!-- SIDEBAR TOGGLER -->
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -17,30 +17,29 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div> <!-- /SIDEBAR HEADER -->
           <!-- SIDEBAR BODY -->
-          <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-center flex-grow-1">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.php">Início</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="sobre.php">Sobre</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="ajuda.php">Ajuda</a>
-              </li>
-            </ul>
-            <div class="d-flex justify-content-end align-items-center ">
-              <ul class="navbar-nav">
+          <div class="offcanvas-body justify-content-end align-content-center">
+            
+            <div class="d-flex align-content-center ">
+              <ul class="navbar-nav align-items-center">
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><ion-icon size="large" name="notifications-outline"></ion-icon></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><ion-icon size="large" name="chatbubbles-outline"></ion-icon></a>
+                </li>
                 <li class="nav-item dropdown">
-                  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
                     <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                   </a>
-                  <ul class="dropdown-menu text-small shadow">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                  <ul class="dropdown-menu dropdown-menu-end text-small shadow">
+                    <li><a class="dropdown-item" href="perfil.php">Perfil</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    <li><a class="dropdown-item" href="#">Mensagens</a></li>
+                    <li><a class="dropdown-item" href="#">Notificações</a></li>
+                    <li><a class="dropdown-item" href="#">Favoritos</a></li>
+                    <li><a class="dropdown-item" href="#">Configurações</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Sair</a></li>
                   </ul>
                 </li>
               </ul>
