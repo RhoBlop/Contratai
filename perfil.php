@@ -10,27 +10,10 @@
         <main class="min-vh-100">
             <div class="container p-3 my-3">
                 <div class="row">
-                    <ul class="navbar-nav flex-column col-2" id="side-bar">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#"><i class="fa-solid fa-user fa-fw pe-3"></i>Meu perfil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa-regular fa-bell fa-fw pe-3"></i>Notificações</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa-solid fa-shield-halved fa-fw pe-3"></i>Segurança</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa-solid fa-gear fa-fw pe-3"></i>Preferências</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa-solid fa-screwdriver-wrench fa-fw pe-3"></i>Admin</a>
-                        </li>
-                        <hr>
-                        <li class="nav-item text-danger">
-                            <a class="nav-link" href="#"><i class="fa-solid fa-trash fa-fw pe-3"></i>Excluir Conta</a>
-                        </li>
-                    </ul>
+
+                    <?php include("components/modal-exclude.html")?>
+
+                    <?php include("components/sidebar.html")?>
 
                     <div class="flex-column col-7 px-3" id="profile-content">
                         <div class="mb-5">

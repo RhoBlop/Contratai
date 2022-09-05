@@ -10,35 +10,15 @@
         <main>
             <div class="container p-3 my-3">
                 <div class="row">
-                    <ul class="navbar-nav flex-column col-2" id="side-bar">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#"><i class="fa-solid fa-user fa-fw pe-3"></i>Meu perfil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa-regular fa-bell fa-fw pe-3"></i>Notificações</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa-solid fa-shield-halved fa-fw pe-3"></i>Segurança</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa-solid fa-gear fa-fw pe-3"></i>Preferências</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa-solid fa-screwdriver-wrench fa-fw pe-3"></i>Admin</a>
-                        </li>
-                        <hr>
-                        <li class="nav-item text-danger">
-                            <a class="nav-link" href="#"><i class="fa-solid fa-trash fa-fw pe-3"></i>Excluir Conta</a>
-                        </li>
-                    </ul>
+                    <?php include("components/sidebar.html")?>
 
                     <div class="flex-column col-8 px-3" id="profile-content">
-                        <div class="mb-5">
+                        <div class="mb-4">
                             <h2>Editar perfil</h2>
                             <h6 class="text-muted">Edite os dados da sua conta</h6>
                         </div>
                         
-                        <img src="https://github.com/mdo.png" alt="" class="rounded-circle mb-5" height="148" width="148"> 
+                        <img src="https://github.com/mdo.png" alt="" class="rounded-circle mb-4" height="148" width="148"> 
 
                         <form action="">
                             <div class="form-group mb-3">

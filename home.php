@@ -6,6 +6,9 @@
     </head>
     <body>
         <?php include ("components/login-header.html") ?>
+        <main class="min-vh-100">
+
+        </main>
         <?php include ("components/footer.html")?>
     </body>
 
