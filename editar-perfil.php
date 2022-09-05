@@ -32,8 +32,50 @@
                         </li>
                     </ul>
 
-                    <div class="flex-column col-7 px-3" id="profile-content">
+                    <div class="flex-column col-8 px-3" id="profile-content">
+                        <div class="mb-5">
+                            <h2>Editar perfil</h2>
+                            <h6 class="text-muted">Edite os dados da sua conta</h6>
+                        </div>
                         
+                        <img src="https://github.com/mdo.png" alt="" class="rounded-circle mb-5" height="148" width="148"> 
+
+                        <form action="">
+                            <div class="form-group mb-3">
+                                <label for="nome" class="form-label">Nome Completo</label>
+                                <input type="text" class="form-control" id="nome" name="nome">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input class="form-control" type="password" id="senha" name="senha" disabled>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="cpf" class="form-label">CPF</label>
+                                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="164.437.627-03" disabled>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="regiao" class="form-label">Região</label>
+                                <input type="text" class="form-control" id="regiao" name="regiao">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="data" class="form-label">Data de Nascimento</label>
+                                <input type="date" class="form-control" id="data" name="data">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="data" class="form-label">Bio</label>
+                                <textarea class="form-control" name="bio" id="bio" rows="5"></textarea>
+                            </div>
+                            
+                            <div class="buttons d-flex justify-content-end align-items-center">
+                                <a href="perfil.php" class="btn btn-link me-3">Cancelar</a>
+                                <button type="submit" class="btn btn-outline-green">Salvar Alterações</button>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>

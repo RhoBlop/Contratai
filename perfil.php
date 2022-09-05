@@ -7,7 +7,7 @@
     <body>
         <?php include ("components/login-header.html") ?>
 
-        <main>
+        <main class="min-vh-100">
             <div class="container p-3 my-3">
                 <div class="row">
                     <ul class="navbar-nav flex-column col-2" id="side-bar">

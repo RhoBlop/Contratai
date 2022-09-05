@@ -186,6 +186,12 @@ hr {
     font-size: 20px;
 }
 
+/* Editar Perfil */
+
+textarea {
+    resize: none;
+}
+
 @media screen and ( max-width: 768px ) {
     .caixa-pesquisa {
         width: 100%;
