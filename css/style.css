@@ -140,9 +140,9 @@ footer {
 }
 
 #content-area {
-    padding-bottom: 1rem;
-    padding-top: 1rem;
-    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    margin-bottom: 0.5rem;
     border-bottom: 1px solid #fff;
 }
 
@@ -150,14 +150,17 @@ footer {
     text-align: center;
 }
 
-.socials ion-icon{
-    color: white;
+i {
     font-size: 24px;
+}
+
+.socials i{
+    color: white;
 }
 
 .socials{
     list-style: none;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
 /* Perfil */
@@ -168,6 +171,19 @@ footer {
 
 table .text-muted {
     font-size: 18px;
+}
+
+hr {
+    size: 1px;
+    color: solid rgba(0, 0, 0, 0.1)
+}
+
+.active {
+    color: var(--primary-green) !important;
+}
+
+#side-bar {
+    font-size: 20px;
 }
 
 @media screen and ( max-width: 768px ) {

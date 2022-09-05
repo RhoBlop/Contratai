@@ -33,40 +33,7 @@
                     </ul>
 
                     <div class="flex-column col-7 px-3" id="profile-content">
-                        <div class="mb-5">
-                            <h2>Meu Perfil</h2>
-                            <h6 class="text-muted">Dados da conta</h6>
-                        </div>
-
-                        <img src="https://github.com/mdo.png" alt="" class="rounded-circle mb-5" height="214" width="214">
-
-                        <table class="table mb-5">
-                            <tbody>
-                                <tr>
-                                    <td>Nome completo</td>
-                                    <td class="text-muted">Rafael Rodrigues</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Email</td>
-                                    <td class="text-muted">rafael1309mt@gmail.com</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Data de Nascimento</td>
-                                    <td class="text-muted">13/09/2004</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Telefone</td>
-                                    <td class="text-muted">(27) *****-0259</td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-
-                        <a href="editar-perfil.php" class="btn btn-outline-dark">Editar Perfil</a>
-
+                        
                     </div>
                 </div>
             </div>
