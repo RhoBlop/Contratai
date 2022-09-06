@@ -199,6 +199,15 @@ label {
     font-weight: 700;
 }
 
+.btn-link {
+    text-decoration: none;
+    color: #202020;
+}
+
+.btn-link:hover {
+    color: var(--primary-green);
+}
+
 @media screen and ( max-width: 768px ) {
     .caixa-pesquisa {
         width: 100%;

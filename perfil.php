@@ -7,7 +7,7 @@
     <body>
         <?php include ("components/login-header.html") ?>
 
-        <main>
+        <main class="min-vh-100">
             <div class="container p-3 my-3">
                 <div class="row">
 
@@ -20,9 +20,9 @@
                             <h2>Meu Perfil</h2>
                             <h6 class="text-muted">Dados da conta</h6>
                         </div>
-
-                        <img src="https://github.com/mdo.png" alt="" class="rounded-circle mb-5" height="214" width="214">
-
+                        <div class="d-flex justify-content-center">
+                            <img src="https://github.com/mdo.png" alt="" class="rounded-circle mb-5" height="214" width="214">
+                        </div>
                         <table class="table mb-5">
                             <tbody>
                                 <tr>
