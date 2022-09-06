@@ -132,6 +132,10 @@ main h1.text-gradient {
     background-size: cover;
 }
 
+.btn {
+    font-weight: 600;
+}
+
 /* Footer */
 
 footer {
