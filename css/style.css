@@ -12,6 +12,10 @@
     --font-family: 'Montserrat', sans-serif;
 } /* VARIABLES */
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: var(--background);
     font-family: 'Montserrat', sans-serif;
@@ -210,6 +214,15 @@ label {
 
 .btn-link:hover {
     color: var(--primary-green);
+}
+
+.form-control:focus {
+    transition: all 200ms linear;
+    box-shadow: none;
+    border: 1px solid #15A0B0;
+    outline-style: solid;
+    outline-color: #15A0B0;
+    outline-width: 1.5px;
 }
 
 @media screen and ( max-width: 768px ) {
