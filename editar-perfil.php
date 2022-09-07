@@ -9,19 +9,19 @@
 
         <main>
             <div class="container p-3 my-3">
-                <div class="row">
+                <div class="row gx-5">
                     
                     <?php include("components/modal-exclude.html")?>
 
                     <?php include("components/sidebar.html")?>
 
-                    <div class="flex-column col-8 px-3" id="profile-content">
+                    <div class="col-8 px-3" id="profile-content">
                         <div class="mb-4">
                             <h2>Editar perfil</h2>
                             <h6 class="text-muted">Edite os dados da sua conta</h6>
                         </div>
                         
-                        <img src="https://github.com/mdo.png" alt="" class="rounded-circle mb-4" height="148" width="148"> 
+                        <img src="https://cdn.discordapp.com/attachments/728388981443526660/1016843534390808646/unknown.png" alt="" class="rounded-circle mb-4" height="148" width="148"> 
 
                         <form action="">
                             <div class="form-group mb-3">

@@ -9,19 +9,19 @@
 
         <main class="min-vh-100">
             <div class="container p-3 my-3">
-                <div class="row">
+                <div class="row gx-5">
 
                     <?php include("components/modal-exclude.html")?>
 
                     <?php include("components/sidebar.html")?>
 
-                    <div class="flex-column col-7 px-3" id="profile-content">
+                    <div class="col-7 px-3" id="profile-content">
                         <div class="mb-5">
                             <h2>Meu Perfil</h2>
                             <h6 class="text-muted">Dados da conta</h6>
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <img src="https://github.com/mdo.png" alt="" class="rounded-circle mb-5" height="214" width="214">
+                        <div class="d-flex justify-content-center ">
+                            <img src="https://cdn.discordapp.com/attachments/728388981443526660/1016843534390808646/unknown.png" alt="" class="rounded-circle shadow-sm mb-5" height="214" width="214">
                         </div>
                         <table class="table mb-5">
                             <tbody>
