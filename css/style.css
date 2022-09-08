@@ -149,13 +149,6 @@ footer {
     font-size: 12px;
 }
 
-#content-area {
-    padding-bottom: 0.5rem;
-    padding-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    border-bottom: 1px solid #fff;
-}
-
 .links {
     text-align: center;
 }
