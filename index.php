@@ -25,7 +25,7 @@
           </div> <!-- /CAIXA DE PESQUISA -->
   
           <div class="col-sm-5 col-8">
-            <img src="images\Code typing (1).gif" alt="Stock Image Trabalhador" width="100%" min-width=200px>
+            <img src="images\business-merger-animate.svg" alt="Stock Image Trabalhador" width="100%" min-width=300px>
           </div>
         </div>
       </div>
