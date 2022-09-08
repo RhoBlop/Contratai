@@ -3,6 +3,7 @@
 
 /* VARIABLES */
 :root {
+    --background: #F8F8F8;
     --primary-green: #026773;
     --text-color: #000;
     --grey: #202020; 
@@ -11,13 +12,19 @@
     --font-family: 'Montserrat', sans-serif;
 } /* VARIABLES */
 
+* {
+    box-sizing: border-box;
+}
+
 body {
+    background-color: var(--background);
     font-family: 'Montserrat', sans-serif;
     -webkit-font-smoothing: antialized;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
     font-size: 18px;
 } 
+
 
 header {
     font-weight: 700;
@@ -120,7 +127,6 @@ main h1.text-gradient {
 
 
 .login-banner {
-    margin-bottom: 100px;
     height: 280px;
     display: flex;
     flex-direction: column;
@@ -130,18 +136,23 @@ main h1.text-gradient {
     background-size: cover;
 }
 
+.btn {
+    font-weight: 600;
+}
+
 /* Footer */
 
 footer {
     margin: 0;
     padding: 0;
     background-color: var(--grey);
+    font-size: 12px;
 }
 
 #content-area {
-    padding-bottom: 1rem;
-    padding-top: 1rem;
-    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    margin-bottom: 0.5rem;
     border-bottom: 1px solid #fff;
 }
 
@@ -149,14 +160,69 @@ footer {
     text-align: center;
 }
 
-.socials ion-icon{
+i {
+    font-size: 24px;
+}
+
+.socials i{
     color: white;
-    font-size: 32px;
 }
 
 .socials{
     list-style: none;
     gap: 1rem;
+}
+
+/* Perfil */
+
+#profile-content {
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+table .text-muted {
+    font-size: 18px;
+}
+
+hr {
+    size: 1px;
+    color: solid rgba(0, 0, 0, 0.1)
+}
+
+.active {
+    color: var(--primary-green) !important;
+}
+
+#side-bar {
+    font-size: 20px;
+}
+
+/* Editar Perfil */
+
+textarea {
+    resize: none;
+}
+
+label {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.btn-link {
+    text-decoration: none;
+    color: #202020;
+}
+
+.btn-link:hover {
+    color: var(--primary-green);
+}
+
+.form-control:focus {
+    transition: all 200ms linear;
+    box-shadow: none;
+    border: 1px solid #15A0B0;
+    outline-style: solid;
+    outline-color: #15A0B0;
+    outline-width: 1.5px;
 }
 
 @media screen and ( max-width: 768px ) {

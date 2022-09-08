@@ -3,7 +3,7 @@
       <div class="container">
         <!-- HEADER LOGO -->
         <a class="navbar-brand" href="index.php">
-          <img src="images/logo/blue-logo.svg" alt="Contratai Logo" height="35px">
+          <img src="images/logo/blue-logo.svg" alt="Contratai Logo" height="32px">
         </a> <!-- /HEADER LOGO -->
         <!-- SIDEBAR TOGGLER -->
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -17,57 +17,38 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div> <!-- /SIDEBAR HEADER -->
           <!-- SIDEBAR BODY -->
-          <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-center flex-grow-1">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.php">Início</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="sobre.php">Sobre</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="ajuda.php">Ajuda</a>
-              </li>
-            </ul>
-            <div class="d-flex justify-content-end align-items-center flex-grow 1">
-                <ul class="navbar-nav">
-                    <!-- Avatar -->
-                    <li class="nav-item dropdown">
-                      <a
-                        class="nav-link dropdown-toggle d-flex align-items-center"
-                        href="#"
-                        id="navbarDropdownMenuLink"
-                        role="button"
-                        data-mdb-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <img
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp"
-                          class="rounded-circle"
-                          height="22"
-                          alt="Portrait of a Woman"
-                          loading="lazy"
-                        />
-                      </a>
-                      <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li>
-                          <a class="dropdown-item" href="#">My profile</a>
-                        </li>
-                        <li>
-                          <a class="dropdown-item" href="#">Settings</a>
-                        </li>
-                        <li>
-                          <a class="dropdown-item" href="#">Logout</a>
-                        </li>
-                      </ul>
-                    </li>
+          <div class="offcanvas-body justify-content-end align-content-center">
+            
+            <div class="d-flex align-content-center">
+              <ul class="navbar-nav align-items-center gap-2">
+                <li class="nav-item">
+                  <a class="btn btn-outline-green" href="#">Anuncie</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="fa-regular fa-bell"></i></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="fa-regular fa-comments"></i></a>
+                </li>
+                <li class="nav-item dropdown p-2">
+                  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+                    <img src="https://cdn.discordapp.com/attachments/728388981443526660/1016843534390808646/unknown.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end text-small shadow">
+                    <li><a class="dropdown-item" href="perfil.php"><i class="fa-regular fa-user fa-lg pe-2"></i>Perfil</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa-regular fa-comment fa-lg pe-2"></i>Mensagens</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa-regular fa-bell fa-lg pe-2"></i>Notificações</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa-regular fa-heart fa-lg pe-2"></i>Favoritos</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gears fa-lg pe-2"></i>Configurações</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-arrow-right-from-bracket fa-lg pe-2"></i>Sair</a></li>
                   </ul>
+                </li>
+              </ul>
             </div>
           </div><!-- /SIDEBAR BODY -->
         </div> <!-- /SIDEBAR -->
       </div>
     </nav>
   </header>
-
-
-  

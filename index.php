@@ -25,7 +25,7 @@
           </div> <!-- /CAIXA DE PESQUISA -->
   
           <div class="col-sm-5 col-8">
-            <img src="images/trabalhador-gradiente-home.svg" alt="Stock Image Trabalhador" width="100%" min-width=200px>
+            <img src="images\Code typing (1).gif" alt="Stock Image Trabalhador" width="100%" min-width=200px>
           </div>
         </div>
       </div>
@@ -37,9 +37,9 @@
       <?php include ("components/avaliacoes-home.html") ?>
 
       <!-- BANNER DE LOGIN -->
-      <div class="login-banner d-flex flex-column align-items-center justify-content-center ">
+      <div class="login-banner d-flex flex-column align-items-center justify-content-center mb-5">
         <h2 class="text-white mb-3">Gostou? Então não perca mais tempo!</h2>
-        <button class="btn btn-dark mt-3">Comece já</button>
+        <button class="btn btn-dark btn-lg mt-3">Comece já</button>
       </div> <!-- /BANNER DE LOGIN -->
     </main>
     
