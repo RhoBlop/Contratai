@@ -2,7 +2,8 @@
     // header da requisição http para declarar que a resposta será um json
     header("Content-Type: application/json");
 
-    if (!isset($_POST["nome"], $_POST["email"], $_POST["senha"]) ) {
+    // falta localizacao
+    if (!isset($_POST["nome"], $_POST["email"], $_POST["localizacao"], $_POST["nascimento"], $_POST["bio"]) ) {
         echo json_encode([
             "resposta" => "parametros errados da requisicao POST"
         ]);
