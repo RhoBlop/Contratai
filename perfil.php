@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <?php include ("components/head.html") ?>
-        <!--<script src="js/isAuthenticated.js"></script>  -->
+        <script src="js/requisicoesAPI.js"></script>
     </head>
     <body>
         <?php include ("components/login-header.html") ?>
@@ -21,28 +21,28 @@
                             <h6 class="text-muted">Dados da conta</h6>
                         </div>
                         <div class="d-flex justify-content-center ">
-                            <img src="https://cdn.discordapp.com/attachments/728388981443526660/1016843534390808646/unknown.png" alt="" class="rounded-circle shadow-sm mb-5" height="214" width="214">
+                            <img id="imgPerfil" alt="" class="rounded-circle shadow-sm mb-5" height="214" width="214">
                         </div>
                         <table class="table mb-5">
                             <tbody>
                                 <tr>
                                     <td>Nome completo</td>
-                                    <td class="text-muted">Rafael Rodrigues</td>
+                                    <td class="text-muted" id="nome"></td>
                                 </tr>
 
                                 <tr>
                                     <td>Email</td>
-                                    <td class="text-muted">rafael1309mt@gmail.com</td>
+                                    <td class="text-muted" id="email"></td>
                                 </tr>
 
                                 <tr>
                                     <td>Data de Nascimento</td>
-                                    <td class="text-muted">13/09/2004</td>
+                                    <td class="text-muted" id="nascimento"></td>
                                 </tr>
 
                                 <tr>
                                     <td>Telefone</td>
-                                    <td class="text-muted">(27) *****-0259</td>
+                                    <td class="text-muted" id="telefone"></td>
                                 </tr>
 
                             </tbody>
@@ -58,6 +58,18 @@
         <?php include ("components/footer.html")?>
     </body>
 
+    <script>
+        // seta os campos da table com os dados do usuário
+        getLoggedUser()
+            .then(user => {
+                document.querySelector("#headerImgPerfil").src = user["imgusr"];
+                document.querySelector("#imgPerfil").src = user["imgusr"]
+                document.querySelector("#nome").innerText = user["nomusr"];
+                document.querySelector("#email").innerText = user["emailusr"];
+                document.querySelector("#nascimento").innerText = user["nascimentousr"];
+                document.querySelector("#telefone").innerText = user["telefoneusr"];
+            })
+    </script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"

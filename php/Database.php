@@ -9,14 +9,14 @@
         public function __construct() {
             // tenta realizar a conexão com o banco de dados
             try {
-                $this->conn = new PDO($this->dsn, $this->username, $this->password, array(PDO::ATTR_PERSISTENT => TRUE));
+                $this->conn = new PDO($this->dsn, $this->username, $this->password);
                 
                 // faz com que o PDO lance uma PDOException em qualquer problema que acontecer (teoricamente) 
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 // echo "Conexão criada com sucesso \n";
             } catch (PDOException $e) {
-                echo "Conexão falhou: {$e->getMessage()}";
+                echo json_encode(["resposta" => "Conexão falhou: {$e->getMessage()}"]);
                 exit();
             }
         }
@@ -24,7 +24,7 @@
         // retorna usuário com o id passado por parâmetro
         public function selectUserById($id) {
             try {
-                $sql = "SELECT * FROM usuario WHERE idusr = :id";
+                $sql = "SELECT nomusr, emailusr, senhausr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr FROM usuario WHERE idusr = :id";
     
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute([
@@ -34,16 +34,15 @@
                 $result = $stmt->fetch();
                 return $result;
             } catch (PDOException $e) {
-                echo "Query SQL Falhou: {$e->getMessage()}";
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
 
                 return false;
             }
-            
         }
 
         public function selectUserLogin($email, $senha) {
             try {
-                $sql = "SELECT idUsr FROM usuario WHERE (dscEmailUsr = :email) AND (dscSenhaUsr = :senha)";
+                $sql = "SELECT idusr FROM usuario WHERE (emailUsr = :email) AND (senhaUsr = :senha)";
 
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute([
@@ -59,7 +58,7 @@
                     return "credenciais invalidas";
                 }
             } catch (PDOException $e) {
-                echo "Query SQL Falhou: {$e->getMessage()}";
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
 
                 return false;
             }
@@ -74,7 +73,7 @@
                 // se não existem usuários cadastrados com esse email, segue para insert
                 if ($validEmail) {
                     // insert do novo usuário
-                    $insertSQL = "INSERT INTO usuario(nomUsr, dscEmailUsr, dscSenhaUsr) VALUES (:nome, :email, :senha)";
+                    $insertSQL = "INSERT INTO usuario(nomUsr, emailUsr, senhaUsr) VALUES (:nome, :email, :senha)";
                     $insertSTMT = $this->conn->prepare($insertSQL);
                     $insertSTMT->execute([
                         ":nome" => $nome,
@@ -87,16 +86,17 @@
                     return "ja existe um usuario cadastrado com esse email";
                 }
             } catch (PDOException $e) {
-                echo "Query SQL Falhou: {$e->getMessage()}";
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
 
                 return false;
             }
         }
 
         // altera as informações de um usuário com id para os dados recebidos por parâmetro
-        public function updateUserInfo($id, $nome, $email, $cpf, $imgBase64, $nascimento, $telefone, $senha=null) {
+        public function updateUserInfo($id, $nome, $email, $cpf, $imgBase64, $nascimento, $telefone, $bio) {
             try {
-                $verifySQL = "SELECT idUsr FROM usuario WHERE (dscEmailUsr = :email) AND (idUsr <> :id)";
+                // verifica se não existe nenhum email idêntico cadastrado (desconsiderando o email do próprio usuário)
+                $verifySQL = "SELECT idUsr FROM usuario WHERE (emailUsr = :email) AND (idUsr <> :id)";
                 $verifySTMT = $this->conn->prepare($verifySQL);
                 $verifySTMT->execute([ 
                     ":email" => $email,
@@ -104,47 +104,31 @@
                 ]);
 
                 if ($verifySTMT->rowCount() < 1) {
-                    $updateTable = [
-                        "nomUsr" => $nome,
-                        "dscEmailUsr" => $email,
-                        "dscSenhaUsr" => $senha,
-                        "numCPFUsr" => $cpf,
-                        "dscFotoUsr" => $imgBase64,
-                        "datNascimentoUsr" => $nascimento,
-                        "numTelefoneUsr" => $telefone
-                    ];
+                    $sql = <<<SQL
+                    UPDATE usuario
+                    SET nomusr = :nome, emailUsr = :email, cpfUsr = :cpf, imgUsr = :img, nascimentoUsr = :nascimento, telefoneUsr = :telefone, biografiaUsr = :bio
+                    WHERE idusr = :id
+                    SQL;
 
-                    // check if empty for every value on associative array
-
-
-                    
-
-                    $set = "SET nomusr = :nome, dscEmailUsr = :email, numCPFusr = :cpf, dscFotoUsr = :img, datNascimentoUsr = :nascimento, numTelefoneUsr = :telefone"; 
-    
-                    if ($senha) {
-                        $set = "{$set}, dscsenhausr = :senha";
-                    }
-    
-                    $sql = "UPDATE {$set} WHERE idusr = :id";
                     $stmt = $this->conn->prepare($sql);
                     $stmt->execute([
                         ":id" => $id,  // INT
                         ":nome" => $nome,  // STRING
                         ":email" => $email,  // STRING
-                        ":senha" => $senha,  // STRING
                         ":cpf" => $cpf,  // STRING
                         ":img" => $imgBase64,  // STRING
                         ":nascimento" => $nascimento,  // ?
                         ":telefone" => $telefone,  // STRING
+                        ":bio" => $bio
                     ]);
     
                     return true;
                 } else {
-                    return "ja existe um usuario cadastrado com esse email";
+                    return [ "resposta" => "ja existe um usuario cadastrado com esse email"  ];
                 }
 
             } catch(PDOException $e) {
-                echo "Query SQL Falhou: {$e->getMessage()}";
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
 
                 return false;
             }
@@ -153,7 +137,7 @@
         // deleta um usuário a partir do id passado por parâmetro
         public function deleteUser($id) {
             try {
-                $sql = "DELETE FROM usuario WHERE idusr = :id";
+                $sql = "DELETE FROM usuario WHERE idUsr = :id";
     
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute([
@@ -162,11 +146,10 @@
     
                 return true;
             } catch (PDOException $e) {
-                echo "Query SQL Falhou: {$e->getMessage()}";
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
 
                 return false;
             }
-
         }
 
         public function getTopCategorias() {
@@ -174,7 +157,7 @@
         }
 
         public function checkIfValidEmail($email) {
-            $verifySQL = "SELECT idUsr FROM usuario WHERE dscEmailUsr = :email";
+            $verifySQL = "SELECT idUsr FROM usuario WHERE emailUsr = :email";
             $verifySTMT = $this->conn->prepare($verifySQL);
             $verifySTMT->execute([ ":email" => $email ]);
 

@@ -17,11 +17,6 @@ async function sendCadastro(event) {
     console.log(data);
 }
 
-// verifica se o email já está cadastrado no banco de dados
-// adicionado ao onblur de input para comodidade do usuário (não é necessário enviar o formulário para checar)
-async function checkIfValidEmail() {
-
-}
 
 // função de formulário responsável por criar uma nova sessão de usuário
 async function sendLogin(event) {
@@ -38,13 +33,66 @@ async function sendLogin(event) {
         body: formData
     });
     let data = await response.json();
+    console.log('aaaa');
 
     // mensagem enviada pela API
     let { resposta } = data;
     if (resposta === "sucesso no login") {
-        window.location.replace("home.php");
+        window.location.href("home.php");
     } else if (resposta === "credenciais invalidas") {
         console.log("Credenciais de login inválidas");
         // append mensagem de erro no formulário
+    } else {
+        // para fins de debug por enquanto
+        console.log(data);
     }
+}
+
+
+async function sendUpdate(event) {
+    event.preventDefault();
+
+    let formData = new FormData(event.target);
+    
+    let response = await fetch("./API/user/update.php", {
+        method: "PUT",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "multipart/form-data",
+            "Accept": "application/json"
+        },
+        body: formData
+    });
+    let data = await response.json();
+
+    console.log(data);
+}
+
+
+async function getLoggedUser() {
+    let response = await fetch("./API/user/get.php", {
+        method: "GET",
+        credentials: "same-origin",
+        headers: {
+            "Accept": "application/json"
+        },
+    })
+    let user = await response.json();
+    console.log(user);
+
+    return user;
+}
+
+
+async function deleteUser() {
+    let response = await fetch("./API/user/delete.php", {
+        method: "DELETE",
+        credentials: "same-origin",
+        headers: {
+            "Accept": "application/jsoN"
+        }
+    });
+    let data = await response.json();
+
+    console.log(data);
 }

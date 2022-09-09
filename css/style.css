@@ -222,6 +222,31 @@ label {
     outline-width: 1.5px;
 }
 
+/* FILE INPUT UPDATE FORM */
+#inputImg {
+    display: none;
+}
+
+#inputFileLabel {
+    width: 148px;
+    height: 148px;
+    transition: all .5s ease-in-out;
+    border: 1px solid black; /* só pra visualização por enquanto */
+    overflow: hidden;
+}
+
+#inputFileLabel:hover {
+    filter: grayscale(.8);
+    cursor: pointer;
+}
+
+#imgPerfil {
+    width: 148px;
+    height: 148px;
+}
+
+
+
 @media screen and ( max-width: 768px ) {
     .caixa-pesquisa {
         width: 100%;
