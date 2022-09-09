@@ -16,6 +16,10 @@
     box-sizing: border-box;
 }
 
+.btn .btn-success {
+    background-color: #074A59 !important;
+}
+
 body {
     background-color: var(--background);
     font-family: 'Montserrat', sans-serif;
