@@ -33,10 +33,6 @@
                                 <input type="email" class="form-control" id="email" name="email">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="senha" class="form-label">Senha</label>
-                                <input class="form-control" type="password" id="senha" name="senha" disabled>
-                            </div>
-                            <div class="form-group mb-3">
                                 <label for="cpf" class="form-label">CPF</label>
                                 <input type="text" class="form-control" id="cpf" name="cpf" placeholder="164.437.627-03" disabled>
                             </div>
@@ -46,11 +42,11 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="data" class="form-label">Data de Nascimento</label>
-                                <input type="date" class="form-control" id="data" name="data">
+                                <input type="date" class="form-control" id="nascimento" name="data">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="data" class="form-label">Bio</label>
-                                <textarea class="form-control" name="bio" id="bio" rows="5"></textarea>
+                                <textarea class="form-control" id="bio" name="bio" rows="5"></textarea>
                             </div>
                             
                             <div class="buttons d-flex justify-content-end align-items-center">

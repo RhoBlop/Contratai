@@ -17,11 +17,7 @@ async function sendCadastro(event) {
     console.log(data);
 }
 
-// verifica se o email já está cadastrado no banco de dados
-// adicionado ao onblur de input para comodidade do usuário (não é necessário enviar o formulário para checar)
-async function checkIfValidEmail() {
-
-}
+// 
 
 // função de formulário responsável por criar uma nova sessão de usuário
 async function sendLogin(event) {
@@ -46,5 +42,8 @@ async function sendLogin(event) {
     } else if (resposta === "credenciais invalidas") {
         console.log("Credenciais de login inválidas");
         // append mensagem de erro no formulário
+    } else if (resposta === "Conexão falhou: could not find driver") {
+        // para fins de debug por enquanto
+        console.log(data);
     }
 }

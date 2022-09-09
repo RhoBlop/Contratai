@@ -25,7 +25,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
         // spread da NodeList em uma array [...var]
         for (link of [...links]) {
             let linkHref = link.getAttribute("href");
-            console.log(linkHref);
 
             if (current === "" && linkHref === "index.php") {
                 // se o pathname atual for vazio, provavelmente estamos no index.php
