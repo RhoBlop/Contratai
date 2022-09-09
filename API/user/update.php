@@ -1,6 +1,6 @@
 <?php 
     // header da requisição http para declarar que a resposta será um json
-    header("Content-Type: application/json");
+    header("Content-Type: multipart/form-data");
 
     // senha não é obrigatório
     if (!isset($_POST["nome"], $_POST["email"], $_POST["cpf"], $_POST["regiao"], $_POST["data"], $_POST["bio"]) ) {
@@ -26,5 +26,5 @@
     // lê o arquivo passado com FormData e faz encode para base64, para ser inserido no banco
     $imgBase64 = base64_encode(file_get_contents($_FILES["imgPerfil"]));
 
-    $db->updateUserInfo($_SESSION['idUsr'], $nome, $email, $cpf, $imgBase64, $nascimento, $telefone, $bio);
+    $result = $db->updateUserInfo($_SESSION['idUsr'], $nome, $email, $cpf, $imgBase64, $nascimento, $telefone, $bio);
 ?>

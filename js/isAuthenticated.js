@@ -1,10 +1,21 @@
 isAuthenticated()
     .then( auth => {
-        if (!auth) {
-            window.location.replace("index.php");
-        } else {
+        let atual = location.pathname;
+        let paginaLiberadas = ["/", "/index.php", "/cadastro.php"];
+        if (auth && paginaLiberadas.includes(atual)) {
+            // caso já esteja logado, o usuário é redirecionado à home
+            window.location.href = "home.php";
+        } else if (auth) {
+            // usuário autenticado e pode ficar normalmente na página atual
             console.log("Usuário autenticado");
+        } else {
+            // usuário não autenticado, é redirecionado ao index
+            window.location.href = "index.php";
         }
+    })
+    .catch( err => {
+        // DOMException: Operation was aborted (o dom não terminou de carregar)
+        console.error(err);
     });
 
 async function isAuthenticated() {

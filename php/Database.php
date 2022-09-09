@@ -9,7 +9,7 @@
         public function __construct() {
             // tenta realizar a conexão com o banco de dados
             try {
-                $this->conn = new PDO($this->dsn, $this->username, $this->password, array(PDO::ATTR_PERSISTENT => TRUE));
+                $this->conn = new PDO($this->dsn, $this->username, $this->password);
                 
                 // faz com que o PDO lance uma PDOException em qualquer problema que acontecer (teoricamente) 
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -24,7 +24,7 @@
         // retorna usuário com o id passado por parâmetro
         public function selectUserById($id) {
             try {
-                $sql = "SELECT * FROM usuario WHERE idusr = :id";
+                $sql = "SELECT nomusr, emailusr, senhausr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr FROM usuario WHERE idusr = :id";
     
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute([
@@ -42,7 +42,7 @@
 
         public function selectUserLogin($email, $senha) {
             try {
-                $sql = "SELECT idUsr FROM usuario WHERE (dscEmailUsr = :email) AND (dscSenhaUsr = :senha)";
+                $sql = "SELECT idusr FROM usuario WHERE (emailUsr = :email) AND (senhaUsr = :senha)";
 
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute([
@@ -73,7 +73,7 @@
                 // se não existem usuários cadastrados com esse email, segue para insert
                 if ($validEmail) {
                     // insert do novo usuário
-                    $insertSQL = "INSERT INTO usuario(nomUsr, dscEmailUsr, dscSenhaUsr) VALUES (:nome, :email, :senha)";
+                    $insertSQL = "INSERT INTO usuario(nomUsr, emailUsr, senhaUsr) VALUES (:nome, :email, :senha)";
                     $insertSTMT = $this->conn->prepare($insertSQL);
                     $insertSTMT->execute([
                         ":nome" => $nome,
@@ -96,7 +96,7 @@
         public function updateUserInfo($id, $nome, $email, $cpf, $imgBase64, $nascimento, $telefone, $bio) {
             try {
                 // verifica se não existe nenhum email idêntico cadastrado (desconsiderando o email do próprio usuário)
-                $verifySQL = "SELECT idUsr FROM usuario WHERE (dscEmailUsr = :email) AND (idUsr <> :id)";
+                $verifySQL = "SELECT idUsr FROM usuario WHERE (emailUsr = :email) AND (idUsr <> :id)";
                 $verifySTMT = $this->conn->prepare($verifySQL);
                 $verifySTMT->execute([ 
                     ":email" => $email,
@@ -106,7 +106,7 @@
                 if ($verifySTMT->rowCount() < 1) {
                     $sql = <<<SQL
                     UPDATE usuario
-                    SET nomusr = :nome, dscEmailUsr = :email, numCPFusr = :cpf, dscFotoUsr = :img, datNascimentoUsr = :nascimento, numTelefoneUsr = :telefone, biografia = :bio
+                    SET nomusr = :nome, emailUsr = :email, cpfUsr = :cpf, imgUsr = :img, nascimentoUsr = :nascimento, telefoneUsr = :telefone, biografiaUsr = :bio
                     WHERE idusr = :id
                     SQL;
 
@@ -137,7 +137,7 @@
         // deleta um usuário a partir do id passado por parâmetro
         public function deleteUser($id) {
             try {
-                $sql = "DELETE FROM usuario WHERE idusr = :id";
+                $sql = "DELETE FROM usuario WHERE idUsr = :id";
     
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute([
@@ -157,7 +157,7 @@
         }
 
         public function checkIfValidEmail($email) {
-            $verifySQL = "SELECT idUsr FROM usuario WHERE dscEmailUsr = :email";
+            $verifySQL = "SELECT idUsr FROM usuario WHERE emailUsr = :email";
             $verifySTMT = $this->conn->prepare($verifySQL);
             $verifySTMT->execute([ ":email" => $email ]);
 

@@ -2,7 +2,8 @@
 <html lang="en">
     <head>
         <?php include ("components/head.html") ?>
-        <!--<script src="js/isAuthenticated.js"></script>  -->
+        <script src="js/requisicoesAPI.js"></script>
+        <script src="js/selecionarImg.js"></script>
     </head>
     <body>
         <?php include ("components/login-header.html") ?>
@@ -21,9 +22,13 @@
                             <h6 class="text-muted">Edite os dados da sua conta</h6>
                         </div>
                         
-                        <img src="https://cdn.discordapp.com/attachments/728388981443526660/1016843534390808646/unknown.png" alt="" class="rounded-circle mb-4" height="148" width="148"> 
+                        
+                        <form id="updateUser" onsubmit="sendUpdate(event)">
+                            <label id="inputFileLabel" for="inputImg" class="rounded-circle mb-4">
+                                <img id="imgPerfil" alt=""> 
+                            </label>
+                            <input id="inputImg" type="file" name="imgPerfil" onchange="showSelectedImg(event, '#imgPerfil')">
 
-                        <form action="">
                             <div class="form-group mb-3">
                                 <label for="nome" class="form-label">Nome Completo</label>
                                 <input type="text" class="form-control" id="nome" name="nome">
@@ -34,18 +39,22 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="cpf" class="form-label">CPF</label>
-                                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="164.437.627-03" disabled>
+                                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="" disabled>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="regiao" class="form-label">Região</label>
                                 <input type="text" class="form-control" id="regiao" name="regiao">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="data" class="form-label">Data de Nascimento</label>
-                                <input type="date" class="form-control" id="nascimento" name="data">
+                                <label for="telefone" class="form-label">Telefone</label>
+                                <input type="text" class="form-control" id="telefone" name="telefone">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="data" class="form-label">Bio</label>
+                                <label for="nascimento" class="form-label">Data de Nascimento</label>
+                                <input type="date" class="form-control" id="nascimento" name="nascimento">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="bio" class="form-label">Bio</label>
                                 <textarea class="form-control" id="bio" name="bio" rows="5"></textarea>
                             </div>
                             
@@ -63,6 +72,23 @@
         <?php include ("components/footer.html")?>
     </body>
 
+    <script>
+        // seta os campos da table com os dados do usuário
+        getLoggedUser()
+            .then(user => {
+                document.querySelector("#headerImgPerfil").src = user["imgusr"];
+                document.querySelector("#imgPerfil").src = user["imgusr"];
+                document.querySelector("#nome").value = user["nomusr"];
+                document.querySelector("#email").value = user["emailusr"];
+                document.querySelector("#cpf").value = user["cpfusr"];
+                document.querySelector("#telefone").value = user["telefoneusr"];
+                document.querySelector("#nascimento").value = user["nascimentousr"];
+                document.querySelector("#bio").innerText = user["biografiausr"];
+            })
+            .catch(err => {
+                console.error(err);
+            })
+    </script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
