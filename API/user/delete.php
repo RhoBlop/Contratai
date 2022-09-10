@@ -18,7 +18,11 @@
 
     // resposta da API
     if ($result === true) {
-        $response = [ "resposta" => "sucesso na delecao" ];
+        $response = [ 
+            "resposta" => "sucesso na delecao",
+            "deleted" => true 
+        ];
+        logout();
     } else {
         $response = [ "resposta" => "falha na delecao" ];
     }

@@ -109,6 +109,16 @@
         <?php include ("components/footer.html")?>
     </body>
 
+    <script>
+        // seta os campos da table com os dados do usuário
+        getLoggedUser()
+            .then(user => {
+                document.querySelector("#headerImgPerfil").src = user["imgusr"];
+            })
+            .catch(err => {
+                console.error(err);
+            })
+    </script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"

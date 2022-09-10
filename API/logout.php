@@ -1,9 +1,17 @@
 <?php
     session_start();
-    setcookie(session_name(), '', 100);
-    session_unset();
-    session_destroy();
-    $_SESSION = array();
+    require("../php/utils.php");
+    if (!isAuthenticated()) {
+        echo json_encode([ "resposta" => "nao autenticado" ]);
+        exit();
+    }
 
-    echo "logouted";
+    logout();
+
+    $resposta = [ 
+        "resposta" => "sucesso no logout",
+        "logout" => true
+    ];
+
+    echo json_encode($resposta);
 ?>

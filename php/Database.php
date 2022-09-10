@@ -103,16 +103,12 @@
                     ":id" => $id
                 ]);
 
-                echo strlen($nome);
-
                 if ($verifySTMT->rowCount() < 1) {
                     $sql = <<<SQL
                     UPDATE usuario
                     SET nomusr = :nome, emailUsr = :email, imgUsr = :img, nascimentoUsr = :nascimento, telefoneUsr = :telefone, biografiaUsr = :bio
                     WHERE idusr = :id
                     SQL;
-
-                    // caso a data de nascimento não tenha sido preenchida
 
                     $stmt = $this->conn->prepare($sql);
                     $stmt->execute([

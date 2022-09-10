@@ -36,7 +36,7 @@
         $imgType = pathinfo($_FILES["imgPerfil"]["name"], PATHINFO_EXTENSION);
 
         // tradução dos dados para base64
-        $imgBase64 = "data:image/{$imgType};base64" . base64_encode($imgData);
+        $imgBase64 = "data:image/{$imgType};base64, " . base64_encode($imgData);
     } else {
         $imgBase64 = null;
     }

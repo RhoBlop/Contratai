@@ -24,7 +24,7 @@
                         
                         <form id="updateUser" onsubmit="sendUpdate(event)">
                             <label id="inputFileLabel" for="inputImg" class="rounded-circle mb-4">
-                                <img id="imgPerfil" alt="">
+                                <img src="images/temp/default-pic.png" id="imgPerfil" alt="">
                                 <div class="editar-hover">
                                     <i class="fa-solid fa-pen"></i>
                                     <p>Editar Foto</p>
@@ -43,10 +43,6 @@
                             <div class="form-group mb-3">
                                 <label for="cpf" class="form-label">CPF</label>
                                 <input type="text" class="form-control" id="cpf" placeholder="" disabled>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="regiao" class="form-label">Região</label>
-                                <input type="text" class="form-control" id="regiao" name="regiao">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="telefone" class="form-label">Telefone</label>

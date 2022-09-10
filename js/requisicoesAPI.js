@@ -8,8 +8,7 @@ async function sendCadastro(event) {
     let response = await fetch("./API/user/register.php", {
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Accept": "application/json"
+            "Content-Type": "application/x-www-form-urlencoded"
         },
         body: formData
     });
@@ -32,8 +31,7 @@ async function sendLogin(event, idErrorDiv) {
     let response = await fetch("./API/login.php", {
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Accept": "application/json"
+            "Content-Type": "application/x-www-form-urlencoded"
         },
         body: formData
     });
@@ -52,19 +50,15 @@ async function sendLogin(event, idErrorDiv) {
     }
 }
 
-
+// função que faz update das informações de usuário
 async function sendUpdate(event) {
     event.preventDefault();
 
     let formData = new FormData(event.target);
-    console.log('rodando');
     
     let response = await fetch("./API/user/updateInfo.php", {
         method: "POST",
         credentials: "same-origin",
-        headers: {
-            "Accept": "application/json"
-        },
         body: formData
     });
     let data = await response.text();
@@ -78,26 +72,38 @@ async function getLoggedUser() {
     let response = await fetch("./API/user/get.php", {
         method: "GET",
         credentials: "same-origin",
-        headers: {
-            "Accept": "application/json"
-        },
     })
     let user = await response.json();
-    console.log(user);
 
     return user;
 }
 
 
-async function deleteUser() {
-    let response = await fetch("./API/user/delete.php", {
-        method: "DELETE",
+async function logout() {
+    console.log("logging out");
+    let response = await fetch("./API/logout.php", {
+        method: "GET",
         credentials: "same-origin",
-        headers: {
-            "Accept": "application/jsoN"
-        }
     });
     let data = await response.json();
 
-    console.log(data);
+    let { logout } = data;
+    if (logout) {
+        localStorage.setItem("openModal", "true");
+        window.location.href = "index.php";
+    }
+}
+
+
+async function deleteUser() {
+    let response = await fetch("./API/user/delete.php", {
+        method: "GET",
+        credentials: "same-origin",
+    });
+    let data = await response.json();
+
+    let { deleted } = data;
+    if (deleted) {
+        window.location.href = "index.php";
+    }
 }
