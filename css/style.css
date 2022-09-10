@@ -61,6 +61,15 @@ main h2 {
     font-size: 48px;
 }
 
+/* Filtros de Serviço */
+
+
+.item-pesquisa {
+    padding-right: 20px;
+    margin-bottom: 1rem;
+}
+
+
 .card-avaliacao .text-muted{
     font-size: 14px;
 }
@@ -163,6 +172,46 @@ main h1.text-gradient {
     font-weight: 600;
 }
 
+/* Principais Categorias */
+
+
+.badge-avaliacao {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    min-width: 60px;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+}
+
+ion-icon {
+    font-size: 16px;
+    margin-right: 0.5rem;
+}
+
+.avaliacao-otima {
+    background-color: #fef3cdc8;
+    color: #F4BF00;
+}
+
+.avaliacao-media {
+    background-color: #cdfefb4d;
+    color: #026773;
+}
+
+
+/* Avaliações */
+
+
+.card-avaliacao {
+    width: 32%;
+}
+
+
 /* Footer */
 
 footer {
@@ -187,6 +236,65 @@ i {
 .socials{
     list-style: none;
     gap: 1rem;
+}
+
+/* Cadastro */
+
+.form-row > div {
+    min-height: 100vh;
+}
+
+.cadastro-logo {
+    position: absolute;
+    top: 40px;
+}
+
+.form-cadastro {
+    width: 80%;
+    max-width: 420px;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.cadastro-side-image {
+    background: url("images/teste2.jpg") no-repeat 0px -100px;
+    background-size: cover;
+}
+
+.btn-green {
+    color: #fff;
+    border: 1.8px solid #026773;
+    background-color: #026773;
+    transition: transform .15s ease-in-out;
+    border-radius: 12px;
+    height: 50px;
+}
+.btn-green:hover {
+    color: #fff;
+    border-color: #026773;
+    background-color: #026773;
+    transform: scale(1.1);
+}
+
+@media screen and (max-width: 1400px) {
+    .cadastro-side-image {
+        background-position: top;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .cadastro-side-image {
+        z-index: -1;
+        min-height: 100vh;
+        position: absolute;
+    }
+    .form-cadastro {
+        background: #fff;
+        border-radius: 12px;
+        padding: 50px;
+    }
 }
 
 /* Perfil */
