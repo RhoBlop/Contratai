@@ -7,8 +7,8 @@
     <body>
         <?php include ("components/login-header.html") ?>
 
-        <main class="min-vh-100">
-            <div class="container p-3 my-3">
+        <main>
+            <div class="container p-3 my-3 mb-5">
                 <div class="row gx-5">
 
                     <?php include("components/modal-exclude.html")?>

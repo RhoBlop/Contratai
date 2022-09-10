@@ -5,6 +5,8 @@
 :root {
     --background: #F8F8F8;
     --primary-green: #026773;
+    --light-green: #15A0B0;
+    --dark-green: #074A59;
     --text-color: #000;
     --grey: #202020; 
     --blue-vertical-gradient: linear-gradient(180deg, #15A0B0, #074A59);
@@ -47,7 +49,7 @@ header .btn {
     border-radius: 12px;
 }
 
-main h1, h2 {
+main h1, h2, h3 {
     font-weight: 700;
 }
 
@@ -142,7 +144,7 @@ main h1.text-gradient {
 
 .btn-green:hover {
     color: #fff;
-    background-color: #074A59;
+    background-color: var(--dark-green);
     border-color: var(--primary-green);
 }
 
@@ -233,9 +235,9 @@ label {
 .form-control:focus {
     transition: all .2s ease-in-out;
     box-shadow: none;
-    border: 1px solid #15A0B0;
+    border: 1px solid var(--light-green);
     outline-style: solid;
-    outline-color: #15A0B0;
+    outline-color: var(--light-green);
     outline-width: 1.5px;
 }
 
