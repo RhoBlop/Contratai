@@ -58,7 +58,7 @@
                                 <textarea class="form-control" id="bio" name="bio" rows="5"></textarea>
                             </div>
                             
-                            <div class="buttons d-flex justify-content-end align-items-center">
+                            <div class="buttons d-flex justify-content-end align-items-center py-3">
                                 <a href="perfil.php" class="btn btn-link me-3">Cancelar</a>
                                 <button type="submit" class="btn btn-outline-green">Salvar Alterações</button>
                             </div>
