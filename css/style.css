@@ -16,6 +16,10 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     background-color: var(--background);
     font-family: 'Montserrat', sans-serif;
@@ -23,8 +27,11 @@ body {
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
     font-size: 18px;
-} 
 
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+} 
 
 header {
     font-weight: 700;
@@ -39,9 +46,6 @@ header .navbar {
 header .btn {
     border-radius: 12px;
 }
-
-
-/* Coloquei o tamanho das fontes e negrito (não sei como economizar linha nesse caso mas ta aí)*/ 
 
 main h1, h2 {
     font-weight: 700;
