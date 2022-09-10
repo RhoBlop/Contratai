@@ -2,8 +2,7 @@
 <html lang="en">
     <head>
         <?php include ("components/head.html") ?>
-        <script src="js/requisicoesAPI.js"></script>
-        <script src="js/selecionarImg.js"></script>
+        <script src="js/visualizarImg.js"></script>
     </head>
     <body>
         <?php include ("components/login-header.html") ?>

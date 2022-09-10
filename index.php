@@ -39,13 +39,14 @@
       <!-- BANNER DE LOGIN -->
       <div class="login-banner d-flex flex-column align-items-center justify-content-center mb-5">
         <h2 class="text-white mb-3">Gostou? Então não perca mais tempo!</h2>
-        <button class="btn btn-dark btn-lg mt-3">Comece já</button>
+        <a type="button" class="btn btn-dark btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#modal-login">Comece já</a>
       </div> <!-- /BANNER DE LOGIN -->
     </main>
     
 
     <!-- FOOTER -->
     <?php include ("components/footer.html") ?>
+
 
     <!-- JS BOOTSTRAP BUNDLE -->
     <script
@@ -54,7 +55,20 @@
       crossorigin="anonymous"
     ></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    
+    <script>
+      // define se o modal de login deve ser aberto quando a página é carregada
+      // isso é usado, por exemplo, quando uma pessoa realiza o cadastro e é redirecionada ao index
+      let opModal = localStorage.getItem("openModal");
+      if (opModal) {
+        console.log('aaaaa');
+        let loginModal = new bootstrap.Modal(document.getElementById('login-modal'), {});
+        loginModal.show();
+        // localStorage.removeItem("openModal");
+      }
+    </script>
   </body>
 </html>
  

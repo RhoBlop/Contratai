@@ -23,8 +23,20 @@
     // destructuring das variáveis
     [$nome, $email, $cpf, $regiao, $nascimento, $telefone, $bio] = [$_POST["nome"], $_POST["email"], $_POST["cpf"], $_POST["regiao"], $_POST["nascimento"], $_POST["data"], $_POST["bio"]];
 
-    // lê o arquivo passado com FormData e faz encode para base64, para ser inserido no banco
-    $imgBase64 = base64_encode(file_get_contents($_FILES["imgPerfil"]));
+    // apenas se um arquivo foi enviado juntamente à requisição
+    if ($_FILES["imgUsr"]["name"] !== "") {
+        // caminho de onde o servidor salvou a imagem temporariamente
+        $tmpPath = $_FILES["imgUsr"]["tmp_name"];
+        // dados da imagem
+        $imgData = file_get_contents($tmpPath);
+        // tipo da imagem
+        $imgType = pathinfo($_FILES["imgUsr"]["name"], PATHINFO_EXTENSION);
+
+        // tradução dos dados para base64
+        $imgBase64 = "data:image/{$imgType};base64" . base64_encode($imgData);
+    } else {
+        $imgBase64 = null;
+    }
 
     $result = $db->updateUserInfo($_SESSION['idUsr'], $nome, $email, $cpf, $imgBase64, $nascimento, $telefone, $bio);
 ?>

@@ -14,12 +14,17 @@ async function sendCadastro(event) {
         body: formData
     });
     let data = await response.json();
-    console.log(data);
+    
+    let {resposta} = data;
+    if (resposta === "sucesso no cadastro") {
+        localStorage.setItem("openModal", "true");
+        window.location.href = "index.php";
+    }
 }
 
 
 // função de formulário responsável por criar uma nova sessão de usuário
-async function sendLogin(event) {
+async function sendLogin(event, idErrorDiv) {
     event.preventDefault();
 
     let formData = new URLSearchParams(new FormData(event.target)).toString();
@@ -33,12 +38,11 @@ async function sendLogin(event) {
         body: formData
     });
     let data = await response.json();
-    console.log('aaaa');
 
     // mensagem enviada pela API
     let { resposta } = data;
     if (resposta === "sucesso no login") {
-        window.location.href("home.php");
+        window.location.href = "home.php";
     } else if (resposta === "credenciais invalidas") {
         console.log("Credenciais de login inválidas");
         // append mensagem de erro no formulário
@@ -54,7 +58,7 @@ async function sendUpdate(event) {
 
     let formData = new FormData(event.target);
     
-    let response = await fetch("./API/user/update.php", {
+    let response = await fetch("./API/user/updateInfo.php", {
         method: "PUT",
         credentials: "same-origin",
         headers: {
@@ -78,7 +82,6 @@ async function getLoggedUser() {
         },
     })
     let user = await response.json();
-    console.log(user);
 
     return user;
 }
