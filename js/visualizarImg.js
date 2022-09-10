@@ -13,7 +13,6 @@ function showSelectedImg(event, idImg) {
 
         reader.onload = function(e) {
             // quando um arquivo for lido, colocar o base64 na imagem com id passada por parâmetro
-            console.log(e.target.result);
             document.querySelector(`${idImg}`).src = e.target.result;
         }
     }

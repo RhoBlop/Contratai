@@ -57,23 +57,24 @@ async function sendUpdate(event) {
     event.preventDefault();
 
     let formData = new FormData(event.target);
+    console.log('rodando');
     
     let response = await fetch("./API/user/updateInfo.php", {
-        method: "PUT",
+        method: "POST",
         credentials: "same-origin",
         headers: {
-            "Content-Type": "multipart/form-data",
             "Accept": "application/json"
         },
         body: formData
     });
-    let data = await response.json();
+    let data = await response.text();
 
     console.log(data);
 }
 
 
 async function getLoggedUser() {
+    console.log("getting logged user");
     let response = await fetch("./API/user/get.php", {
         method: "GET",
         credentials: "same-origin",
@@ -82,6 +83,7 @@ async function getLoggedUser() {
         },
     })
     let user = await response.json();
+    console.log(user);
 
     return user;
 }

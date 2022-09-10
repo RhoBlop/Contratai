@@ -49,24 +49,18 @@
 
 
     <!-- JS BOOTSTRAP BUNDLE -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-    
-    <script>
+    <script defer>
       // define se o modal de login deve ser aberto quando a página é carregada
       // isso é usado, por exemplo, quando uma pessoa realiza o cadastro e é redirecionada ao index
       let opModal = localStorage.getItem("openModal");
       if (opModal) {
-        console.log('aaaaa');
-        let loginModal = new bootstrap.Modal(document.getElementById('login-modal'), {});
+        let loginModal = new bootstrap.Modal(document.getElementById('modal-login'), {});
         loginModal.show();
-        // localStorage.removeItem("openModal");
+        localStorage.removeItem("openModal");
       }
     </script>
   </body>

@@ -38,7 +38,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="cpf" class="form-label">CPF</label>
-                                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="" disabled>
+                                <input type="text" class="form-control" id="cpf" placeholder="" disabled>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="regiao" class="form-label">Região</label>
