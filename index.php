@@ -39,7 +39,7 @@
       <!-- BANNER DE LOGIN -->
       <div class="login-banner d-flex flex-column align-items-center justify-content-center mb-5">
         <h2 class="text-white mb-3">Gostou? Então não perca mais tempo!</h2>
-        <button class="btn btn-dark btn-lg mt-3">Comece já</button>
+        <button class="btn btn-dark btn-lg rounded-5 shadow mt-3">Comece já</button>
       </div> <!-- /BANNER DE LOGIN -->
     </main>
     

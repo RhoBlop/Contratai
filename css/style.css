@@ -280,6 +280,8 @@ i {
     transform: scale(1.1);
 }
 
+
+
 @media screen and (max-width: 1400px) {
     .cadastro-side-image {
         background-position: top;
