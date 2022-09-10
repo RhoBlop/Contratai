@@ -206,10 +206,6 @@ hr {
     font-size: 20px;
 }
 
-#side-bar > .nav-item > a:hover { 
-    background-color: red;
-} 
-
 /* Editar Perfil */
 
 textarea {
@@ -245,22 +241,47 @@ label {
 }
 
 #inputFileLabel {
+    position: relative;
+    filter: brightness(100%);
     width: 148px;
     height: 148px;
-    transition: all .5s ease-in-out;
+    transition: all .1s ease-in-out;
     border: 1px solid black; /* só pra visualização por enquanto */
     overflow: hidden;
-}
-
-#inputFileLabel:hover {
-    filter: grayscale(.8);
-    cursor: pointer;
 }
 
 #imgPerfil {
     width: 148px;
     height: 148px;
 }
+
+/* FUTURO HOVER */
+
+/*
+
+#inputFileLabel:hover {
+    filter: brightness(50%);
+    cursor: pointer;
+}
+
+#inputFileLabel > .editar-hover {
+    position: absolute;
+    top: 50px;
+    width: 148px;
+    height: 148px;
+    text-align: center;
+    color: #fff;
+    opacity: 0;
+    z-index: 100;
+}
+
+#inputFileLabel .editar-hover:hover {
+    filter: brightness(100%);
+    opacity: 100%;
+}
+
+*/
+
 
 
 
