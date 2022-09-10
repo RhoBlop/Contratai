@@ -25,7 +25,7 @@
           </div> <!-- /CAIXA DE PESQUISA -->
   
           <div class="col-sm-5 col-8">
-            <img src="images\Code typing (1).gif" alt="Stock Image Trabalhador" width="100%" min-width=200px>
+            <img src="images\storyset\business-merger-animate.svg" alt="Stock Image Trabalhador" width="100%" min-width=300px>
           </div>
         </div>
       </div>
@@ -52,8 +52,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-    <script defer>
+    
+    <script>
       // define se o modal de login deve ser aberto quando a página é carregada
       // isso é usado, por exemplo, quando uma pessoa realiza o cadastro e é redirecionada ao index
       let opModal = localStorage.getItem("openModal");

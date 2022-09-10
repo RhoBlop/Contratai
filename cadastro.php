@@ -3,64 +3,6 @@
     <head>
         <?php include("components/head.html") ?>
     </head>
-    <style>
-        .form-row > div {
-            min-height: 100vh;
-        }
-
-        .cadastro-logo {
-            position: absolute;
-            top: 40px;
-        }
-
-        .form-cadastro {
-            width: 80%;
-            max-width: 420px;
-        }
-
-        .form-group {
-            width: 100%;
-        }
-
-        .cadastro-side-image {
-            background: url("images/teste2.jpg") no-repeat 0px -100px;
-            background-size: cover;
-        }
-
-        .btn-green {
-            color: #fff;
-            border: 1.8px solid #026773;
-            background-color: #026773;
-            transition: transform .15s ease-in-out;
-            border-radius: 12px;
-            height: 50px;
-        }
-        .btn-green:hover {
-            color: #fff;
-            border-color: #026773;
-            background-color: #026773;
-            transform: scale(1.1);
-        }
-
-        @media screen and (max-width: 1400px) {
-            .cadastro-side-image {
-                background-position: top;
-            }
-        }
-
-        @media screen and (max-width: 768px) {
-            .cadastro-side-image {
-                z-index: -1;
-                min-height: 100vh;
-                position: absolute;
-            }
-            .form-cadastro {
-                background: #fff;
-                border-radius: 12px;
-                padding: 50px;
-            }
-        }
-    </style>
 
     <body>
         <main>
