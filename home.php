@@ -12,7 +12,7 @@
                         <form action="">
                             <div class="input-group">
                                 <input type="text" class="form-control form-control-lg" placeholder="O que você está procurando?">
-                                <button class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                <button class="btn btn-green"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </div>
                         </form>
                     </div>
@@ -27,7 +27,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <a href="#" class="btn btn-green">Go somewhere</a>
                             </div>
                         </div>
                     </div>    
@@ -37,7 +37,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <a href="#" class="btn btn-green">Go somewhere</a>
                             </div>
                         </div>
                     </div> 
@@ -47,7 +47,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <a href="#" class="btn btn-green">Go somewhere</a>
                             </div>
                         </div>
                     </div> 
@@ -57,7 +57,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <a href="#" class="btn btn-green">Go somewhere</a>
                             </div>
                         </div>
                     </div> 
@@ -66,7 +66,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <a href="#" class="btn btn-green">Go somewhere</a>
                             </div>
                         </div>
                     </div> 
@@ -75,7 +75,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <a href="#" class="btn btn-green">Go somewhere</a>
                             </div>
                         </div>
                     </div> 
@@ -84,7 +84,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <a href="#" class="btn btn-green">Go somewhere</a>
                             </div>
                         </div>
                     </div> 
@@ -93,7 +93,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <a href="#" class="btn btn-green">Go somewhere</a>
                             </div>
                         </div>
                     </div> 

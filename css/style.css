@@ -16,10 +16,6 @@
     box-sizing: border-box;
 }
 
-.btn .btn-success {
-    background-color: #074A59 !important;
-}
-
 body {
     background-color: var(--background);
     font-family: 'Montserrat', sans-serif;
@@ -129,6 +125,23 @@ main h1.text-gradient {
     transform: scale(1.1);
 }
 
+.btn-green {
+    outline: 0;
+    color: #fff;
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+    font-weight: 700;
+    text-align: center;
+    border: 1px solid transparent;
+    transition: background-color 0.2s ease-in-out 0s, opacity 0.2s ease-in-out 0s;
+}
+
+.btn-green:hover {
+    color: #fff;
+    background-color: #074A59;
+    border-color: var(--primary-green);
+}
+
 
 .login-banner {
     height: 280px;
@@ -193,6 +206,10 @@ hr {
     font-size: 20px;
 }
 
+#side-bar > .nav-item > a:hover { 
+    background-color: red;
+} 
+
 /* Editar Perfil */
 
 textarea {
@@ -214,7 +231,7 @@ label {
 }
 
 .form-control:focus {
-    transition: all 200ms linear;
+    transition: all .2s ease-in-out;
     box-shadow: none;
     border: 1px solid #15A0B0;
     outline-style: solid;
