@@ -10,7 +10,7 @@
     <!-- MODAL -->
     <?php include ("components/login-modal.html"); ?>
 
-    <main class="min-vh-100">
+    <main>
       
     </main>
     

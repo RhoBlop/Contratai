@@ -259,9 +259,11 @@ i {
 }
 
 .cadastro-side-image {
-    background: url("images/teste2.jpg") no-repeat 0px -100px;
+    background: url("../images/teste2.jpg") no-repeat 0px -100px;
     background-size: cover;
 }
+
+/* Botões */
 
 .btn-green {
     color: #fff;
