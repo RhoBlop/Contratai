@@ -61,6 +61,15 @@ main h2 {
     font-size: 48px;
 }
 
+a {
+    cursor: pointer;
+    color: var(--light-green);
+}
+
+a:hover{
+    color: var(--primary-green);
+}
+
 /* Filtros de Serviço */
 
 
@@ -95,6 +104,8 @@ main h1.text-gradient {
     font-size: 24px;
 }
 
+/* Botões*/
+
 .btn-login {
     position: relative;
     transition: color .2s ease-in-out, transform .2s ease-in-out;
@@ -107,7 +118,6 @@ main h1.text-gradient {
     transform: scale(1.1);
 }
 
-/* Animation */
 .btn-login::after {
     content: '';
     position: absolute;
@@ -263,22 +273,6 @@ i {
     background-size: cover;
 }
 
-/* Botões */
-
-.btn-green {
-    color: #fff;
-    border: 1.8px solid #026773;
-    background-color: #026773;
-    transition: transform .15s ease-in-out;
-    border-radius: 12px;
-    height: 50px;
-}
-.btn-green:hover {
-    color: #fff;
-    border-color: #026773;
-    background-color: #026773;
-    transform: scale(1.1);
-}
 
 @media screen and (max-width: 1400px) {
     .cadastro-side-image {
