@@ -53,8 +53,8 @@ main h1, h2, h3 {
     font-weight: 700;
 }
 
-main h1 {
-    font-size: 90px;
+ h1 {
+    font-size: 82px;
 }
 
 main h2 {
@@ -279,8 +279,6 @@ i {
     background-color: #026773;
     transform: scale(1.1);
 }
-
-
 
 @media screen and (max-width: 1400px) {
     .cadastro-side-image {
