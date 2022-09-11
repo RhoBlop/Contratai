@@ -2,7 +2,6 @@
 <html lang="en">
     <head>
         <?php include ("components/head.html") ?>
-        <script src="js/requisicoesAPI.js"></script>
     </head>
     <body>
         <?php include ("components/login-header.html") ?>
@@ -21,7 +20,7 @@
                             <h6 class="text-muted">Dados da conta</h6>
                         </div>
                         <div class="d-flex justify-content-center ">
-                            <img id="imgPerfil" alt="" class="rounded-circle shadow-sm mb-5" height="214" width="214">
+                            <img id="imgPerfil" src="images/temp/default-pic.png" alt="" class="rounded-circle shadow-sm mb-5" height="214" width="214">
                         </div>
                         <table class="table mb-5">
                             <tbody>

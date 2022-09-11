@@ -1,3 +1,5 @@
+// função executada sempre que uma imagem do input type=file é selecionada
+// lê os dados da imagem e coloca em uma imagem passada por parâmetro (o usuário pode visualizar a imagem selecionada)
 function showSelectedImg(event, idImg) {
     let input = event.target;
     
@@ -14,5 +16,4 @@ function showSelectedImg(event, idImg) {
             document.querySelector(`${idImg}`).src = e.target.result;
         }
     }
-
 }

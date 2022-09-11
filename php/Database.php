@@ -83,7 +83,7 @@
 
                     return true;
                 } else {
-                    return "ja existe um usuario cadastrado com esse email";
+                    return "Email indisponível";
                 }
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
@@ -93,7 +93,7 @@
         }
 
         // altera as informações de um usuário com id para os dados recebidos por parâmetro
-        public function updateUserInfo($id, $nome, $email, $cpf, $imgBase64, $nascimento, $telefone, $bio) {
+        public function updateUserInfo($id, $nome, $email, $imgBase64, $nascimento, $telefone, $bio) {
             try {
                 // verifica se não existe nenhum email idêntico cadastrado (desconsiderando o email do próprio usuário)
                 $verifySQL = "SELECT idUsr FROM usuario WHERE (emailUsr = :email) AND (idUsr <> :id)";
@@ -106,7 +106,7 @@
                 if ($verifySTMT->rowCount() < 1) {
                     $sql = <<<SQL
                     UPDATE usuario
-                    SET nomusr = :nome, emailUsr = :email, cpfUsr = :cpf, imgUsr = :img, nascimentoUsr = :nascimento, telefoneUsr = :telefone, biografiaUsr = :bio
+                    SET nomusr = :nome, emailUsr = :email, imgUsr = :img, nascimentoUsr = :nascimento, telefoneUsr = :telefone, biografiaUsr = :bio
                     WHERE idusr = :id
                     SQL;
 
@@ -115,7 +115,6 @@
                         ":id" => $id,  // INT
                         ":nome" => $nome,  // STRING
                         ":email" => $email,  // STRING
-                        ":cpf" => $cpf,  // STRING
                         ":img" => $imgBase64,  // STRING
                         ":nascimento" => $nascimento,  // ?
                         ":telefone" => $telefone,  // STRING
@@ -124,7 +123,7 @@
     
                     return true;
                 } else {
-                    return [ "resposta" => "ja existe um usuario cadastrado com esse email"  ];
+                    return [ "resposta" => "Email indisponível"  ];
                 }
 
             } catch(PDOException $e) {

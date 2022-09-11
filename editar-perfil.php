@@ -2,8 +2,7 @@
 <html lang="en">
     <head>
         <?php include ("components/head.html") ?>
-        <script src="js/requisicoesAPI.js"></script>
-        <script src="js/selecionarImg.js"></script>
+        <script src="js/visualizarImg.js"></script>
     </head>
     <body>
         <?php include ("components/login-header.html") ?>
@@ -25,7 +24,7 @@
                         
                         <form id="updateUser" onsubmit="sendUpdate(event)">
                             <label id="inputFileLabel" for="inputImg" class="rounded-circle mb-4">
-                                <img id="imgPerfil" alt="">
+                                <img src="images/temp/default-pic.png" id="imgPerfil" alt="">
                                 <div class="editar-hover">
                                     <i class="fa-solid fa-pen"></i>
                                     <p>Editar Foto</p>
@@ -43,11 +42,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="cpf" class="form-label">CPF</label>
-                                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="" disabled>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="regiao" class="form-label">Região</label>
-                                <input type="text" class="form-control" id="regiao" name="regiao">
+                                <input type="text" class="form-control" id="cpf" placeholder="" disabled>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="telefone" class="form-label">Telefone</label>

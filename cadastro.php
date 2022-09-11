@@ -4,8 +4,6 @@
         <?php include("components/head.html") ?>
     </head>
 
-    <script src="js/requisicoesAPI.js"></script>
-
     <body>
         <main>
             <div class="container-fluid">

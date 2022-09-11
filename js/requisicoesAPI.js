@@ -8,18 +8,22 @@ async function sendCadastro(event) {
     let response = await fetch("./API/user/register.php", {
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Accept": "application/json"
+            "Content-Type": "application/x-www-form-urlencoded"
         },
         body: formData
     });
     let data = await response.json();
-    console.log(data);
+    
+    let {resposta} = data;
+    if (resposta === "sucesso no cadastro") {
+        localStorage.setItem("openModal", "true");
+        window.location.href = "index.php";
+    }
 }
 
 
 // função de formulário responsável por criar uma nova sessão de usuário
-async function sendLogin(event) {
+async function sendLogin(event, idErrorDiv) {
     event.preventDefault();
 
     let formData = new URLSearchParams(new FormData(event.target)).toString();
@@ -27,18 +31,16 @@ async function sendLogin(event) {
     let response = await fetch("./API/login.php", {
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Accept": "application/json"
+            "Content-Type": "application/x-www-form-urlencoded"
         },
         body: formData
     });
     let data = await response.json();
-    console.log('aaaa');
 
     // mensagem enviada pela API
     let { resposta } = data;
     if (resposta === "sucesso no login") {
-        window.location.href("home.php");
+        window.location.href = "home.php";
     } else if (resposta === "credenciais invalidas") {
         console.log("Credenciais de login inválidas");
         // append mensagem de erro no formulário
@@ -48,51 +50,60 @@ async function sendLogin(event) {
     }
 }
 
-
+// função que faz update das informações de usuário
 async function sendUpdate(event) {
     event.preventDefault();
 
     let formData = new FormData(event.target);
     
-    let response = await fetch("./API/user/update.php", {
-        method: "PUT",
+    let response = await fetch("./API/user/updateInfo.php", {
+        method: "POST",
         credentials: "same-origin",
-        headers: {
-            "Content-Type": "multipart/form-data",
-            "Accept": "application/json"
-        },
         body: formData
     });
-    let data = await response.json();
+    let data = await response.text();
 
     console.log(data);
 }
 
 
 async function getLoggedUser() {
+    console.log("getting logged user");
     let response = await fetch("./API/user/get.php", {
         method: "GET",
         credentials: "same-origin",
-        headers: {
-            "Accept": "application/json"
-        },
     })
     let user = await response.json();
-    console.log(user);
 
     return user;
 }
 
 
-async function deleteUser() {
-    let response = await fetch("./API/user/delete.php", {
-        method: "DELETE",
+async function logout() {
+    console.log("logging out");
+    let response = await fetch("./API/logout.php", {
+        method: "GET",
         credentials: "same-origin",
-        headers: {
-            "Accept": "application/jsoN"
-        }
     });
     let data = await response.json();
 
-    console.log(data);
+    let { logout } = data;
+    if (logout) {
+        localStorage.setItem("openModal", "true");
+        window.location.href = "index.php";
+    }
+}
+
+
+async function deleteUser() {
+    let response = await fetch("./API/user/delete.php", {
+        method: "GET",
+        credentials: "same-origin",
+    });
+    let data = await response.json();
+
+    let { deleted } = data;
+    if (deleted) {
+        window.location.href = "index.php";
+    }
 }
