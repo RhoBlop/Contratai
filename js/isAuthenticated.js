@@ -1,14 +1,14 @@
 isAuthenticated()
     .then( auth => {
         let atual = location.pathname;
-        let paginaLiberadas = ["/", "/index.php", "/cadastro.php"];
-        if (auth && paginaLiberadas.includes(atual)) {
+        let paginasLiberadas = ["/", "/index.php", "/cadastro.php", "/sobre.php", "/ajuda.php", "/excluido.php"];
+        if (auth && paginasLiberadas.includes(atual)) {
             // caso já esteja logado e em uma "página não logada" o usuário é redirecionado à home
             window.location.href = "home.php";
         } else if (auth) {
             // caso o usuário esteja logado, nada acontece
             console.log("Usuário autenticado");
-        } else if (!auth && paginaLiberadas.includes(atual)) {
+        } else if (!auth && paginasLiberadas.includes(atual)) {
             // caso o usuário não esteja autenticado e esteja em páginas liberadas, não faz nada
             console.log("Usuário não autenticado");
         } else {

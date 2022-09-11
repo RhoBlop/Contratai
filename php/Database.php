@@ -123,7 +123,7 @@
     
                     return true;
                 } else {
-                    return [ "resposta" => "Email indisponível"  ];
+                    return "Email indisponível";
                 }
 
             } catch(PDOException $e) {

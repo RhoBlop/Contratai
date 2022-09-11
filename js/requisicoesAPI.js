@@ -1,5 +1,5 @@
 // função de formulário responsável por criar um novo usuário
-async function sendCadastro(event, id) {
+async function sendCadastro(event, idDivFeedback) {
     event.preventDefault();
 
     // transforma os dados do formulário para o formato x-www-form-urlencoded
@@ -70,7 +70,6 @@ async function sendLogin(event, idDivFeedback) {
 // função que faz update das informações de usuário
 async function sendUpdate(event, idDivFeedback) {
     event.preventDefault();
-    console.log("aaaaaaaa");
 
     let formData = new FormData(event.target);
 
@@ -86,10 +85,13 @@ async function sendUpdate(event, idDivFeedback) {
         body: formData
     });
     let data = await response.json();
-    console.log(data);
 
     let { resposta } = data;
-    if (resposta === "sucesso no update") {
+    let { erro } = data;
+    if (erro) {
+        feedbackDiv.style.backgroundColor = "#cf1c0e";
+        feedbackDiv.innerText = erro;
+    } else if (resposta === "sucesso no update") {
         await savesLoggedUser();
 
         window.location.href = "perfil.php";
@@ -153,6 +155,6 @@ async function deleteUser() {
     let { deleted } = data;
     if (deleted) {
         deleteLocalStorageUser();
-        window.location.href = "index.php";
+        window.location.href = "excluido.php";
     }
 }

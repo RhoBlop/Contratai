@@ -61,7 +61,6 @@
         // seta os campos da table com os dados do usuário
         let user = getLocalStorageUser();
         let { imgusr, nomusr, emailusr, nascimentousr, telefoneusr } = user;
-        console.log(imgusr);
 
         if (imgusr) {
             document.querySelector("#headerImgPerfil").src = imgusr;
