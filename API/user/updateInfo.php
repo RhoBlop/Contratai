@@ -3,7 +3,7 @@
     header("Content-Type: application/json");
 
     // senha não é obrigatório
-    if (!isset($_POST["nome"], $_POST["email"], $_POST["regiao"], $_POST["telefone"], $_POST["nascimento"], $_POST["bio"]) ) {
+    if (!isset($_POST["nome"], $_POST["email"], $_POST["telefone"], $_POST["nascimento"], $_POST["bio"]) ) {
         echo json_encode([
             "resposta" => "parametros errados da requisicao POST"
         ]);
@@ -24,7 +24,7 @@
 
 
     // destructuring das variáveis
-    [$nome, $email, $regiao, $nascimento, $telefone, $bio] = [$_POST["nome"], $_POST["email"], $_POST["regiao"], $_POST["nascimento"], $_POST["nascimento"], $_POST["bio"]];
+    [$nome, $email, $nascimento, $telefone, $bio] = [$_POST["nome"], $_POST["email"], $_POST["nascimento"], $_POST["nascimento"], $_POST["bio"]];
 
     // apenas se um arquivo foi enviado juntamente à requisição
     if ($_FILES["imgPerfil"]["name"] !== "") {
@@ -43,5 +43,9 @@
 
     $result = $db->updateUserInfo($_SESSION['idUsr'], $nome, $email, $imgBase64, $nascimento, $telefone, $bio);
 
-    echo $result;
+    $resposta = [
+        "resposta" => "sucesso no update"
+    ];
+
+    echo json_encode($resposta);
 ?>

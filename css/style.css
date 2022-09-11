@@ -373,14 +373,20 @@ label {
 
 /* FUTURO HOVER */
 
-/*
 
-#inputFileLabel:hover {
-    filter: brightness(50%);
+#inputFileLabel {
     cursor: pointer;
 }
 
-#inputFileLabel > .editar-hover {
+#inputFileLabel img {
+    transition: all 0.25s linear;
+}
+
+#inputFileLabel:hover img {
+    filter: brightness(35%);
+}
+
+#inputFileLabel:hover > .editar-hover {
     position: absolute;
     top: 50px;
     width: 148px;
@@ -391,12 +397,22 @@ label {
     z-index: 100;
 }
 
-#inputFileLabel .editar-hover:hover {
+#inputFileLabel:hover .editar-hover {
     filter: brightness(100%);
     opacity: 100%;
 }
 
-*/
+#feedbackUsuario {
+    display: none;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 0;
+    margin: 20px 0 0 0;
+    border-radius: 8px;
+    /* max-height: 0;
+    transition: max-height 4s ease-in-out; */
+}
 
 
 @media screen and ( max-width: 768px ) {

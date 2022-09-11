@@ -24,8 +24,8 @@
         // se tudo der certo, $result é o id
         $_SESSION["idUsr"] = $result;
         $response = [ "resposta" => "sucesso no login"];
-    } else if ($result === "credenciais invalidas") {
-        $response = [ "resposta" => $result ];
+    } else if ($result === "Email ou senha inválidos") {
+        $response = [ "erro" => $result ];
     }
 
     echo json_encode($response);

@@ -7,7 +7,8 @@
         <h2 class="modal-title w-100">Entrar</h2>
         <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form id="login" class="form-login d-flex flex-column" onsubmit="sendLogin(event)">
+
+      <form id="login" class="form-login d-flex flex-column" onsubmit="sendLogin(event, '#feedbackUsuario')">
         <div class="modal-body mx-0">
               <!-- EMAIL -->
               <div class="form-group mb-3">
@@ -20,6 +21,9 @@
                   <label for="password" class="form-label">Senha</label>
                   <input type="password" class="form-control" id="password" name="senha" placeholder="Digite sua senha" required>
                 </div>
+
+                <!-- div para comunicação com usuário -->
+                <div id="feedbackUsuario"></div>
         </div>
         <div class="modal-footer d-flex justify-content-center">
           <button type="submit" class="btn btn-outline-green">Entrar</button>
