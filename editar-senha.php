@@ -16,36 +16,9 @@
 
                     <?php include("components/sidebar.html")?>
 
-                    <div class="col-8 px-3" id="profile-content">
-                        <div class="mb-4">
-                            <h2>Editar senha</h2>
-                            <h6 class="text-muted">Altere a senha da sua conta</h6>
-                        </div>
-                        
-                        
-                        <form id="updateUser" onsubmit="sendUpdate(event)">
-                        
-                            <div class="form-group mb-3">
-                                <label for="nome" class="form-label">Senha Atual</label>
-                                <input type="password" class="form-control" id="senha-atual" name="senha-atual" placeholder="Digite sua senha atual">
-                            </div>
-
-                            <div class="form-group mb-3">
-                                <label for="nome" class="form-label">Nova Senha</label>
-                                <input type="password" class="form-control" id="nova-senha" name="nova-senha" placeholder="Digite sua nova senha">
-                            </div>
-
-                            <div class="form-group mb-3">
-                                <label for="nome" class="form-label">Confirme a nova senha</label>
-                                <input type="password" class="form-control" id="nova-senha-confirma" name="nova-senha-confirma" placeholder="Repita sua nova senha">
-                            </div>
-                            
-                            <div class="buttons d-flex justify-content-end align-items-center py-3">
-                                <a href="perfil.php" class="btn btn-link me-3">Cancelar</a>
-                                <button type="submit" class="btn btn-outline-green">Salvar nova senha</button>
-                            </div>
-                        </form>
-
+                    <div class="col-8 px-3 flex-column text-center" id="profile-content">
+                        <h3>Esta pagina está em desenvolvimento...</h3>
+                        <img src="images\storyset\Work time-pana.svg" width="55%" alt="">
                     </div>
                 </div>
             </div>
