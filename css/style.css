@@ -382,13 +382,16 @@ label {
 
 #inputFileLabel:hover > .editar-hover {
     position: absolute;
-    top: 50px;
+    top: 10%;
     width: 148px;
     height: 148px;
     text-align: center;
     color: #fff;
     opacity: 0;
     z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #inputFileLabel:hover .editar-hover {
