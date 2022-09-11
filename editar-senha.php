@@ -27,17 +27,17 @@
                         
                             <div class="form-group mb-3">
                                 <label for="nome" class="form-label">Senha Atual</label>
-                                <input type="password" class="form-control" id="senha-atual" name="senha-atual">
+                                <input type="password" class="form-control" id="senha-atual" name="senha-atual" placeholder="Digite sua senha atual">
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="nome" class="form-label">Nova Senha</label>
-                                <input type="password" class="form-control" id="nova-senha" name="nova-senha">
+                                <input type="password" class="form-control" id="nova-senha" name="nova-senha" placeholder="Digite sua nova senha">
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="nome" class="form-label">Confirme a nova senha</label>
-                                <input type="password" class="form-control" id="nova-senha-confirma" name="nova-senha-confirma">
+                                <input type="password" class="form-control" id="nova-senha-confirma" name="nova-senha-confirma" placeholder="Repita sua nova senha">
                             </div>
                             
                             <div class="buttons d-flex justify-content-end align-items-center py-3">

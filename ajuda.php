@@ -11,22 +11,14 @@
     <?php include ("components/login-modal.html"); ?>
 
     <main>
-      <div class="container p-3 my-5">
-        <div class="row d-flex justify-content-center align-items-center my-3 py-3">
-            <div class="col-sm-5 p-5">
-              <h2 class="mb-3">Quem somos?</h2>
-              <p>Criado por um grupo de 3 alunos do curso técnico de informática do IFES Serra, 
-              o Contrata Aí é um site que conecta clientes e profissionais capacitados, com o objetivo 
-              de facilitar a comunicação entre eles.</p>
-              <p>Acreditamos que, o que era pra ser um Projeto de conclusão de curso, possa ajudar milhares 
-                de pessoas ao redor do país, quem dirá do mundo! 
-              </p>
-            </div>
-            <div class="col-sm-5 col-xxl-7 p-3">
-              <img src="images\storyset\design-team-animate.svg" width="100%" alt="">
+        <div class="container p-3 my-3">
+            <div class="row gx-5">
+                <div class="col-12 px-3 flex-column text-center">
+                    <h2>Esta pagina está em desenvolvimento...</h2>
+                    <img src="images\storyset\work-time-animate.svg" width="55%" alt="">
+                </div>
             </div>
         </div>
-      </div>
     </main>
     
 
