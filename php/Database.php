@@ -55,7 +55,7 @@
                     // retorna ID do usuário
                     return $result['idusr'];
                 } else {
-                    return "credenciais invalidas";
+                    return "Email ou senha inválidos";
                 }
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);

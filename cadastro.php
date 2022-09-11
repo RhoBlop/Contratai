@@ -20,6 +20,9 @@
                             <h6>Preencha suas informações</h6>
                         </div>
 
+                        <!-- div para comunicação com usuário -->
+                        <div id="feedbackUsuario"></div>
+                        
                         <form id="cadastro" class="form-cadastro d-flex flex-column" onsubmit="sendCadastro(event)">
 
                             <!-- NOME -->
@@ -47,6 +50,9 @@
                             </div>
 
                             <a class="ms-auto mb-5">Esqueci minha senha</a>
+
+                            <!-- div para comunicação com usuário -->
+                            <div id="feedbackUsuario"></div>
 
                             <button type="submit" class="btn btn-green">Cadastrar</button>
                         </form>

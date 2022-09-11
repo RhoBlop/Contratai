@@ -21,8 +21,7 @@
                             <h6 class="text-muted">Edite os dados da sua conta</h6>
                         </div>
                         
-                        
-                        <form id="updateUser" onsubmit="sendUpdate(event)">
+                        <form id="updateUser" onsubmit="sendUpdate(event, '#feedbackUsuario')">
                             <label id="inputFileLabel" for="inputImg" class="rounded-circle mb-4">
                                 <img src="images/temp/default-pic.png" id="imgPerfil" alt="">
                                 <div class="editar-hover">
@@ -56,13 +55,15 @@
                                 <label for="bio" class="form-label">Bio</label>
                                 <textarea class="form-control" id="bio" name="bio" rows="5"></textarea>
                             </div>
+
+                            <!-- div para comunicação com usuário -->
+                            <div id="feedbackUsuario"></div>
                             
                             <div class="buttons d-flex justify-content-end align-items-center py-3">
                                 <a href="perfil.php" class="btn btn-link me-3">Cancelar</a>
                                 <button type="submit" class="btn btn-outline-green">Salvar Alterações</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -73,20 +74,19 @@
 
     <script>
         // seta os campos da table com os dados do usuário
-        getLoggedUser()
-            .then(user => {
-                document.querySelector("#headerImgPerfil").src = user["imgusr"];
-                document.querySelector("#imgPerfil").src = user["imgusr"];
-                document.querySelector("#nome").value = user["nomusr"];
-                document.querySelector("#email").value = user["emailusr"];
-                document.querySelector("#cpf").value = user["cpfusr"];
-                document.querySelector("#telefone").value = user["telefoneusr"];
-                document.querySelector("#nascimento").value = user["nascimentousr"];
-                document.querySelector("#bio").innerText = user["biografiausr"];
-            })
-            .catch(err => {
-                console.error(err);
-            })
+        let user = getLocalStorageUser();
+        console.log(user);
+        let { imgusr, nomusr, emailusr, cpfusr, nascimentousr, telefoneusr, biografiausr } = user;
+
+        if (imgusr) {
+            document.querySelector("#headerImgPerfil").src = imgusr;
+            document.querySelector("#imgPerfil").src = imgusr;
+        }
+        document.querySelector("#nome").value = nomusr;
+        document.querySelector("#email").value = emailusr;
+        document.querySelector("#nascimento").value = nascimentousr;
+        document.querySelector("#telefone").value = telefoneusr;
+        document.querySelector("#bio").innerText = biografiausr;
     </script>
 
     <script

@@ -30,13 +30,12 @@
 
     <script>
         // seta os campos da table com os dados do usuário
-        getLoggedUser()
-            .then(user => {
-                document.querySelector("#headerImgPerfil").src = user["imgusr"];
-            })
-            .catch(err => {
-                console.error(err);
-            })
+        let user = getLocalStorageUser();
+        let { imgusr } = user;
+
+        if (imgusr) {
+            document.querySelector("#headerImgPerfil").src = imgusr;
+        }
     </script>
 
     <script
