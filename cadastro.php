@@ -19,11 +19,8 @@
                             <h2>Crie sua conta!</h2>
                             <h6>Preencha suas informações</h6>
                         </div>
-
-                        <!-- div para comunicação com usuário -->
-                        <div id="feedbackUsuario"></div>
                         
-                        <form id="cadastro" class="form-cadastro d-flex flex-column" onsubmit="sendCadastro(event)">
+                        <form id="cadastro" class="form-cadastro d-flex flex-column" onsubmit="sendCadastro(event, '#feedbackUsuario')">
 
                             <!-- NOME -->
                             <div class="form-group mb-3">

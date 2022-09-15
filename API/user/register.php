@@ -20,10 +20,10 @@
     // resposta da API
     if ($result === true) {
         $response = [ "resposta" => "sucesso no cadastro" ];
-    } else if ($result === "ja existe um usuario cadastrado com esse email") {
-        $response = [ "resposta" => $result ];
+    } else if ($result === "Email indisponível") {
+        $response = [ "erro" => $result ];
     } else {
-        $response = [ "resposta" => "falha no cadastro" ];
+        $response = [ "erro" => "Falha no cadastro" ];
     }
     
     echo json_encode($response);

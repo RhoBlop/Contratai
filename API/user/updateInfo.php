@@ -43,9 +43,15 @@
 
     $result = $db->updateUserInfo($_SESSION['idUsr'], $nome, $email, $imgBase64, $nascimento, $telefone, $bio);
 
-    $resposta = [
-        "resposta" => "sucesso no update"
-    ];
+    if ($result === "Email indisponível") {
+        $resposta = [
+            "erro" => $result
+        ];
+    } else {
+        $resposta = [
+            "resposta" => "sucesso no update"
+        ];
+    }
 
     echo json_encode($resposta);
 ?>

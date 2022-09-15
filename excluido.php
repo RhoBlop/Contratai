@@ -15,7 +15,7 @@
 
             <div class="col-sm-5 col-xxl-6 flex-column py-5 text-center align-self-center ">
               <h1 class="mb-3">Poxa!</h1>
-              <p class="fs-4">Uma pena você ter abandonado nosso serviço! <br>Quem sabe você possa tentar recomeçar novamente?</p>
+              <p class="fs-4">Uma pena você ter abandonado nosso serviço! <br>Quem sabe você possa tentar começar novamente?</p>
               <a type="button" class="btn btn-outline-green btn-lg mt-3" href="cadastro.php">Cadastre-se</a>
             </div>
         </div>
