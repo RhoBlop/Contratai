@@ -10,22 +10,17 @@
     }
 
     // classe PDO para realização de operações no BD
-    require ("../../php/Database.php");
-    $db = new Database();
+    require ("../../php/database/Usuario.php.php");
+    $user = new Usuario();
 
-    $idUsr = $_SESSION["idUsr"];
-    $result = $db->deleteUser($idUsr);
+    $result = $user->deleteById($_SESSION["idUsr"]);
 
     // resposta da API
-    if ($result === true) {
-        $response = [ 
-            "resposta" => "sucesso na delecao",
-            "deleted" => true 
-        ];
+    if (isset($result["action"]) && $result["action"] === TRUE) {
         logout();
-    } else {
-        $response = [ "resposta" => "falha na delecao" ];
     }
+
+    $response = $result;
 
     echo json_encode($response);
 ?>

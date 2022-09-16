@@ -48,12 +48,12 @@
                                 <small id="senhaErrada"></small>
                             </div>
 
-                            <a class="ms-auto mb-5">Esqueci minha senha</a>
+                            <a class="ms-auto mb-2">Esqueci minha senha</a>
 
                             <!-- div para comunicação com usuário -->
                             <div id="feedbackUsuario"></div>
 
-                            <button type="submit" class="btn btn-green">Cadastrar</button>
+                            <button type="submit" class="btn btn-green mt-4">Cadastrar</button>
                         </form>
                     </div>
 

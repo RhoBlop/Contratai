@@ -19,8 +19,8 @@
     $_POST = replaceEmptysForNulls($_POST);
 
     // classe PDO para realização de operações no BD
-    require ("../../php/Database.php");
-    $db = new Database();
+    require ("../../php/database/Usuario.php");
+    $user = new Usuario();
 
 
     // destructuring das variáveis
@@ -41,17 +41,9 @@
         $imgBase64 = null;
     }
 
-    $result = $db->updateUserInfo($_SESSION['idUsr'], $nome, $email, $imgBase64, $nascimento, $telefone, $bio);
+    $result = $user->updateInfo($_SESSION['idUsr'], $nome, $email, $imgBase64, $nascimento, $telefone, $bio);
 
-    if ($result === "Email indisponível") {
-        $resposta = [
-            "erro" => $result
-        ];
-    } else {
-        $resposta = [
-            "resposta" => "sucesso no update"
-        ];
-    }
+    $response = $result;
 
-    echo json_encode($resposta);
+    echo json_encode($response);
 ?>

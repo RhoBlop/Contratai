@@ -10,14 +10,13 @@
     }
 
     // classe PDO para realização de operações no BD
-    require ("../../php/Database.php");
-    $db = new Database();
+    require ("../../php/database/Usuario.php.php");
+    $user = new Usuario();
 
-    $idUsr = $_SESSION["idUsr"];
     // retorna array associativa com os dados do usuário caso exista
-    $result = $db->selectUserById($idUsr);
+    $result = $user->getById($_SESSION["idUsr"]);
 
-    if ($result) {
-        echo json_encode($result);
-    }
+    $response = $result;
+
+    echo json_encode($response);
 ?>

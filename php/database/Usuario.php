@@ -14,11 +14,11 @@
                 ]);
                 
                 $result = $stmt->fetch();
-                return $result;
+                return [ "dados" => $result ];
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
 
-                return false;
+                return [ "action" => false ];
             }
         }
 
@@ -37,14 +37,14 @@
                 $result = $stmt->fetch();
                 if ($result) {
                     // retorna ID do usuário
-                    return $result['idusr'];
+                    return [ "dados" => $result ];
                 } else {
-                    return "Email ou senha inválidos";
+                    return [ "erro" => "Email ou senha inválidos" ];
                 }
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
 
-                return false;
+                return [ "action" => false ];
             }
         }
 
@@ -68,14 +68,14 @@
                         ":senha" => $senha
                     ]);
 
-                    return true;
+                    return [ "action" => true ];
                 } else {
-                    return "Email indisponível";
+                    return [ "erro" => "Email já cadastrado" ];
                 }
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
 
-                return false;
+                return [ "action" => false ];
             }
         }
 
@@ -109,15 +109,15 @@
                         ":bio" => $bio
                     ]);
     
-                    return true;
+                    return [ "action" => true ];
                 } else {
-                    return "Email indisponível";
+                    return [ "erro" => "Email já cadastrado" ];
                 }
 
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
 
-                return false;
+                return [ "action" => false ];
             }
         }
 
@@ -131,17 +131,17 @@
                     ":senha" => $senha
                 ]);
     
-                return true;
+                return [ "action" => true ];
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
 
-                return false;
+                return [ "action" => false ];
             }
         }
 
 
         // deleta um usuário a partir do id passado por parâmetro
-        public function delete($id) {
+        public function deleteById($id) {
             try {
                 $sql = "DELETE FROM usuario WHERE idUsr = :id";
     
@@ -150,11 +150,11 @@
                     ":id" => $id
                 ]);
     
-                return true;
+                return [ "action" => true ];
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
 
-                return false;
+                return [ "action" => false ];
             }
         }
     }

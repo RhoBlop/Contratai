@@ -17,7 +17,6 @@
         }
     }
 
-    // destrói tudo que for possível
     function logout() {
         session_unset();
         session_destroy();
