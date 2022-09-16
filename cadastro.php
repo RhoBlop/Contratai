@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <?php include("components/head.html") ?>
+        <script src="js/confirmaSenha.js"></script>
     </head>
 
     <body>
@@ -43,7 +44,8 @@
                             <!-- CONFIRMAÇÃO SENHA -->
                             <div class="form-group mb-1">
                                 <label for="nome" class="form-label">Confirme sua senha</label>
-                                <input type="password" class="form-control" id="nome" name="confirmSenha" placeholder="Digite sua senha" autocomplete="off" required>
+                                <input type="password" class="form-control" id="nome" onchange="confirmaSenha(event, '#senha', '#senhaErrada')" name="confirmSenha" placeholder="Digite sua senha" autocomplete="off" required>
+                                <small id="senhaErrada"></small>
                             </div>
 
                             <a class="ms-auto mb-5">Esqueci minha senha</a>

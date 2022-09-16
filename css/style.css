@@ -412,6 +412,17 @@ label {
 }
 
 
+.inputSenhaErrada {
+    border-color: #cf1c0e;
+}
+
+.inputSenhaErrada:focus {
+    outline-style: solid;
+    outline-color: #cf1c0e;
+    outline-width: 1.5px;
+}
+
+
 @media screen and ( max-width: 768px ) {
     .caixa-pesquisa {
         width: 100%;
