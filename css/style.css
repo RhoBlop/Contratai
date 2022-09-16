@@ -412,6 +412,19 @@ label {
 }
 
 
+/* Cards dos Perfis */
+
+.col-md-3 #profile-card .card-header {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 20px 85px;
+    width: 100%;
+    height: 100%;
+
+    background: var(--dark-green);
+}
+
 @media screen and ( max-width: 768px ) {
     .caixa-pesquisa {
         width: 100%;

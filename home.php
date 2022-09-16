@@ -6,9 +6,10 @@
     <body>
         <?php include ("components/login-header.html") ?>
         <main>
-            <div class="container p-3 my-3">
-                <div class="row d-flex justify-content-center align-items-center mb-3">
-                    <div class="col-md-12">
+            <div class="container my-3">
+
+                <div class="row py-3 d-flex justify-content-center align-items-center mb-3">
+                    <div class="col-md-12 search-bar">
                         <form action="">
                             <div class="input-group">
                                 <input type="text" class="form-control form-control-lg" placeholder="O que você está procurando?">
@@ -16,10 +17,23 @@
                             </div>
                         </form>
                     </div>
-
                 </div>
-
+                
             </div>
+
+            <div class="container my-3">
+                    <div class="row gx-5 mb-3">
+                        <div class="col-md-3">
+                            <div class="card shadow-sm" id="profile-card">
+                                <div class="card-header">
+                                    <div class="profile-pic"><img src="" alt=""></div>
+                                </div>
+                                <div class="card-content"></div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
 
             <!-- SLIDER DAS PRINCIPAIS CATEGORIAS -->
             <?php include ("components/principais-categorias.html") ?>
