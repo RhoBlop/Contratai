@@ -22,15 +22,21 @@
             </div>
 
             <div class="container my-3">
-                    <div class="row gx-5 mb-3">
-                        <div class="col-md-3">
-                            <div class="card shadow-sm" id="profile-card">
+                    <div class="row row-cols-2 row-cols-lg-5 mb-3">
+                        <div class="col">
+                            <div class="card text-center shadow-sm border-0 rounded-4" id="profile-card">
                                 <div class="card-header">
-                                    <div class="profile-pic"><img src="" alt=""></div>
+                                    <div class="profile-pic"><img src="images\temp\default-pic.png" class="rounded-circle" alt=""></div>
                                 </div>
-                                <div class="card-content"></div>
+                                <div class="card-body">
+                                    <h3>Fulano</h3>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, tempore.</p>
+                                    <button class="btn btn-outline-green">Ver mais</button>
+
+                                </div>
                             </div>
                         </div>
+                        
                     </div>
             </div>
 
