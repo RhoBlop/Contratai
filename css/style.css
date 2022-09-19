@@ -351,6 +351,9 @@ label {
 }
 
 #inputFileLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     filter: brightness(100%);
     width: 148px;
@@ -360,9 +363,17 @@ label {
     overflow: hidden;
 }
 
-#imgPerfil {
+.img-perfil-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 148px;
     height: 148px;
+    overflow: hidden;
+}
+
+#imgPerfil {
+    width: 148px;
 }
 
 /* FUTURO HOVER */
@@ -378,6 +389,10 @@ label {
 
 #inputFileLabel:hover img {
     filter: brightness(35%);
+}
+
+.editar-hover {
+    display: none;
 }
 
 #inputFileLabel:hover > .editar-hover {
