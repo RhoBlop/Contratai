@@ -419,26 +419,42 @@ label {
 }
 
 #profile-card .card-header {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    padding: 20px 85px;
+    width: 100%;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     background: var(--primary-green);
 }
 
-#profile-card .card-header .profile-pic {
-    padding: 3px;
-}
-
-#profile-card .card-header .profile-pic img {
+.profile-pic img {
     width: 104px;
     height: 104px;
     border: 3px solid #fff;
 }
 
+#profile .card .header-card {
+    width: 100%;
+    height: 150px;
+    background: var(--primary-green);
 
+}
+
+.profile-pic img {
+    width: 160px;
+    height: 160px;
+    border: 3px solid #fff;
+}
+
+#profile .card .card-body{
+    padding: 15px;
+}
+
+#profile .profile-pic {
+    margin-top: -100px;
+}
+
+#profile .top-infos h,p {
+    margin: 0;
+}
 
 @media screen and ( max-width: 768px ) {
     .caixa-pesquisa {

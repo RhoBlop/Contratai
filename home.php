@@ -31,13 +31,14 @@
                                 <div class="card-body">
                                     <h3>Fulano</h3>
                                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, tempore.</p>
-                                    <button class="btn btn-outline-green">Ver mais</button>
+                                    <a class="btn btn-outline-green" href="perfil-publico.php">Anuncie</a>
 
                                 </div>
                             </div>
                         </div>
                         
                     </div>
+                    
             </div>
 
 

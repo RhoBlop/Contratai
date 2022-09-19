@@ -1,5 +1,4 @@
 <?php
-    echo phpinfo();
 
     class Database {
         // credenciais banco de dados
