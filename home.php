@@ -24,15 +24,16 @@
             <div class="container my-3">
                     <div class="row row-cols-2 row-cols-lg-5 mb-3">
                         <div class="col">
-                            <div class="card text-center shadow-sm border-0 rounded-4" id="profile-card">
+                            <div class="card text-center shadow-sm rounded-4" id="profile-card">
                                 <div class="card-header">
                                     <div class="profile-pic"><img src="images\temp\default-pic.png" class="rounded-circle" alt=""></div>
                                 </div>
                                 <div class="card-body">
-                                    <h3>Fulano</h3>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, tempore.</p>
-                                    <a class="btn btn-outline-green" href="perfil-publico.php">Anuncie</a>
-
+                                    <div class="text mb-3">
+                                        <h3>Fulano</h3>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, tempore.</p>
+                                    </div>
+                                    <a class="btn btn-outline-green" href="perfil-publico.php">Veja mais</a>
                                 </div>
                             </div>
                         </div>

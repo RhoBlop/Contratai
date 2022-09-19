@@ -425,7 +425,7 @@ label {
     background: var(--primary-green);
 }
 
-.profile-pic img {
+#profile-card .profile-pic img {
     width: 104px;
     height: 104px;
     border: 3px solid #fff;
@@ -449,11 +449,16 @@ label {
 }
 
 #profile .profile-pic {
-    margin-top: -100px;
+    margin-top: -120px;
 }
 
-#profile .top-infos h,p {
+#profile .top-infos h3, p {
     margin: 0;
+}
+
+#profile i {
+    font-size: 18px;
+    margin-right: .25rem;
 }
 
 @media screen and ( max-width: 768px ) {

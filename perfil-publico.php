@@ -11,18 +11,21 @@
             <div class="container p-3 my-3">
                 <div class="row gx-5">
                     <div class="col-7" id="profile">
-                        <div class="card rounded-5">
-                            <div class="header-card rounded-5  rounded-bottom">
+                        <div class="card shadow-sm rounded-4">
+                            <div class="header-card rounded-4  rounded-bottom">
                             </div>
                             <div class="card-body p-3 text-start">
-                                <div class="top-body p-3 mb-3">
+                                <div class="top-body p-3 mb-1">
                                     <div class="profile-pic"><img src="images\temp\default-pic.png"class="rounded-circle" alt=""></div>
                                 </div>
 
-                                <div class="content px-3">
+                                <div class="text px-3">
                                     <h3>Rafael Rodrigues Matos</h3>
-                                    <p>Designer Gráfico</p>
-                                    <p>Serra, ES</p>
+                                    <p><i class="fa-solid fa-briefcase fa-fw"></i>Designer Gráfico</p>
+                                    <p><i class="fa-solid fa-location-dot fa-fw"></i>Serra, ES</p>
+                                    <p><i class="fa-solid fa-star fa-fw"></i>5.0</p>
+                                    <p>100 Trabalhos realizados</p>
+                                    <a href="#">50 Avaliações recebidas</a>
                                 </div>
 
                                 
@@ -30,6 +33,11 @@
                             </div>
                         </div> 
                     </div>
+
+                    <div class="col-5 " id="fotos">
+                        <h3>Fotos</h3>
+                    </div>
+
                 </div>
             </div>
         </main>
