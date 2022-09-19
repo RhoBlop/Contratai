@@ -19,8 +19,8 @@
                             <h2>Meu Perfil</h2>
                             <h6 class="text-muted">Dados da conta</h6>
                         </div>
-                        <div class="d-flex justify-content-center ">
-                            <img id="imgPerfil" src="images/temp/default-pic.png" alt="" class="rounded-circle shadow-sm mb-5" height="214" width="214">
+                        <div class="d-flex justify-content-center mb-4">
+                            <img src="images/temp/default-pic.png" class="rounded-circle" id="imgPerfil" alt="">
                         </div>
                         <table class="table mb-5">
                             <tbody>
