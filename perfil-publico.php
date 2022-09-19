@@ -11,7 +11,7 @@
             <div class="container p-3 my-3">
                 <div class="row gx-5">
                     <div class="col-7" id="profile">
-                        <div class="card shadow-sm rounded-4">
+                        <div class="card shadow-sm rounded-4 mb-3">
                             <div class="header-card rounded-4  rounded-bottom">
                             </div>
                             <div class="card-body p-3 text-start">
@@ -25,13 +25,15 @@
                                     <p><i class="fa-solid fa-location-dot fa-fw"></i>Serra, ES</p>
                                     <p><i class="fa-solid fa-star fa-fw"></i>5.0</p>
                                     <p>100 Trabalhos realizados</p>
-                                    <a href="#">50 Avaliações recebidas</a>
+                                    <a href="#">50 Avaliações recebidas</a><br>
+                                    <a href="#" class="btn btn-outline-green mt-3">Contactar</a>
                                 </div>
 
-                                
+                            
 
                             </div>
-                        </div> 
+                        </div>
+
                     </div>
 
                     <div class="col-5 " id="fotos">
