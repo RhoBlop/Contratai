@@ -1,6 +1,5 @@
 // adicionado no onchange do confirmaSenha para checar se as duas senhas são iguais
 function confirmaSenha(event, idDivSenha, idDivErro) {
-    console.log("abc");
     let divSenha = document.querySelector(idDivSenha);
     let divConfirmaSenha = event.target;
 
@@ -18,5 +17,4 @@ function confirmaSenha(event, idDivSenha, idDivErro) {
             erroMsg.textContent = "";
         }
     }
-
 }

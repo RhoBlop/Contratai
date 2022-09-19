@@ -20,12 +20,14 @@ async function sendCadastro(event, idDivFeedback) {
     });
     let data = await response.json();
     
-    let { resposta } = data;
     let { erro } = data;
     if (erro) {
         feedbackDiv.style.backgroundColor = "#cf1c0e";
         feedbackDiv.innerText = erro;
-    } else if (resposta === "sucesso no cadastro") {
+    } 
+    
+    let { action } = data;
+    if (action) {
         localStorage.setItem("openModal", "true");
         window.location.href = "index.php";
     }
@@ -53,13 +55,14 @@ async function sendLogin(event, idDivFeedback) {
     });
     let data = await response.json();
 
-    // mensagem enviada pela API
-    let { resposta } = data;
     let { erro } = data;
     if (erro) {
         feedbackDiv.style.backgroundColor = "#cf1c0e";
         feedbackDiv.innerText = erro;
-    } else if (resposta === "sucesso no login") {
+    }
+    
+    let { dados } = data;
+    if (dados) {
         // salva usuário logado no localStorage
         await savesLoggedUser();
 
@@ -86,12 +89,14 @@ async function sendUpdate(event, idDivFeedback) {
     });
     let data = await response.json();
 
-    let { resposta } = data;
     let { erro } = data;
     if (erro) {
         feedbackDiv.style.backgroundColor = "#cf1c0e";
         feedbackDiv.innerText = erro;
-    } else if (resposta === "sucesso no update") {
+    }
+    
+    let { action } = data;
+    if (action) {
         await savesLoggedUser();
 
         window.location.href = "perfil.php";
@@ -106,9 +111,9 @@ async function savesLoggedUser() {
         method: "GET",
         credentials: "same-origin",
     })
-    let user = await response.json();
+    let { dados } = await response.json();
 
-    localStorage.setItem("currentUser", JSON.stringify(user));
+    localStorage.setItem("currentUser", JSON.stringify(dados));
 
     return true;
 }
@@ -136,8 +141,8 @@ async function logout() {
     });
     let data = await response.json();
 
-    let { logout } = data;
-    if (logout) {
+    let { action } = data;
+    if (action) {
         deleteLocalStorageUser();
         localStorage.setItem("openModal", "true");
         window.location.href = "index.php";

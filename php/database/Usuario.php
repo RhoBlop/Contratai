@@ -1,7 +1,7 @@
 <?php 
-    require_once "./Database.php";
+    require_once "Database.php";
 
-    class Usuario {
+    class Usuario extends Database {
 
         // retorna usuário com o id passado por parâmetro
         public function getById($id) {
@@ -17,6 +17,7 @@
                 return [ "dados" => $result ];
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
 
                 return [ "action" => false ];
             }
@@ -43,6 +44,7 @@
                 }
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
 
                 return [ "action" => false ];
             }
@@ -74,6 +76,7 @@
                 }
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
 
                 return [ "action" => false ];
             }
@@ -116,6 +119,7 @@
 
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
 
                 return [ "action" => false ];
             }
@@ -134,6 +138,7 @@
                 return [ "action" => true ];
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
 
                 return [ "action" => false ];
             }
@@ -153,6 +158,7 @@
                 return [ "action" => true ];
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
 
                 return [ "action" => false ];
             }

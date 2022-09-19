@@ -11,22 +11,18 @@
 
     session_start();
     // classe PDO para realização de operações no BD
-    require ("../php/Database.php");
-    $db = new Database();
+    require ("../php/database/Usuario.php");
+    $user = new Usuario();
     
     // destructuring das variáveis recebidas pelo POST request
     [$email, $senha] = [$_POST["email"], $_POST["senha"]];
     // retorna o id do usuário, caso exista um, ou "credenciais invalidas"
-    $result = $db->selectUserLogin($email, $senha);
-    
-    // resposta da API  
-    if (is_numeric($result)) {
-        // se tudo der certo, $result é o id
-        $_SESSION["idUsr"] = $result;
-        $response = [ "resposta" => "sucesso no login"];
-    } else if ($result === "Email ou senha inválidos") {
-        $response = [ "erro" => $result ];
+    $result = $user->getLogin($email, $senha);
+
+    $idUsr = $result["dados"]["idusr"];
+    if (isset($idUsr)) {
+        $_SESSION["idUsr"] = $idUsr;
     }
 
-    echo json_encode($response);
+    echo json_encode($result);
 ?>

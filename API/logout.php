@@ -8,9 +8,8 @@
 
     logout();
 
-    $resposta = [ 
-        "resposta" => "sucesso no logout",
-        "logout" => true
+    $resposta = [
+        "action" => true
     ];
 
     echo json_encode($resposta);

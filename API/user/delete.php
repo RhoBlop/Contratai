@@ -10,7 +10,7 @@
     }
 
     // classe PDO para realização de operações no BD
-    require ("../../php/database/Usuario.php.php");
+    require ("../../php/database/Usuario.php");
     $user = new Usuario();
 
     $result = $user->deleteById($_SESSION["idUsr"]);
