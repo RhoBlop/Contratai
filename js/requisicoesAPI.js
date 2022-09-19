@@ -88,6 +88,7 @@ async function sendUpdate(event, idDivFeedback) {
         body: formData
     });
     let data = await response.json();
+    console.log(data);
 
     let { erro } = data;
     if (erro) {

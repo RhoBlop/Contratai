@@ -95,22 +95,41 @@
                 ]);
 
                 if ($verifySTMT->rowCount() < 1) {
-                    $sql = <<<SQL
-                    UPDATE usuario
-                    SET nomusr = :nome, emailUsr = :email, imgUsr = :img, nascimentoUsr = :nascimento, telefoneUsr = :telefone, biografiaUsr = :bio
-                    WHERE idusr = :id
-                    SQL;
+                    if ($imgBase64 != "") {
+                        $sql = <<<SQL
+                        UPDATE usuario
+                        SET nomusr = :nome, emailUsr = :email, imgUsr = :img, nascimentoUsr = :nascimento, telefoneUsr = :telefone, biografiaUsr = :bio
+                        WHERE idusr = :id
+                        SQL;
+    
+                        $stmt = Database::prepare($sql);
+                        $stmt->execute([
+                            ":id" => $id,  // INT
+                            ":nome" => $nome,  // STRING
+                            ":email" => $email,  // STRING
+                            ":img" => $imgBase64,  // STRING
+                            ":nascimento" => $nascimento,  // ?
+                            ":telefone" => $telefone,  // STRING
+                            ":bio" => $bio
+                        ]);
+                    } else {
+                        $sql = <<<SQL
+                        UPDATE usuario
+                        SET nomusr = :nome, emailUsr = :email, nascimentoUsr = :nascimento, telefoneUsr = :telefone, biografiaUsr = :bio
+                        WHERE idusr = :id
+                        SQL;
+    
+                        $stmt = Database::prepare($sql);
+                        $stmt->execute([
+                            ":id" => $id,  // INT
+                            ":nome" => $nome,  // STRING
+                            ":email" => $email,  // STRING
+                            ":nascimento" => $nascimento,  // ?
+                            ":telefone" => $telefone,  // STRING
+                            ":bio" => $bio
+                        ]);
+                    }
 
-                    $stmt = Database::prepare($sql);
-                    $stmt->execute([
-                        ":id" => $id,  // INT
-                        ":nome" => $nome,  // STRING
-                        ":email" => $email,  // STRING
-                        ":img" => $imgBase64,  // STRING
-                        ":nascimento" => $nascimento,  // ?
-                        ":telefone" => $telefone,  // STRING
-                        ":bio" => $bio
-                    ]);
     
                     return [ "action" => true ];
                 } else {

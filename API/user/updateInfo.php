@@ -1,44 +1,37 @@
 <?php 
     // header da requisição http para declarar que a resposta será um json
     header("Content-Type: application/json");
+    require ("../../php/verificacoes.php");
 
-    // senha não é obrigatório
-    if (!isset($_POST["nome"], $_POST["email"], $_POST["telefone"], $_POST["nascimento"], $_POST["bio"]) ) {
-        echo json_encode([
-            "resposta" => "parametros errados da requisicao POST"
-        ]);
-        exit();
-    }
+    // termina o serviço caso alguma das variáveis não tenha sido enviada no POST
+    verifyIsSetPost("nome", "email", "telefone", "nascimento", "bio");
+
+    // termina o serviço caso alguma das variáveis esteja vazia
+    verifyIsEmptyPost("nome", "email");
 
     session_start();
-    require("../../php/utils.php");
-    if (!isAuthenticated()) {
-        echo json_encode([ "resposta" => "nao autenticado" ]);
-        exit();
-    }
+    // termina o serviço caso o usuário não esteja autenticado
+    verifyIsAuthenticated();
+
+    require ("../../php/utils.php");
+    // o usuário pode acabar não preenchendo alguns campos em um formulário de update,
+    // então substituímos eles por valores nulos
     $_POST = replaceEmptysForNulls($_POST);
 
     // classe PDO para realização de operações no BD
     require ("../../php/database/Usuario.php");
     $user = new Usuario();
 
-
     // destructuring das variáveis
     [$nome, $email, $nascimento, $telefone, $bio] = [$_POST["nome"], $_POST["email"], $_POST["nascimento"], $_POST["nascimento"], $_POST["bio"]];
 
     // apenas se um arquivo foi enviado juntamente à requisição
     if ($_FILES["imgPerfil"]["name"] !== "") {
-        // caminho de onde o servidor salvou a imagem temporariamente
-        $tmpPath = $_FILES["imgPerfil"]["tmp_name"];
-        // dados da imagem
-        $imgData = file_get_contents($tmpPath);
-        // tipo da imagem
-        $imgType = pathinfo($_FILES["imgPerfil"]["name"], PATHINFO_EXTENSION);
+        $imgs = generateImgBase64($_FILES);
 
-        // tradução dos dados para base64
-        $imgBase64 = "data:image/{$imgType};base64, " . base64_encode($imgData);
+        $imgBase64 = $imgs[0];
     } else {
-        $imgBase64 = null;
+        $imgBase64 = "";
     }
 
     $result = $user->updateInfo($_SESSION['idUsr'], $nome, $email, $imgBase64, $nascimento, $telefone, $bio);
