@@ -17,7 +17,7 @@
     // destructuring das variáveis recebidas pelo POST request
     [$email, $senha] = [$_POST["email"], $_POST["senha"]];
     // retorna o id do usuário, caso exista um, ou "credenciais invalidas"
-    $result = $user->getLogin($email, $senha);
+    $result = $user->selectLogin($email, $senha);
 
     $idUsr = $result["dados"]["idusr"];
     if (isset($idUsr)) {

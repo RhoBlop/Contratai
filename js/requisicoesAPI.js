@@ -1,15 +1,27 @@
-// função de formulário responsável por criar um novo usuário
-async function sendCadastro(event, idDivFeedback) {
-    event.preventDefault();
+let idDivFeedback = "#feedbackUsuario";
 
-    // transforma os dados do formulário para o formato x-www-form-urlencoded
-    let formData = new URLSearchParams(new FormData(event.target)).toString();
-
+function loading() {
     let feedbackDiv = document.querySelector(idDivFeedback);
     feedbackDiv.style.display = "block";
     // feedbackDiv.style.maxHeight = "50px";
     feedbackDiv.style.backgroundColor = "#026773";
     feedbackDiv.innerText = "Aguarde um instante...";
+}
+
+function formErro(textErro) {
+    let feedbackDiv = document.querySelector(idDivFeedback);
+    feedbackDiv.style.backgroundColor = "#cf1c0e";
+    feedbackDiv.innerText = textErro;
+}
+
+// função de formulário responsável por criar um novo usuário
+async function sendCadastro(event) {
+    event.preventDefault();
+
+    // transforma os dados do formulário para o formato x-www-form-urlencoded
+    let formData = new URLSearchParams(new FormData(event.target)).toString();
+
+    loading();
 
     let response = await fetch("./API/user/register.php", {
         method: "POST",
@@ -22,8 +34,7 @@ async function sendCadastro(event, idDivFeedback) {
     
     let { erro } = data;
     if (erro) {
-        feedbackDiv.style.backgroundColor = "#cf1c0e";
-        feedbackDiv.innerText = erro;
+        formErro(erro);
     } 
     
     let { action } = data;
@@ -35,16 +46,12 @@ async function sendCadastro(event, idDivFeedback) {
 
 
 // função de formulário responsável por criar uma nova sessão de usuário
-async function sendLogin(event, idDivFeedback) {
+async function sendLogin(event) {
     event.preventDefault();
 
     let formData = new URLSearchParams(new FormData(event.target)).toString();
 
-    let feedbackDiv = document.querySelector(idDivFeedback);
-    feedbackDiv.style.display = "block";
-    // feedbackDiv.style.maxHeight = "50px";
-    feedbackDiv.style.backgroundColor = "#026773";
-    feedbackDiv.innerText = "Aguarde um instante...";
+    loading();
 
     let response = await fetch("./API/login.php", {
         method: "POST",
@@ -57,8 +64,7 @@ async function sendLogin(event, idDivFeedback) {
 
     let { erro } = data;
     if (erro) {
-        feedbackDiv.style.backgroundColor = "#cf1c0e";
-        feedbackDiv.innerText = erro;
+        formErro(erro);
     }
     
     let { dados } = data;
@@ -71,16 +77,12 @@ async function sendLogin(event, idDivFeedback) {
 }
 
 // função que faz update das informações de usuário
-async function sendUpdate(event, idDivFeedback) {
+async function sendUpdate(event) {
     event.preventDefault();
 
     let formData = new FormData(event.target);
 
-    let feedbackDiv = document.querySelector(idDivFeedback);
-    feedbackDiv.style.display = "block";
-    // feedbackDiv.style.maxHeight = "50px";
-    feedbackDiv.style.backgroundColor = "#026773";
-    feedbackDiv.innerText = "Aguarde um instante...";
+    loading();
     
     let response = await fetch("./API/user/updateInfo.php", {
         method: "POST",
@@ -88,12 +90,10 @@ async function sendUpdate(event, idDivFeedback) {
         body: formData
     });
     let data = await response.json();
-    console.log(data);
 
     let { erro } = data;
     if (erro) {
-        feedbackDiv.style.backgroundColor = "#cf1c0e";
-        feedbackDiv.innerText = erro;
+        formErro(erro);
     }
     
     let { action } = data;

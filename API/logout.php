@@ -1,10 +1,9 @@
 <?php
     session_start();
+    require("../php/verificacoes.php");
     require("../php/utils.php");
-    if (!isAuthenticated()) {
-        echo json_encode([ "resposta" => "nao autenticado" ]);
-        exit();
-    }
+
+    verifyIsAuthenticated();
 
     logout();
 

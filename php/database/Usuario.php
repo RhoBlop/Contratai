@@ -4,7 +4,7 @@
     class Usuario extends Database {
 
         // retorna usuário com o id passado por parâmetro
-        public function getById($id) {
+        public function selectById($id) {
             try {
                 $sql = "SELECT nomusr, emailusr, senhausr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr FROM usuario WHERE idusr = :id";
     
@@ -25,7 +25,7 @@
 
 
         // retorna usuário para login, ou seja, a partir de um email e uma senha
-        public function getLogin($email, $senha) {
+        public function selectLogin($email, $senha) {
             try {
                 $sql = "SELECT idusr FROM usuario WHERE (emailUsr = :email) AND (senhaUsr = :senha)";
 
@@ -145,16 +145,29 @@
         }
 
         
-        public function updateSenha($id, $senha) {
+        public function updateSenha($id, $senhaAtual, $senhaNova) {
             try {
-                $sql = "UPDATE usuario SET senhaUsr = :senha WHERE idUsr = :id";
-                $stmt = Database::prepare($sql);
-                $stmt->execute([
+                $verifySenhaSQL = "SELECT idusr FROM usuario WHERE (idusr = :id) AND (senhausr = :senhaAtual)";
+                $verifySTMT = Database::prepare($verifySenhaSQL);
+                $verifySTMT->execute([
                     ":id" => $id,
-                    ":senha" => $senha
+                    ":senhaAtual" => $senhaAtual
                 ]);
-    
-                return [ "action" => true ];
+
+                if ($verifySTMT->rowCount() < 1) {
+                    $sql = "UPDATE usuario SET senhaUsr = :senhaNova WHERE idUsr = :id";
+                    $stmt = Database::prepare($sql);
+                    $stmt->execute([
+                        ":id" => $id,
+                        ":senhaNova" => $senhaNova
+                    ]);
+        
+                    return [ "action" => true ];
+                } else {
+                    return [
+                        "erro" => "A senha atual digitada está incorreta"
+                    ];
+                }
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();

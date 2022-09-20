@@ -2,6 +2,7 @@
     // header da requisição http para declarar que a resposta será um json
     header("Content-Type: application/json");
     require ("../../php/verificacoes.php");
+    require ("../../php/utils.php");
 
     // termina o serviço caso alguma das variáveis não tenha sido enviada no POST
     verifyIsSetPost("nome", "email", "telefone", "nascimento", "bio");
@@ -13,7 +14,6 @@
     // termina o serviço caso o usuário não esteja autenticado
     verifyIsAuthenticated();
 
-    require ("../../php/utils.php");
     // o usuário pode acabar não preenchendo alguns campos em um formulário de update,
     // então substituímos eles por valores nulos
     $_POST = replaceEmptysForNulls($_POST);

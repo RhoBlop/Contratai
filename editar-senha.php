@@ -2,8 +2,45 @@
 <html lang="en">
     <head>
         <?php include ("components/head.html") ?>
-        <script src="js/requisicoesAPI.js"></script>
-        <script src="js/selecionarImg.js"></script>
+        <script src="js/confirmaSenha.js"></script>
+
+        <script>
+            async function sendUpdateSenha(event) {
+                event.preventDefault();
+
+                let senhaNova = document.querySelector("#senhaNova").value;
+                let confirmSenhaNova = document.querySelector("#confirmSenhaNova").value;
+
+                if (senhaNova === confirmSenhaNova) {
+                    // transforma os dados do formulário para o formato x-www-form-urlencoded
+                    let formData = new URLSearchParams(new FormData(event.target)).toString();
+    
+                    loading();
+                    
+                    let response = await fetch("./API/user/updateSenha.php", {
+                        method: "POST",
+                        credentials: "same-origin",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        },
+                        body: formData
+                    });
+                    let data = await response.text();
+                    console.log(data);
+    
+                    let { erro } = data;
+                    if (erro) {
+                        formErro(erro);
+                    }
+                    
+                    let { action } = data;
+                    if (action) {
+                        window.location.href = "perfil.php";
+                    }
+                }
+
+            }
+        </script>
     </head>
     <body>
         <?php include ("components/login-header.html") ?>
@@ -23,22 +60,26 @@
                         </div>
                         
                         
-                        <form id="updateUser" onsubmit="sendUpdate(event)">
+                        <form id="updateUser" onsubmit="sendUpdateSenha(event)">
                         
                             <div class="form-group mb-3">
                                 <label for="nome" class="form-label">Senha Atual</label>
-                                <input type="password" class="form-control" id="senha-atual" name="senha-atual" placeholder="Digite sua senha atual">
+                                <input type="password" class="form-control" id="senhaAtual" name="senhaAtual" placeholder="Digite sua senha atual" required>
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="nome" class="form-label">Nova Senha</label>
-                                <input type="password" class="form-control" id="nova-senha" name="nova-senha" placeholder="Digite sua nova senha">
+                                <input type="password" class="form-control" id="senhaNova" name="senhaNova" placeholder="Digite sua nova senha" required>
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="nome" class="form-label">Confirme a nova senha</label>
-                                <input type="password" class="form-control" id="nova-senha-confirma" name="nova-senha-confirma" placeholder="Repita sua nova senha">
+                                <input type="password" class="form-control" id="confirmSenhaNova" name="confirmSenhaNova" onchange="confirmaSenha(event, '#senhaNova')" placeholder="Repita sua nova senha" required>
+                                <div class="formMsgErro">As senhas precisam ser iguais</div>
                             </div>
+                            
+                            <!-- div para comunicação com usuário -->
+                            <div id="feedbackUsuario"></div>
                             
                             <div class="buttons d-flex justify-content-end align-items-center py-3">
                                 <a href="perfil.php" class="btn btn-link me-3">Cancelar</a>
