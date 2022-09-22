@@ -18,29 +18,36 @@ function formErro(textErro) {
 async function sendCadastro(event) {
     event.preventDefault();
 
-    // transforma os dados do formulário para o formato x-www-form-urlencoded
-    let formData = new URLSearchParams(new FormData(event.target)).toString();
+    let senha = document.querySelector("#senha").value;
+    let confirmSenha = document.querySelector("#confirmSenha").value;
 
-    loading();
-
-    let response = await fetch("./API/user/register.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: formData
-    });
-    let data = await response.json();
+    if (senha === confirmSenha) {
+        // transforma os dados do formulário para o formato x-www-form-urlencoded
+        let formData = new URLSearchParams(new FormData(event.target)).toString();
     
-    let { erro } = data;
-    if (erro) {
-        formErro(erro);
-    } 
+        loading();
     
-    let { action } = data;
-    if (action) {
-        localStorage.setItem("openModal", "true");
-        window.location.href = "index.php";
+        let response = await fetch("./API/user/register.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: formData
+        });
+        let data = await response.json();
+        
+        let { erro } = data;
+        if (erro) {
+            formErro(erro);
+        } 
+        
+        let { action } = data;
+        if (action) {
+            localStorage.setItem("openModal", "true");
+            window.location.href = "index.php";
+        }
+    } else {
+        
     }
 }
 
@@ -67,11 +74,8 @@ async function sendLogin(event) {
         formErro(erro);
     }
     
-    let { dados } = data;
-    if (dados) {
-        // salva usuário logado no localStorage
-        await savesLoggedUser();
-
+    let { action } = data;
+    if (action) {
         window.location.href = "home.php";
     }
 }
@@ -104,45 +108,40 @@ async function sendUpdate(event) {
     }
 }
 
-async function getUser() {
-    let response = await fetch("./API/user/get.php", {
-        method: "GET",
-        credentials: "same-origin"
-    });
-    let { dados } = await response.json();
 
-    if (dados) {
-        return dados;
+async function sendUpdateSenha(event) {
+    event.preventDefault();
+
+    let senhaNova = document.querySelector("#senhaNova").value;
+    let confirmSenhaNova = document.querySelector("#confirmSenhaNova").value;
+
+    if (senhaNova === confirmSenhaNova) {
+        // transforma os dados do formulário para o formato x-www-form-urlencoded
+        let formData = new URLSearchParams(new FormData(event.target)).toString();
+
+        loading();
+        
+        let response = await fetch("./API/user/updateSenha.php", {
+            method: "POST",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: formData
+        });
+        let data = await response.text();
+        console.log(data);
+
+        let { erro } = data;
+        if (erro) {
+            formErro(erro);
+        }
+        
+        let { action } = data;
+        if (action) {
+            window.location.href = "perfil.php";
+        }
     }
-}
-
-
-// salva os dados do usuário no localStorage (solução temporária porque o banco estava demorando mais de 2 segundos para retornar um usuário)
-async function savesLoggedUser() {
-    console.log("getting logged user");
-    let response = await fetch("./API/user/get.php", {
-        method: "GET",
-        credentials: "same-origin",
-    })
-    let { dados } = await response.json();
-
-    localStorage.setItem("currentUser", JSON.stringify(dados));
-
-    return true;
-}
-
-
-// retorna user salvo do localStorage
-function getLocalStorageUser() {
-    let user = localStorage.getItem("currentUser");
-
-    return JSON.parse(user);
-}
-
-function deleteLocalStorageUser() {
-    localStorage.removeItem("currentUser");
-
-    return true;
 }
 
 
@@ -156,7 +155,6 @@ async function logout() {
 
     let { action } = data;
     if (action) {
-        deleteLocalStorageUser();
         localStorage.setItem("openModal", "true");
         window.location.href = "index.php";
     }
@@ -172,7 +170,6 @@ async function deleteUser() {
 
     let { deleted } = data;
     if (deleted) {
-        deleteLocalStorageUser();
         window.location.href = "excluido.php";
     }
 }

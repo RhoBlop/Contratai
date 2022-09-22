@@ -13,7 +13,7 @@
     require ("../../php/database/Usuario.php");
     $user = new Usuario();
 
-    $result = $user->deleteById($_SESSION["idUsr"]);
+    $result = $user->deleteById($_SESSION["idusr"]);
 
     // resposta da API
     if (isset($result["action"]) && $result["action"] === TRUE) {

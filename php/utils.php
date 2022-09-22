@@ -1,6 +1,6 @@
 <?php 
     function isAuthenticated() {
-        if (isset($_SESSION["idUsr"])) {
+        if (isset($_SESSION["idusr"])) {
             return true;
         } else {
             return false;
@@ -33,21 +33,6 @@
 
         return $imgs;
     }
-
-    // $tmpPath = $_FILES["imgPerfil"]["tmp_name"];
-    // // tipo da imagem
-    // $imgType = pathinfo($_FILES["imgPerfil"]["name"], PATHINFO_EXTENSION);
-    // $allowedTypes = ["webp", "jpg", "jpeg", "png", "svg"];
-    
-    // if (in_array($imgType, $allowedTypes)) {
-    //     // dados da imagem
-    //     $imgData = file_get_contents($tmpPath);
-        
-    //     // tradução dos dados para base64
-    //     $imgBase64 = "data:image/{$imgType};base64, " . base64_encode($imgData);
-    // } else {
-    //     $imgBase64 = null;
-    // }
 
     function replaceEmptysForNulls($array) {
         if (is_array($array)) {

@@ -14,7 +14,7 @@
     $user = new Usuario();
 
     // retorna array associativa com os dados do usuário caso exista
-    $result = $user->selectById($_SESSION["idUsr"]);
+    $result = $user->selectById($_SESSION["idusr"]);
 
     echo json_encode($result);
 ?>

@@ -17,7 +17,7 @@
     [$senhaAtual, $senhaNova, $confirmSenhaNova] = [$_POST["senhaAtual"], $_POST["senhaNova"], $_POST["confirmSenhaNova"]];
 
     if ($senhaNova == $confirmSenhaNova) {
-        $response = $user->updateSenha($_SESSION["idUsr"], $senhaAtual, $senhaNova);
+        $response = $user->updateSenha($_SESSION["idusr"], $senhaAtual, $senhaNova);
         
         echo json_encode($response);
     }

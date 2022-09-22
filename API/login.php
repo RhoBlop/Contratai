@@ -22,7 +22,11 @@
 
     if (isset($result["dados"])) {
         $idUsr = $result["dados"]["idusr"];
-        $_SESSION["idUsr"] = $idUsr;
+        $_SESSION["idusr"] = $idUsr;
+
+        $result = [
+            "action" => true
+        ];
     }
 
     echo json_encode($result);

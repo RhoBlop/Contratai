@@ -1,49 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+    <?php 
+        session_start();
+        require_once("php/database/Usuario.php");
+        require_once("php/impressaoDados.php");
+
+        $user = carregaUsuario();
+    ?>
     <head>
         <?php include ("components/head.html") ?>
         <script src="js/confirmaSenha.js"></script>
-
-        <script>
-            async function sendUpdateSenha(event) {
-                event.preventDefault();
-
-                let senhaNova = document.querySelector("#senhaNova").value;
-                let confirmSenhaNova = document.querySelector("#confirmSenhaNova").value;
-
-                if (senhaNova === confirmSenhaNova) {
-                    // transforma os dados do formulário para o formato x-www-form-urlencoded
-                    let formData = new URLSearchParams(new FormData(event.target)).toString();
-    
-                    loading();
-                    
-                    let response = await fetch("./API/user/updateSenha.php", {
-                        method: "POST",
-                        credentials: "same-origin",
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded"
-                        },
-                        body: formData
-                    });
-                    let data = await response.text();
-                    console.log(data);
-    
-                    let { erro } = data;
-                    if (erro) {
-                        formErro(erro);
-                    }
-                    
-                    let { action } = data;
-                    if (action) {
-                        window.location.href = "perfil.php";
-                    }
-                }
-
-            }
-        </script>
     </head>
     <body>
-        <?php include ("components/login-header.html") ?>
+        <?php include ("components/login-header.php") ?>
 
         <main>
             <div class="container p-3 my-3">
@@ -63,18 +32,18 @@
                         <form id="updateUser" onsubmit="sendUpdateSenha(event)">
                         
                             <div class="form-group mb-3">
-                                <label for="nome" class="form-label">Senha Atual</label>
-                                <input type="password" class="form-control" id="senhaAtual" name="senhaAtual" placeholder="Digite sua senha atual" required>
+                                <label for="senhaAtual" class="form-label">Senha Atual</label>
+                                <input type="password" class="form-control" id="senhaAtual" name="senhaAtual" autocomplete="off" placeholder="Digite sua senha atual" required>
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="nome" class="form-label">Nova Senha</label>
-                                <input type="password" class="form-control" id="senhaNova" name="senhaNova" placeholder="Digite sua nova senha" required>
+                                <label for="senhaNova" class="form-label">Nova Senha</label>
+                                <input type="password" class="form-control" id="senhaNova" name="senhaNova" autocomplete="off" placeholder="Digite sua nova senha" required>
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="nome" class="form-label">Confirme a nova senha</label>
-                                <input type="password" class="form-control" id="confirmSenhaNova" name="confirmSenhaNova" onchange="confirmaSenha(event, '#senhaNova')" placeholder="Repita sua nova senha" required>
+                                <label for="confirmSenhaNova" class="form-label">Confirme a nova senha</label>
+                                <input type="password" class="form-control" id="confirmSenhaNova" name="confirmSenhaNova" autocomplete="off" onchange="confirmaSenha(event, '#senhaNova')" placeholder="Repita sua nova senha" required>
                                 <div class="formMsgErro">As senhas precisam ser iguais</div>
                             </div>
                             

@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+    <?php 
+        session_start();
+        require_once("php/database/Usuario.php");
+        require_once("php/impressaoDados.php");
+
+        $user = carregaUsuario();
+    ?>
     <head>
         <?php include ("components/head.html") ?>
     </head>
     <body>
-        <?php include ("components/login-header.html") ?>
+        <?php include ("components/login-header.php") ?>
 
         <main>
             <div class="container p-3 my-3 mb-5">
@@ -21,29 +28,29 @@
                         </div>
                         <div class="d-flex justify-content-center ">
                             <div class="img-perfil-wrapper rounded-circle shadow-sm mb-5">
-                                <img id="imgPerfil" src="images/temp/default-pic.png">
+                                <img id="imgPerfil" src="<?php echoImage($user["imgusr"]); ?>">
                             </div>
                         </div>
                         <table class="table mb-5">
                             <tbody>
                                 <tr>
                                     <td>Nome completo</td>
-                                    <td class="text-muted" id="nome"></td>
+                                    <td class="text-muted" id="nome"><?php echoDadosPerfil($user["nomusr"]); ?></td>
                                 </tr>
 
                                 <tr>
                                     <td>Email</td>
-                                    <td class="text-muted" id="email"></td>
+                                    <td class="text-muted" id="email"><?php echoDadosPerfil($user["emailusr"]); ?></td>
                                 </tr>
 
                                 <tr>
                                     <td>Data de Nascimento</td>
-                                    <td class="text-muted" id="nascimento"></td>
+                                    <td class="text-muted" id="nascimento"><?php echoDadosPerfil($user["nascimentousr"]); ?></td>
                                 </tr>
 
                                 <tr>
                                     <td>Telefone</td>
-                                    <td class="text-muted" id="telefone"></td>
+                                    <td class="text-muted" id="telefone"><?php echoDadosPerfil($user["telefoneusr"]); ?></td>
                                 </tr>
 
                             </tbody>
@@ -58,22 +65,6 @@
 
         <?php include ("components/footer.html")?>
     </body>
-
-    <script>
-        getUser()
-            .then(user => {
-                let { imgusr, nomusr, emailusr, nascimentousr, telefoneusr } = user;
-        
-                if (imgusr) {
-                    document.querySelector("#headerImgPerfil").src = imgusr;
-                    document.querySelector("#imgPerfil").src = imgusr;
-                }
-                document.querySelector("#nome").innerText = nomusr;
-                document.querySelector("#email").innerText = emailusr;
-                document.querySelector("#nascimento").innerText = nascimentousr;
-                document.querySelector("#telefone").innerText = telefoneusr;
-            })
-    </script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"

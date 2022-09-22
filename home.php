@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <?php 
-        require("php/database/Usuario.php");
-        $userClass = new Usuario();
+        session_start();
+        require_once("php/database/Usuario.php");
+        require_once("php/impressaoDados.php");
 
-        $user = $userClass->selectById($_SESSION["idUsr"]);
+        $user = carregaUsuario();
     ?>
     <head>
         <?php include ("components/head.html") ?>
@@ -12,6 +13,7 @@
     <body>
         <?php include ("components/login-header.php") ?>
         <main>
+            
             <div class="container p-3 my-3">
                 <div class="row d-flex justify-content-center align-items-center mb-3">
                     <div class="col-md-12">
