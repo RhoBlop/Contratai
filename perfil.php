@@ -60,18 +60,19 @@
     </body>
 
     <script>
-        // seta os campos da table com os dados do usuário
-        let user = getLocalStorageUser();
-        let { imgusr, nomusr, emailusr, nascimentousr, telefoneusr } = user;
-
-        if (imgusr) {
-            document.querySelector("#headerImgPerfil").src = imgusr;
-            document.querySelector("#imgPerfil").src = imgusr;
-        }
-        document.querySelector("#nome").innerText = nomusr;
-        document.querySelector("#email").innerText = emailusr;
-        document.querySelector("#nascimento").innerText = nascimentousr;
-        document.querySelector("#telefone").innerText = telefoneusr;
+        getUser()
+            .then(user => {
+                let { imgusr, nomusr, emailusr, nascimentousr, telefoneusr } = user;
+        
+                if (imgusr) {
+                    document.querySelector("#headerImgPerfil").src = imgusr;
+                    document.querySelector("#imgPerfil").src = imgusr;
+                }
+                document.querySelector("#nome").innerText = nomusr;
+                document.querySelector("#email").innerText = emailusr;
+                document.querySelector("#nascimento").innerText = nascimentousr;
+                document.querySelector("#telefone").innerText = telefoneusr;
+            })
     </script>
 
     <script

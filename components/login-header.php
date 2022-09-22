@@ -1,3 +1,5 @@
+<?php print_r($user) ?>
+
 <header>
     <nav class="navbar navbar-expand-md fixed-top bg-light">
       <div class="container">
@@ -32,7 +34,7 @@
                 </li>
                 <li class="nav-item dropdown p-2">
                   <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
-                    <img id="headerImgPerfil" src="images/temp/default-pic.png" alt="" width="32" height="32" class="rounded-circle">
+                    <img id="headerImgPerfil" src=<?php echo is_null($user["imgUsr"]) ? "images/temp/default-pic.png": $user["imgUsr"] ?> alt="" width="32" height="32" class="rounded-circle">
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end text-small shadow">
                     <li><a class="dropdown-item" href="perfil.php"><i class="fa-regular fa-user fa-lg pe-2"></i>Perfil</a></li>

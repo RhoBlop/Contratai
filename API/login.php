@@ -19,8 +19,9 @@
     // retorna o id do usuário, caso exista um, ou "credenciais invalidas"
     $result = $user->selectLogin($email, $senha);
 
-    $idUsr = $result["dados"]["idusr"];
-    if (isset($idUsr)) {
+
+    if (isset($result["dados"])) {
+        $idUsr = $result["dados"]["idusr"];
         $_SESSION["idUsr"] = $idUsr;
     }
 

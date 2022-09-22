@@ -104,6 +104,18 @@ async function sendUpdate(event) {
     }
 }
 
+async function getUser() {
+    let response = await fetch("./API/user/get.php", {
+        method: "GET",
+        credentials: "same-origin"
+    });
+    let { dados } = await response.json();
+
+    if (dados) {
+        return dados;
+    }
+}
+
 
 // salva os dados do usuário no localStorage (solução temporária porque o banco estava demorando mais de 2 segundos para retornar um usuário)
 async function savesLoggedUser() {

@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+    <?php 
+        require("php/database/Usuario.php");
+        $userClass = new Usuario();
+
+        $user = $userClass->selectById($_SESSION["idUsr"]);
+    ?>
     <head>
         <?php include ("components/head.html") ?>
     </head>
     <body>
-        <?php include ("components/login-header.html") ?>
+        <?php include ("components/login-header.php") ?>
         <main>
             <div class="container p-3 my-3">
                 <div class="row d-flex justify-content-center align-items-center mb-3">
@@ -27,16 +33,6 @@
         </main>
         <?php include ("components/footer.html")?>
     </body>
-
-    <script>
-        // seta os campos da table com os dados do usuário
-        let user = getLocalStorageUser();
-        let { imgusr } = user;
-
-        if (imgusr) {
-            document.querySelector("#headerImgPerfil").src = imgusr;
-        }
-    </script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
