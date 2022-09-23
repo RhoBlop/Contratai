@@ -1,5 +1,5 @@
 /* Montserrat Import */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 
 /* VARIABLES */
 :root {
@@ -35,21 +35,7 @@ body {
     flex-direction: column;
 } 
 
-header {
-    font-weight: 700;
-    height: var(--navbar-height);
-}
-
-header .navbar {
-    height: var(--navbar-height);
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
-}
-
-header .btn {
-    border-radius: 12px;
-}
-
-main h1, h2 {
+main h1, h2, h5{
     font-weight: 700;
 }
 
@@ -62,7 +48,7 @@ main h2 {
 }
 
 main h3 {
-    font-weight: 500;
+    font-weight: 600;
 }
 
 a {
@@ -72,6 +58,26 @@ a {
 
 a:hover{
     color: var(--primary-green);
+}
+
+.card {
+    background-color: var(--background) !important;
+}
+
+/* Header */
+
+header {
+    font-weight: 700;
+    height: var(--navbar-height);
+}
+
+header .navbar {
+    height: var(--navbar-height);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+}
+
+header .btn {
+    border-radius: 12px;
 }
 
 /* Filtros de Serviço */
@@ -239,7 +245,7 @@ footer {
     text-align: center;
 }
 
-i {
+footer i {
     font-size: 24px;
 }
 
@@ -493,8 +499,18 @@ label {
     border-radius: 8px;
 }
 
-#sobre p, #avaliacao p {
+#sobre p, #avaliacao p, #anuncio p {
     font-size: 16px;
+}
+
+/* Anúncio */
+
+#anuncio {
+    border: none !important;
+}
+
+#anuncio > .card-body > .card-text > i {
+    font-size: 12px;
 }
 
 
