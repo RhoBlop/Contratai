@@ -23,7 +23,7 @@
             </div>
 
             <!-- SLIDER DAS PRINCIPAIS CATEGORIAS -->
-            <?php include ("components/principais-categorias.html") ?>
+            <?php include ("components/profissoes-mais-cadastradas.php") ?>
 
         </main>
         <?php include ("components/footer.html")?>

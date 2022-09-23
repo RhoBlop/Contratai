@@ -7,6 +7,12 @@ function loading() {
     feedbackDiv.innerText = "Aguarde um instante...";
 }
 
+function timeoutConnection() {
+    return setTimeout(() => {
+        formErro("Algum erro ocorreu. Tente novamente mais tarde!");
+    }, 6000)
+}
+
 function formErro(textErro) {
     let feedbackDiv = document.querySelector(idDivFeedback);
     feedbackDiv.style.display = "block";
@@ -26,6 +32,7 @@ async function sendCadastro(event) {
         let formData = new URLSearchParams(new FormData(event.target)).toString();
     
         loading();
+        timeout = timeoutConnection();
     
         let response = await fetch("./API/user/register.php", {
             method: "POST",
@@ -44,6 +51,7 @@ async function sendCadastro(event) {
         let { action } = data;
         if (action) {
             setOpenModal("#modal-login");
+            clearTimeout(timeout);
             window.location.href = "index.php";
         }
     } else {
@@ -59,6 +67,7 @@ async function sendLogin(event) {
     let formData = new URLSearchParams(new FormData(event.target)).toString();
 
     loading();
+    timeout = timeoutConnection();
 
     let response = await fetch("./API/login.php", {
         method: "POST",
@@ -76,6 +85,7 @@ async function sendLogin(event) {
     
     let { action } = data;
     if (action) {
+        clearTimeout(timeout);
         window.location.href = "home.php";
     }
 }
@@ -87,6 +97,7 @@ async function sendUpdate(event) {
     let formData = new FormData(event.target);
 
     loading();
+    timeout = timeoutConnection();
     
     let response = await fetch("./API/user/updateInfo.php", {
         method: "POST",
@@ -94,6 +105,7 @@ async function sendUpdate(event) {
         body: formData
     });
     let data = await response.json();
+    timeout = timeoutConnection();
 
     let { erro } = data;
     if (erro) {
@@ -103,7 +115,7 @@ async function sendUpdate(event) {
     let { action } = data;
     if (action) {
         setOpenToast("#notifyToast", "Edição de perfil", "Edição de perfil realizada com sucesso");
-
+        clearTimeout(timeout);
         window.location.href = "perfil.php";
     }
 }
@@ -120,6 +132,7 @@ async function sendUpdateSenha(event) {
         let formData = new URLSearchParams(new FormData(event.target)).toString();
 
         loading();
+        timeout = timeoutConnection();
         
         let response = await fetch("./API/user/updateSenha.php", {
             method: "POST",
@@ -139,7 +152,7 @@ async function sendUpdateSenha(event) {
         let { action } = data;
         if (action) {
             setOpenToast("#notifyToast", "Edição de senha", "Edição da senha realizada com sucesso");
-
+            clearTimeout(timeout);
             window.location.href = "perfil.php";
         }
     } else {

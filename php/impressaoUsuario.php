@@ -1,6 +1,6 @@
 <?php 
     function carregaUsuario() {
-        global $userClass;
+        $userClass = new Usuario();
         $response = $userClass->selectById($_SESSION["idusr"]);
 
         if (isset($response["dados"])) {
@@ -23,5 +23,9 @@
 
     function echoImage($img) {
         echo is_null($img) ? "images/temp/default-pic.png" : $img;
+    }
+
+    function echoDadosBreakLine($text) {
+        echo is_null($text) ? "---" : nl2br($text);
     }
 ?>

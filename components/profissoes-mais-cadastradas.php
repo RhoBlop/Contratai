@@ -1,3 +1,10 @@
+<?php 
+    require_once("php/database/Profissao.php");
+    $prof = new Profissao();
+
+    $principProf = $prof->selectMaisContratos(3); 
+?>
+
 <div class="container align-items-center mb-5">
     <div class="mb-4">
         <h2>Principais Categorias</h2>

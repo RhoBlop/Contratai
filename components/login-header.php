@@ -1,9 +1,8 @@
 <?php 
   session_start();
   require_once("php/database/Usuario.php");
-  require_once("php/impressaoDados.php");
+  require_once("php/impressaoUsuario.php");
 
-  $userClass = new Usuario();
   $user = carregaUsuario();
 ?>
 <header>

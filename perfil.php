@@ -48,7 +48,7 @@
                                 
                                 <tr>
                                     <td>Bio</td>
-                                    <td class="text-muted" id="bio"><?php echoDadosPerfil(nl2br($user["biografiausr"])); ?></td>
+                                    <td class="text-muted" id="bio"><?php echoDadosBreakLine($user["biografiausr"]); ?></td>
                                 </tr>
 
                             </tbody>
@@ -62,8 +62,6 @@
         </main>
 
         <?php include ("components/toast.html") ?>
-
-        <?php include ("components/footer.html")?>
     </body>
 
     <script
