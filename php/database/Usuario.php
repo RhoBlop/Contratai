@@ -14,6 +14,10 @@
                 ]);
                 
                 $result = $stmt->fetch();
+                // ajustando formato da data para ser impressa
+                // $date = DateTime::createFromFormat('Y-m-d', $result["nascimentousr"]);
+                // $result["nascimentousr"] = $date->format('d/m/Y');
+
                 return [ "dados" => $result ];
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
@@ -154,7 +158,7 @@
                     ":senhaAtual" => $senhaAtual
                 ]);
 
-                if ($verifySTMT->rowCount() < 1) {
+                if ($verifySTMT->rowCount() > 0) {
                     $sql = "UPDATE usuario SET senhaUsr = :senhaNova WHERE idUsr = :id";
                     $stmt = Database::prepare($sql);
                     $stmt->execute([

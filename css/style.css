@@ -8,7 +8,8 @@
     --light-green: #15A0B0;
     --dark-green: #074A59;
     --text-color: #000;
-    --grey: #202020; 
+    --grey: #202020;
+    --danger-color: #cf1c0e;
     --blue-vertical-gradient: linear-gradient(180deg, #15A0B0, #074A59);
     --navbar-height: 72px;
     --font-family: 'Montserrat', sans-serif;
@@ -428,17 +429,17 @@ label {
 
 
 .inputErro {
-    border-color: #cf1c0e;
+    border-color: var(--danger-color);
 }
 
 .inputErro:focus {
     outline-style: solid;
-    outline-color: #cf1c0e;
+    outline-color: var(--danger-color);
     outline-width: 1.5px;
 }
 
 .formMsgErro {
-    color: #cf1c0e;
+    color: var(--danger-color);
     display: none;
     font-size: 14px;
 }

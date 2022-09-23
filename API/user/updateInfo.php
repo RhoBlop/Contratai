@@ -23,7 +23,7 @@
     $user = new Usuario();
 
     // destructuring das variáveis
-    [$nome, $email, $nascimento, $telefone, $bio] = [$_POST["nome"], $_POST["email"], $_POST["nascimento"], $_POST["nascimento"], $_POST["bio"]];
+    [$nome, $email, $nascimento, $telefone, $bio] = [$_POST["nome"], $_POST["email"], $_POST["nascimento"], $_POST["telefone"], $_POST["bio"]];
 
     // apenas se um arquivo foi enviado juntamente à requisição
     if ($_FILES["imgPerfil"]["name"] !== "") {

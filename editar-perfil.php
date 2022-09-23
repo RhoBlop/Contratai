@@ -1,12 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-    <?php 
-        session_start();
-        require_once("php/database/Usuario.php");
-        require_once("php/impressaoDados.php");
-
-        $user = carregaUsuario();
-    ?>
     <head>
         <?php include ("components/head.html") ?>
         <script src="js/visualizarImg.js"></script>
@@ -28,7 +21,7 @@
                             <h6 class="text-muted">Edite os dados da sua conta</h6>
                         </div>
                         
-                        <form id="updateUser" onsubmit="sendUpdate(event, '#feedbackUsuario')">
+                        <form id="updateUser" onsubmit="sendUpdate(event)">
                             <label id="inputFileLabel" for="inputImg" class="rounded-circle mb-4">
                                 <img src="<?php echoImage($user["imgusr"]) ?>" id="imgPerfil" alt="">
                                 <div class="editar-hover">
@@ -60,7 +53,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="bio" class="form-label">Bio</label>
-                                <textarea class="form-control" id="bio" name="bio" rows="5"><?php echoDadosForm($user["biografiausr"]) ?></textarea>
+                                <textarea class="form-control" id="bio" name="bio" rows="5" style="white-space: pre-wrap;"><?php echoDadosForm($user["biografiausr"]) ?></textarea>
                             </div>
 
                             <!-- div para comunicação com usuário -->

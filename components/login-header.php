@@ -1,3 +1,11 @@
+<?php 
+  session_start();
+  require_once("php/database/Usuario.php");
+  require_once("php/impressaoDados.php");
+
+  $userClass = new Usuario();
+  $user = carregaUsuario();
+?>
 <header>
     <nav class="navbar navbar-expand-md fixed-top bg-light">
       <div class="container">

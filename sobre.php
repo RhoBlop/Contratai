@@ -8,7 +8,7 @@
     <?php include ("components/home-header.html"); ?>
 
     <!-- MODAL -->
-    <?php include ("components/login-modal.html"); ?>
+    <?php include ("components/login-modal.php"); ?>
 
     <main>
       <div class="container p-3 my-5">

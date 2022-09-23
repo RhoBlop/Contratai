@@ -7,6 +7,12 @@
         }
     }
 
+    function logout() {
+        session_unset();
+        session_destroy();
+        $_SESSION = array();
+    }
+
     function generateImgBase64($files) {
         $imgs = [];
 
@@ -34,6 +40,7 @@
         return $imgs;
     }
 
+    // usado em updates, para que os campos ainda não cadastrados continuem como NULL no BD
     function replaceEmptysForNulls($array) {
         if (is_array($array)) {
             return array_map(function($value) {
@@ -41,11 +48,5 @@
                 return $value === "" ? null : $value;
             }, $array);
         }
-    }
-
-    function logout() {
-        session_unset();
-        session_destroy();
-        $_SESSION = array();
     }
 ?>

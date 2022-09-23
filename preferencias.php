@@ -6,7 +6,7 @@
         <script src="js/selecionarImg.js"></script>
     </head>
     <body>
-        <?php include ("components/login-header.html") ?>
+        <?php include ("components/login-header.php") ?>
 
         <main>
             <div class="container p-3 my-3">

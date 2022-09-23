@@ -5,7 +5,7 @@
   </head>
   <body>
     <!-- HOME PAGE HEADER -->
-    <?php include ("components/home-header.html"); ?>
+    <?php include ("components/home-header.php"); ?>
 
     <!-- MODAL -->
     <?php include ("components/login-modal.html"); ?>

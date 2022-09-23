@@ -1,12 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-    <?php 
-        session_start();
-        require_once("php/database/Usuario.php");
-        require_once("php/impressaoDados.php");
-
-        $user = carregaUsuario();
-    ?>
     <head>
         <?php include ("components/head.html") ?>
     </head>

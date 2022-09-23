@@ -56,12 +56,7 @@
     <script>
       // define se o modal de login deve ser aberto quando a página é carregada
       // isso é usado, por exemplo, quando uma pessoa realiza o cadastro e é redirecionada ao index
-      let opModal = localStorage.getItem("openModal");
-      if (opModal) {
-        let loginModal = new bootstrap.Modal(document.getElementById('modal-login'), {});
-        loginModal.show();
-        localStorage.removeItem("openModal");
-      }
+      checkForOpenModal();
     </script>
   </body>
 </html>

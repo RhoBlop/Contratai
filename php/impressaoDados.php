@@ -1,10 +1,11 @@
 <?php 
     function carregaUsuario() {
-        $userClass = new Usuario();
+        global $userClass;
         $response = $userClass->selectById($_SESSION["idusr"]);
 
         if (isset($response["dados"])) {
             $user = $response["dados"];
+
             return $user;
         } else {
             header("Location: 500Error.php");

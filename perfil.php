@@ -1,12 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-    <?php 
-        session_start();
-        require_once("php/database/Usuario.php");
-        require_once("php/impressaoDados.php");
-
-        $user = carregaUsuario();
-    ?>
     <head>
         <?php include ("components/head.html") ?>
     </head>
@@ -52,6 +45,11 @@
                                     <td>Telefone</td>
                                     <td class="text-muted" id="telefone"><?php echoDadosPerfil($user["telefoneusr"]); ?></td>
                                 </tr>
+                                
+                                <tr>
+                                    <td>Bio</td>
+                                    <td class="text-muted" id="bio"><?php echoDadosPerfil(nl2br($user["biografiausr"])); ?></td>
+                                </tr>
 
                             </tbody>
                         </table>
@@ -63,6 +61,8 @@
             </div>
         </main>
 
+        <?php include ("components/toast.html") ?>
+
         <?php include ("components/footer.html")?>
     </body>
 
@@ -73,4 +73,8 @@
     ></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        checkForOpenToast();
+    </script>
 </html>

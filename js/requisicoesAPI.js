@@ -1,15 +1,15 @@
-let idDivFeedback = "#feedbackUsuario";
+var idDivFeedback = "#feedbackUsuario";
 
 function loading() {
     let feedbackDiv = document.querySelector(idDivFeedback);
     feedbackDiv.style.display = "block";
-    // feedbackDiv.style.maxHeight = "50px";
     feedbackDiv.style.backgroundColor = "#026773";
     feedbackDiv.innerText = "Aguarde um instante...";
 }
 
 function formErro(textErro) {
     let feedbackDiv = document.querySelector(idDivFeedback);
+    feedbackDiv.style.display = "block";
     feedbackDiv.style.backgroundColor = "#cf1c0e";
     feedbackDiv.innerText = textErro;
 }
@@ -43,11 +43,11 @@ async function sendCadastro(event) {
         
         let { action } = data;
         if (action) {
-            localStorage.setItem("openModal", "true");
+            setOpenModal("#modal-login");
             window.location.href = "index.php";
         }
     } else {
-        
+        formErro("As senhas não são iguais");
     }
 }
 
@@ -102,7 +102,7 @@ async function sendUpdate(event) {
     
     let { action } = data;
     if (action) {
-        await savesLoggedUser();
+        setOpenToast("#notifyToast", "Edição de perfil", "Edição de perfil realizada com sucesso");
 
         window.location.href = "perfil.php";
     }
@@ -129,8 +129,7 @@ async function sendUpdateSenha(event) {
             },
             body: formData
         });
-        let data = await response.text();
-        console.log(data);
+        let data = await response.json();
 
         let { erro } = data;
         if (erro) {
@@ -139,8 +138,12 @@ async function sendUpdateSenha(event) {
         
         let { action } = data;
         if (action) {
+            setOpenToast("#notifyToast", "Edição de senha", "Edição da senha realizada com sucesso");
+
             window.location.href = "perfil.php";
         }
+    } else {
+        formErro("As senhas não são iguais");
     }
 }
 
@@ -155,7 +158,7 @@ async function logout() {
 
     let { action } = data;
     if (action) {
-        localStorage.setItem("openModal", "true");
+        setOpenModal("#modal-login")
         window.location.href = "index.php";
     }
 }
