@@ -5,11 +5,11 @@
     </head>
     <body>
     <!-- HOME PAGE HEADER -->
-        <?php include ("components/login-header.html"); ?>
+        <?php include ("components/login-header.html") ?>
 
         <main>
-            <div class="container p-3 my-3">
-                <div class="row gx-5">
+            <div class="container my-5">
+                <div class="row gx-5 align-items-center">
                     <div class="col-7" id="profile">
                         <div class="card shadow-sm rounded-4 mb-3">
                             <div class="header-card rounded-4  rounded-bottom">
@@ -36,8 +36,45 @@
 
                     </div>
 
-                    <div class="col-5 " id="fotos">
-                        <h3>Fotos</h3>
+                    <div class="col-5">
+
+                        <div class="row mb-5" id="fotos">
+                            <h3>Galeria</h3>
+
+                            <div class="col-10 p-0">
+                                <div class="big-photo">
+                                    <img src="images\temp\eletricista.png" alt="">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="row g-2">
+                                    <div class="sm-photo">
+                                        <img src="images\temp\eletricista.png" alt="">
+                                    </div>
+                                    <div class="sm-photo">
+                                        <img src="images\temp\eletricista.png" alt="">
+                                    </div>
+                                    <div class="sm-photo">
+                                        <img src="images\temp\eletricista.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" id="sobre">
+                            <div class="col p-0">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Sobre</h3>
+                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi eum porro, doloremque a fuga nobis excepturi provident soluta deserunt iusto laborum ducimus pariatur magnam doloribus consectetur quo alias sed sunt! Totam atque iusto tenetur id! Id non alias, necessitatibus molestiae voluptas natus sapiente corrupti cumque ipsam. Id dolorem repellat eligendi.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+
+                        </div>
+                        
                     </div>
 
                 </div>

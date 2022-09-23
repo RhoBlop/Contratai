@@ -49,7 +49,7 @@ header .btn {
     border-radius: 12px;
 }
 
-main h1, h2, h3 {
+main h1, h2 {
     font-weight: 700;
 }
 
@@ -59,6 +59,10 @@ h1 {
 
 main h2 {
     font-size: 48px;
+}
+
+main h3 {
+    font-weight: 500;
 }
 
 a {
@@ -310,6 +314,7 @@ hr {
 
 .active {
     color: var(--primary-green) !important;
+    transition: all 2s ease-in-out !important;
 }
 
 #side-bar {
@@ -370,7 +375,7 @@ label {
 }
 
 
-/* FUTURO HOVER */
+/* HOVER */
 
 
 #inputFileLabel {
@@ -469,6 +474,30 @@ label {
     font-size: 18px;
     margin-right: .25rem;
 }
+
+/* Perfil Público */
+
+#fotos img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#fotos .sm-photo img{
+    height: 48px;
+    width: 100%;
+    border-radius: 4px;
+}
+
+#fotos .big-photo img{
+    border-radius: 8px;
+}
+
+#sobre .card p {
+    font-size: 14px;
+}
+
+
 
 @media screen and ( max-width: 768px ) {
     .caixa-pesquisa {
