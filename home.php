@@ -23,6 +23,8 @@
 
             <div class="container my-3">
                     <div class="row row-cols-2 row-cols-lg-5 mb-3">
+
+                        <!-- Card de Perfil (colocar na pagina de anuncio depois)
                         <div class="col">
                             <div class="card text-center shadow-sm rounded-4" id="profile-card">
                                 <div class="card-header">
@@ -37,6 +39,18 @@
                                 </div>
                             </div>
                         </div>
+                        -->
+
+                        <div class="col">
+                            <div class="card">
+                                <img src="images\temp\ilustrador.jpg" class="card-img-top" alt="">
+                                <div class="card-body">
+
+                                    <h5 class="card-title">Faço Ilustrações</h5>
+
+                                </div>
+                            </div>
+                        </div>    
                         
                     </div>
                     
