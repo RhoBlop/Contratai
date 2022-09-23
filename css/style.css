@@ -64,6 +64,8 @@ a:hover{
     background-color: var(--background) !important;
 }
 
+
+
 /* Header */
 
 header {
@@ -78,6 +80,10 @@ header .navbar {
 
 header .btn {
     border-radius: 12px;
+}
+
+header .dropdown-item:active {
+    background-color: var(--primary-green);
 }
 
 /* Filtros de Serviço */
@@ -344,6 +350,15 @@ label {
 }
 
 .btn-link:hover {
+    color: var(--primary-green);
+}
+
+.btn-link:focus {
+    color: var(--primary-green);
+    box-shadow: none !important;
+}
+
+.btn-link:active {
     color: var(--primary-green);
 }
 
