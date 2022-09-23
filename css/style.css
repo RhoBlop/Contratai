@@ -93,7 +93,7 @@ a:hover{
 }
 
 .avaliacao-usuario {
-    gap: 20px;
+    gap: 10px;
 }
 
 /* Gradient pro texto da home*/
@@ -470,7 +470,7 @@ label {
     margin: 0;
 }
 
-#profile i {
+#infos i {
     font-size: 18px;
     margin-right: .25rem;
 }
@@ -493,8 +493,8 @@ label {
     border-radius: 8px;
 }
 
-#sobre .card p {
-    font-size: 14px;
+#sobre p, #avaliacao p {
+    font-size: 16px;
 }
 
 

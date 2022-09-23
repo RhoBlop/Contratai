@@ -1,5 +1,4 @@
 <?php
-
     class Database {
         // credenciais banco de dados
         private $dsn = "pgsql:host=fanny.db.elephantsql.com;port=5432;dbname=fiutwocm";
