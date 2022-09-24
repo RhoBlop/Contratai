@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
-    <?php include ("components/head.html") ?>
+    <?php require("components/head.php") ?>
   </head>
   <body>
 

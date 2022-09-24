@@ -31,13 +31,23 @@ INNER JOIN disponibilidade as disp ON (usrdi.idDisp = disp.idDisp)
 INNER JOIN diaSemana as diaSemn ON (disp.idDiaSemn = diaSemn.idDiaSemn)
 /* WHERE usr.idUsr = (X) */
 
--- Principais categorias (profissões) - em construção
-SELECT *
-FROM profissao as prof
-INNER JOIN especializacao as espec ON (prof.idProf = espec.idProf)
-INNER JOIN usrEspec as usres ON (espec.idEspec = usres.idEspec)
-INNER JOIN usuario as usr ON (usres.idUsr = usr.idUsr)
-INNER JOIN contrato as contr ON (usr.idUsr = contr.idContratado)
+-- PROFISSÕES MAIS CADASTRADAS + MÉDIA DE AVALIAÇÃO
+SELECT top.idprof, top.dscprof, top.numusr, avg(aval.notaavaliacao) AS mediaavaliacao 
+FROM (SELECT count(*) AS numUsr, prof.idprof, prof.dscProf
+    FROM profissao AS prof
+    INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
+    INNER JOIN usrEspec AS usres ON (espec.idespec = usres.idespec)
+    INNER JOIN usuario AS usr ON (usres.idusr = usr.idusr)
+    GROUP BY prof.idprof, prof.dscProf
+    ORDER BY count(*) DESC
+    LIMIT :limit) AS top
+
+    INNER JOIN profissao AS prof ON (top.idprof = prof.idprof)
+    INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
+    INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+    INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+GROUP BY top.dscprof, top.numusr, top.idprof
+ORDER BY top.numusr DESC;
 
 -- Média de avaliação por profissão - em construção
 SELECT *

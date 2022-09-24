@@ -33,3 +33,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
 
 <!-- REQUISIÇÕES PARA O BACKEND -->
 <script src="../js/requisicoesAPI.js"></script>
+
+<?php
+    require("php/database/Usuario.php");
+    require("php/database/Profissao.php");
+    require("php/impressaoDados.php");
+    require("php/utils.php");
+?>

@@ -3,21 +3,24 @@
 
     
     class Profissao extends Database {
-        protected $table = "profissao";
-        
-        // retorna
-        public function selectMaisContratos($limit) {
+
+        public function selectMaisCadastros($limit) {
             try {
                 $sql = <<<SQL
-                    SELECT count(*) AS numProf, dscProf
-                    FROM (SELECT dscProf
-                    FROM profissao AS prof
-                    INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
-                    INNER JOIN usrEspec AS usres ON (espec.idespec = usres.idespec)
-                    INNER JOIN usuario AS usr ON (usres.idusr = usr.idusr)
-                    GROUP BY prof.idProf
-                    ORDER BY count(*) DESC
-                    LIMIT :limit) as test
+                    SELECT top.idprof, top.dscprof, top.numusr, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao 
+                    FROM (SELECT count(*) AS numUsr, prof.idprof, prof.dscProf
+                        FROM profissao AS prof
+                        INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
+                        INNER JOIN usrEspec AS usres ON (espec.idespec = usres.idespec)
+                        INNER JOIN usuario AS usr ON (usres.idusr = usr.idusr)
+                        GROUP BY prof.idprof, prof.dscProf
+                        ORDER BY numUsr DESC
+                        LIMIT :limit) AS top
+                    INNER JOIN especializacao AS espec ON (top.idprof = espec.idprof)
+                    INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+                    INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    GROUP BY top.dscprof, top.numusr, top.idprof
+                    ORDER BY top.numusr DESC;
                 SQL;
                 
                 $stmt = Database::prepare($sql);
@@ -32,16 +35,71 @@
             }
         }
 
+
+        public function selectMaisContratos($limit) {
+            try {
+                $sql = <<<SQL
+                    SELECT top.idprof, top.dscprof, top.numContrato, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
+                    FROM (SELECT prof.idprof, prof.dscprof, count(*) AS numContrato
+                        FROM profissao AS prof
+                        INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
+                        INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+                        GROUP BY prof.idprof, prof.dscprof
+                        ORDER BY numContrato DESC
+                        LIMIT :limit) AS top
+                    INNER JOIN especializacao AS espec ON (top.idprof = espec.idprof)
+                    INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+                    INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    GROUP BY top.dscprof, top.idprof, top.numContrato
+                    ORDER BY top.numContrato DESC
+                    LIMIT :limit
+                SQL;
+                
+                $stmt = Database::prepare($sql);
+                $stmt->execute([ ":limit" => $limit ]);
+
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch(PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
+                
+                return [ "action" => false ];
+            }
+        }
+
+
         // retorna as X profissões (de acordo com $limit) com maior média de avaliações 
         public function selectMaiorAvaliacao($limit) {
-            
+            try {
+                $sql = <<<SQL
+                    SELECT prof.idprof, prof.dscprof, count(*) AS numAvaliacao, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
+                    FROM profissao AS prof
+                    INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
+                    INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+                    INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    GROUP BY prof.dscprof, prof.idprof
+                    ORDER BY mediaavaliacao DESC
+                    LIMIT :limit
+                SQL;
+                
+                $stmt = Database::prepare($sql);
+                $stmt->execute([ ":limit" => $limit ]);
+
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch(PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
+                
+                return [ "action" => false ];
+            }
         }
     }
-    $prof = new Profissao();
-    $profissoes = $prof->selectMaisContratos(3);
+    
+    // $prof = new Profissao();
+    // $profissoes = $prof->selectMaiorAvaliacao(3);
 
-    foreach($profissoes as $profi) {
-        print_r($profi);
-        echo "<br>";
-    }
+    // foreach($profissoes as $profi) {
+    //     print_r($profi);
+    //     echo "<br>";
+    // }
     ?>

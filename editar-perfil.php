@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <?php include ("components/head.html") ?>
+        <?php require("components/head.php") ?>
         <script src="js/visualizarImg.js"></script>
     </head>
     <body>
@@ -23,7 +23,7 @@
                         
                         <form id="updateUser" onsubmit="sendUpdate(event)">
                             <label id="inputFileLabel" for="inputImg" class="rounded-circle mb-4">
-                                <img src="<?php echoImage($user["imgusr"]) ?>" id="imgPerfil" alt="">
+                                <img src="<?php echoProfileImage($user["imgusr"]) ?>" id="imgPerfil" alt="">
                                 <div class="editar-hover">
                                     <i class="fa-solid fa-pen"></i>
                                     <p>Editar Foto</p>

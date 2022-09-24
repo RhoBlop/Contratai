@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <?php include ("components/head.html") ?>
+        <?php require("components/head.php") ?>
     </head>
     <body>
         <?php include ("components/login-header.php") ?>
@@ -21,7 +21,7 @@
                         </div>
                         <div class="d-flex justify-content-center ">
                             <div class="img-perfil-wrapper rounded-circle shadow-sm mb-5">
-                                <img id="imgPerfil" src="<?php echoImage($user["imgusr"]); ?>">
+                                <img id="imgPerfil" src="<?php echoProfileImage($user["imgusr"]); ?>">
                             </div>
                         </div>
                         <table class="table mb-5">
@@ -38,7 +38,7 @@
 
                                 <tr>
                                     <td>Data de Nascimento</td>
-                                    <td class="text-muted" id="nascimento"><?php echoDadosPerfil($user["nascimentousr"]); ?></td>
+                                    <td class="text-muted" id="nascimento"><?php echoFormattedDate($user["nascimentousr"]); ?></td>
                                 </tr>
 
                                 <tr>

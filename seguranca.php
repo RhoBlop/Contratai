@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <?php include ("components/head.html") ?>
+        <?php require("components/head.php") ?>
         <script src="js/requisicoesAPI.js"></script>
         <script src="js/selecionarImg.js"></script>
     </head>

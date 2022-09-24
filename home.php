@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <?php include ("components/head.html") ?>
+        <?php require("components/head.php") ?>
     </head>
     <body>
         <?php include ("components/login-header.php") ?>
@@ -22,8 +22,14 @@
 
             </div>
 
-            <!-- SLIDER DAS PRINCIPAIS CATEGORIAS -->
-            <?php include ("components/profissoes-mais-cadastradas.php") ?>
+            <!-- CAROUSEL DAS PROFISSÕES COM MAIS CONTRATOS -->
+            <?php include ("components/prof-top-contrato.php") ?>
+
+            <!-- CAROUSEL DAS PROFISSÕES COM AVALIAÇÕES MAIS ALTAS -->
+            <?php include ("components/prof-top-avaliacao.php") ?>
+
+            <!-- CAROUSEL DAS PROFISSÕES COM MAIS CADASTROS -->
+            <?php include ("components/prof-top-cadastro.php") ?>
 
         </main>
         <?php include ("components/footer.html")?>

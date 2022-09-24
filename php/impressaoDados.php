@@ -21,11 +21,16 @@
         echo is_null($field) ? null : $field;
     }
 
-    function echoImage($img) {
-        echo is_null($img) ? "images/temp/default-pic.png" : $img;
-    }
-
     function echoDadosBreakLine($text) {
         echo is_null($text) ? "---" : nl2br($text);
     }
+    
+    function echoFormattedDate($date) {
+        echo is_null($date) ? "---" : date("d/m/Y", strtotime($date));
+    }
+
+    function echoProfileImage($img) {
+        echo is_null($img) ? "images/temp/default-pic.png" : $img;
+    }
+
 ?>

@@ -14,9 +14,6 @@
                 ]);
                 
                 $result = $stmt->fetch();
-                // ajustando formato da data para ser impressa
-                // $date = DateTime::createFromFormat('Y-m-d', $result["nascimentousr"]);
-                // $result["nascimentousr"] = $date->format('d/m/Y');
 
                 return [ "dados" => $result ];
             } catch (PDOException $e) {

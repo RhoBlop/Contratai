@@ -444,6 +444,10 @@ label {
     font-size: 14px;
 }
 
+@media screen and ( min-width: 576px ) {
+    
+}
+
 @media screen and ( max-width: 768px ) {
     .caixa-pesquisa {
         width: 100%;

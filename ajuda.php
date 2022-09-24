@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
-    <?php include ("components/head.html") ?>
+    <?php require("components/head.php") ?>
   </head>
   <body>
     <!-- HOME PAGE HEADER -->
-    <?php include ("components/home-header.php"); ?>
+    <?php include ("components/home-header.html"); ?>
 
     <!-- MODAL -->
     <?php include ("components/login-modal.html"); ?>
