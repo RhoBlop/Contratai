@@ -1,5 +1,5 @@
 /* Montserrat Import */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
 
 /* VARIABLES */
 :root {
@@ -36,6 +36,39 @@ body {
     flex-direction: column;
 } 
 
+main h1, h2, h5{
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 82px;
+}
+
+main h2 {
+    font-size: 48px;
+}
+
+main h3 {
+    font-weight: 600;
+}
+
+a {
+    cursor: pointer;
+    color: var(--light-green);
+}
+
+a:hover{
+    color: var(--primary-green);
+}
+
+.card {
+    background-color: var(--background) !important;
+}
+
+
+
+/* Header */
+
 header {
     font-weight: 700;
     height: var(--navbar-height);
@@ -50,25 +83,8 @@ header .btn {
     border-radius: 12px;
 }
 
-main h1, h2, h3 {
-    font-weight: 700;
-}
-
- h1 {
-    font-size: 82px;
-}
-
-main h2 {
-    font-size: 48px;
-}
-
-a {
-    cursor: pointer;
-    color: var(--light-green);
-}
-
-a:hover{
-    color: var(--primary-green);
+header .dropdown-item:active {
+    background-color: var(--primary-green);
 }
 
 /* Filtros de Serviço */
@@ -90,7 +106,7 @@ a:hover{
 }
 
 .avaliacao-usuario {
-    gap: 20px;
+    gap: 10px;
 }
 
 /* Gradient pro texto da home*/
@@ -140,7 +156,7 @@ main h1.text-gradient {
 .btn-outline-green {
     font-weight: 700;
     color: var(--primary-green);
-    border: 1.8px solid var(--text-color);
+    border: 1.8px solid var(--primary-green);
     background-color: inherit;
     transition: color .25s ease-in-out, background-color .25s ease-in-out, border-color .15s ease-in-out, transform .15s ease-in-out;
 }
@@ -256,7 +272,7 @@ footer {
     text-align: center;
 }
 
-i {
+footer i {
     font-size: 24px;
 }
 
@@ -331,6 +347,7 @@ hr {
 
 .active-link {
     color: var(--primary-green) !important;
+    transition: all 2s ease-in-out !important;
 }
 
 #side-bar {
@@ -354,6 +371,15 @@ label {
 }
 
 .btn-link:hover {
+    color: var(--primary-green);
+}
+
+.btn-link:focus {
+    color: var(--primary-green);
+    box-shadow: none !important;
+}
+
+.btn-link:active {
     color: var(--primary-green);
 }
 
@@ -390,15 +416,15 @@ label {
     align-items: center;
     width: 148px;
     height: 148px;
-    overflow: hidden;
 }
 
 #imgPerfil {
     width: 148px;
+    object-fit: cover;
 }
 
-/* FUTURO HOVER */
 
+/* HOVER */
 
 #inputFileLabel {
     cursor: pointer;
@@ -447,7 +473,6 @@ label {
     transition: max-height 4s ease-in-out; */
 }
 
-
 .inputErro {
     border-color: var(--danger-color);
 }
@@ -462,6 +487,87 @@ label {
     color: var(--danger-color);
     display: none;
     font-size: 14px;
+}
+
+/* Cards dos Perfis */
+
+#profile-card {
+    font-size: 14px;
+}
+
+#profile-card .card-header {
+    width: 100%;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    background: var(--primary-green);
+}
+
+#profile-card .profile-pic img {
+    width: 104px;
+    height: 104px;
+    border: 3px solid #fff;
+}
+
+#profile .card .header-card {
+    width: 100%;
+    height: 150px;
+    background: var(--primary-green);
+
+}
+
+.profile-pic img {
+    width: 160px;
+    height: 160px;
+    border: 3px solid #fff;
+}
+
+#profile .card .card-body{
+    padding: 15px;
+}
+
+#profile .profile-pic {
+    margin-top: -120px;
+}
+
+#profile .top-infos h3, p {
+    margin: 0;
+}
+
+#infos i {
+    font-size: 18px;
+    margin-right: .25rem;
+}
+
+/* Perfil Público */
+
+#fotos img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#fotos .sm-photo img{
+    height: 48px;
+    width: 100%;
+    border-radius: 4px;
+}
+
+#fotos .big-photo img{
+    border-radius: 8px;
+}
+
+#sobre p, #avaliacao p, #anuncio p {
+    font-size: 16px;
+}
+
+/* Anúncio */
+
+#anuncio {
+    border: none !important;
+}
+
+#anuncio > .card-body > .card-text > i {
+    font-size: 12px;
 }
 
 @media screen and ( max-width: 768px ) {
