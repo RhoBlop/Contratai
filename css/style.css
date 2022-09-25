@@ -204,6 +204,11 @@ ion-icon {
     margin-right: 0.5rem;
 }
 
+.card-avaliacao {
+    flex: 1 0 350px;
+    margin: 8px 15px;
+}
+
 .avaliacao-otima {
     background-color: #fef3cdc8;
     color: #F4BF00;
@@ -215,12 +220,27 @@ ion-icon {
 }
 
 
-/* Avaliações */
-
-
-.card-avaliacao {
-    width: 32%;
+/* Categoria e Carousel */
+.card-categoria {
+    margin: 0 10px;
 }
+
+.card-categoria .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Telas maiores que a do celular */
+@media screen and ( min-width: 768px ) {
+    .carousel-inner {
+        display: flex;
+    }
+    .carousel-item {
+        display: block;
+        margin-right: 0;
+        flex: 0 0 calc(100%/3);
+    }
+} 
 
 
 /* Footer */
@@ -309,7 +329,7 @@ hr {
     color: solid rgba(0, 0, 0, 0.1)
 }
 
-.active {
+.active-link {
     color: var(--primary-green) !important;
 }
 
@@ -442,10 +462,6 @@ label {
     color: var(--danger-color);
     display: none;
     font-size: 14px;
-}
-
-@media screen and ( min-width: 576px ) {
-    
 }
 
 @media screen and ( max-width: 768px ) {

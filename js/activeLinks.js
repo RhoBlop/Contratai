@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         for (link of [...links]) {
             // se href do link for igual 
             if (link.getAttribute("href") == current) {
-                link.classList.add("active");
+                link.classList.add("active-link");
             } else {
                 link.classList.add("link-secondary");
             }
@@ -28,10 +28,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
             if (current === "" && linkHref === "index.php") {
                 // se o pathname atual for vazio, provavelmente estamos no index.php
-                link.classList.add("active");
+                link.classList.add("active-link");
             } else if (linkHref === current) {
                 // se href do link for igual ao pathname da url, adicionar classe active ao link
-                link.classList.add("active");
+                link.classList.add("active-link");
             } else {
                 link.classList.add("link-secondary");
             }

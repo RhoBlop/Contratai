@@ -31,32 +31,104 @@
       </div>
 
       <!-- CAROUSEL -->
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div id="multiCar" class="container carousel multitem-car" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="..." class="d-block w-100" alt="...">
+			<div class="card card-categoria rounded-3 shadow-sm">
+				<img src="images/temp/placeholder-card.jpg" class="card-img-top">
+				<div class="badge-avaliacao avaliacao-otima px-2">
+					<!-- STAR ICON -->
+					<ion-icon name="star"></ion-icon>
+					4.8
+				</div>
+				<div class="card-body">
+					<h4>Primeiro</h4>
+					<p>100 cadastrados</p>
+					<a href="#" class="btn btn-outline-dark">Ver mais</a>
+				</div>
+			</div>
           </div>
           <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
+            <div class="card card-categoria rounded-3 shadow-sm">
+				<img src="images/temp/placeholder-card.jpg" class="card-img-top">
+				<div class="badge-avaliacao avaliacao-otima px-2">
+					<!-- STAR ICON -->
+					<ion-icon name="star"></ion-icon>
+					4.8
+				</div>
+				<div class="card-body">
+					<h4>Segundo</h4>
+					<p>100 cadastrados</p>
+					<a href="#" class="btn btn-outline-dark">Ver mais</a>
+				</div>
+			</div>
           </div>
           <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
+            <div class="card card-categoria rounded-3 shadow-sm">
+				<img src="images/temp/placeholder-card.jpg" class="card-img-top">
+				<div class="badge-avaliacao avaliacao-otima px-2">
+					<!-- STAR ICON -->
+					<ion-icon name="star"></ion-icon>
+					4.8
+				</div>
+				<div class="card-body">
+					<h4>Terceiro</h4>
+					<p>100 cadastrados</p>
+					<a href="#" class="btn btn-outline-dark">Ver mais</a>
+				</div>
+			</div>
           </div>
 		  <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
+            <div class="card card-categoria rounded-3 shadow-sm">
+				<img src="images/temp/placeholder-card.jpg" class="card-img-top">
+				<div class="badge-avaliacao avaliacao-otima px-2">
+					<!-- STAR ICON -->
+					<ion-icon name="star"></ion-icon>
+					4.8
+				</div>
+				<div class="card-body">
+					<h4>Quarto</h4>
+					<p>100 cadastrados</p>
+					<a href="#" class="btn btn-outline-dark">Ver mais</a>
+				</div>
+			</div>
           </div>
 		  <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
+            <div class="card card-categoria rounded-3 shadow-sm">
+				<img src="images/temp/placeholder-card.jpg" class="card-img-top">
+				<div class="badge-avaliacao avaliacao-otima px-2">
+					<!-- STAR ICON -->
+					<ion-icon name="star"></ion-icon>
+					4.8
+				</div>
+				<div class="card-body">
+					<h4>Quinto</h4>
+					<p>100 cadastrados</p>
+					<a href="#" class="btn btn-outline-dark">Ver mais</a>
+				</div>
+			</div>
           </div>
 		  <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
+            <div class="card card-categoria rounded-3 shadow-sm">
+				<img src="images/temp/placeholder-card.jpg" class="card-img-top">
+				<div class="badge-avaliacao avaliacao-otima px-2">
+					<!-- STAR ICON -->
+					<ion-icon name="star"></ion-icon>
+					4.8
+				</div>
+				<div class="card-body">
+					<h4>Sexto</h4>
+					<p>100 cadastrados</p>
+					<a href="#" class="btn btn-outline-dark">Ver mais</a>
+				</div>
+			</div>
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#multiCar" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#multiCar" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
@@ -68,18 +140,20 @@
 
     <!-- FOOTER -->
     <?php include ("components/footer.html") ?>
-
-
+	
+    
+    
     <!-- JS BOOTSTRAP BUNDLE -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     
-    <script>
-      // define se o modal de login deve ser aberto quando a página é carregada
-      // isso é usado, por exemplo, quando uma pessoa realiza o cadastro e é redirecionada ao index
-      checkForOpenModal();
-    </script>
+    <script src="js/multitemCarousel.js"></script>
+	<script>
+		// define se o modal de login deve ser aberto quando a página é carregada
+		// isso é usado, por exemplo, quando uma pessoa realiza o cadastro e é redirecionada ao index
+		checkForOpenModal();
+	</script>
   </body>
 </html>
  

@@ -37,7 +37,7 @@
       <?php include ("components/prof-top-avaliacao.php") ?>
 
       <!-- CAROUSEL DE AVALIAÇÕES -->
-      <?php include ("components/avaliacoes-home.html") ?>
+      <?php include ("components/avaliacoes-index.html") ?>
 
       <!-- BANNER DE LOGIN -->
       <div class="login-banner d-flex flex-column align-items-center justify-content-center mb-5">
@@ -49,15 +49,17 @@
 
     <!-- FOOTER -->
     <?php include ("components/footer.html") ?>
-
-
+    
+    
     <!-- JS BOOTSTRAP BUNDLE -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     
+    <!-- Sliding do carousel com animação -->
+    <script src="js/multitemCarousel.js"></script>
     <script>
-      // define se o modal de login deve ser aberto quando a página é carregada
+        // define se o modal de login deve ser aberto quando a página é carregada
       // isso é usado, por exemplo, quando uma pessoa realiza o cadastro e é redirecionada ao index
       checkForOpenModal();
     </script>
