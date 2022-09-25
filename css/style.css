@@ -61,10 +61,6 @@ a:hover{
     color: var(--primary-green);
 }
 
-.card {
-    background-color: var(--background) !important;
-}
-
 
 
 /* Header */
@@ -220,6 +216,56 @@ ion-icon {
     margin-right: 0.5rem;
 }
 
+.card {
+    background-color: var(--background) !important;
+    border: 2.5px solid transparent;
+    transition: all .25s ease-in-out;
+    position: relative;
+}
+
+.card .btn-outline-green {
+    position: relative;
+    color: var(--grey);
+    border: 1.8px solid var(--grey);
+    z-index: 2;
+}
+
+.card:hover {
+    color: var(--primary-green);
+    border: 2.5px solid var(--primary-green);
+    transform: scale(1.01);
+}
+
+.card:hover .btn-outline-green {
+    color: var(--primary-green);
+    border: 1.8px solid var(--primary-green);
+}
+
+.card .btn-outline-green:hover {
+    color: #fff;
+}
+
+/* Categoria */
+.clickable-card {
+    position:absolute; 
+    width:100%;
+    height:100%;
+    top:0;
+    left: 0;
+
+    z-index: 1;
+}
+
+.card-categoria {
+    margin: 0 10px;
+}
+
+.card-categoria .card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Avaliação */
 .card-avaliacao {
     flex: 1 0 350px;
     margin: 8px 15px;
@@ -235,18 +281,11 @@ ion-icon {
     color: #026773;
 }
 
-
-/* Categoria e Carousel */
-.card-categoria {
-    margin: 0 10px;
+/* Carousel para telas grandes */
+.carousel-inner {
+    padding: 10px 0;
 }
 
-.card-categoria .card-img-top {
-    height: 200px;
-    object-fit: cover;
-}
-
-/* Telas maiores que a do celular */
 @media screen and ( min-width: 768px ) {
     .carousel-inner {
         display: flex;
@@ -410,16 +449,15 @@ label {
     overflow: hidden;
 }
 
-.img-perfil-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 148px;
-    height: 148px;
-}
-
 #imgPerfil {
     width: 148px;
+    height: 148px;
+    object-fit: cover;
+}
+
+#headerImgPerfil {
+    width: 32px;
+    height: 32px;
     object-fit: cover;
 }
 

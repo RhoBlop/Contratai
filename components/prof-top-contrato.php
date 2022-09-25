@@ -25,8 +25,9 @@
                     </div>
                     <div class="card-body">
                         <h4><?php echo ucfirst($dscprof); ?></h4>
-                        <p><?php echo $numcontrato; ?> contratações</p>
-                        <a href="<?php echo "profissao.php?id={$idprof}" ?>" class="btn btn-outline-dark">Ver mais</a>
+                        <p class="mb-2"><?php echo $numcontrato; ?> contratações</p>
+                        <a href="<?php echo "profissao.php?id={$idprof}" ?>" class="btn btn-outline-green">Ver mais</a>
+                        <a href="<?php echo "profissao.php?id={$idprof}" ?>"><span class="clickable-card"></span></a>
                     </div>
                 </div>
             </div> <!-- /CARD PROFISSÃO -->
@@ -41,8 +42,9 @@
                     </div>
                     <div class="card-body">
                         <h4><?php echo ucfirst($dscprof); ?></h4>
-                        <p><?php echo $numcontrato; ?> contratações</p>
-                        <a href="<?php echo "profissao.php?id={$idprof}" ?>" class="btn btn-outline-dark">Ver mais</a>
+                        <p class="mb-2"><?php echo $numcontrato; ?> contratações</p>
+                        <a href="<?php echo "profissao.php?id={$idprof}" ?>" class="btn btn-outline-green">Ver mais</a>
+                        <a href="<?php echo "profissao.php?id={$idprof}" ?>"><span class="clickable-card"></span></a>
                     </div>
                 </div>
             </div> <!-- /CARD PROFISSÃO -->

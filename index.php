@@ -36,7 +36,7 @@
       <!-- CAROUSEL DAS PROFISSÕES COM AVALIAÇÕES MAIS ALTAS -->
       <?php include ("components/prof-top-avaliacao.php") ?>
 
-      <!-- CAROUSEL DE AVALIAÇÕES -->
+      <!-- GRID DE AVALIAÇÕES ESTÁTICAS -->
       <?php include ("components/avaliacoes-index.html") ?>
 
       <!-- BANNER DE LOGIN -->

@@ -37,7 +37,7 @@
                 <li class="nav-item dropdown p-2">
                   <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
                     <!-- define uma imagem padrão caso o usuário não tenha nenhuma -->
-                    <img id="headerImgPerfil" src="<?php echoProfileImage($user["imgusr"]) ?>" alt="" width="32" height="32" class="rounded-circle">
+                    <img id="headerImgPerfil" src="<?php echoProfileImage($user["imgusr"]) ?>" alt="" class="rounded-circle">
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end text-small shadow">
                     <li><a class="dropdown-item" href="perfil.php"><i class="fa-regular fa-user fa-lg pe-2"></i>Perfil</a></li>
