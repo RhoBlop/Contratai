@@ -216,6 +216,7 @@ ion-icon {
     margin-right: 0.5rem;
 }
 
+/* hover de cards no geral*/
 .card {
     background-color: var(--background) !important;
     border: 2.5px solid transparent;
@@ -245,7 +246,7 @@ ion-icon {
     color: #fff;
 }
 
-/* Categoria */
+/* Card de Categoria */
 .clickable-card {
     position:absolute; 
     width:100%;
@@ -265,7 +266,7 @@ ion-icon {
     object-fit: cover;
 }
 
-/* Avaliação */
+/* Card de Avaliação */
 .card-avaliacao {
     flex: 1 0 350px;
     margin: 8px 15px;
@@ -281,9 +282,70 @@ ion-icon {
     color: #026773;
 }
 
+/* Card de Pesquisa */
+.card-pesquisa {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 2.5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    margin: 10px 0;
+}
+
+.card-pesquisa .card-body {
+    padding: 13px;
+}
+
+
+.card-pesquisa .card-title {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.card-pesquisa .card-title h5 {
+    font-size: 18px;
+    display: inline-block;
+}
+
+.card-pesquisa img {
+    box-sizing: content-box;
+    align-self: center;
+    padding: 12px 20px;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.card-pesquisa .badge-avaliacao {
+    min-width: 70px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: center;
+    position: static;
+    margin-left: 5px;
+}
+
 /* Carousel para telas grandes */
 .carousel-inner {
     padding: 10px 0;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    box-sizing: content-box;
+    width: 2rem;
+    height: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    background-color: var(--grey);
+    border-radius: 50%;
+}
+.carousel-control-prev {
+    left: 4rem;
+}
+.carousel-control-next {
+    right: 4rem;
 }
 
 @media screen and ( min-width: 768px ) {
@@ -452,12 +514,14 @@ label {
 #imgPerfil {
     width: 148px;
     height: 148px;
+    border-radius: 50%;
     object-fit: cover;
 }
 
 #headerImgPerfil {
     width: 32px;
     height: 32px;
+    border-radius: 50%;
     object-fit: cover;
 }
 

@@ -7,8 +7,7 @@
     <div id="topContrato" class="container carousel multitem-car">
         <div class="carousel-inner">
         <?php 
-            $profClass = new Profissao();
-            $profsAv = $profClass->selectMaisContratos(6);
+            $profsAv = $profissaoClass->selectMaisContratos($limit = 6);
             
             foreach ($profsAv as $prof): 
                 [$idprof, $dscprof, $numcontrato, $mediaAv] = [$prof["idprof"], $prof["dscprof"], $prof["numcontrato"], $prof["mediaavaliacao"]];
@@ -18,11 +17,11 @@
             <div class="carousel-item">
                 <div class="card card-categoria rounded-3 shadow-sm">
                     <img src="images/temp/placeholder-card.jpg" class="card-img-top">
-                    <div class="badge-avaliacao px-2 <?php echo $mediaAv > 4.5 ? "avaliacao-otima" : "avaliacao-media" ?>">
+                    <span class="badge-avaliacao px-2 <?php echo echoAvaliacaoClass($mediaAv) ?>">
                         <!-- STAR ICON -->
                         <ion-icon name="star"></ion-icon>
                         <?php echo $mediaAv; ?>
-                    </div>
+                    </span>
                     <div class="card-body">
                         <h4><?php echo ucfirst($dscprof); ?></h4>
                         <p class="mb-2"><?php echo $numcontrato; ?> contratações</p>
@@ -35,11 +34,11 @@
             <div class="carousel-item">
                 <div class="card card-categoria rounded-3 shadow-sm">
                     <img src="images/temp/placeholder-card.jpg" class="card-img-top">
-                    <div class="badge-avaliacao px-2 <?php echo $mediaAv > 4.5 ? "avaliacao-otima" : "avaliacao-media" ?>">
+                    <span class="badge-avaliacao px-2 <?php echo echoAvaliacaoClass($mediaAv) ?>">
                         <!-- STAR ICON -->
                         <ion-icon name="star"></ion-icon>
                         <?php echo $mediaAv; ?>
-                    </div>
+                    </span>
                     <div class="card-body">
                         <h4><?php echo ucfirst($dscprof); ?></h4>
                         <p class="mb-2"><?php echo $numcontrato; ?> contratações</p>

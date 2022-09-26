@@ -7,8 +7,7 @@
     <div id="topCadastro" class="container carousel multitem-car">
         <div class="carousel-inner">
         <?php 
-            $profClass = new Profissao();
-            $profsAv = $profClass->selectMaisCadastros(6);
+            $profsAv = $profissaoClass->selectMaisCadastros($limit = 6);
             
             foreach ($profsAv as $prof): 
                 [$idprof, $dscprof, $numusr, $mediaAv] = [$prof["idprof"], $prof["dscprof"], $prof["numusr"], $prof["mediaavaliacao"]];
@@ -18,7 +17,7 @@
             <div class="carousel-item active">
                 <div class="card card-categoria rounded-3 shadow-sm">
                     <img src="images/temp/placeholder-card.jpg" class="card-img-top">
-                    <div class="badge-avaliacao px-2 <?php echo $mediaAv > 4.5 ? "avaliacao-otima" : "avaliacao-media" ?>">
+                    <div class="badge-avaliacao px-2 <?php echo echoAvaliacaoClass($mediaAv) ?>">
                         <!-- STAR ICON -->
                         <ion-icon name="star"></ion-icon>
                         <?php echo $mediaAv; ?>

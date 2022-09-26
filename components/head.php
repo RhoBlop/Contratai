@@ -35,8 +35,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
 <script src="../js/requisicoesAPI.js"></script>
 
 <?php
+    session_start();
     require("php/database/Usuario.php");
     require("php/database/Profissao.php");
     require("php/impressaoDados.php");
     require("php/utils.php");
+
+    $auth = isAuthenticated();
+    $usuarioClass = new Usuario();
+    $profissaoClass = new Profissao();
 ?>

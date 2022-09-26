@@ -20,7 +20,7 @@
                             <h6 class="text-muted">Dados da conta</h6>
                         </div>
                         <div class="d-flex justify-content-center mb-4">
-                            <img id="imgPerfil" class="rounded-circle" src="<?php echoProfileImage($user["imgusr"]); ?>" alt="Imagem de Perfil">
+                            <img id="imgPerfil" src="<?php echoProfileImage($user["imgusr"]); ?>" alt="Imagem de Perfil">
                         </div>
                         <table class="table mb-5">
                             <tbody>
