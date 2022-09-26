@@ -9,15 +9,77 @@
             <div class="container my-3">
                 <div class="row py-3 d-flex justify-content-center align-items-center mb-3">
                     <div class="col-md-12 search-bar">
-                        <form action="">
+                        <form id="searchForm" action="" onsubmit="false">
                             <div class="input-group">
-                                <input type="text" class="form-control form-control-lg" placeholder="O que você está procurando?">
+                                <input id="searchBox" name="searchParam" type="text" class="form-control form-control-lg" placeholder="O que você está procurando?">
                                 <button class="btn btn-green"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                            <div class="filters-group" style="display: none">
+                                <select name="filterTable" id="filterTable">
+                                    <option value="profissao" selected>Profissão</option>
+                                    <option value="usuario">Usuário</option>
+                                </select>
                             </div>
                         </form>
                     </div>
+
+                    <div id="searchResult">
+
+                    </div>
                 </div>
                 
+                <script>
+                    let abortControl = null;
+
+                    let searchBox = document.querySelector("#searchBox");
+                    searchBox.onclick = () => {
+                        document.querySelector(".filters-group").style.display = "block"
+                    }
+                    searchBox.onkeyup = () => {
+                        search("#searchForm");
+                    };
+                    
+
+                    async function search(idForm) {
+                        if (abortControl) {
+                            abortControl.abort();
+                        }
+                        abortControl = new AbortController();
+
+                        let form = document.querySelector(idForm);
+                        let formData = new URLSearchParams(new FormData(form)).toString();
+                        
+                        try {
+                            console.log("new request being made");
+                            let response = await fetch("./API/pesquisa.php", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/x-www-form-urlencoded"
+                                },
+                                signal: abortControl.signal,
+                                body: formData
+                            });
+                            let data = await response.json();
+                            console.log("got request response");
+                            
+                            let { erro } = data;
+                            if (erro) {
+                                formErro(erro);
+                            } 
+                            
+                            let { dados } = data;
+                            if (dados) {
+                                constructSearchCards()
+                            }
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+
+                    function constructSearchCards() {
+
+                    }
+                </script>
             </div>
 
 

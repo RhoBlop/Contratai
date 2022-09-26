@@ -12,7 +12,7 @@ for (let carousel of carousels) {
 
 
         // número de cards no carrosel
-        let itemNumbers = 3;
+        let itemNumbers = 4;
         let carouselInner = carousel.querySelector(".carousel-inner")
         // largura total do carrosel, contando também com o conteúdo em overflow
         let carouselWidth = carouselInner.scrollWidth;

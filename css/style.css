@@ -325,7 +325,7 @@ ion-icon {
     margin-left: 5px;
 }
 
-/* Carousel para telas grandes */
+/* Carousel */
 .carousel-inner {
     padding: 10px 0;
 }
@@ -348,6 +348,7 @@ ion-icon {
     right: 4rem;
 }
 
+/* Carousel em telas maiores */
 @media screen and ( min-width: 768px ) {
     .carousel-inner {
         display: flex;
@@ -355,7 +356,7 @@ ion-icon {
     .carousel-item {
         display: block;
         margin-right: 0;
-        flex: 0 0 calc(100%/3);
+        flex: 0 0 calc(100%/4);
     }
 } 
 
