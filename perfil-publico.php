@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
-        <?php include ("components/head.html") ?>
+        <?php include ("components/head.php") ?>
     </head>
     <body>
     <!-- HOME PAGE HEADER -->
-        <?php include ("components/login-header.html") ?>
+        <?php include ("components/login-header.php") ?>
 
         <main>
             <div class="container my-3">

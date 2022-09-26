@@ -18,13 +18,12 @@
 
                     <div class="col-8 px-3 flex-column text-center" id="profile-content">
                         <h3>Esta pagina está em desenvolvimento...</h3>
-                        <img src="images\storyset\Work time-pana.svg" width="55%" alt="">
+                        <img src="images\storyset\Work time-pana.svg" alt="">
                     </div>
                 </div>
             </div>
         </main>
 
-        <?php include ("components/footer.html")?>
     </body>
 
     <script

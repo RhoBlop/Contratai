@@ -11,7 +11,7 @@
     <?php include ("components/login-modal.html"); ?>
 
     <main>
-      <div class="container p-3 my-5">
+      <div class="container p-3">
         <div class="row d-flex justify-content-center align-items-center my-3 py-3">
             <div class="col-sm-5 p-5">
               <h2 class="mb-3">Quem somos?</h2>
@@ -28,10 +28,6 @@
         </div>
       </div>
     </main>
-    
-
-    <!-- FOOTER -->
-    <?php include ("components/footer.html") ?>
 
     <!-- JS BOOTSTRAP BUNDLE -->
     <script

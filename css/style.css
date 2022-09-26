@@ -119,16 +119,22 @@ main h1.text-gradient {
 
 /* Botões*/
 
+.btn {
+    transition: color .25s ease-in-out, background-color .25s ease-in-out, border-color .15s ease-in-out, transform .15s ease-in-out;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}
+
 .btn-login {
     position: relative;
-    transition: color .2s ease-in-out, transform .2s ease-in-out;
     border: none;
     font-weight: 700;
 }
 .btn-login:hover {
     color: var(--primary-green);
     border: none;
-    transform: scale(1.1);
 }
 
 .btn-login::after {
@@ -154,8 +160,8 @@ main h1.text-gradient {
     color: var(--primary-green);
     border: 1.8px solid var(--primary-green);
     background-color: inherit;
-    transition: color .25s ease-in-out, background-color .25s ease-in-out, border-color .15s ease-in-out, transform .15s ease-in-out;
 }
+
 .btn-outline-green:hover {
     color: #fff;
     border-color: var(--primary-green);
@@ -171,7 +177,6 @@ main h1.text-gradient {
     font-weight: 700;
     text-align: center;
     border: 1px solid transparent;
-    transition: background-color 0.2s ease-in-out 0s, opacity 0.2s ease-in-out 0s;
 }
 
 .btn-green:hover {
@@ -218,30 +223,31 @@ ion-icon {
 
 .card {
     background-color: var(--background) !important;
-    border: 2.5px solid transparent;
+}
+
+.card-categoria {
+    border: none;
     transition: all .25s ease-in-out;
     position: relative;
 }
 
-.card .btn-outline-green {
+.card-categoria .btn-outline-green {
     position: relative;
     color: var(--grey);
     border: 1.8px solid var(--grey);
     z-index: 2;
 }
 
-.card:hover {
-    color: var(--primary-green);
-    border: 2.5px solid var(--primary-green);
-    transform: scale(1.01);
+.card-categoria:hover {
+    transform: scale(1.05);
 }
 
-.card:hover .btn-outline-green {
+.card-categoria:hover .btn-outline-green {
     color: var(--primary-green);
     border: 1.8px solid var(--primary-green);
 }
 
-.card .btn-outline-green:hover {
+.card-categoria .btn-outline-green:hover {
     color: #fff;
 }
 
@@ -445,7 +451,6 @@ label {
     width: 148px;
     height: 148px;
     transition: all .1s ease-in-out;
-    border: 1px solid black; /* só pra visualização por enquanto */
     overflow: hidden;
 }
 
@@ -604,7 +609,7 @@ label {
     border: none !important;
 }
 
-#anuncio > .card-body > .card-text > i {
+#anuncio > .card-body > .card-text > .avaliacoes > i {
     font-size: 12px;
 }
 
