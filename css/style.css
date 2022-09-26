@@ -49,6 +49,7 @@ main h2 {
 }
 
 main h3 {
+    font-size: 32px;
     font-weight: 600;
 }
 
@@ -612,6 +613,41 @@ label {
 #anuncio > .card-body > .card-text > .avaliacoes > i {
     font-size: 12px;
 }
+
+.grid {
+    display: grid;
+    gap: .5rem;
+    grid-template-areas: 
+    "big-photo sm-photo1"
+    "big-photo sm-photo2"
+}
+
+.big-photo {
+    grid-area: big-photo;
+}
+
+.big-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sm-photo1 {
+    grid-area: sm-photo1;
+}
+
+.sm-photo2 {
+    grid-area: sm-photo2;
+}
+
+.sm-photo1 img, .sm-photo2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
 
 @media screen and ( max-width: 768px ) {
     .caixa-pesquisa {
