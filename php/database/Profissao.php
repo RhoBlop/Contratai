@@ -4,7 +4,40 @@
     
     class Profissao extends Database {
 
-        public function selectMaisCadastros($limit) {
+        public function selectAnunciosMaiorAvaliacao($idprof, $limit = null) {
+            try {
+                $users = <<<SQL
+                    SELECT prof.dscprof, espec.dscespec, usr.idusr, usr.nomusr, usr.imgusr, count(*) AS numContrato, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
+                    FROM usuario AS usr
+                    INNER JOIN usrEspec AS usres ON (usr.idusr = usres.idusr)
+                    INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
+                    INNER JOIN profissao AS prof ON (espec.idprof = prof.idprof)
+                    INNER JOIN contrato AS contrt ON (usr.idusr = contrt.idcontratado AND contrt.idespec = espec.idespec)
+                    INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    WHERE (prof.idprof = :id)
+                    GROUP BY usr.idusr, prof.dscprof, espec.dscespec
+                    ORDER BY mediaavaliacao DESC
+                    LIMIT :limit
+                SQL;
+                
+                $stmt = Database::prepare($users);
+                $stmt->execute([ 
+                    ":id" => $idprof,
+                    ":limit" => $limit 
+                ]);
+
+                $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                return $users;
+            } catch(PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
+                
+                return [ "action" => false ];
+            }
+        }
+
+        public function selectMaisCadastros($limit = null) {
             try {
                 $sql = <<<SQL
                     SELECT top.idprof, top.dscprof, top.numusr, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao 
@@ -36,7 +69,7 @@
         }
 
 
-        public function selectMaisContratos($limit) {
+        public function selectMaisContratos($limit = null) {
             try {
                 $sql = <<<SQL
                     SELECT top.idprof, top.dscprof, top.numContrato, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
@@ -69,7 +102,7 @@
 
 
         // retorna as X profissões (de acordo com $limit) com maior média de avaliações 
-        public function selectMaiorAvaliacao($limit) {
+        public function selectMaiorAvaliacao($limit = null) {
             try {
                 $sql = <<<SQL
                     SELECT prof.idprof, prof.dscprof, count(*) AS numAvaliacao, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao

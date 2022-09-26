@@ -1,7 +1,7 @@
 <?php 
     function carregaUsuario() {
-        $userClass = new Usuario();
-        $response = $userClass->selectById($_SESSION["idusr"]);
+        global $usuarioClass;
+        $response = $usuarioClass->selectById($_SESSION["idusr"]);
 
         if (isset($response["dados"])) {
             $user = $response["dados"];
@@ -31,6 +31,10 @@
 
     function echoProfileImage($img) {
         echo is_null($img) ? "images/temp/default-pic.png" : $img;
+    }
+
+    function echoAvaliacaoClass($nota) {
+        echo $nota > 4.5 ? "avaliacao-otima" : "avaliacao-media";
     }
 
 ?>
