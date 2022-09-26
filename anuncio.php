@@ -11,8 +11,8 @@
             <div class="container my-3">
                 <h3>Faço ilustrações</h3>
                 <div class="row">
-                    <div class="col-8">
-                        <div class="grid rounded-3">
+                    <div class="col-9">
+                        <div class="grid">
                             <div class="big-photo">
                                 <img src="images\temp\placeholder-card.jpg" alt="">
                             </div>
