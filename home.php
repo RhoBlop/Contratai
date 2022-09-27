@@ -15,10 +15,10 @@
                                 <button id="searchButton" class="btn btn-green"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </div>
                             <div class="filters-group">
-                                <input type="checkbox" id="profissao" class="search-filter" name="filterTable[]" value="profissao" checked>
+                                <input type="radio" id="profissao" class="search-filter" name="filterTable" value="profissao">
                                 <label for="profissao">Profissão</label>
 
-                                <input type="checkbox" id="usuario" class="search-filter" name="filterTable[]" value="usuario">
+                                <input type="radio" id="usuario" class="search-filter" name="filterTable" value="usuario" checked>
                                 <label for="usuario">Usuário</label>
                             </div>
                         </form>

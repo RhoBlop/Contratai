@@ -323,7 +323,7 @@ ion-icon {
 .search-filter + label {
     display: inline-block;
     user-select: none;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 500;
     padding: 3px 15px;
     margin: 0px 5px;
@@ -331,12 +331,12 @@ ion-icon {
     border: 1px solid var(--grey);
     border-radius: 15px;
     background-color: white;
-    transition: all .25s ease-in-out
+    transition: all .15s ease-in-out
 }
 .search-filter + label:hover {
     cursor: pointer;
 }
-.search-filter:checked ~ label {
+.search-filter:checked + label {
     color: white;
     border: 1px solid var(--primary-green);
     background-color: var(--primary-green);
@@ -420,8 +420,9 @@ ion-icon {
     box-sizing: content-box;
     align-self: center;
     padding: 12px 20px;
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
     object-fit: cover;
 }
 
