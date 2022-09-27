@@ -5,7 +5,7 @@
     require ("../php/utils.php");
 
     // termina o serviço caso alguma das variáveis não tenha sido enviada no POST
-    verifyIsSetPost("searchParam", "filterTable");
+    verifyIsSetPost("searchParam");
         
     session_start();
     verifyIsAuthenticated();
@@ -15,8 +15,10 @@
     $search = new Pesquisa();
 
     [$searchParam, $filterTable] = [$_POST["searchParam"], $_POST["filterTable"]];
-
-    $response = $search->searchTable($filterTable);
-
-    echo json_encode($response);
+    
+    if (count($filterTable) == 1) {
+        $response = $search->searchTable($searchParam, $filterTable[0]);
+    
+        echo json_encode($response);
+    }
 ?>

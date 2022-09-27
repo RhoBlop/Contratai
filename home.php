@@ -9,78 +9,30 @@
             <div class="container my-3">
                 <div class="row py-3 d-flex justify-content-center align-items-center mb-3">
                     <div class="col-md-12 search-bar">
-                        <form id="searchForm" action="" onsubmit="false">
+                        <form id="searchForm" onsubmit="return false">
                             <div class="input-group">
-                                <input id="searchBox" name="searchParam" type="text" class="form-control form-control-lg" placeholder="O que você está procurando?">
-                                <button class="btn btn-green"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                <input id="searchBox" name="searchParam" type="text" class="form-control form-control-lg" autocomplete="off" placeholder="O que você está procurando?">
+                                <button id="searchButton" class="btn btn-green"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </div>
-                            <div class="filters-group" style="display: none">
-                                <select name="filterTable" id="filterTable">
-                                    <option value="profissao" selected>Profissão</option>
-                                    <option value="usuario">Usuário</option>
-                                </select>
+                            <div class="filters-group">
+                                <input type="checkbox" id="profissao" class="search-filter" name="filterTable[]" value="profissao" checked>
+                                <label for="profissao">Profissão</label>
+
+                                <input type="checkbox" id="usuario" class="search-filter" name="filterTable[]" value="usuario">
+                                <label for="usuario">Usuário</label>
                             </div>
                         </form>
-                    </div>
 
-                    <div id="searchResult">
+                        <div id="searchResult">
+                            <div class="lds-ring"><div></div><div></div><div></div></div>
 
+                            <div id="cardsPesquisa"></div>
+                        </div>
                     </div>
                 </div>
-                
-                <script>
-                    let abortControl = null;
-
-                    let searchBox = document.querySelector("#searchBox");
-                    searchBox.onclick = () => {
-                        document.querySelector(".filters-group").style.display = "block"
-                    }
-                    searchBox.onkeyup = () => {
-                        search("#searchForm");
-                    };
-                    
-
-                    async function search(idForm) {
-                        if (abortControl) {
-                            abortControl.abort();
-                        }
-                        abortControl = new AbortController();
-
-                        let form = document.querySelector(idForm);
-                        let formData = new URLSearchParams(new FormData(form)).toString();
-                        
-                        try {
-                            console.log("new request being made");
-                            let response = await fetch("./API/pesquisa.php", {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/x-www-form-urlencoded"
-                                },
-                                signal: abortControl.signal,
-                                body: formData
-                            });
-                            let data = await response.json();
-                            console.log("got request response");
-                            
-                            let { erro } = data;
-                            if (erro) {
-                                formErro(erro);
-                            } 
-                            
-                            let { dados } = data;
-                            if (dados) {
-                                constructSearchCards()
-                            }
-                        } catch (error) {
-                            console.error(error);
-                        }
-                    }
-
-                    function constructSearchCards() {
-
-                    }
-                </script>
             </div>
+
+            <script src="js/pesquisa.js"></script>
 
 
             <!-- CAROUSEL DAS PROFISSÕES COM MAIS CONTRATOS -->
@@ -136,6 +88,9 @@
     ></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <!-- Barra de pesquisa -->
+    
     
     <!-- Sliding do carousel com animação -->
     <script src="js/multitemCarousel.js"></script>

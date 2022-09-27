@@ -282,6 +282,115 @@ ion-icon {
     color: #026773;
 }
 
+/* Filtros de pesquisa */
+#searchBox {
+    border: 1px solid var(--grey);
+}
+
+#cardsPesquisa {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.filters-group {
+    display: none;
+    padding: 15px 5px;
+    background-color: white;
+    border: 1px solid var(--grey);
+    border-top: none;
+}
+
+.active #searchBox {
+    border-radius: .5rem 0 0 0
+}
+.active #searchButton {
+    border-radius: 0 .5rem 0 0
+}
+.active .filters-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: calc(1.5em + 1rem + 2px);
+    border-radius: 0 0 .5rem .5rem;
+}
+
+.search-filter {
+    display: none;
+}
+.search-filter + label {
+    display: inline-block;
+    user-select: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 3px 15px;
+    margin: 0px 5px;
+    color: var(--grey);
+    border: 1px solid var(--grey);
+    border-radius: 15px;
+    background-color: white;
+    transition: all .25s ease-in-out
+}
+.search-filter + label:hover {
+    cursor: pointer;
+}
+.search-filter:checked ~ label {
+    color: white;
+    border: 1px solid var(--primary-green);
+    background-color: var(--primary-green);
+}
+
+
+#searchResult {
+    display: none;
+    margin-top: 10px;
+    padding: 15px 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: .5rem;
+}
+
+/* Loading spinner */
+.lds-ring {
+  display: none;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* Card de Pesquisa */
 .card-pesquisa {
     width: 80%;

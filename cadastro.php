@@ -44,7 +44,7 @@
                             <!-- CONFIRMAÇÃO SENHA -->
                             <div class="form-group mb-1">
                                 <label for="nome" class="form-label">Confirme sua senha</label>
-                                <input type="password" class="form-control" id="confirmSenha" name="confirmSenha" onkeyup="confirmaSenha(event, '#senha', '#senhaErrada')" placeholder="Digite sua senha" autocomplete="off" required>
+                                <input type="password" class="form-control" id="confirmSenha" name="confirmSenha" oninput="confirmaSenha(event, '#senha', '#senhaErrada')" placeholder="Digite sua senha" autocomplete="off" required>
                                 <small class="formMsgErro">As senhas precisam ser iguais</small>
                             </div>
 

@@ -4,7 +4,7 @@
     
     class Profissao extends Database {
 
-        public function selectAnunciosMaiorAvaliacao($idprof, $limit = null) {
+        public function selectProfissaoMaiorAvaliacao($idprof, $limit = 1) {
             try {
                 $users = <<<SQL
                     SELECT prof.dscprof, espec.dscespec, usr.idusr, usr.nomusr, usr.imgusr, count(*) AS numContrato, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
@@ -37,7 +37,7 @@
             }
         }
 
-        public function selectMaisCadastros($limit = null) {
+        public function selectMaisCadastros($limit = 1) {
             try {
                 $sql = <<<SQL
                     SELECT top.idprof, top.dscprof, top.numusr, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao 
@@ -69,7 +69,7 @@
         }
 
 
-        public function selectMaisContratos($limit = null) {
+        public function selectMaisContratos($limit = 1) {
             try {
                 $sql = <<<SQL
                     SELECT top.idprof, top.dscprof, top.numContrato, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
@@ -102,7 +102,7 @@
 
 
         // retorna as X profissões (de acordo com $limit) com maior média de avaliações 
-        public function selectMaiorAvaliacao($limit = null) {
+        public function selectMaiorAvaliacao($limit = 1) {
             try {
                 $sql = <<<SQL
                     SELECT prof.idprof, prof.dscprof, count(*) AS numAvaliacao, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao

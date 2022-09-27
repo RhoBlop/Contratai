@@ -4,7 +4,7 @@
     
     class Pesquisa extends Database {
 
-        public function searchTable($table) {
+        public function searchTable($search, $table, $limit = 1) {
             try {
                 $allowedTables = ["usuario", "profissao"];
                 
@@ -14,12 +14,10 @@
                     SQL;
     
                     $stmt = Database::prepare($sql);
-                    $stmt->execute([
-                        
-                    ]);
+                    $stmt->execute();
 
                     $result = $stmt->fetchAll();
-                    return ["dados" => $result];
+                    return ["dados" =>  $result];
                 }
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
