@@ -1,40 +1,47 @@
+// controller for aborting http requests
 let abortControl = null;
 
-let searchBox = document.querySelector("#searchBox");
 let form = searchBox.form;
-console.log(form);
+let searchBox = form.querySelector("#searchBox");
+let searchResult = document.querySelector("#searchResult");
 
+// DISPLAY FILTERS UNDER SEARCH BAR WHEN THE PREVIOUS IS CLICKED
 searchBox.onclick = () => {
     form.classList.add("active");
 }
 
-// sempre que um dos checkboxes soferem alteração, o request ao servidor é refeito
+/* ========== EVENTS FOR ACTIVATING SEARCHS ========== */
+// CHANGE EVENT FOR FILTERS
 for (input of document.querySelectorAll(".search-filter")) {
     input.onchange = () => {
         search(form);
     }
 }
-// pesquisa quando enter é pressionado na barra de pesquisa
+// ENTER PRESSED WHEN IN SEARCHBAR
 searchBox.onkeyup = (event) => {
     if (event.keyCode == 13) {
         search(form);
     }
 };
+// SEARCHBAR LOSES FOCUS
 searchBox.onchange = (event) => {
     search(form);
 }
 
 
+// AJAX SEARCH FUNCTION
 async function search() {
+    // aborts previous fetch if it exists and creates a new one
     if (abortControl) {
         abortControl.abort();
     }
     abortControl = new AbortController();
-    let formData = new URLSearchParams(new FormData(form)).toString();
-    console.log(formData);
 
+    
     if (searchBox.value !== "") {
-        document.querySelector("#searchResult").style.display = "flex";
+        let formData = new URLSearchParams(new FormData(form)).toString();
+        console.log(formData);
+
         loading();
         
         try {
@@ -54,6 +61,8 @@ async function search() {
             if (dados) {
                 clearLoading();
                 constructSearchCards(dados);
+            } else {
+                // Error message
             }
         } catch (error) {
             console.error(error);
@@ -62,10 +71,22 @@ async function search() {
 }
 
 function loading() {
-    document.querySelector("#searchResult .lds-ring").style.display = "inline-block";
+    // inserts loading spinner into div
+    // spinner structure => <div class="lds-ring"> <div></div> <div></div> <div></div> </div>
+    let ldsRing = document.createElement("div");
+    ldsRing.setAttribute("id", "loading");
+    ldsRing.classList.add("lds-ring");
+    for (i=0; i<3; i++) {
+        ldsRing.append(document.createElement("div"));
+    }
+
+
+    searchResult.prependChild(ldsRing);
 }
+
 function clearLoading() {
-    document.querySelector("#searchResult .lds-ring").style.display = "none";
+    // selects loading spinner and deletes it
+    document.querySelector("#loading").remove();
 }
 
 function constructSearchCards(dados) {

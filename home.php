@@ -24,9 +24,7 @@
                         </form>
 
                         <div id="searchResult">
-                            <div class="lds-ring"><div></div><div></div><div></div></div>
-
-                            <div id="cardsPesquisa"></div>
+                            
                         </div>
                     </div>
                 </div>

@@ -356,7 +356,7 @@ ion-icon {
 
 /* Loading spinner */
 .lds-ring {
-  display: none;
+  display: inline-block;
   position: relative;
   width: 80px;
   height: 80px;
