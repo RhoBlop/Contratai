@@ -57,8 +57,7 @@
                         </form>
                     </div>
 
-                    <div class="cadastro-side-image col-md-6"></div>
-                </div>
+                    <div class="cadastro-side-image col-md-6 px-0"><img src="images\teste2.jpg" alt=""></div>
             </div>
         </main>
     </body>

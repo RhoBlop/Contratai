@@ -414,8 +414,13 @@ footer i {
 }
 
 .cadastro-side-image {
-    background: url("../images/teste2.jpg") no-repeat 0px -100px;
-    background-size: cover;
+    overflow: hidden;
+}
+
+.cadastro-side-image img{
+    object-fit: cover;
+    width: 100%;
+    height: 100vh;
 }
 
 
