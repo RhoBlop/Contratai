@@ -411,6 +411,10 @@ footer i {
     max-width: 420px;
 }
 
+.cadastro > .form-group {
+    padding: 0;
+}
+
 .cadastro-side-image {
     overflow: hidden;
 }

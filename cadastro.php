@@ -20,8 +20,7 @@
                             <h2>Crie sua conta!</h2>
                         </div>
                         
-                        <form id="cadastro" class="form-cadastro d-flex flex-column" onsubmit="sendCadastro(event, '#feedbackUsuario')">
-                            <div class="row g-3">
+                        <form id="cadastro" class="form-cadastro row g-3" onsubmit="sendCadastro(event, '#feedbackUsuario')">
                                 <div class="form-group mb-3">
                                     <input type="text" class="form-control form-control-lg" id="nome" name="nome" placeholder="Digite seu nome" autocomplete="off" required>
                                 </div>
@@ -55,13 +54,11 @@
                                 <!-- div para comunicação com usuário -->
                                 <div id="feedbackUsuario"></div>
 
-                                
-                            </div>
                             <!-- NOME -->
                             <div class="buttons d-flex justify-content-end align-items-center gap-3 my-3">
                                     <a href="#" class="btn btn-link">Já sou usuário</a>
                                     <button type="submit" class="btn btn-green">Cadastrar</button>
-                                </div>
+                            </div>
                         </form>
                     </div>
 
