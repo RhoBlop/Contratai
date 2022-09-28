@@ -395,22 +395,20 @@ footer i {
 
 /* Cadastro */
 
-.form-row > div {
-    min-height: 100vh;
+.buttons > a, .buttons > button{
+    font-size: 18px !important;
 }
+
 
 .cadastro-logo {
     position: absolute;
-    top: 40px;
+    top: 16px;
+    left: 16px;
 }
 
 .form-cadastro {
     width: 80%;
     max-width: 420px;
-}
-
-.form-group {
-    width: 100%;
 }
 
 .cadastro-side-image {
