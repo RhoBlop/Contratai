@@ -26,27 +26,26 @@ searchBox.onkeyup = (event) => {
         search(form);
     }
 };
-// SEARCHBAR LOSES FOCUS
-searchBox.onchange = (event) => {
-    searchResult.innerHTML = "";
-    search(form);
-}
 
 
 // AJAX SEARCH FUNCTION
 async function search() {
     if (searchBox.value !== "") {
         let data = await searchRequest();
+
+        if (data) {
+            let { dados } = data;
+            if (dados) {
+                clearLoading();
+                constructSearchCards(dados);
+            } else {
+                let { erro } = data;
+                searchResult.innerHTML = erro;
+            }
+        }
+
     }
             
-    let { dados } = data;
-    if (dados) {
-        clearLoading();
-        constructSearchCards(dados);
-    } else {
-        let { erro } = data;
-        searchResult.innerHTML = erro;
-    }
 }
 
 async function searchRequest() {
@@ -85,7 +84,7 @@ function checkIfFirstQuery() {
 }
 
 function loading() {
-    searchResult.style.display = "flex";
+    searchResult.classList.add("show-result");
 
     // inserts loading spinner into div
     // spinner structure => <div class="lds-ring"> <div></div> <div></div> <div></div> </div>
