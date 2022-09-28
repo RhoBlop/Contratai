@@ -14,10 +14,10 @@
     require ("../php/database/Pesquisa.php");
     $search = new Pesquisa();
 
-    [$searchParam, $filterTable] = [$_POST["searchParam"], $_POST["filterTable"]];
+    [$searchParam, $filterTable, $searchLimit, $searchOffset] = [$_POST["searchParam"], $_POST["filterTable"], $_POST["limit"], $_POST["offset"]];
 
     if ($filterTable == "usuario") {
-        $response = $search->searchUser($searchParam, $limit = 8);
+        $response = $search->searchUser($searchParam, $limit = $searchLimit, $offset = $searchOffset);
 
         echo json_encode($response);
     } else {

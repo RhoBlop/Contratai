@@ -2,8 +2,12 @@
 let abortControl = null;
 
 let searchBox = document.querySelector("#searchBox");
-let form = searchBox.form;
+let searchButton = document.querySelector("#searchButton");
 let searchResult = document.querySelector("#searchResult");
+let form = searchBox.form;
+
+let itemsNumToBeDisplayed = 8;
+let hasMoreRows = true;
 let offset = 0;
 
 // DISPLAY FILTERS UNDER SEARCH BAR WHEN THE PREVIOUS IS CLICKED
@@ -16,14 +20,21 @@ searchBox.onclick = () => {
 for (input of document.querySelectorAll(".search-filter")) {
     input.onchange = () => {
         searchResult.innerHTML = "";
-        search(form);
+        offset = 0;
+        search();
     }
 }
-// ENTER PRESSED WHEN IN SEARCHBAR
+searchButton.onclick = () => {
+    searchResult.innerHTML = "";
+    offset = 0;
+    search();
+}
+// ENTER PRESSED WHEN SEARCHBOX FOCUSED
 searchBox.onkeyup = (event) => {
     if (event.keyCode == 13) {
         searchResult.innerHTML = "";
-        search(form);
+        offset = 0;
+        search();
     }
 };
 
@@ -31,12 +42,12 @@ searchBox.onkeyup = (event) => {
 // AJAX SEARCH FUNCTION
 async function search() {
     if (searchBox.value !== "") {
-        let data = await searchRequest();
+        let data = await ajaxSearch();
 
         if (data) {
-            let { dados } = data;
-            if (dados) {
-                clearLoading();
+            if (data.dados) {
+                let { dados } = data;
+
                 constructSearchCards(dados);
             } else {
                 let { erro } = data;
@@ -48,14 +59,20 @@ async function search() {
             
 }
 
-async function searchRequest() {
+async function ajaxSearch() {
     // aborts previous fetch if it exists and creates a new one
     if (abortControl) {
         abortControl.abort();
     }
     abortControl = new AbortController();
 
-    let formData = new URLSearchParams(new FormData(form)).toString();
+    let formData = new FormData(form);
+    // only 8 will be displayed, but searches for +1 to check if we can search again
+    formData.append("limit", itemsNumToBeDisplayed + 1);
+    formData.append("offset", offset);
+
+    // converts formData to x-www-form-urlencoded
+    formData = new URLSearchParams(formData).toString();
     console.log(formData);
 
     loading();
@@ -73,15 +90,14 @@ async function searchRequest() {
         let data = await response.json();
         console.log(data);
 
+        clearLoading();
+
         return data;
     } catch (error) {
         console.error(error);
     }
 }
 
-function checkIfFirstQuery() {
-    
-}
 
 function loading() {
     searchResult.classList.add("show-result");
@@ -107,16 +123,36 @@ function clearLoading() {
 }
 
 function addPlusButton() {
+    let button = document.createElement("div");
+    button.textContent = "Pesquisar novamente";
 
+    button.onclick = () => {
+        // adds to offset value
+        offset += itemsNumToBeDisplayed;
+        // removes button
+        button.remove();
+        // starts loading and search
+        search();
+    };
+
+    searchResult.append(button)
 }
 
 function constructSearchCards(dados) {
     console.log(dados);
     if (dados.length > 0) {
-        for (info of dados) {
-                let profCard = createUserCard(info);
-                searchResult.append(profCard);
-            }
+        for (let i=0; i<dados.length && i<itemsNumToBeDisplayed; i++) {
+            let object = dados[i];
+            let profCard = createUserCard(object);
+
+            searchResult.append(profCard);
+        }
+
+        // caso um item a mais tenha sido retornado do fetch, o usuário recebe a oportunidade 
+        // de adicionar mais itens à pesquisa (paginação)
+        if (dados.length === itemsNumToBeDisplayed + 1) {
+            addPlusButton();
+        }
     } else {
         searchResult.innerHTML = "Nenhum usuário encontrado";
     }
@@ -130,7 +166,7 @@ function createUserCard(user) {
     let { idusr, imgusr, nomusr, mediaavaliacao, numcontrato, especs} = user;
 
     // convert into array
-    especs = JSON.parse(info.especsusr);
+    especs = JSON.parse(user.especsusr);
     // join into string
     especs = especs.join(", ");
     // capitalize first letter
