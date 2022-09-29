@@ -1,7 +1,7 @@
 <?php 
     function carregaUsuario() {
         global $usuarioClass;
-        $response = $usuarioClass->selectById($_SESSION["idusr"]);
+        $response = $usuarioClass->selectBasicInfoById($_SESSION["idusr"]);
 
         if (isset($response["dados"])) {
             $user = $response["dados"];

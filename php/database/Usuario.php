@@ -4,9 +4,9 @@
     class Usuario extends Database {
 
         // retorna usuário com o id passado por parâmetro
-        public function selectById($id) {
+        public function selectBasicInfoById($id) {
             try {
-                $sql = "SELECT nomusr, emailusr, senhausr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr FROM usuario WHERE idusr = :id";
+                $sql = "SELECT nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr FROM usuario WHERE idusr = :id";
     
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
@@ -24,6 +24,20 @@
             }
         }
 
+
+        public function selectAvalById($id) {
+            try {
+                $sql = <<<SQL
+
+                SQL;
+            } catch (PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
+
+                return [ "action" => false ];
+            }
+        }
+        
 
         // retorna usuário para login, ou seja, a partir de um email e uma senha
         public function selectLogin($email, $senha) {
@@ -50,6 +64,8 @@
                 return [ "action" => false ];
             }
         }
+
+
 
 
         // insere um usuário com as informações passadas por parâmetro

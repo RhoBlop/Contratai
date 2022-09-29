@@ -7,6 +7,10 @@
     <!-- HOME PAGE HEADER -->
         <?php include ("components/login-header.html") ?>
 
+        <?php 
+            $user = $usuarioClass->selectAvalById($_GET);
+        ?>
+
         <main>
             <div class="container my-3">
                 <div class="row gx-5">
