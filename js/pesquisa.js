@@ -6,7 +6,7 @@ let searchButton = document.querySelector("#searchButton");
 let searchResult = document.querySelector("#searchResult");
 let form = searchBox.form;
 
-let itemsNumToBeDisplayed = 1;
+let itemsNumToBeDisplayed = 2;
 let hasMoreRows = true;
 let offset = 0;
 
@@ -135,6 +135,7 @@ function constructSearchCards(dados) {
         for (let i=0; i<dados.length && i<itemsNumToBeDisplayed; i++) {
             let object = dados[i];
             let profCard = createUserCard(object);
+            profCard.style.animationDelay = `${i * 0.2}s`
 
             searchResult.append(profCard);
         }

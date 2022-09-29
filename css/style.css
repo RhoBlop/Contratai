@@ -451,7 +451,8 @@ ion-icon {
     border-radius: 15px;
     margin: 10px 0;
     z-index: 2;
-    animation: drop-in .4s ease-in-out;
+    opacity: 0;
+    animation: drop-in .4s ease-in-out forwards;
 }
 
 .card-pesquisa .card-body {
