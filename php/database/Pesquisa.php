@@ -24,11 +24,11 @@
                           INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
                           INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                           GROUP BY usr.idusr
-                          ORDER BY mediaavaliacao DESC
                         ) AS media ON (usr.idusr = media.idusr)
                     INNER JOIN usrespec AS usres ON (usr.idusr = usres.idusr)
                     INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
                     GROUP BY usr.idusr, usr.nomusr, usr.imgusr, media.mediaavaliacao, media.numcontrato
+                    ORDER BY media.mediaavaliacao DESC
                     LIMIT :limit
                     OFFSET :offset
                 SQL;

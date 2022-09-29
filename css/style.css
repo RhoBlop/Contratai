@@ -368,7 +368,6 @@ ion-icon {
     background-color: var(--primary-green);
 }
 
-
 #searchResult {
     display: none;
     margin-top: 10px;
@@ -378,6 +377,31 @@ ion-icon {
     align-items: center;
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: .5rem;
+}
+
+.btn-continue-search {
+    background-color: var(#ddd);
+    margin: 8px;
+    border: none;
+}
+.btn-continue-search i {
+    font-size: 30px;
+    color: var(--grey);
+    transform: none ;
+}
+.btn-continue-search:hover i {
+    animation-name: up-down, up-down;
+    animation-duration: 250ms, 150ms;
+    animation-delay: 0ms, 250ms;
+    animation-timing-function: ease-in-out, ease-in-out;
+    animation-direction: normal, reverse;
+}
+@keyframes up-down {
+    from {
+        transform: translateY(0);
+    } to {
+        transform: translateY(15px);
+    }
 }
 
 /* Loading spinner */

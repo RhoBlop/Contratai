@@ -6,7 +6,7 @@ let searchButton = document.querySelector("#searchButton");
 let searchResult = document.querySelector("#searchResult");
 let form = searchBox.form;
 
-let itemsNumToBeDisplayed = 8;
+let itemsNumToBeDisplayed = 1;
 let hasMoreRows = true;
 let offset = 0;
 
@@ -24,19 +24,12 @@ for (input of document.querySelectorAll(".search-filter")) {
         search();
     }
 }
+// BUTTON CLICK AND FURTHER ENTER PRESS WHEN INPUT IS FOCUSED
 searchButton.onclick = () => {
     searchResult.innerHTML = "";
     offset = 0;
     search();
 }
-// ENTER PRESSED WHEN SEARCHBOX FOCUSED
-searchBox.onkeyup = (event) => {
-    if (event.keyCode == 13) {
-        searchResult.innerHTML = "";
-        offset = 0;
-        search();
-    }
-};
 
 
 // AJAX SEARCH FUNCTION
@@ -65,21 +58,17 @@ async function ajaxSearch() {
         abortControl.abort();
     }
     abortControl = new AbortController();
-
-    let formData = new FormData(form);
+    
     // only 8 will be displayed, but searches for +1 to check if we can search again
-    formData.append("limit", itemsNumToBeDisplayed + 1);
-    formData.append("offset", offset);
+    let limit = itemsNumToBeDisplayed + 1;
 
     // converts formData to x-www-form-urlencoded
-    formData = new URLSearchParams(formData).toString();
-    console.log(formData);
+    formData = new URLSearchParams(new FormData(form)).toString();
 
     loading();
-    
     try {
         console.log("new request being made");
-        let response = await fetch("./API/pesquisa.php", {
+        let response = await fetch(`./API/pesquisa.php?limit=${limit}&offset=${offset}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
@@ -122,10 +111,9 @@ function clearLoading() {
     document.querySelector("#loading").remove();
 }
 
-function addPlusButton() {
-    let button = document.createElement("div");
-    button.textContent = "Pesquisar novamente";
-
+function addContinueSearch() {
+    let button = document.createElement("button");
+    button.classList.add("btn", "btn-continue-search");
     button.onclick = () => {
         // adds to offset value
         offset += itemsNumToBeDisplayed;
@@ -135,11 +123,14 @@ function addPlusButton() {
         search();
     };
 
+    let arrowIcon = document.createElement("i");
+    arrowIcon.classList.add("fa-solid", "fa-angle-down");
+
+    button.append(arrowIcon);
     searchResult.append(button)
 }
 
 function constructSearchCards(dados) {
-    console.log(dados);
     if (dados.length > 0) {
         for (let i=0; i<dados.length && i<itemsNumToBeDisplayed; i++) {
             let object = dados[i];
@@ -151,7 +142,7 @@ function constructSearchCards(dados) {
         // caso um item a mais tenha sido retornado do fetch, o usuário recebe a oportunidade 
         // de adicionar mais itens à pesquisa (paginação)
         if (dados.length === itemsNumToBeDisplayed + 1) {
-            addPlusButton();
+            addContinueSearch();
         }
     } else {
         searchResult.innerHTML = "Nenhum usuário encontrado";

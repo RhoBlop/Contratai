@@ -3,9 +3,6 @@
     header("Content-Type: application/json");
     require ("../php/verificacoes.php");
     require ("../php/utils.php");
-
-    // termina o serviço caso alguma das variáveis não tenha sido enviada no POST
-    verifyIsSetPost("searchParam");
         
     session_start();
     verifyIsAuthenticated();
@@ -14,7 +11,7 @@
     require ("../php/database/Pesquisa.php");
     $search = new Pesquisa();
 
-    [$searchParam, $filterTable, $searchLimit, $searchOffset] = [$_POST["searchParam"], $_POST["filterTable"], $_POST["limit"], $_POST["offset"]];
+    [$searchParam, $filterTable, $searchLimit, $searchOffset] = [$_POST["searchParam"], $_POST["filterTable"], $_GET["limit"], $_GET["offset"]];
 
     if ($filterTable == "usuario") {
         $response = $search->searchUser($searchParam, $limit = $searchLimit, $offset = $searchOffset);
