@@ -21,8 +21,8 @@
                             <h6 class="text-muted">Veja e adicione suas Profissões</h6>
                         </div>
 
-                        <div class="row">
-                            <div class="col-7 d-flex flex-column justify-content-center">
+                        <div class="row justify-content-center">
+                            <div class="col-8 d-flex flex-column justify-content-center">
                                 <div class="card shadow-sm rounded-4 my-3" id="cardProfissao">
                                     <div class="card-body d-flex justify-content-between align-items-center px-4">
 
@@ -36,8 +36,10 @@
                                     </div>
                                 </div>
 
-                           
-                                <a data-bs-toggle="modal" data-bs-target="#modal-addProf" class="btn btn-link">Adicionar profissão</a>
+                                <div class="mt-3 text-center">
+                                    <a data-bs-toggle="modal" data-bs-target="#modal-addProf" class="btn btn-link">Adicionar profissão</a>
+                                </div>
+                                
                             </div>
                         </div>
                         
