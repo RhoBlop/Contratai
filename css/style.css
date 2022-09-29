@@ -422,7 +422,7 @@ footer i {
 .cadastro-side-image img{
     object-fit: cover;
     width: 100%;
-    height: 100vh;
+    height: 100%;
 }
 
 
@@ -445,11 +445,10 @@ footer i {
     }
 }
 
-/* Perfil */
-
-#profile-content {
+#settingsContent {
     border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
+
 
 table .text-muted {
     font-size: 18px;
@@ -709,6 +708,12 @@ label {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+/* Card Profissão */
+
+#cardProfissao p {
+    font-size: 14px;
 }
 
 

@@ -14,7 +14,7 @@
 
                     <?php include("components/sidebar.html")?>
 
-                    <div class="col-7 px-3" id="profile-content">
+                    <div class="col-7 px-3" id="settings-content">
                         <div class="mb-5">
                             <h2>Meu Perfil</h2>
                             <h6 class="text-muted">Dados da conta</h6>

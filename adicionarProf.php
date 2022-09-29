@@ -10,8 +10,6 @@
         <main>
             <div class="container p-3 my-3">
                 <div class="row gx-5">
-                    
-                    <?php include("components/modal-exclude.html")?>
 
                     <?php include("components/sidebar.html")?>
 
