@@ -19,9 +19,6 @@
                             <h6 class="text-muted">Altere a senha da sua conta</h6>
                         </div>
                         
-                        
-                        <form id="updateUser" onsubmit="sendUpdateSenha(event)">
-                        
                             <div class="form-group mb-3">
                                 <label for="senhaAtual" class="form-label">Senha Atual</label>
                                 <input type="password" class="form-control" id="senhaAtual" name="senhaAtual" autocomplete="off" placeholder="Digite sua senha atual" required>
