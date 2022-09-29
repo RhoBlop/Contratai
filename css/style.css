@@ -497,7 +497,7 @@ label {
     color: var(--primary-green);
 }
 
-.form-control:focus {
+.form-control:focus, .form-select:focus {
     transition: all .2s ease-in-out;
     box-shadow: none;
     border: 1px solid var(--light-green);
@@ -714,6 +714,10 @@ label {
 
 #cardProfissao p {
     font-size: 14px;
+}
+
+#modal-addProf select option:hover {
+    box-shadow: 0 0 10px 100px #1882a8 inset;
 }
 
 

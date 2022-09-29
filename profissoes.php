@@ -11,6 +11,8 @@
         <main>
             <div class="container p-3 my-3">
                 <div class="row gx-5">
+                    <?php include("components/modal-addProf.php")?>
+
                     <?php include("components/sidebar.html")?>
 
                     <div class="col-md-8 px-3" id="settingsContent">
@@ -21,7 +23,7 @@
 
                         <div class="row">
                             <div class="col-7 d-flex flex-column justify-content-center">
-                                <div class="card shadow-sm rounded-5 my-3" id="cardProfissao">
+                                <div class="card shadow-sm rounded-4 my-3" id="cardProfissao">
                                     <div class="card-body d-flex justify-content-between align-items-center px-4">
 
                                         <div class="card-text">
@@ -35,7 +37,7 @@
                                 </div>
 
                            
-                                <a href="adicionarProf.php" class="btn btn-link">Adicionar profissão</a>
+                                <a data-bs-toggle="modal" data-bs-target="#modal-addProf" class="btn btn-link">Adicionar profissão</a>
                             </div>
                         </div>
                         
