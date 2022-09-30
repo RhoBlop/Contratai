@@ -10,7 +10,7 @@
         <main>
             <div class="container my-3">
                 <h3>Faço ilustrações</h3>
-                <div class="row my-3 ">
+                <div class="row">
                     <div class="col-9">
                         <div class="grid">
                             <div class="big-photo">
