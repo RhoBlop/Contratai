@@ -607,6 +607,18 @@ label {
 
 /* Cards dos Perfis */
 
+#profileCard > .card-img-top {
+    height: 148px;
+    object-fit: cover;
+}
+
+#profileCard {
+    font-size: 14px;
+}
+
+#profileCard > .card-body {
+    margin-top: -2rem;
+}
 
 
 /* Perfil Público */
@@ -677,6 +689,7 @@ label {
 #cardProfissao p {
     font-size: 14px;
 }
+
 
 
 @media screen and ( max-width: 768px ) {
