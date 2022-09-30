@@ -5,7 +5,7 @@
 
         public function searchUser($search, $limit = 1, $offset = 0) {
             try {
-                $search = "%{$search}%";
+                $search = "{$search}%";
 
                 $sql = <<<SQL
                     SELECT usr.idusr, usr.nomusr, usr.imgusr, media.mediaavaliacao, media.numcontrato, json_agg(espec.dscespec) AS especsusr

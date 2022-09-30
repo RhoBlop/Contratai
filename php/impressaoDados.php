@@ -1,16 +1,9 @@
 <?php 
     function carregaUsuario() {
         global $usuarioClass;
-        $response = $usuarioClass->selectBasicInfoById($_SESSION["idusr"]);
+        $user = $usuarioClass->selectBasicInfoById($_SESSION["idusr"]);
 
-        if (isset($response["dados"])) {
-            $user = $response["dados"];
-
-            return $user;
-        } else {
-            header("Location: 500Error.php");
-            exit();
-        }
+        return $user;
     }
 
     function echoDadosPerfil($field) {

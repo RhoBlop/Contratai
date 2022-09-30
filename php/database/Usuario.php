@@ -15,7 +15,7 @@
                 
                 $result = $stmt->fetch();
 
-                return [ "dados" => $result ];
+                return $result;
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
@@ -28,12 +28,49 @@
         public function selectPerfilPublico($id) {
             try {
                 $sql = <<<SQL
-                    SELECT
+                    SELECT usr.idusr, nomusr, imgusr, biografiausr, round(avg(notaavaliacao), 1) AS mediaavaliacao, count(*) AS numcontrato
+                    FROM usuario AS usr
+                    INNER JOIN usrespec AS usres ON (usres.idusr = usr.idusr)
+                    INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
+                    INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+                    INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    WHERE usr.idusr = :id
+                    GROUP BY usr.idusr, nomusr, imgusr, biografiausr
                 SQL;
+
+                $stmt = Database::prepare($sql);
+                $stmt->execute([
+                    ":id" => $id
+                ]);
+
+                $result = $stmt->fetch();
+                return $result;
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
 
+                return [ "action" => false ];
+            }
+        }
+
+
+        public function selectEspecsUsr($id) {
+            try {
+                $sql = <<<SQL
+
+                SQL;
+
+                $stmt = Database::prepare($sql);
+                $stmt->execute([
+                    ":id" => $id
+                ]);
+
+                $result = $stmt->fetchAll();
+                return $result;
+            } catch (PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
+                
                 return [ "action" => false ];
             }
         }
