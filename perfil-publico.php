@@ -12,8 +12,7 @@
                 <div class="row gx-5">
                     <div class="col-8" id="profile">
                         <div class="card shadow-sm rounded-4 mb-3" id="infos">
-                            <div class="header-card rounded-4  rounded-bottom">
-                            </div>
+                            <div class="header-card rounded-4  rounded-bottom"></div>
                             <div class="card-body p-3 text-start">
                                 <div class="top-body p-3 mb-1">
                                     <div class="profile-pic"><img src="images\temp\default-pic.png"class="rounded-circle" alt=""></div>
