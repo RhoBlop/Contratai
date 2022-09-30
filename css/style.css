@@ -608,18 +608,29 @@ label {
 /* Cards dos Perfis */
 
 #profileCard > .card-img-top {
-    height: 148px;
+    height: 100px;
     object-fit: cover;
+    border-top-right-radius: 1rem !important;
+    border-top-left-radius: 1rem !important;
 }
 
 #profileCard {
     font-size: 14px;
 }
 
-#profileCard > .card-body {
-    margin-top: -2rem;
+#profileCard > .card-body  {
+    margin-top: -50px;
 }
 
+#profileCard .vr {
+    width: 1.5px;
+}
+
+#profileCard .badge-avaliacao {
+    left: auto;
+    right: 1rem;
+    top: 142px;
+}
 
 /* Perfil Público */
 
@@ -644,7 +655,7 @@ label {
     border-radius: 8px;
 }
 
-#sobre p, #avaliacao p, #anuncio p {
+#sobre p, #avaliacao p, #anuncio p, #profileCard p {
     font-size: 16px;
 }
 
