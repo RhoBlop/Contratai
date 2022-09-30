@@ -10,11 +10,11 @@
                     SELECT * FROM profissao
                 SQL;
 
-                $stmt = Database::prepare($users);
+                $stmt = Database::prepare($sql);
                 $stmt->execute();
 
                 $result = $stmt->fetchAll();
-                return $stmt;
+                return $result;
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();

@@ -96,8 +96,9 @@ function loading() {
     if (!document.querySelector("#loading")) {
         let ldsRing = document.createElement("div");
         ldsRing.setAttribute("id", "loading");
-        ldsRing.classList.add("lds-ring");
+        ldsRing.classList.add("lds-ellipsis");
 
+        ldsRing.append(document.createElement("div"));
         ldsRing.append(document.createElement("div"));
         ldsRing.append(document.createElement("div"));
         ldsRing.append(document.createElement("div"));
@@ -135,7 +136,7 @@ function constructSearchCards(dados) {
         for (let i=0; i<dados.length && i<itemsNumToBeDisplayed; i++) {
             let object = dados[i];
             let profCard = createUserCard(object);
-            profCard.style.animationDelay = `${i * 0.2}s`
+            profCard.style.animationDelay = `${i * 0.2}s`;
 
             searchResult.append(profCard);
         }
@@ -155,14 +156,12 @@ function createUserCard(user) {
     let card = document.createElement("div");
     card.classList.add("card", "card-hover", "card-pesquisa");
 
-    let { idusr, imgusr, nomusr, mediaavaliacao, numcontrato, especs} = user;
+    let { idusr, imgusr, nomusr, mediaavaliacao, numcontrato, especsusr} = user;
 
-    // convert into array
-    especs = JSON.parse(user.especsusr);
     // join into string
-    especs = especs.join(", ");
+    especsusr = especsusr.join(", ");
     // capitalize first letter
-    especs = especs[0].toUpperCase() + especs.slice(1);
+    especsusr = especsusr[0].toUpperCase() + especsusr.slice(1);
     
     card.innerHTML = `
         <img src="${imgusr || 'images/temp/default-pic.png'}" alt="Imagem de perfil">
@@ -177,7 +176,7 @@ function createUserCard(user) {
             </div>
             <div class="card-text">
                 <p>Total de ${numcontrato} contratações</p>
-                <p>${especs}</p>
+                <p>${especsusr}</p>
 
                 <p>Em nossa plataforma desde</p>
 

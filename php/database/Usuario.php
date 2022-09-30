@@ -25,17 +25,10 @@
         }
 
 
-        public function selectAvalById($id) {
+        public function selectPerfilPublico($id) {
             try {
                 $sql = <<<SQL
-                    SELECT usr.nomusr, imgusr, descavaliacao, notaavaliacao, datavaliacao
-                    FROM avaliacao AS aval
-                    INNER JOIN contrato AS contrt ON (aval.idcontrato = contrt.idcontrato)
-                    INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
-                    INNER JOIN usuario AS usr ON (contrt
-                    idcontratante = usr.idusr)
-                    WHERE contrt.idcontratado = :idusr
-                    ORDER BY aval.notaavaliacao : filterNota
+                    SELECT
                 SQL;
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
@@ -44,19 +37,19 @@
                 return [ "action" => false ];
             }
         }
-        
+
 
         // retorna usuário para login, ou seja, a partir de um email e uma senha
         public function selectLogin($email, $senha) {
             try {
                 $sql = "SELECT idusr FROM usuario WHERE (emailUsr = :email) AND (senhaUsr = :senha)";
-
+                
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
                     ":email" => $email,
                     ":senha" => $senha
                 ]);
-
+                
                 $result = $stmt->fetch();
                 if ($result) {
                     // retorna ID do usuário
@@ -67,12 +60,37 @@
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
+                
+                return [ "action" => false ];
+            }
+        }
+        
+
+        public function selectAvalById($id, $filterNota = "DESC") {
+            try {
+                $sql = <<<SQL
+                    SELECT usr.nomusr, imgusr, comentarioavaliacao, notaavaliacao
+                    FROM avaliacao AS aval
+                    INNER JOIN contrato AS contrt ON (aval.idcontrato = contrt.idcontrato)
+                    INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
+                    INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.idusr)
+                    WHERE contrt.idcontratado = :id
+                    ORDER BY aval.notaavaliacao DESC
+                SQL;
+                $stmt = Database::prepare($sql);
+                $stmt->execute([
+                    ":id" => $id
+                ]);
+
+                $result = $stmt->fetchAll();
+                return $result;
+            } catch (PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
 
                 return [ "action" => false ];
             }
         }
-
-
 
 
         // insere um usuário com as informações passadas por parâmetro

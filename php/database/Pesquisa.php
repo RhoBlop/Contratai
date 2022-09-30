@@ -1,6 +1,5 @@
 <?php 
     require_once "Database.php";
-
     
     class Pesquisa extends Database {
 
@@ -60,6 +59,11 @@
 
                 $result = $stmt->fetchAll();
 
+                // converte json_agg() [String] para array associativa
+                for ($i=0; $i<count($result); $i++) {
+                    $result[$i]["especsusr"] = json_decode($result[$i]["especsusr"]);
+                }
+                
                 return ["dados"=>$result];
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);

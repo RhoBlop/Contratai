@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
-        <?php include ("components/head.html") ?>
+        <?php include ("components/head.php") ?>
     </head>
     <body>
     <!-- HOME PAGE HEADER -->
-        <?php include ("components/login-header.html") ?>
+        <?php include ("components/login-header.php") ?>
 
         <?php 
-            $user = $usuarioClass->selectAvalById($_GET);
+            $userId = $_GET["id"];
+            $perfPublico = $usuarioClass->selectPerfilPublico($userId);
         ?>
 
         <main>
@@ -44,39 +45,41 @@
                             </div>
                         </div>
 
+
+
                         <div class="card shadow-sm rounded-4 mb-3" id="avaliacao">
                             <div class="card-body">
                                 <h3 class="card-title mb-3">Avaliações</h3>
-                                
+
+
                                 <div class="subtitle d-flex gap-1 mb-3">
                                 <i class="fa-solid fa-star fa-fw"></i>
                                     <h4 class="mb-3">4.5 de 50 Avaliações</h4>
                                 </div>
 
+                                <?php 
+                                    $avaliacoes = $usuarioClass->selectAvalById($userId);
+                                ?>
                                 <div class="row g-3">
-                                    <div class="avaliacao col">
-                                        <div class="avaliacao-header d-flex align-items-start gap-3 mb-3">
-                                            <img src="images/temp/person-rating.png" width="48px">
-                                            <div class="d-flex flex-column">
-                                                <h5 class="mb-0">Fulano</h5>
-                                                <p class="text-muted">Abril de 2022</p>
+                                    <?php
+                                        foreach ($avaliacoes as $aval):
+                                    ?>
+                                
+                                        <div class="avaliacao col">
+                                            <div class="avaliacao-header d-flex align-items-start gap-3 mb-3">
+                                                <img src="<?php echoProfileImage($aval["imgusr"]); ?>" width="48px">
+                                                <div class="d-flex flex-column">
+                                                    <h5 class="mb-0"><?php echo $aval["nomusr"]; ?></h5>
+                                                    <p class="text-muted">[atualizar banco]</p>
+                                                </div>
                                             </div>
+
+                                            <p><?php echo ucfirst($aval["comentarioavaliacao"]); ?></p>
                                         </div>
 
-                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis corporis ratione cum aut. Saepe dolores nostrum numquam accusantium, culpa libero, iusto dicta itaque aut voluptatum animi nam inventore hic placeat.</p>
-                                    </div>
-                                    <div class="avaliacao col">
-                                        <div class="avaliacao-header d-flex align-items-start gap-3 mb-3">
-                                            <img src="images/temp/person-rating.png" width="48px">
-                                            <div class="d-flex flex-column">
-                                                <h5 class="mb-0">Fulano</h5>
-                                                <p class="text-muted">Abril de 2022</p>
-                                            </div>
-                                        </div>
-
-                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis corporis ratione cum aut. Saepe dolores nostrum numquam accusantium, culpa libero, iusto dicta itaque aut voluptatum animi nam inventore hic placeat.</p>
-                                    </div>
-
+                                    <?php 
+                                        endforeach;
+                                    ?>
                                 </div>
 
                             </div>
