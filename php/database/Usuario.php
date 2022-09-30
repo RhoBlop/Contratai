@@ -28,7 +28,14 @@
         public function selectAvalById($id) {
             try {
                 $sql = <<<SQL
-
+                    SELECT usr.nomusr, imgusr, descavaliacao, notaavaliacao, datavaliacao
+                    FROM avaliacao AS aval
+                    INNER JOIN contrato AS contrt ON (aval.idcontrato = contrt.idcontrato)
+                    INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
+                    INNER JOIN usuario AS usr ON (contrt
+                    idcontratante = usr.idusr)
+                    WHERE contrt.idcontratado = :idusr
+                    ORDER BY aval.notaavaliacao : filterNota
                 SQL;
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
