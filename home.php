@@ -22,6 +22,12 @@
                     <?php for ($i=1; $i <= 10; $i++) { include("components/card-anuncio.html");} ?>
                 </div>
 
+                <div class="row row-cols-2 row-cols-lg-5 g-3 mb-3">
+
+                    <?php include("components/card-perfil.html")?>
+                                            
+                </div>
+
                 
             </div>
 
@@ -34,30 +40,6 @@
 
             <!-- CAROUSEL DAS PROFISSÕES COM MAIS CADASTROS -->
             <?php include ("components/prof-top-cadastro.php") ?>
-
-            <div class="container my-3">
-                    <div class="row row-cols-2 row-cols-lg-5 g-3 mb-3">
-
-                        <!-- Card de Perfil (colocar na pagina de anuncio depois)
-                        <div class="col">
-                            <div class="card text-center shadow-sm rounded-4" id="profile-card">
-                                <div class="card-header">
-                                    <div class="profile-pic"><img src="images\temp\default-pic.png" class="rounded-circle" alt=""></div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="text mb-3">
-                                        <h3>Fulano</h3>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, tempore.</p>
-                                    </div>
-                                    <a class="btn btn-outline-green" href="perfil-publico.php">Veja mais</a>
-                                </div>
-                            </div>
-                        </div>
-                        -->
-                                               
-                    </div>
-                    
-            </div>
 
         </main>
         <?php include ("components/footer.html")?>
