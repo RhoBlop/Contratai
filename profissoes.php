@@ -4,6 +4,7 @@
         <?php require("components/head.php") ?>
         <script src="js/requisicoesAPI.js"></script>
         <script src="js/selecionarImg.js"></script>
+        <script src="js/autoComplete.js"></script>
     </head>
     <body>
         <?php include ("components/login-header.php") ?>
