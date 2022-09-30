@@ -32,7 +32,9 @@
                                             <p class="text-muted">Designer Gráfico</p>
                                         </div>
 
-                                        <button type="button" class="btn-close" aria-label="Close"></button>
+                                        <a href="" class="exclude">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </a>
 
                                     </div>
                                 </div>
