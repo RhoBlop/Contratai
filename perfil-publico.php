@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+    <?php 
+        if (!isset($_GET["id"])) {
+            header("Location: 500.php");
+        }
+    ?>
     <head>
         <?php include ("components/head.php") ?>
     </head>
@@ -7,10 +12,22 @@
     <!-- HOME PAGE HEADER -->
         <?php include ("components/login-header.php") ?>
 
+        <?php 
+            $userId = $_GET["id"];
+            $perfPublico = $usuarioClass->selectBasicInfoById($userId);
+            $avaliacoes = $usuarioClass->selectAvalById($userId);
+
+            [$perfnomusr, $perfbiografiausr, $perfnumcontrato] = [$perfPublico["nomusr"], $perfPublico["biografiausr"], $perfPublico['numcontrato']];
+            var_dump($perfPublico);
+
+        ?>
+
         <main>
             <div class="container my-3">
                 <div class="row gx-5">
                     <div class="col-8" id="profile">
+
+                        <!-- APRESENTAÇÃO PERFIL -->
                         <div class="card shadow-sm rounded-4 mb-3" id="infos">
                             <div class="header-card rounded-4  rounded-bottom"></div>
                             <div class="card-body p-3 text-start">
@@ -19,63 +36,98 @@
                                 </div>
 
                                 <div class="text px-3">
-                                    <h3>Rafael Rodrigues Matos</h3>
+                                    <h3><?php echoDadosPerfil($perfnomusr); ?></h3>
                                     <p><i class="fa-solid fa-briefcase fa-fw"></i>Designer Gráfico</p>
-                                    <p><i class="fa-solid fa-location-dot fa-fw"></i>Serra, ES</p>
-                                    <p><i class="fa-solid fa-star fa-fw"></i>5.0</p>
-                                    <p>100 Trabalhos realizados</p>
-                                    <a href="#">50 Avaliações recebidas</a><br>
+                                    <p><i class="fa-solid fa-location-dot fa-fw"></i>[Desenvolvimento no futuro]</p>
+                                    <p><i class="fa-solid fa-star fa-fw"></i><?php echoDadosPerfil($perfPublico["mediaavaliacao"]); ?></p>
+                                    <p><?php echo is_null($perfPublico["numcontrato"]) ? "Ainda não foi contratado nenhuma vez" : "{$perfnumcontrato} trabalhos realizados"; ?></p>
+                                    <a href="#avaliacao">50 Avaliações recebidas</a><br>
                                     <a href="#" class="btn btn-outline-green mt-3">Contactar</a>
                                 </div>
 
                             </div>
-                        </div>
+                        </div> <!-- /APRESENTAÇÃO PERFIL -->
 
-                        
+                        <!-- BIOGRAFIA -->
                         <div class="card shadow-sm rounded-4 mb-3" id="sobre">
                             <div class="card-body">
                                 <h3 class="card-title">Sobre</h3>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi eum porro, doloremque a fuga nobis excepturi provident soluta deserunt iusto laborum ducimus pariatur magnam doloribus consectetur quo alias sed sunt! Totam atque iusto tenetur id! Id non alias, necessitatibus molestiae voluptas natus sapiente corrupti cumque ipsam. Id dolorem repellat eligendi.</p>
+                                <p><?php echoDadosPerfil($perfbiografiausr); ?></p>
                             </div>
-                        </div>
+                        </div> <!-- /BIOGRAFIA -->
 
+                        <!-- ESPECIALIZAÇÕES -->
+                        <div class="card shadow-sm rounded-4 mb-3" id="sobre">
+                            <div class="card-body">
+                                <h3 class="card-title">Especializações</h3>
+                                <?php 
+                                    $especializacoes = $usuarioClass->selectEspecsUsr($userId);
+
+                                    foreach($especializacoes as $espec):
+                                ?>
+
+                                    <div class="card card-hover card-pesquisa">
+                                        <img src="<?php echo echoProfileImage($imgusr) ?>" alt="Imagem de perfil">
+                                        <div class="card-body">
+                                            <div class="card-title">
+                                                <h5><?php echo $nomusr; ?></h5>
+                                                <span class="badge-avaliacao <?php echo echoAvaliacaoClass($mediaAv); ?>">
+                                                    <!-- STAR ICON -->
+                                                    <ion-icon name="star"></ion-icon>
+                                                    <?php echo $mediaAv; ?>
+                                                </span>
+                                            </div>
+                                            <div class="card-text">
+                                                <p>Total de <?php echo $numcontrato; ?> contratações como <?php echo $dscprof ?></p>
+
+                                                <p>Em nossa plataforma desde <?php echo "[atualizar banco de dados]" ?></p>
+
+                                                <a href="<?php echo "perfil-publico.php?id={$idusr}" ?>"><span class="clickable-card"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                <?php 
+                                    endforeach;
+                                ?>
+                            </div>
+                        </div> <!-- /ESPECIALIZAÇÕES -->
+
+
+                        <!-- AVALIAÇÕES -->
                         <div class="card shadow-sm rounded-4 mb-3" id="avaliacao">
                             <div class="card-body">
                                 <h3 class="card-title mb-3">Avaliações</h3>
-                                
+
                                 <div class="subtitle d-flex gap-1 mb-3">
                                 <i class="fa-solid fa-star fa-fw"></i>
                                     <h4 class="mb-3">4.5 de 50 Avaliações</h4>
                                 </div>
 
                                 <div class="row g-3">
-                                    <div class="avaliacao col">
-                                        <div class="avaliacao-header d-flex align-items-start gap-3 mb-3">
-                                            <img src="images/temp/person-rating.png" width="48px">
-                                            <div class="d-flex flex-column">
-                                                <h5 class="mb-0">Fulano</h5>
-                                                <p class="text-muted">Abril de 2022</p>
+                                    <?php
+                                        foreach ($avaliacoes as $aval):
+                                    ?>
+                                
+                                        <div class="avaliacao col">
+                                            <div class="avaliacao-header d-flex align-items-start gap-3 mb-3">
+                                                <img src="<?php echoProfileImage($aval["imgusr"]); ?>" width="48px">
+                                                <div class="d-flex flex-column">
+                                                    <h5 class="mb-0"><?php echo $aval["nomusr"]; ?></h5>
+                                                    <p class="text-muted">[atualizar banco]</p>
+                                                </div>
                                             </div>
+
+                                            <p><?php echo ucfirst($aval["comentarioavaliacao"]); ?></p>
                                         </div>
 
-                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis corporis ratione cum aut. Saepe dolores nostrum numquam accusantium, culpa libero, iusto dicta itaque aut voluptatum animi nam inventore hic placeat.</p>
-                                    </div>
-                                    <div class="avaliacao col">
-                                        <div class="avaliacao-header d-flex align-items-start gap-3 mb-3">
-                                            <img src="images/temp/person-rating.png" width="48px">
-                                            <div class="d-flex flex-column">
-                                                <h5 class="mb-0">Fulano</h5>
-                                                <p class="text-muted">Abril de 2022</p>
-                                            </div>
-                                        </div>
-
-                                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis corporis ratione cum aut. Saepe dolores nostrum numquam accusantium, culpa libero, iusto dicta itaque aut voluptatum animi nam inventore hic placeat.</p>
-                                    </div>
-
+                                    <?php 
+                                        endforeach;
+                                    ?>
                                 </div>
 
                             </div>
-                        </div>
+                        </div> <!-- /AVALIAÇÕES -->
 
                     </div>
 

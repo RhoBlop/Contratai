@@ -36,8 +36,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="confirmSenhaNova" class="form-label">Confirme a nova senha</label>
-                                <input type="password" class="form-control" id="confirmSenhaNova" name="confirmSenhaNova" autocomplete="off" onchange="confirmaSenha(event, '#senhaNova')" placeholder="Repita sua nova senha" required>
-                                <div class="formMsgErro">As senhas precisam ser iguais</div>
+                                <input type="password" class="form-control" id="confirmSenhaNova" name="confirmSenhaNova" autocomplete="off" oninput="confirmaSenha(event, '#senhaNova')" placeholder="Repita sua nova senha" required>
                             </div>
                             
                             <!-- div para comunicação com usuário -->

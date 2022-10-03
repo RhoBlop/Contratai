@@ -291,6 +291,185 @@ ion-icon {
     color: #026773;
 }
 
+/* Filtros de pesquisa */
+#searchBox {
+    border: 1px solid var(--grey);
+}
+
+#cardsPesquisa {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.filters-group {
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    padding: 15px 5px;
+    background-color: white;
+    border: 1px solid var(--grey);
+    border-top: none;
+}
+
+.active #searchBox {
+    border-radius: .5rem 0 0 0
+}
+.active #searchButton {
+    border-radius: 0 .5rem 0 0
+}
+.active .filters-group {
+    display: flex;
+    height: calc(1.5em + 1rem + 2px);
+    border-radius: 0 0 .5rem .5rem;
+    transform-origin: top left;
+    animation: fade-in .3s linear; 
+}
+
+.show-result {
+    display: flex !important;
+    transform-origin: center;
+    animation: collapse .3s ease-in-out !important;
+}
+
+@keyframes collapse {
+    from {
+        transform: scaleY(0);
+        opacity: 0;
+    } to {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
+
+.search-filter {
+    display: none;
+}
+.search-filter + label {
+    display: inline-block;
+    user-select: none;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 3px 15px;
+    margin: 0px 5px;
+    color: var(--grey);
+    border: 1px solid var(--grey);
+    border-radius: 15px;
+    background-color: white;
+    transition: all .15s ease-in-out
+}
+.search-filter + label:hover {
+    cursor: pointer;
+}
+.search-filter:checked + label {
+    color: white;
+    border: 1px solid var(--primary-green);
+    background-color: var(--primary-green);
+}
+
+#searchResult {
+    display: none;
+    margin-top: 10px;
+    padding: 15px 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: .5rem;
+}
+
+.btn-continue-search {
+    background-color: var(#ddd);
+    margin: 8px;
+    border: none;
+}
+.btn-continue-search i {
+    font-size: 30px;
+    color: var(--grey);
+    transform: none ;
+}
+.btn-continue-search:hover i {
+    animation-name: up-down, up-down;
+    animation-duration: 300ms, 250ms;
+    animation-delay: 0ms, 300ms;
+    animation-timing-function: ease-in-out, ease-in-out;
+    animation-direction: normal, reverse;
+}
+@keyframes up-down {
+    from {
+        transform: translateY(0);
+    } to {
+        transform: translateY(15px);
+    }
+}
+
+/* Loading spinner */
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+
 /* Card de Pesquisa */
 .card-pesquisa {
     width: 80%;
@@ -300,6 +479,9 @@ ion-icon {
     border: 2.5px solid rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     margin: 10px 0;
+    z-index: 2;
+    opacity: 0;
+    animation: drop-in .4s ease-in-out forwards;
 }
 
 .card-pesquisa .card-body {
@@ -320,8 +502,9 @@ ion-icon {
     box-sizing: content-box;
     align-self: center;
     padding: 12px 20px;
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
     object-fit: cover;
 }
 
@@ -334,7 +517,17 @@ ion-icon {
     margin-left: 5px;
 }
 
-/* Carousel para telas grandes */
+@keyframes drop-in {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    } to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Carousel */
 .carousel-inner {
     padding: 10px 0;
 }
@@ -357,6 +550,7 @@ ion-icon {
     right: 4rem;
 }
 
+/* Carousel em telas maiores */
 @media screen and ( min-width: 768px ) {
     .carousel-inner {
         display: flex;
@@ -364,7 +558,7 @@ ion-icon {
     .carousel-item {
         display: block;
         margin-right: 0;
-        flex: 0 0 calc(100%/3);
+        flex: 0 0 calc(100%/4);
     }
 } 
 

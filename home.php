@@ -9,12 +9,23 @@
             <div class="container my-3">
                 <div class="row py-3 d-flex justify-content-center align-items-center mb-3">
                     <div class="col-md-12 search-bar">
-                        <form action="">
+                        <form id="searchForm" onsubmit="return false">
                             <div class="input-group">
-                                <input type="text" class="form-control form-control-lg" placeholder="O que você está procurando?">
-                                <button class="btn btn-green"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                <input id="searchBox" name="searchParam" type="text" class="form-control form-control-lg" autocomplete="off" placeholder="O que você está procurando?">
+                                <button id="searchButton" class="btn btn-green"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                            <div class="filters-group">
+                                <input type="radio" id="profissao" class="search-filter" name="filterTable" value="profissao">
+                                <label for="profissao">Profissão</label>
+
+                                <input type="radio" id="usuario" class="search-filter" name="filterTable" value="usuario" checked>
+                                <label for="usuario">Usuário</label>
                             </div>
                         </form>
+
+                        <div id="searchResult">
+                            
+                        </div>
                     </div>
                 </div>
 
@@ -30,6 +41,8 @@
 
                 
             </div>
+
+            <script src="js/pesquisa.js"></script>
 
 
             <!-- CAROUSEL DAS PROFISSÕES COM MAIS CONTRATOS -->
@@ -53,6 +66,9 @@
     ></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <!-- Barra de pesquisa -->
+    
     
     <!-- Sliding do carousel com animação -->
     <script src="js/multitemCarousel.js"></script>
