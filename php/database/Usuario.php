@@ -6,8 +6,11 @@
         // retorna usuário com o id passado por parâmetro
         public function selectBasicInfoById($id) {
             try {
-                $sql = "SELECT nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr FROM usuario WHERE idusr = :id";
-    
+                $sql = <<<SQL
+                    SELECT nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr 
+                    FROM usuario
+                    WHERE idusr = :id;
+                SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
                     ":id" => $id
@@ -25,56 +28,42 @@
         }
 
 
-        public function selectPerfilPublico($id) {
+        public function selectPerfilPublicoById($id) {
             try {
                 $sql = <<<SQL
-                    SELECT usr.idusr, nomusr, imgusr, biografiausr, round(avg(notaavaliacao), 1) AS mediaavaliacao, count(*) AS numcontrato
+                    SELECT usr.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, mediaavaliacao, count(*) AS numcontrato, json_agg(dscespec) AS especsusr
                     FROM usuario AS usr
                     INNER JOIN usrespec AS usres ON (usres.idusr = usr.idusr)
                     INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
-                    INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
-                    INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    WHERE usr.idusr = :id
-                    GROUP BY usr.idusr, nomusr, imgusr, biografiausr
+                    LEFT JOIN (SELECT usr.idusr, round(avg(notaavaliacao), 1) AS mediaavaliacao
+                                FROM usuario AS usr
+                                INNER JOIN contrato AS contrt ON (usr.idusr = contrt.idcontratado)
+                                INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                                WHERE usr.idusr = :id
+                                GROUP BY usr.idusr
+                                ) AS mediausr ON (usr.idusr = mediausr.idusr)
+                    GROUP BY usr.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, mediaavaliacao
                 SQL;
-
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
                     ":id" => $id
                 ]);
-
-                $result = $stmt->fetch();
-                return $result;
-            } catch (PDOException $e) {
-                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
-                exit();
-
-                return [ "action" => false ];
-            }
-        }
-
-
-        public function selectEspecsUsr($id) {
-            try {
-                $sql = <<<SQL
-
-                SQL;
-
-                $stmt = Database::prepare($sql);
-                $stmt->execute([
-                    ":id" => $id
-                ]);
-
-                $result = $stmt->fetchAll();
-                return $result;
-            } catch (PDOException $e) {
-                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
-                exit();
                 
+                $result = $stmt->fetch();
+
+                if (isset($result["especsusr"])) {
+                    $result["especsusr"] = json_decode($result["especsusr"]);
+                }
+
+                return $result;
+            } catch (PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
+
                 return [ "action" => false ];
             }
         }
-
+        
 
         // retorna usuário para login, ou seja, a partir de um email e uma senha
         public function selectLogin($email, $senha) {
@@ -103,16 +92,40 @@
         }
         
 
+        public function selectEspecsById($id) {
+            try {
+                $sql = <<<SQL
+                    SELECT dscespec, 
+                SQL;
+
+                $stmt = Database::prepare($sql);
+                $stmt->execute([
+                    ":id" => $id
+                ]);
+
+                $result = $stmt->fetchAll();
+                return $result;
+            } catch (PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
+                
+                return [ "action" => false ];
+            }
+        }
+
+
         public function selectAvalById($id, $filterNota = "DESC") {
             try {
                 $sql = <<<SQL
-                    SELECT usr.nomusr, imgusr, comentarioavaliacao, notaavaliacao
-                    FROM avaliacao AS aval
-                    INNER JOIN contrato AS contrt ON (aval.idcontrato = contrt.idcontrato)
-                    INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
-                    INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.idusr)
-                    WHERE contrt.idcontratado = :id
-                    ORDER BY aval.notaavaliacao DESC
+                    SELECT avalusr.nomusr, avalusr.imgusr, avalusr.comentarioavaliacao, round(avg(avalusr.notaavaliacao), 1) AS mediaavaliacao
+                    FROM (SELECT usr.idusr, usr.nomusr, imgusr, comentarioavaliacao, notaavaliacao
+                        FROM avaliacao AS aval
+                        INNER JOIN contrato AS contrt ON (aval.idcontrato = contrt.idcontrato)
+                        INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
+                        INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.idusr)
+                        WHERE contrt.idcontratado = :id
+                        ORDER BY aval.notaavaliacao DESC) AS avalusr
+                    GROUP BY avalusr.idusr
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
@@ -174,6 +187,7 @@
                 ]);
 
                 if ($verifySTMT->rowCount() < 1) {
+                    // SQLs diferentes para não deixar a foto vazia no banco de dados
                     if ($imgBase64 != "") {
                         $sql = <<<SQL
                         UPDATE usuario

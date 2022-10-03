@@ -29,5 +29,5 @@
     function echoAvaliacaoClass($nota) {
         echo $nota > 4.5 ? "avaliacao-otima" : "avaliacao-media";
     }
-
+    
 ?>
