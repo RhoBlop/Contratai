@@ -8,7 +8,7 @@
             if ($auth) {
                 include("components/login-header.php");
             } else {
-                include("components/home-header.html");
+                include("components/no-auth-header.php");
             }
         ?>
 

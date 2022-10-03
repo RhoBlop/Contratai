@@ -38,3 +38,5 @@
     </div>
   </nav>
 </header>
+
+<?php include("components/login-modal.html"); ?>

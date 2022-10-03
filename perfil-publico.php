@@ -14,12 +14,12 @@
 
         <?php 
             $userId = $_GET["id"];
-            $perfPublico = $usuarioClass->selectBasicInfoById($userId);
-            $avaliacoes = $usuarioClass->selectAvalById($userId);
-
-            [$perfnomusr, $perfbiografiausr, $perfnumcontrato] = [$perfPublico["nomusr"], $perfPublico["biografiausr"], $perfPublico['numcontrato']];
+            $perfPublico = $usuarioClass->selectPerfilPublicoById($userId);
             var_dump($perfPublico);
+            // $especializacoes = $usuarioClass->selectEspecsUsr($userId);
+            // $avaliacoes = $usuarioClass->selectAvalById($userId);
 
+            [$perfNomUsr, $perfBiografiaUsr, $perfNumContrato, $perfMediaAval, $perfEspecs] = [$perfPublico["nomusr"], $perfPublico["biografiausr"], $perfPublico['numcontrato'], $perfPublico["mediaavaliacao"], $perfPublico["especsusr"]];
         ?>
 
         <main>
@@ -37,11 +37,11 @@
                                 </div>
 
                                 <div class="text px-3">
-                                    <h3><?php echoDadosPerfil($perfnomusr); ?></h3>
-                                    <p><i class="fa-solid fa-briefcase fa-fw"></i>Designer Gráfico</p>
+                                    <h3><?php echoDadosPerfil($perfNomUsr); ?></h3>
+                                    <p><i class="fa-solid fa-briefcase fa-fw"></i><?php echo ucfirst(implode(", ", $perfEspecs)) ?></p>
                                     <p><i class="fa-solid fa-location-dot fa-fw"></i>[Desenvolvimento no futuro]</p>
                                     <p><i class="fa-solid fa-star fa-fw"></i><?php echoDadosPerfil($perfPublico["mediaavaliacao"]); ?></p>
-                                    <p><?php echo is_null($perfPublico["numcontrato"]) ? "Ainda não foi contratado nenhuma vez" : "{$perfnumcontrato} trabalhos realizados"; ?></p>
+                                    <p><?php echo is_null($perfPublico["numcontrato"]) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
                                     <a href="#avaliacao">50 Avaliações recebidas</a><br>
                                     <a href="#" class="btn btn-outline-green mt-3">Contactar</a>
                                 </div>
@@ -53,7 +53,7 @@
                         <div class="card shadow-sm rounded-4 mb-3" id="sobre">
                             <div class="card-body">
                                 <h3 class="card-title">Sobre</h3>
-                                <p><?php echoDadosPerfil($perfbiografiausr); ?></p>
+                                <p><?php echoDadosPerfil($perfBiografiaUsr); ?></p>
                             </div>
                         </div> <!-- /BIOGRAFIA -->
 
@@ -61,9 +61,7 @@
                         <div class="card shadow-sm rounded-4 mb-3" id="sobre">
                             <div class="card-body">
                                 <h3 class="card-title">Especializações</h3>
-                                <?php 
-                                    $especializacoes = $usuarioClass->selectEspecsUsr($userId);
-
+                                <?php
                                     foreach($especializacoes as $espec):
                                 ?>
 
@@ -93,6 +91,40 @@
                                 ?>
                             </div>
                         </div> <!-- /ESPECIALIZAÇÕES -->
+
+                        <div class="card shadow-sm rounded-4 mb-3" id="sobre">
+                            <div class="card-body">
+                                <h3 class="card-title">Especializações</h3>
+                                <?php 
+                                    foreach($especializacoes as $espec):
+                                ?>
+
+                                    <div class="card card-hover card-pesquisa">
+                                        <img src="<?php echo echoProfileImage($imgusr) ?>" alt="Imagem de perfil">
+                                        <div class="card-body">
+                                            <div class="card-title">
+                                                <h5><?php echo $nomusr; ?></h5>
+                                                <span class="badge-avaliacao <?php echo echoAvaliacaoClass($mediaAv); ?>">
+                                                    <!-- STAR ICON -->
+                                                    <ion-icon name="star"></ion-icon>
+                                                    <?php echo $mediaAv; ?>
+                                                </span>
+                                            </div>
+                                            <div class="card-text">
+                                                <p>Total de <?php echo $numcontrato; ?> contratações como <?php echo $dscprof ?></p>
+
+                                                <p>Em nossa plataforma desde <?php echo "[atualizar banco de dados]" ?></p>
+
+                                                <a href="<?php echo "perfil-publico.php?id={$idusr}" ?>"><span class="clickable-card"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                <?php 
+                                    endforeach;
+                                ?>
+                            </div>
+                        </div>
 
 
                         <!-- AVALIAÇÕES -->
