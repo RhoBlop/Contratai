@@ -15,11 +15,23 @@
         <?php 
             $userId = $_GET["id"];
             $perfPublico = $usuarioClass->selectPerfilPublicoById($userId);
-            var_dump($perfPublico);
-            // $especializacoes = $usuarioClass->selectEspecsUsr($userId);
-            // $avaliacoes = $usuarioClass->selectAvalById($userId);
 
-            [$perfNomUsr, $perfBiografiaUsr, $perfNumContrato, $perfMediaAval, $perfEspecs] = [$perfPublico["nomusr"], $perfPublico["biografiausr"], $perfPublico['numcontrato'], $perfPublico["mediaavaliacao"], $perfPublico["especsusr"]];
+            if (!$perfPublico)
+                ?>
+
+                <?php
+
+            $especializacoes = $usuarioClass->selectEspecsById($userId);
+            $avaliacoes = $usuarioClass->selectAvalById($userId);
+            var_dump($perfPublico);
+            
+
+            $perfEspecs = [];
+            foreach($especializacoes as $espec) {
+                $perfEspecs[] = $espec["dscespec"];
+            }
+
+            [$perfNomUsr, $perfBiografiaUsr, $perfNumContrato, $perfMediaAval] = [$perfPublico["nomusr"], $perfPublico["biografiausr"], $perfPublico['numcontrato'], $perfPublico["mediaavaliacao"]];
         ?>
 
         <main>

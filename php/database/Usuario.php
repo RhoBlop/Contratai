@@ -32,18 +32,17 @@
             try {
                 // tá feio :(
                 $sql = <<<SQL
-                        SELECT usrinfo.idusr, round(avg(notaavaliacao), 1) AS mediaavaliacao, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, numcontrato, especsusr
-                        FROM (SELECT usr.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, count(*) AS numcontrato, json_agg(dscespec) AS especsusr
+                        SELECT usrinfo.idusr, round(avg(notaavaliacao), 1) AS mediaavaliacao, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, numcontrato
+                        FROM (SELECT usr.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, count(*) AS numcontrato
                                 FROM usuario AS usr
                                 INNER JOIN usrespec AS usres ON (usres.idusr = usr.idusr)
                                 INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
                                 WHERE usr.idusr = :id
                                 GROUP BY usr.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr
                         ) AS usrinfo
-                        INNER JOIN usres
                         INNER JOIN contrato AS contrt ON (usrinfo.idusr = contrt.idcontratado)
                         INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                        GROUP BY usrinfo.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, numcontrato, especsusr
+                        GROUP BY usrinfo.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, numcontrato
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
@@ -51,10 +50,6 @@
                 ]);
                 
                 $result = $stmt->fetch();
-
-                if (isset($result["especsusr"])) {
-                    $result["especsusr"] = json_decode($result["especsusr"]);
-                }
 
                 return $result;
             } catch (PDOException $e) {
@@ -96,7 +91,14 @@
         public function selectEspecsById($id) {
             try {
                 $sql = <<<SQL
-                    SELECT dscespec, 
+                    SELECT espec.idespec, dscespec, round(avg(notaavaliacao), 1) AS mediaavaliacao
+                    FROM usuario AS usr
+                    INNER JOIN usrespec AS usres ON (usr.idusr = usres.idusr)
+                    INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
+                    FULL OUTER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+                    FULL OUTER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    WHERE usr.idusr = :id
+                    GROUP BY espec.idespec, dscespec
                 SQL;
 
                 $stmt = Database::prepare($sql);
@@ -104,7 +106,7 @@
                     ":id" => $id
                 ]);
 
-                $result = $stmt->fetchAll();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 return $result;
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
@@ -126,7 +128,7 @@
                         INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.idusr)
                         WHERE contrt.idcontratado = :id
                         ORDER BY aval.notaavaliacao DESC) AS avalusr
-                    GROUP BY avalusr.idusr
+                    GROUP BY avalusr.nomusr, avalusr.imgusr, avalusr.comentarioavaliacao
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
