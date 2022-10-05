@@ -23,7 +23,6 @@
 
             $especializacoes = $usuarioClass->selectEspecsById($userId);
             $avaliacoes = $usuarioClass->selectAvalById($userId);
-            var_dump($perfPublico);
             
 
             $perfEspecs = [];
@@ -31,7 +30,7 @@
                 $perfEspecs[] = $espec["dscespec"];
             }
 
-            [$perfNomUsr, $perfBiografiaUsr, $perfNumContrato, $perfMediaAval] = [$perfPublico["nomusr"], $perfPublico["biografiausr"], $perfPublico['numcontrato'], $perfPublico["mediaavaliacao"]];
+            [$perfNomUsr, $perfBiografiaUsr, $perfNumContrato, $perfMediaAval, $perfImgUsr] = [$perfPublico["nomusr"], $perfPublico["biografiausr"], $perfPublico['numcontrato'], $perfPublico["mediaavaliacao"], $perfPublico["imgusr"]];
         ?>
 
         <main>
@@ -45,16 +44,18 @@
                             </div>
                             <div class="card-body p-3 text-start">
                                 <div class="top-body p-3 mb-1">
-                                    <div class="profile-pic"><img src="images\temp\default-pic.png"class="rounded-circle" alt=""></div>
+                                    <div class="profile-pic">
+                                        <img src="<?php echoProfileImage($perfImgUsr)?>" class="rounded-circle" alt="">
+                                    </div>
                                 </div>
 
                                 <div class="text px-3">
                                     <h3><?php echoDadosPerfil($perfNomUsr); ?></h3>
                                     <p><i class="fa-solid fa-briefcase fa-fw"></i><?php echo ucfirst(implode(", ", $perfEspecs)) ?></p>
                                     <p><i class="fa-solid fa-location-dot fa-fw"></i>[Desenvolvimento no futuro]</p>
-                                    <p><i class="fa-solid fa-star fa-fw"></i><?php echoDadosPerfil($perfPublico["mediaavaliacao"]); ?></p>
-                                    <p><?php echo is_null($perfPublico["numcontrato"]) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
-                                    <a href="#avaliacao">50 Avaliações recebidas</a><br>
+                                    <p><i class="fa-solid fa-star fa-fw"></i><?php echoDadosPerfil($perfMediaAval); ?></p>
+                                    <p><?php echo is_null($perfNumContrato) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
+                                    <a href="#avaliacao">[Desenvolvimento]</a><br>
                                     <a href="#" class="btn btn-outline-green mt-3">Contactar</a>
                                 </div>
 
@@ -65,7 +66,7 @@
                         <div class="card shadow-sm rounded-4 mb-3" id="sobre">
                             <div class="card-body">
                                 <h3 class="card-title">Sobre</h3>
-                                <p><?php echoDadosPerfil($perfBiografiaUsr); ?></p>
+                                <p><?php echoDadosBreakLine($perfBiografiaUsr); ?></p>
                             </div>
                         </div> <!-- /BIOGRAFIA -->
 
@@ -75,25 +76,21 @@
                                 <h3 class="card-title">Especializações</h3>
                                 <?php
                                     foreach($especializacoes as $espec):
+                                        [$dscEspec, $mediaEspec] = [$espec["dscespec"], $espec["mediaavaliacao"]]
                                 ?>
 
                                     <div class="card card-hover card-pesquisa">
-                                        <img src="<?php echo echoProfileImage($imgusr) ?>" alt="Imagem de perfil">
                                         <div class="card-body">
                                             <div class="card-title">
-                                                <h5><?php echo $nomusr; ?></h5>
-                                                <span class="badge-avaliacao <?php echo echoAvaliacaoClass($mediaAv); ?>">
+                                                <h5><?php echo ucfirst($dscEspec); ?></h5>
+                                                <span class="badge-avaliacao <?php echo echoAvaliacaoClass($mediaEspec); ?>">
                                                     <!-- STAR ICON -->
                                                     <ion-icon name="star"></ion-icon>
-                                                    <?php echo $mediaAv; ?>
+                                                    <?php echoDadosPerfil($mediaEspec); ?>
                                                 </span>
                                             </div>
                                             <div class="card-text">
-                                                <p>Total de <?php echo $numcontrato; ?> contratações como <?php echo $dscprof ?></p>
-
-                                                <p>Em nossa plataforma desde <?php echo "[atualizar banco de dados]" ?></p>
-
-                                                <a href="<?php echo "perfil-publico.php?id={$idusr}" ?>"><span class="clickable-card"></span></a>
+                                                <p>[SQL não tá funcionando como esperado] <?php echo is_null($perfPublico["numcontrato"]) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
                                             </div>
                                         </div>
                                     </div>
@@ -103,41 +100,6 @@
                                 ?>
                             </div>
                         </div> <!-- /ESPECIALIZAÇÕES -->
-
-                        <div class="card shadow-sm rounded-4 mb-3" id="sobre">
-                            <div class="card-body">
-                                <h3 class="card-title">Especializações</h3>
-                                <?php 
-                                    foreach($especializacoes as $espec):
-                                ?>
-
-                                    <div class="card card-hover card-pesquisa">
-                                        <img src="<?php echo echoProfileImage($imgusr) ?>" alt="Imagem de perfil">
-                                        <div class="card-body">
-                                            <div class="card-title">
-                                                <h5><?php echo $nomusr; ?></h5>
-                                                <span class="badge-avaliacao <?php echo echoAvaliacaoClass($mediaAv); ?>">
-                                                    <!-- STAR ICON -->
-                                                    <ion-icon name="star"></ion-icon>
-                                                    <?php echo $mediaAv; ?>
-                                                </span>
-                                            </div>
-                                            <div class="card-text">
-                                                <p>Total de <?php echo $numcontrato; ?> contratações como <?php echo $dscprof ?></p>
-
-                                                <p>Em nossa plataforma desde <?php echo "[atualizar banco de dados]" ?></p>
-
-                                                <a href="<?php echo "perfil-publico.php?id={$idusr}" ?>"><span class="clickable-card"></span></a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                <?php 
-                                    endforeach;
-                                ?>
-                            </div>
-                        </div>
-
 
                         <!-- AVALIAÇÕES -->
                         <div class="card shadow-sm rounded-4 mb-3" id="avaliacao">

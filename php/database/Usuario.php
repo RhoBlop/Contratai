@@ -40,8 +40,8 @@
                                 WHERE usr.idusr = :id
                                 GROUP BY usr.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr
                         ) AS usrinfo
-                        INNER JOIN contrato AS contrt ON (usrinfo.idusr = contrt.idcontratado)
-                        INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                        LEFT JOIN contrato AS contrt ON (usrinfo.idusr = contrt.idcontratado)
+                        LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                         GROUP BY usrinfo.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, numcontrato
                 SQL;
                 $stmt = Database::prepare($sql);
@@ -95,8 +95,8 @@
                     FROM usuario AS usr
                     INNER JOIN usrespec AS usres ON (usr.idusr = usres.idusr)
                     INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
-                    FULL OUTER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
-                    FULL OUTER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    LEFT JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+                    LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                     WHERE usr.idusr = :id
                     GROUP BY espec.idespec, dscespec
                 SQL;
@@ -106,7 +106,7 @@
                     ":id" => $id
                 ]);
 
-                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $result = $stmt->fetchAll();
                 return $result;
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
