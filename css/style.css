@@ -41,7 +41,7 @@ main h1, h2, h5{
 }
 
 h1 {
-    font-size: 82px;
+    font-size: 78px;
     margin: 0;
 }
 
@@ -74,7 +74,7 @@ p {
     font-weight: 500;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
     h1 {
         font-size: 56px;
     }
@@ -165,19 +165,12 @@ header .dropdown-item:active {
 /* Filtros de Serviço */
 
 
-.item-pesquisa {
-    padding-right: 20px;
-    margin-bottom: 1rem;
-}
-
-
-.card-avaliacao .text-muted{
+.card-avaliacao .text-muted, .card-avaliacao p{
     font-size: 14px;
 }
 
 .card-avaliacao {
     border: solid 1px #000;
-
 }
 
 .avaliacao-usuario {
