@@ -20,7 +20,7 @@
 }
 
 html {
-    height: 100%;
+    min-height: 100%;
 }
 
 body {
@@ -41,7 +41,8 @@ main h1, h2, h5{
 }
 
 h1 {
-    font-size: 82px;
+    font-size: 78px;
+    margin: 0;
 }
 
 main h2 {
@@ -49,6 +50,7 @@ main h2 {
 }
 
 main h3 {
+    font-size: 32px;
     font-weight: 600;
 }
 
@@ -61,7 +63,57 @@ a:hover{
     color: var(--primary-green);
 }
 
+p {
+    font-size: 24px;
+    margin: 0;
+}
 
+h6 {
+    font-size: 24px;
+}
+
+.text-muted {
+    font-weight: 500;
+}
+
+@media screen and (max-width: 992px) {
+    h1 {
+        font-size: 56px;
+    }
+
+    main h2 {
+        font-size: 32px;
+    }
+
+    .text-gradient {
+        margin-top: -8px;
+    }
+
+    p {
+        font-size: 20px;
+    }
+
+    .top-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .filtros-servico {
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .filtros-servico .item-pesquisa {
+        padding: 0;
+        margin: 0;
+    }
+
+    #fContent {
+        flex-direction: column-reverse;
+    }
+}
 
 /* Header */
 
@@ -83,6 +135,35 @@ header .dropdown-item:active {
     background-color: var(--primary-green);
 }
 
+@media screen and (max-width: 768px) {
+
+    .offcanvas-header {
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+    }
+
+    .offcanvas-body .navbar-nav .nav-item{
+        display: flex;
+        justify-content: center;
+    }
+
+    .offcanvas-body .navbar-nav {
+        padding-bottom: 20px;
+        border-bottom: solid 1px rgba(0, 0, 0, .2);
+    }
+
+    .offcanvas-body .header-buttons {
+        flex-direction: column;
+        justify-content: center !important;
+        padding-top: 20px;
+        gap: 10px;
+    }
+
+    .offcanvas-body .header-buttons a {
+        font-size: 20px !important;
+    }
+
+}
+
 /* Filtros de Serviço */
 
 
@@ -91,14 +172,16 @@ header .dropdown-item:active {
     margin-bottom: 1rem;
 }
 
-
 .card-avaliacao .text-muted{
     font-size: 14px;
 }
 
+.card-avaliacao p {
+    font-size: 16px;
+}
+
 .card-avaliacao {
     border: solid 1px #000;
-
 }
 
 .avaliacao-usuario {
@@ -113,22 +196,25 @@ main h1.text-gradient {
     background-clip: text;
 }
 
-.text-muted {
-    font-size: 24px;
-}
 
 /* Botões*/
 
+.btn {
+    transition: color .25s ease-in-out, background-color .25s ease-in-out, border-color .15s ease-in-out, transform .15s ease-in-out;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}
+
 .btn-login {
     position: relative;
-    transition: color .2s ease-in-out, transform .2s ease-in-out;
     border: none;
     font-weight: 700;
 }
 .btn-login:hover {
     color: var(--primary-green);
     border: none;
-    transform: scale(1.1);
 }
 
 .btn-login::after {
@@ -154,8 +240,8 @@ main h1.text-gradient {
     color: var(--primary-green);
     border: 1.8px solid var(--primary-green);
     background-color: inherit;
-    transition: color .25s ease-in-out, background-color .25s ease-in-out, border-color .15s ease-in-out, transform .15s ease-in-out;
 }
+
 .btn-outline-green:hover {
     color: #fff;
     border-color: var(--primary-green);
@@ -171,7 +257,6 @@ main h1.text-gradient {
     font-weight: 700;
     text-align: center;
     border: 1px solid transparent;
-    transition: background-color 0.2s ease-in-out 0s, opacity 0.2s ease-in-out 0s;
 }
 
 .btn-green:hover {
@@ -219,30 +304,31 @@ ion-icon {
 /* hover de cards no geral*/
 .card {
     background-color: var(--background) !important;
-    border: 2.5px solid transparent;
+}
+
+.card-categoria {
+    border: none;
     transition: all .25s ease-in-out;
     position: relative;
 }
 
-.card .btn-outline-green {
+.card-categoria .btn-outline-green {
     position: relative;
     color: var(--grey);
     border: 1.8px solid var(--grey);
     z-index: 2;
 }
 
-.card:hover {
-    color: var(--primary-green);
-    border: 2.5px solid var(--primary-green);
-    transform: scale(1.01);
+.card-categoria:hover {
+    transform: scale(1.05);
 }
 
-.card:hover .btn-outline-green {
+.card-categoria:hover .btn-outline-green {
     color: var(--primary-green);
     border: 1.8px solid var(--primary-green);
 }
 
-.card .btn-outline-green:hover {
+.card-categoria .btn-outline-green:hover {
     color: #fff;
 }
 
@@ -267,10 +353,6 @@ ion-icon {
 }
 
 /* Card de Avaliação */
-.card-avaliacao {
-    flex: 1 0 350px;
-    margin: 8px 15px;
-}
 
 .avaliacao-otima {
     background-color: #fef3cdc8;
@@ -560,6 +642,9 @@ footer {
     margin: 0;
     padding: 0;
     background-color: var(--grey);
+}
+
+footer p {
     font-size: 12px;
 }
 
@@ -580,15 +665,44 @@ footer i {
     gap: 1rem;
 }
 
+@media screen and (max-width: 768px){
+
+    .socials {
+        display: flex !important;
+        justify-content: space-around !important;
+        width: 172px;
+    }
+
+    .footer-socials {
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo {
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo img {
+        height: 80%;
+    }
+
+    footer i {
+        font-size: 30px;
+    }
+}
+
 /* Cadastro */
 
-.form-row > div {
-    min-height: 100vh;
+.buttons > a, .buttons > button{
+    font-size: 18px !important;
 }
+
 
 .cadastro-logo {
     position: absolute;
-    top: 40px;
+    top: 16px;
+    left: 16px;
 }
 
 .form-cadastro {
@@ -596,13 +710,18 @@ footer i {
     max-width: 420px;
 }
 
-.form-group {
-    width: 100%;
+.cadastro > .form-group {
+    padding: 0;
 }
 
 .cadastro-side-image {
-    background: url("../images/teste2.jpg") no-repeat 0px -100px;
-    background-size: cover;
+    overflow: hidden;
+}
+
+.cadastro-side-image img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -625,11 +744,10 @@ footer i {
     }
 }
 
-/* Perfil */
-
-#profile-content {
+#settingsContent {
     border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
+
 
 table .text-muted {
     font-size: 18px;
@@ -701,7 +819,6 @@ label {
     width: 148px;
     height: 148px;
     transition: all .1s ease-in-out;
-    border: 1px solid black; /* só pra visualização por enquanto */
     overflow: hidden;
 }
 
@@ -787,22 +904,42 @@ label {
 
 /* Cards dos Perfis */
 
-#profile-card {
+#profileCard {
     font-size: 14px;
+    transition: all .2s ease-in-out;
 }
 
-#profile-card .card-header {
-    width: 100%;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-    background: var(--primary-green);
+#profileCard:hover {
+    transform: scale(1.05);
 }
 
-#profile-card .profile-pic img {
-    width: 104px;
-    height: 104px;
-    border: 3px solid #fff;
+#profileCard > .card-img-top {
+    height: 100px;
+    object-fit: cover;
+    border-top-right-radius: .375rem !important;
+    border-top-left-radius: .375rem !important;
 }
+
+#profileCard .profile-pic img {
+    border: solid 2px #fff;
+}
+
+#profileCard > .card-body  {
+    margin-top: -50px;
+}
+
+#profileCard .vr {
+    width: 1.5px;
+}
+
+#profileCard .badge-avaliacao {
+    left: auto;
+    right: 1rem;
+    top: 142px;
+}
+
+/* Perfil Público */
+
 
 #profile .card .header-card {
     width: 100%;
@@ -835,8 +972,6 @@ label {
     margin-right: .25rem;
 }
 
-/* Perfil Público */
-
 #fotos img {
     width: 100%;
     height: 100%;
@@ -853,7 +988,7 @@ label {
     border-radius: 8px;
 }
 
-#sobre p, #avaliacao p, #anuncio p {
+#sobre p, #avaliacao p, #anuncio p, #profileCard p {
     font-size: 16px;
 }
 
@@ -863,9 +998,53 @@ label {
     border: none !important;
 }
 
-#anuncio > .card-body > .card-text > i {
+#anuncio > .card-body > .card-text > .avaliacoes > i {
     font-size: 12px;
 }
+
+.grid {
+    display: grid;
+    gap: .5rem;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: repeat(2, 240px);
+    border-radius: 1rem;
+}
+
+.big-photo {
+    grid-row: 1/3;
+}
+
+.big-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sm-photo1 img, .sm-photo2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Card Profissão */
+
+#cardProfissao p {
+    font-size: 14px;
+}
+
+
+#cardProfissao a .fa-trash-can {
+    transition: all 3s ease-in-out;
+}
+
+#cardProfissao .fa-trash-can:before {
+    transition: all .1s ease-in-out;
+}
+
+#cardProfissao a:hover .fa-trash-can:before {
+    content: "\f00d";
+}
+
 
 @media screen and ( max-width: 768px ) {
     .caixa-pesquisa {
