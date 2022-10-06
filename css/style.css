@@ -41,11 +41,9 @@ main h1, h2, h5{
 }
 
 h1 {
-    font-size: 82px;
+    font-size: 78px;
     margin: 0;
 }
-
-
 
 main h2 {
     font-size: 48px;
@@ -70,11 +68,15 @@ p {
     margin: 0;
 }
 
+h6 {
+    font-size: 24px;
+}
+
 .text-muted {
     font-weight: 500;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
     h1 {
         font-size: 56px;
     }
@@ -170,14 +172,16 @@ header .dropdown-item:active {
     margin-bottom: 1rem;
 }
 
-
 .card-avaliacao .text-muted{
     font-size: 14px;
 }
 
+.card-avaliacao p {
+    font-size: 16px;
+}
+
 .card-avaliacao {
     border: solid 1px #000;
-
 }
 
 .avaliacao-usuario {
@@ -349,10 +353,6 @@ ion-icon {
 }
 
 /* Card de Avaliação */
-.card-avaliacao {
-    flex: 1 0 350px;
-    margin: 8px 15px;
-}
 
 .avaliacao-otima {
     background-color: #fef3cdc8;
@@ -663,6 +663,33 @@ footer i {
 .socials{
     list-style: none;
     gap: 1rem;
+}
+
+@media screen and (max-width: 768px){
+
+    .socials {
+        display: flex !important;
+        justify-content: space-around !important;
+        width: 172px;
+    }
+
+    .footer-socials {
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo {
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo img {
+        height: 80%;
+    }
+
+    footer i {
+        font-size: 30px;
+    }
 }
 
 /* Cadastro */

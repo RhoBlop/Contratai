@@ -11,10 +11,10 @@
     <?php include ("components/login-modal.html"); ?>
 
     <main>
-      <div class="container my-3">
-        <div class="row d-flex align-items-center flex-wrap justify-content-center" id="fContent">
-          <div class="top-content col-12 col-sm-7 mb-4 mb-md-0">
-          <div class="title mb-3">
+      <div class="container my-lg-3">
+        <div class="row d-flex align-items-start flex-wrap justify-content-center" id="fContent">
+          <div class="top-content col-12 col-lg-7 mb-4 mb-md-0">
+          <div class="title my-3">
             <h1>Ajudando você</h1> 
             <h1 class="text-gradient">sempre!</h1>
           </div>
@@ -26,7 +26,7 @@
             </form>
           </div>
   
-          <div class="col-12 col-sm-5 mb-3 mb-sm-0">
+          <div class="col-12 col-lg-5 mb-3 mb-sm-0">
             <img src="images\storyset\business-merger-animate.svg" alt="Stock Image Trabalhador" width="100%" min-width=300px>
           </div>
         </div>
