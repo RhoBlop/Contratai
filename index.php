@@ -11,20 +11,22 @@
     <?php include ("components/login-modal.html"); ?>
 
     <main>
-      <div class="container p-3 my-3">
-        <div class="row d-flex align-items-center flex-wrap justify-content-center">
-          <!-- CAIXA DE PESQUISA -->
-          <div class="col-sm-7 col-11 mb-4 mb-md-0">
-          <h1>Ajudando você</h1> <h1 class="text-gradient">sempre!</h1>
+      <div class="container my-3">
+        <div class="row d-flex align-items-center flex-wrap justify-content-center" id="fContent">
+          <div class="top-content col-12 col-sm-7 mb-4 mb-md-0">
+          <div class="title mb-3">
+            <h1>Ajudando você</h1> 
+            <h1 class="text-gradient">sempre!</h1>
+          </div>
             <!-- tive que botar um <br> mesmo fodase.. -->
-            <h6 class="text-muted">Você encontrará os melhores profissionais aqui, <br>no Contrataí!</h6>
+            <p class="text-muted">Você encontrará os melhores profissionais aqui<br>no Contrataí!</p>
             <form action="cadastro.php" method="GET">
               <!-- BOTÕES PARA FILTRAGEM DA PESQUISA POR SERVIÇO -->
                 <?php include ("components/filtros-servico.html") ?>
             </form>
-          </div> <!-- /CAIXA DE PESQUISA -->
+          </div>
   
-          <div class="col-sm-5 col-8">
+          <div class="col-12 col-sm-5 mb-3 mb-sm-0">
             <img src="images\storyset\business-merger-animate.svg" alt="Stock Image Trabalhador" width="100%" min-width=300px>
           </div>
         </div>
@@ -40,7 +42,7 @@
       <?php include ("components/avaliacoes-index.html") ?>
 
       <!-- BANNER DE LOGIN -->
-      <div class="login-banner d-flex flex-column align-items-center justify-content-center mb-5">
+      <div class="login-banner d-flex flex-column align-items-center justify-content-center text-center mb-4">
         <h2 class="text-white mb-3">Gostou? Então não perca mais tempo!</h2>
         <a type="button" class="btn btn-dark btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#modal-login">Comece já</a>
       </div> <!-- /BANNER DE LOGIN -->

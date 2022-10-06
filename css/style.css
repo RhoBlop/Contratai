@@ -42,7 +42,10 @@ main h1, h2, h5{
 
 h1 {
     font-size: 82px;
+    margin: 0;
 }
+
+
 
 main h2 {
     font-size: 48px;
@@ -63,7 +66,51 @@ a:hover{
 }
 
 p {
+    font-size: 24px;
     margin: 0;
+}
+
+.text-muted {
+    font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 56px;
+    }
+
+    main h2 {
+        font-size: 32px;
+    }
+
+    .text-gradient {
+        margin-top: -8px;
+    }
+
+    p {
+        font-size: 20px;
+    }
+
+    .top-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .filtros-servico {
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .filtros-servico .item-pesquisa {
+        padding: 0;
+        margin: 0;
+    }
+
+    #fContent {
+        flex-direction: column-reverse;
+    }
 }
 
 /* Header */
@@ -145,9 +192,6 @@ main h1.text-gradient {
     background-clip: text;
 }
 
-.text-muted {
-    font-size: 24px;
-}
 
 /* Botões*/
 
@@ -598,6 +642,9 @@ footer {
     margin: 0;
     padding: 0;
     background-color: var(--grey);
+}
+
+footer p {
     font-size: 12px;
 }
 
