@@ -774,9 +774,17 @@ hr {
     color: solid rgba(0, 0, 0, 0.1)
 }
 
-.active-link {
+.active-link{
     color: var(--primary-green) !important;
-    transition: all 2s ease-in-out !important;
+}
+
+.nav .active {
+    background-color: var(--primary-green) !important;
+    color: white !important;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem;
 }
 
 #side-bar {
