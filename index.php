@@ -5,10 +5,7 @@
   </head>
   <body>
     <!-- HOME PAGE HEADER -->
-    <?php include ("components/home-header.html"); ?>
-
-    <!-- MODAL -->
-    <?php include ("components/login-modal.html"); ?>
+    <?php include ("components/no-auth-header.php"); ?>
 
     <main>
       <div class="container my-lg-3">
