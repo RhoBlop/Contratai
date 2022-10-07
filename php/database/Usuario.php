@@ -86,9 +86,37 @@
                 return [ "action" => false ];
             }
         }
+
+
+        public function selectProfsById($id) {
+            try {
+                $sql = <<<SQL
+                    SELECT usres.idusrespec, dscprof, dscespec
+                    FROM usuario AS usr
+                    INNER JOIN usrespec AS usres ON (usr.idusr = usres.idusr)
+                    INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
+                    INNER JOIN profissao AS prof ON (espec.idprof = prof.idprof)
+                    WHERE usr.idusr = :id
+                    ORDER BY dscprof ASC
+                SQL;
+
+                $stmt = Database::prepare($sql);
+                $stmt->execute([
+                    ":id" => $id
+                ]);
+
+                $result = $stmt->fetchAll();
+                return $result;
+            } catch (PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
+                
+                return [ "action" => false ];
+            }
+        }
         
 
-        public function selectEspecsById($id) {
+        public function selectEspecsPerfPublicoById($id) {
             try {
                 $sql = <<<SQL
                     SELECT espec.idespec, dscespec, round(avg(notaavaliacao), 1) AS mediaavaliacao
@@ -99,6 +127,7 @@
                     LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                     WHERE usr.idusr = :id
                     GROUP BY espec.idespec, dscespec
+                    ORDER BY mediaavaliacao DESC
                 SQL;
 
                 $stmt = Database::prepare($sql);
