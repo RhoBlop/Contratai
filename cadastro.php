@@ -21,6 +21,7 @@
                         </div>
                         
                         <form id="cadastro" class="form-cadastro row g-3" onsubmit="sendCadastro(event, '#feedbackUsuario')">
+                                <!-- NOME -->
                                 <div class="form-group mb-3">
                                     <input type="text" class="form-control form-control-lg" id="nome" name="nome" placeholder="Digite seu nome" autocomplete="off" required>
                                 </div>
@@ -54,37 +55,11 @@
                                 <!-- div para comunicação com usuário -->
                                 <div id="feedbackUsuario"></div>
 
-                            <!-- NOME -->
+                            <!-- BOTÕES AÇÃO -->
                             <div class="buttons d-flex justify-content-end align-items-center gap-3 my-3">
                                     <a href="#" class="btn btn-link">Já sou usuário</a>
                                     <button type="submit" class="btn btn-green">Cadastrar</button>
                             </div>
-
-                            <!-- EMAIL -->
-                            <div class="form-group mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
-                            </div>
-
-                            <!-- SENHA -->
-                            <div class="form-group mb-3">
-                                <label for="senha" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="off" required>
-                            </div>
-
-                            <!-- CONFIRMAÇÃO SENHA -->
-                            <div class="form-group mb-1">
-                                <label for="nome" class="form-label">Confirme sua senha</label>
-                                <input type="password" class="form-control" id="confirmSenha" name="confirmSenha" oninput="confirmaSenha(event, '#senha', '#senhaErrada')" placeholder="Digite sua senha" autocomplete="off" required>
-                                <small class="formMsgErro">As senhas precisam ser iguais</small>
-                            </div>
-
-                            <a class="ms-auto mb-2">Esqueci minha senha</a>
-
-                            <!-- div para comunicação com usuário -->
-                            <div id="feedbackUsuario"></div>
-
-                            <button type="submit" class="btn btn-green mt-4">Cadastrar</button>
                         </form>
                     </div>
 

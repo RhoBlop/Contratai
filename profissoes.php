@@ -2,9 +2,6 @@
 <html lang="en">
     <head>
         <?php require("components/head.php") ?>
-        <script src="js/requisicoesAPI.js"></script>
-        <script src="js/selecionarImg.js"></script>
-        <script src="js/autoComplete.js"></script>
     </head>
     <body>
         <?php include ("components/login-header.php") ?>
@@ -24,20 +21,34 @@
 
                         <div class="row justify-content-center">
                             <div class="col-8 d-flex flex-column justify-content-center">
-                                <div class="card shadow-sm rounded-4 my-3" id="cardProfissao">
-                                    <div class="card-body d-flex justify-content-between align-items-center px-4">
+                                <?php
+                                    $profissoes = $usuarioClass->selectProfsById($_SESSION["idusr"]);
 
-                                        <div class="card-text">
-                                            <h5 class="mb-0">Designer</h5>
-                                            <p class="text-muted">Designer Gráfico</p>
+                                    foreach($profissoes as $prof):
+
+                                        [$idusres, $dscespec, $dscprof] = [$prof["idusrespec"], ucfirst($prof["dscespec"]), ucfirst($prof["dscprof"])];
+                                ?>
+
+                                    <!-- CARD PROFISSÃO -->
+                                    <div class="card shadow-sm rounded-4 my-3" id="cardProfissao">
+                                        <div class="card-body d-flex justify-content-between align-items-center px-4">
+
+                                            <div class="card-text">
+                                                <h5 class="mb-0"><?php echo $dscprof ?></h5>
+                                                <p class="text-muted"><?php echo $dscespec ?></p>
+                                            </div>
+
+                                            <a href="<?php echo '?idexclude={$idusres}' ?>" class="exclude">
+                                                <i class="fa-solid fa-trash-can"></i>
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </a>
+
                                         </div>
-
-                                        <a href="" class="exclude">
-                                            <i class="fa-solid fa-trash-can"></i>
-                                        </a>
-
                                     </div>
-                                </div>
+
+                                <?php 
+                                    endforeach;
+                                ?>
 
                                 <div class="mt-3 text-center">
                                     <a data-bs-toggle="modal" data-bs-target="#modal-addProf" class="btn btn-link">Adicionar profissão</a>
