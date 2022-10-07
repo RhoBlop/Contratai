@@ -9,6 +9,7 @@
     --dark-green: #074A59;
     --text-color: #000;
     --grey: #202020;
+    --bootstrap-border: #ced4da;
     --danger-color: #cf1c0e;
     --blue-vertical-gradient: linear-gradient(180deg, #15A0B0, #074A59);
     --navbar-height: 72px;
@@ -70,6 +71,10 @@ p {
 
 h6 {
     font-size: 24px;
+}
+
+h7 {
+    font-size: 20px;
 }
 
 .text-muted {
@@ -369,7 +374,7 @@ ion-icon {
 
 /* Filtros de pesquisa */
 #searchBox {
-    border: 1px solid var(--grey);
+    border: 1px solid var(--bootstrap-border);
 }
 
 #cardsPesquisa {
@@ -386,7 +391,7 @@ ion-icon {
     align-items: center;
     padding: 15px 5px;
     background-color: white;
-    border: 1px solid var(--grey);
+    border: 1px solid var(--bootstrap-border);
     border-top: none;
 }
 
@@ -561,28 +566,33 @@ ion-icon {
 }
 
 .card-pesquisa .card-body {
-    padding: 13px;
+    padding: 1rem;
 }
-
 
 .card-pesquisa .card-title {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.card-pesquisa .card-title h5 {
-    font-size: 18px;
+.card-pesquisa .card-title h6 {
+    font-weight: 600;
     display: inline-block;
 }
 
-.card-pesquisa img {
-    box-sizing: content-box;
+.card-pesquisa .card-text p {
+    font-size: 16px;
+}
+
+.card-pesquisa .search-profile-pic {
     align-self: center;
-    padding: 12px 20px;
+}
+
+.card-pesquisa .search-profile-pic img{
     width: 100px;
     height: 100px;
-    border-radius: 50%;
     object-fit: cover;
+    border-radius: 50%;
 }
+
 
 .card-pesquisa .badge-avaliacao {
     min-width: 70px;
@@ -635,6 +645,9 @@ ion-icon {
         display: block;
         margin-right: 0;
         flex: 0 0 calc(100%/4);
+    }
+    .carousel-item p {
+        font-size: 18px;
     }
 } 
 
