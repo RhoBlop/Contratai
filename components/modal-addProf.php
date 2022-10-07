@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-addProf" tabindex="-1" role="dialog">
+<div class="modal fade" id="modaladdProf" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -6,7 +6,7 @@
         <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <form id="login" class="form-login d-flex flex-column" autocomplete="off" onsubmit="sendLogin(event)">
+      <form id="especializacao" class="especializacao login d-flex flex-column" autocomplete="off" onsubmit="sendLogin(event)">
         <div class="modal-body mx-0">
             
               <!-- ESPECIALIZAÇÃO -->
@@ -34,7 +34,9 @@
                 <div id="feedbackUsuario"></div>
         </div>
         <div class="modal-footer d-flex justify-content-center">
-          <button type="submit" class="btn btn-outline-green"><i class="fa-solid fa-arrow-right"></i></button>
+          <button type="submit" class="btn btn-outline-green">
+            <i class="fa-solid fa-arrow-right"></i>Adicionar
+          </button>
         </div>
       </form>
     </div>
