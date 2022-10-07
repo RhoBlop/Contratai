@@ -40,7 +40,7 @@
 
         <main>
             <div class="container my-3">
-                <div class="row gx-5">
+                <div class="row gx-5 justify-content-center">
                     <div class="col-12 col-lg-8" id="profile">
 
                         <!-- APRESENTAÇÃO PERFIL -->
@@ -81,30 +81,32 @@
                         <div class="card shadow-sm rounded-4 mb-3" id="sobre">
                             <div class="card-body">
                                 <h3 class="card-title">Especializações</h3>
-                                <?php
-                                    foreach($especializacoes as $espec):
-                                        [$dscEspec, $mediaEspec] = [$espec["dscespec"], $espec["mediaavaliacao"]]
-                                ?>
+                                <div class="d-flex flex-column align-items-center">
+                                    <?php
+                                        foreach($especializacoes as $espec):
+                                            [$dscEspec, $mediaEspec] = [$espec["dscespec"], $espec["mediaavaliacao"]]
+                                    ?>
 
-                                    <div class="card card-hover card-pesquisa">
-                                        <div class="card-body">
-                                            <div class="card-title">
-                                                <h5><?php echo ucfirst($dscEspec); ?></h5>
-                                                <span class="badge-avaliacao <?php echo echoAvaliacaoClass($mediaEspec); ?>">
-                                                    <!-- STAR ICON -->
-                                                    <ion-icon name="star"></ion-icon>
-                                                    <?php echoDadosPerfil($mediaEspec); ?>
-                                                </span>
-                                            </div>
-                                            <div class="card-text">
-                                                <p>[ Não sei fazer o SQL :( ] <?php echo is_null($perfPublico["numcontrato"]) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
+                                        <div class="card card-hover card-pesquisa">
+                                            <div class="card-body">
+                                                <div class="card-title">
+                                                    <h5><?php echo ucfirst($dscEspec); ?></h5>
+                                                    <span class="badge-avaliacao <?php echo echoAvaliacaoClass($mediaEspec); ?>">
+                                                        <!-- STAR ICON -->
+                                                        <ion-icon name="star"></ion-icon>
+                                                        <?php echoDadosPerfil($mediaEspec); ?>
+                                                    </span>
+                                                </div>
+                                                <div class="card-text">
+                                                    <p>[ Não sei fazer o SQL ] <?php echo is_null($perfPublico["numcontrato"]) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                <?php 
-                                    endforeach;
-                                ?>
+                                    <?php 
+                                        endforeach;
+                                    ?>
+                                </div>
                             </div>
                         </div> <!-- /ESPECIALIZAÇÕES -->
 
