@@ -36,7 +36,7 @@
         <main>
             <div class="container my-3">
                 <div class="row gx-5">
-                    <div class="col-8" id="profile">
+                    <div class="col-12 col-lg-8" id="profile">
 
                         <!-- APRESENTAÇÃO PERFIL -->
                         <div class="card shadow-sm rounded-4 mb-3" id="infos">
@@ -51,11 +51,13 @@
 
                                 <div class="text px-3">
                                     <h3><?php echoDadosPerfil($perfNomUsr); ?></h3>
-                                    <p><i class="fa-solid fa-briefcase fa-fw"></i><?php echo ucfirst(implode(", ", $perfEspecs)) ?></p>
-                                    <p><i class="fa-solid fa-location-dot fa-fw"></i>[Desenvolvimento no futuro]</p>
-                                    <p><i class="fa-solid fa-star fa-fw"></i><?php echoDadosPerfil($perfMediaAval); ?></p>
-                                    <p><?php echo is_null($perfNumContrato) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
-                                    <a href="#avaliacao">[Desenvolvimento]</a><br>
+                                    <div class="body-text">
+                                        <p><i class="fa-solid fa-briefcase fa-fw"></i><?php echo ucfirst(implode(", ", $perfEspecs)) ?></p>
+                                        <p><i class="fa-solid fa-location-dot fa-fw"></i>[Desenvolvimento no futuro]</p>
+                                        <p><i class="fa-solid fa-star fa-fw"></i><?php echoDadosPerfil($perfMediaAval); ?></p>
+                                        <p><?php echo is_null($perfNumContrato) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
+                                        <a href="#avaliacao">[Desenvolvimento]</a><br>
+                                    </div>
                                     <a href="#" class="btn btn-outline-green mt-3">Contactar</a>
                                 </div>
 
@@ -102,8 +104,8 @@
                         </div> <!-- /ESPECIALIZAÇÕES -->
 
                         <!-- AVALIAÇÕES -->
-                        <div class="card shadow-sm rounded-4 mb-3" id="avaliacao">
-                            <div class="card-body">
+                        <div class="card shadow-sm rounded-4 mb-3 d-flex" id="avaliacao">
+                            <div class="card-body d-flex flex-column justify-content-center">
                                 <h3 class="card-title mb-3">Avaliações</h3>
 
                                 <div class="subtitle d-flex gap-1 mb-3">
@@ -111,14 +113,16 @@
                                     <h4 class="mb-3">4.5 de 50 Avaliações</h4>
                                 </div>
 
-                                <div class="row g-3">
+                                <div class="row row-cols-2 g-3">
                                     <?php
                                         foreach ($avaliacoes as $aval):
                                     ?>
                                 
                                         <div class="avaliacao col">
                                             <div class="avaliacao-header d-flex align-items-start gap-3 mb-3">
-                                                <img src="<?php echoProfileImage($aval["imgusr"]); ?>" width="48px">
+                                                <div class="aval-pic">
+                                                    <img src="<?php echoProfileImage($aval["imgusr"]); ?>" class="rounded-circle">
+                                                </div>
                                                 <div class="d-flex flex-column">
                                                     <h5 class="mb-0"><?php echo $aval["nomusr"]; ?></h5>
                                                     <p class="text-muted">[atualizar banco]</p>
@@ -139,7 +143,7 @@
                     </div>
 
 
-
+                    <!--
                     <div class="col-4">
 
                         <div class="row mb-5" id="fotos">
@@ -164,8 +168,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        
+                    -->
 
                     </div>
 

@@ -992,6 +992,14 @@ label {
     margin-top: -120px;
 }
 
+@media screen and (max-width: 992px){
+    #profile .profile-pic {
+        display: flex;
+        justify-content: center;
+    }
+
+}
+
 #profile .top-infos h3, p {
     margin: 0;
 }
@@ -1019,6 +1027,16 @@ label {
 
 #sobre p, #avaliacao p, #anuncio p, #profileCard p {
     font-size: 16px;
+}
+
+#avaliacao .aval-pic {
+    width: 48px;
+    height: 48px;
+}
+
+#avaliacao .aval-pic img {
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Anúncio */
