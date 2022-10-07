@@ -16,12 +16,17 @@
             $userId = $_GET["id"];
             $perfPublico = $usuarioClass->selectPerfilPublicoById($userId);
 
-            if (!$perfPublico)
+            if (!$perfPublico):
                 ?>
-
+                    <div>
+                        É necessário cadastrar uma profissão para que o perfil se torne público
+                        <a href="">Finalizar cadastro</a>
+                    </div>
                 <?php
+                exit();
+            endif;
 
-            $especializacoes = $usuarioClass->selectEspecsById($userId);
+            $especializacoes = $usuarioClass->selectEspecsPerfPublicoById($userId);
             $avaliacoes = $usuarioClass->selectAvalById($userId);
             
 
@@ -90,7 +95,7 @@
                                                 </span>
                                             </div>
                                             <div class="card-text">
-                                                <p>[SQL não tá funcionando como esperado] <?php echo is_null($perfPublico["numcontrato"]) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
+                                                <p>[ Não sei fazer o SQL :( ] <?php echo is_null($perfPublico["numcontrato"]) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
                                             </div>
                                         </div>
                                     </div>

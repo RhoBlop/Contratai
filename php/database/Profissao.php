@@ -7,7 +7,7 @@
         public function selectAll() {
             try {
                 $sql = <<<SQL
-                    SELECT * FROM profissao
+                    SELECT idprof, dscprof FROM profissao
                 SQL;
 
                 $stmt = Database::prepare($sql);

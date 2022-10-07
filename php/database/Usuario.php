@@ -127,7 +127,7 @@
                     LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                     WHERE usr.idusr = :id
                     GROUP BY espec.idespec, dscespec
-                    ORDER BY mediaavaliacao DESC
+                    ORDER BY mediaavaliacao DESC NULLS LAST
                 SQL;
 
                 $stmt = Database::prepare($sql);
