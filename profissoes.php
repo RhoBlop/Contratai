@@ -32,7 +32,7 @@
                                             <p class="text-muted">Designer Gráfico</p>
                                         </div>
 
-                                        <a href="" class="exclude">
+                                        <a href="#" class="exclude">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </a>
 
