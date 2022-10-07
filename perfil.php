@@ -12,8 +12,9 @@
 
                     <?php include("components/modal-exclude.html")?>
 
+                    
                     <?php include("components/sidebar.html")?>
-
+                   
                     <div class="col-7 px-3" id="settingsContent">
                         <div class="mb-5">
                             <h2>Meu Perfil</h2>
