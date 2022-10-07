@@ -113,12 +113,12 @@
                                     <h4 class="mb-3">4.5 de 50 Avaliações</h4>
                                 </div>
 
-                                <div class="row row-cols-2 g-3">
+                                <div class="row row-cols-1 row-cols-md-2 g-3">
                                     <?php
                                         foreach ($avaliacoes as $aval):
                                     ?>
                                 
-                                        <div class="avaliacao col">
+                                        <div class="avaliacao col mb-3">
                                             <div class="avaliacao-header d-flex align-items-start gap-3 mb-3">
                                                 <div class="aval-pic">
                                                     <img src="<?php echoProfileImage($aval["imgusr"]); ?>" class="rounded-circle">
