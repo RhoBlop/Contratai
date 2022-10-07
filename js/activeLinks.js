@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         for (link of [...links]) {
             // se href do link for igual 
             if (link.getAttribute("href") == current) {
-                link.classList.add("active-link");
+                link.classList.add("active");
             } else {
                 link.classList.add("link-secondary");
             }

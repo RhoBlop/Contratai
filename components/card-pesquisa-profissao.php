@@ -1,5 +1,7 @@
 <div class="card card-hover card-pesquisa">
-    <img src="<?php echo echoProfileImage($imgusr) ?>" alt="Imagem de perfil">
+    <div class="search-profile-pic ps-3">
+        <img src="<?php echo echoProfileImage($imgusr) ?>" alt="Imagem de perfil">
+    </div>
     <div class="card-body">
         <div class="card-title">
             <h5><?php echo $nomusr; ?></h5>

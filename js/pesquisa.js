@@ -164,10 +164,12 @@ function createUserCard(user) {
     especsusr = especsusr[0].toUpperCase() + especsusr.slice(1);
     
     card.innerHTML = `
-        <img src="${imgusr || 'images/temp/default-pic.png'}" alt="Imagem de perfil">
+        <div class="search-profile-pic ps-3">
+            <img src="${imgusr || 'images/temp/default-pic.png'}" alt="Imagem de perfil">
+        </div>
         <div class="card-body">
             <div class="card-title">
-                <h5>${nomusr}</h5>
+                <h6>${nomusr}</h6>
                 <span class="badge-avaliacao ${ mediaavaliacao > 4.5 ? "avaliacao-otima" : "avaliacao-media"}">
                     <!-- STAR ICON -->
                     <ion-icon name="star"></ion-icon>
@@ -175,7 +177,7 @@ function createUserCard(user) {
                 </span>
             </div>
             <div class="card-text">
-                <p>Total de ${numcontrato} contratações</p>
+                <h7 class="text-muted">Total de ${numcontrato} contratações</h7>
                 <p>${especsusr}</p>
 
                 <p>Em nossa plataforma desde</p>

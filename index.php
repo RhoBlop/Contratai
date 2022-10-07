@@ -39,7 +39,7 @@
       <?php include ("components/avaliacoes-index.html") ?>
 
       <!-- BANNER DE LOGIN -->
-      <div class="login-banner d-flex flex-column align-items-center justify-content-center text-center mb-4">
+      <div class="login-banner d-flex flex-column align-items-center justify-content-center text-center mb-4 p-3">
         <h2 class="text-white mb-3">Gostou? Então não perca mais tempo!</h2>
         <a type="button" class="btn btn-dark btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#modal-login">Comece já</a>
       </div> <!-- /BANNER DE LOGIN -->

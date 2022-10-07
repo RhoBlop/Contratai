@@ -28,10 +28,12 @@
                         </div>
                     </div>
                 </div>
-
+                
+                <!--
                 <div class="row row-cols-2 row-cols-lg-5 g-4 mb-5">
-                    <?php for ($i=1; $i <= 10; $i++) { include("components/card-anuncio.html");} ?>
+                    <?php // for ($i=1; $i <= 10; $i++) { include("components/card-anuncio.html");} ?>
                 </div>
+                -->
 
                 <div class="row row-cols-2 row-cols-lg-4 g-3 mb-3">
 
