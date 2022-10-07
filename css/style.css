@@ -172,6 +172,8 @@ header .dropdown-item:active {
     margin-bottom: 1rem;
 }
 
+/* Avaliações (Index) */
+
 .card-avaliacao .text-muted{
     font-size: 14px;
 }
@@ -189,6 +191,7 @@ header .dropdown-item:active {
 }
 
 /* Gradient pro texto da home*/
+
 main h1.text-gradient {
     background: linear-gradient(180deg, #15A0B0 0%, #074A59 100%);
     -webkit-background-clip: text;
@@ -1031,19 +1034,26 @@ label {
     font-size: 14px;
 }
 
-
-#cardProfissao a .fa-trash-can {
-    transition: all 3s ease-in-out;
-}
-
 #cardProfissao .fa-trash-can:before {
-    transition: all .1s ease-in-out;
+    transition: content 10s ease-in-out;
 }
 
 #cardProfissao a:hover .fa-trash-can:before {
     content: "\f00d";
 }
 
+#cardProfissao .exclude {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cardProfissao .exclude i {
+    width: 100%;
+    height: 100%;
+}
 
 @media screen and ( max-width: 768px ) {
     .caixa-pesquisa {
