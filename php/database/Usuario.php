@@ -23,7 +23,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
@@ -56,7 +56,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
         
@@ -83,12 +83,12 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
 
-        public function selectProfsById($id) {
+        public function selectProfissoessById($id) {
             try {
                 $sql = <<<SQL
                     SELECT usres.idusrespec, dscprof, dscespec
@@ -111,7 +111,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
         
@@ -141,12 +141,12 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
 
-        public function selectAvalById($id, $filterNota = "DESC") {
+        public function selectAvaliacoesById($id, $filterNota = "DESC") {
             try {
                 $sql = <<<SQL
                     SELECT avalusr.nomusr, avalusr.imgusr, avalusr.comentarioavaliacao, round(avg(avalusr.notaavaliacao), 1) AS mediaavaliacao
@@ -170,13 +170,13 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
 
         // insere um usuário com as informações passadas por parâmetro
-        public function insertBasicInfo($nome, $email, $senha) {
+        public function insertBasicInfo($nome, $email, $cpf, $telefone, $senha) {
             try {
                 // verifica se já existe um usuário cadastro com esse email
                 $verifySQL = "SELECT idUsr FROM usuario WHERE emailUsr = :email";
@@ -186,15 +186,17 @@
                 // se não existem usuários cadastrados com esse email, segue para insert
                 if ($verifyEmail->rowCount() < 1) {
                     // insert do novo usuário
-                    $insertSQL = "INSERT INTO usuario(nomUsr, emailUsr, senhaUsr) VALUES (:nome, :email, :senha)";
+                    $insertSQL = "INSERT INTO usuario(nomUsr, emailUsr, cpfUsr, telefoneUsr, senhaUsr) VALUES (:nome, :email, :cpf, :telefone, :senha)";
                     $insertSTMT = Database::prepare($insertSQL);
                     $insertSTMT->execute([
                         ":nome" => $nome,
                         ":email" => $email,
+                        ":cpf" => $cpf,
+                        ":telefone" => $telefone,
                         ":senha" => $senha
                     ]);
 
-                    return [ "action" => true ];
+                    return [ "dados" => true ];
                 } else {
                     return [ "erro" => "Email já cadastrado" ];
                 }
@@ -202,7 +204,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
@@ -256,7 +258,7 @@
                     }
 
     
-                    return [ "action" => true ];
+                    return [ "dados" => true ];
                 } else {
                     return [ "erro" => "Email já cadastrado" ];
                 }
@@ -265,7 +267,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
@@ -287,7 +289,7 @@
                         ":senhaNova" => $senhaNova
                     ]);
         
-                    return [ "action" => true ];
+                    return [ "dados" => true ];
                 } else {
                     return [
                         "erro" => "A senha atual digitada está incorreta"
@@ -297,7 +299,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
@@ -312,12 +314,12 @@
                     ":id" => $id
                 ]);
     
-                return [ "action" => true ];
+                return [ "dados" => true ];
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
     }

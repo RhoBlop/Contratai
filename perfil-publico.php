@@ -10,10 +10,12 @@
     </head>
     <body>
     <!-- HOME PAGE HEADER -->
-        <?php include ("components/login-header.php") ?>
+        <?php include ("components/auth-header.php") ?>
 
         <?php 
+            $usuarioClass = new Usuario();
             $userId = $_GET["id"];
+
             $perfPublico = $usuarioClass->selectPerfilPublicoById($userId);
 
             if (!$perfPublico):
@@ -27,7 +29,7 @@
             endif;
 
             $especializacoes = $usuarioClass->selectEspecsPerfPublicoById($userId);
-            $avaliacoes = $usuarioClass->selectAvalById($userId);
+            $avaliacoes = $usuarioClass->selectAvaliacoesById($userId);
             
 
             $perfEspecs = [];
@@ -55,11 +57,11 @@
                                 </div>
 
                                 <div class="text px-3">
-                                    <h3><?php echoDadosPerfil($perfNomUsr); ?></h3>
+                                    <h3><?php echoDadosNotNull($perfNomUsr, "---"); ?></h3>
                                     <div class="body-text">
                                         <p><i class="fa-solid fa-briefcase fa-fw"></i><?php echo ucfirst(implode(", ", $perfEspecs)) ?></p>
                                         <p><i class="fa-solid fa-location-dot fa-fw"></i>[Desenvolvimento no futuro]</p>
-                                        <p><i class="fa-solid fa-star fa-fw"></i><?php echoDadosPerfil($perfMediaAval); ?></p>
+                                        <p><i class="fa-solid fa-star fa-fw"></i><?php echoDadosNotNull($perfMediaAval, "---"); ?></p>
                                         <p><?php echo is_null($perfNumContrato) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
                                         <a href="#avaliacao">[Desenvolvimento]</a><br>
                                     </div>
@@ -94,7 +96,7 @@
                                                     <span class="badge-avaliacao <?php echo echoAvaliacaoClass($mediaEspec); ?>">
                                                         <!-- STAR ICON -->
                                                         <ion-icon name="star"></ion-icon>
-                                                        <?php echoDadosPerfil($mediaEspec); ?>
+                                                        <?php echoDadosNotNull($mediaEspec, "---"); ?>
                                                     </span>
                                                 </div>
                                                 <div class="card-text">

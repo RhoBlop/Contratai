@@ -4,14 +4,14 @@
         <?php require("components/head.php") ?>
     </head>
     <body>
-        <?php include ("components/login-header.php") ?>
+        <?php include ("components/auth-header.php") ?>
 
         <main>
             <div class="container p-3 my-3">
                 <div class="row gx-5">
                     <?php include("components/modal-addProf.php")?>
 
-                    <?php include("components/sidebar.html")?>
+                    <?php include("components/sidebar.php")?>
 
                     <div class="col-md-8 px-3" id="settingsContent">
                         <div class="mb-4">
@@ -22,7 +22,9 @@
                         <div class="row justify-content-center">
                             <div class="col-8 d-flex flex-column justify-content-center">
                                 <?php
-                                    $profissoes = $usuarioClass->selectProfsById($_SESSION["idusr"]);
+                                    $usuarioClass = new Usuario();
+
+                                    $profissoes = $usuarioClass->selectProfissoessById($_SESSION["idusr"]);
 
                                     foreach($profissoes as $prof):
 

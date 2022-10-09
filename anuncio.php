@@ -5,7 +5,7 @@
     </head>
     <body>
     <!-- HOME PAGE HEADER -->
-        <?php include ("components/login-header.php") ?>
+        <?php include ("components/auth-header.php") ?>
 
         <main>
             <div class="container my-3">

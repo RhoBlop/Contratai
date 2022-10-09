@@ -7,6 +7,7 @@
     <div id="topCadastro" class="container carousel multitem-car">
         <div class="carousel-inner">
         <?php 
+            $profissaoClass = new Profissao();
             $profsAv = $profissaoClass->selectMaisCadastros($limit = 6);
             
             foreach ($profsAv as $prof): 

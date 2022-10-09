@@ -19,7 +19,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
@@ -44,7 +44,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
@@ -77,7 +77,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
@@ -108,7 +108,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
@@ -140,7 +140,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
@@ -167,7 +167,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
     }

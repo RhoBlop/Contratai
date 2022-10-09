@@ -15,6 +15,7 @@
                 <select name="profissao" id="addProf">
                   <option value="" selected>Selecione uma profissão</option>
                   <?php 
+                    $profissaoClass = new Profissao();
                     $profissoes = $profissaoClass->selectAll();
 
                     foreach ($profissoes as $prof):
@@ -44,4 +45,4 @@
 <!-- SELECT SEARCHABLE -->
 <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.1/dist/css/tom-select.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.1/dist/js/tom-select.complete.min.js"></script>
-<script src="js/adicionarProf.js"></script>
+<script src="js/fetch/addProf.js"></script>

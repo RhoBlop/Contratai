@@ -4,16 +4,12 @@
         <?php require("components/head.php") ?>
     </head>
     <body>
-        <?php include ("components/login-header.php") ?>
+        <?php include ("components/auth-header.php") ?>
 
         <main>
             <div class="container p-3 my-3 mb-5">
                 <div class="row gx-5">
-
-                    <?php include("components/modal-exclude.html")?>
-
-                    
-                    <?php include("components/sidebar.html")?>
+                    <?php include("components/sidebar.php")?>
                    
                     <div class="col-7 px-3" id="settingsContent">
                         <div class="mb-5">
@@ -26,13 +22,18 @@
                         <table class="table mb-5">
                             <tbody>
                                 <tr>
-                                    <td>Nome completo</td>
-                                    <td class="text-muted" id="nome"><?php echoDadosPerfil($user["nomusr"]); ?></td>
+                                    <td>Nome</td>
+                                    <td class="text-muted" id="nome"><?php echoDadosNotNull($user["nomusr"], "---"); ?></td>
                                 </tr>
 
                                 <tr>
                                     <td>Email</td>
-                                    <td class="text-muted" id="email"><?php echoDadosPerfil($user["emailusr"]); ?></td>
+                                    <td class="text-muted" id="email"><?php echoDadosNotNull($user["emailusr"], "---"); ?></td>
+                                </tr>
+
+                                <tr>
+                                    <td>CPF</td>
+                                    <td class="text-muted" id="nascimento"><?php echoDadosNotNUll($user["cpfusr"], "---"); ?></td>
                                 </tr>
 
                                 <tr>
@@ -42,7 +43,7 @@
 
                                 <tr>
                                     <td>Telefone</td>
-                                    <td class="text-muted" id="telefone"><?php echoDadosPerfil($user["telefoneusr"]); ?></td>
+                                    <td class="text-muted" id="telefone"><?php echoDadosNotNull($user["telefoneusr"], "---"); ?></td>
                                 </tr>
                                 
                                 <tr>

@@ -6,22 +6,29 @@
         <a class="nav-link" href="profissoes.php"><i class="fa-solid fa-user-tie fa-fw me-1"></i>Profissões</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="notificacoes.php"><i class="fa-regular fa-bell fa-fw me-1"></i>Notificações</a>
+        <a class="nav-link" href="contratos.php"><i class="fa-solid fa-address-book fa-fw me-1"></i>Contratos</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="seguranca.php"><i class="fa-solid fa-shield-halved fa-fw me-1"></i>Segurança</a>
+        <a class="nav-link" href="notificacoes.php"><i class="fa-regular fa-bell fa-fw me-1"></i>Notificações</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="editar-senha.php"><i class="fa-solid fa-lock fa-fw me-1"></i>Editar Senha</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="preferencias.php"><i class="fa-solid fa-gear fa-fw me-1"></i>Preferências</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="admin.php"><i class="fa-solid fa-screwdriver-wrench fa-fw me-1"></i>Admin</a>
-    </li>
+
+    <?php 
+        if ($admin === true):
+    ?>
+        <li class="nav-item">
+            <a class="nav-link" href="admin.php"><i class="fa-solid fa-screwdriver-wrench fa-fw me-1"></i>Admin</a>
+        </li>
+    <?php
+        endif;
+    ?>
+
     <hr>
     <li class="nav-item">
         <a href="#modal-exclude" class="nav-link link-danger" data-bs-toggle="modal"><i class="fa-solid fa-trash fa-fw me-1"></i>Excluir Conta</a>
     </li>
 </ul>
+
+<?php include("components/modal-exclude.php"); ?>

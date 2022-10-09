@@ -4,7 +4,7 @@
         <?php require("components/head.php") ?>
     </head>
     <body>
-        <?php include ("components/login-header.php") ?>
+        <?php include ("components/auth-header.php") ?>
         <main>
             <div class="container my-3">
                 <div class="row py-3 d-flex justify-content-center align-items-center mb-3">
@@ -43,7 +43,7 @@
 
             </div>
 
-            <script src="js/pesquisa.js"></script>
+            <script src="js/fetch/pesquisa.js"></script>
 
 
             <!-- CAROUSEL DAS PROFISSÕES COM MAIS CONTRATOS -->

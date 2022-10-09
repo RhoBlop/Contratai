@@ -8,7 +8,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         let links = sidebar.querySelectorAll(".nav-link");
         // spread da NodeList em uma array [...var]
         for (link of [...links]) {
-            // se href do link for igual 
+            // se href do link for igual
             if (link.getAttribute("href") == current) {
                 link.classList.add("active");
             } else {
