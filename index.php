@@ -9,7 +9,7 @@
 
     <main>
       <div class="container my-lg-3">
-        <div class="row d-flex align-items-start flex-wrap justify-content-center" id="fContent">
+        <div class="row d-flex align-items-center flex-wrap justify-content-center" id="fContent">
           <div class="top-content col-12 col-lg-7 mb-4 mb-md-0">
           <div class="title my-3">
             <h1>Ajudando você</h1> 

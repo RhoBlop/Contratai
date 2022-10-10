@@ -37,9 +37,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
 <!-- REQUISIÇÕES PARA O BACKEND -->
 <script src="js/fetch/formularios.js"></script>
 
-<!-- INPUT MASKS -->
-<script> wget https://github.com/igorescobar/jQuery-Mask-Plugin/blob/master/dist/jquery.mask.min.js </script>
-
 
 <?php
     session_start();

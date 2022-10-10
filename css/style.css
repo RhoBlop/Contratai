@@ -138,6 +138,7 @@ header .btn {
     border-radius: 12px;
 }
 
+
 header .dropdown-item:active {
     background-color: var(--primary-green);
 }
@@ -208,6 +209,9 @@ main h1.text-gradient {
 .btn {
     transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
         border-color 0.15s ease-in-out, transform 0.15s ease-in-out;
+        
+
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1); 
 }
 
 .btn:hover {
@@ -372,6 +376,7 @@ ion-icon {
 /* Filtros de pesquisa */
 #searchBox {
     border: 1px solid var(--bootstrap-border);
+    box-shadow: 0px 2px .5rem rgba(0, 0, 0, 0.1);
 }
 
 #cardsPesquisa {
@@ -789,6 +794,7 @@ hr {
 .nav .active {
     background-color: var(--primary-green) !important;
     color: white !important;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2); 
 }
 
 .nav-link {
