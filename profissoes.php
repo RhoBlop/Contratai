@@ -28,11 +28,11 @@
 
                                     foreach($profissoes as $prof):
 
-                                        [$idusres, $dscespec, $dscprof] = [$prof["idusrespec"], ucfirst($prof["dscespec"]), ucfirst($prof["dscprof"])];
+                                        [$idusres, $idespec, $dscespec, $dscprof] = [$prof["idusrespec"], $prof["idespec"], ucfirst($prof["dscespec"]), ucfirst($prof["dscprof"])];
                                 ?>
 
                                     <!-- CARD PROFISSÃO -->
-                                    <div class="card shadow-sm rounded-4 my-3" id="cardProfissao">
+                                    <div class="card card-profissao shadow-sm rounded-4 my-3">
                                         <div class="card-body d-flex justify-content-between align-items-center px-4">
 
                                             <div class="card-text">
@@ -40,10 +40,10 @@
                                                 <p class="text-muted"><?php echo $dscespec ?></p>
                                             </div>
 
-                                            <a href="<?php echo '?idexclude={$idusres}' ?>" class="exclude">
+                                            <button class="exclude" onclick="deleteEspec(event)" data-especid="<?php echo $idusres ?>">
                                                 <i class="fa-solid fa-trash-can"></i>
                                                 <i class="fa-solid fa-xmark"></i>
-                                            </a>
+                                            </button>
 
                                         </div>
                                     </div>

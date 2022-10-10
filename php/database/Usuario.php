@@ -95,7 +95,7 @@
         public function selectProfissoessById($usrId) {
             try {
                 $sql = <<<SQL
-                    SELECT usres.idusrespec, dscprof, dscespec
+                    SELECT usres.idusrespec, dscprof, espec.idespec, dscespec
                     FROM usuario AS usr
                     INNER JOIN usrespec AS usres ON (usr.idusr = usres.idusr)
                     INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
@@ -221,7 +221,7 @@
             try {
                 // se o usuário já está cadastrado com essa especialização
                 $verifySQL = <<<SQL
-                    SELECT idUsr 
+                    SELECT usr.idUsr 
                     FROM usuario AS usr
                     INNER JOIN usrespec AS usres ON (usr.idusr = usres.idusr)
                     WHERE (usr.idusr = :usrId) and (usres.idespec = :especId)
@@ -387,7 +387,29 @@
         }
 
         public function deleteEspecById($usrId, $especId) {
+            try {
+                $sql = <<<SQL
+                DELETE FROM usrespec
+                WHERE (idUsr = :usrId) and (idEspec = :especId)
+                SQL;
+    
+                $stmt = Database::prepare($sql);
+                $stmt->execute([
+                    ":usrId" => $usrId,
+                    ":especId" => $especId
+                ]);
+    
+                if ($stmt->rowCount() > 0) {
+                    return [ "dados" => true ];
+                } else {
+                    return [ "dados" => false ];
+                }
+            } catch (PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
 
+                return [ "dados" => false ];
+            }
         }
     }
 ?>

@@ -11,7 +11,7 @@ let feedbackDiv = document.querySelector("#feedbackUsuario");
 // pega as especs após uma profissão ser selecionada
 selectProf.onchange = async () => {
     let profId = selectProf.value;
-    clearSelectEspecs();
+    clearLoading();
 
     // consulta as especs da profissão no banco, caso a profissão não tenha sido adicionada
     if (profId !== "new" && profId !== "") {
@@ -40,12 +40,12 @@ confirmBtn.onclick = async () => {
     let dscEspec;
     if (especId) { dscEspec = selectEspecsControl.getItem(especId).innerText; }
 
-    await fetchAddEspec(profId, dscProf, especId, dscEspec);
     
-    // if (profId && especId) {
-    // } else {
-    //     formErro("Selecione uma profissão e especialização");
-    // }
+    if (profId && especId) {
+        await fetchAddEspec(profId, dscProf, especId, dscEspec);
+    } else {
+        formErro("Selecione uma profissão e especialização");
+    }
 };
 
 async function fetchGetEspecs(profId) {
@@ -55,7 +55,12 @@ async function fetchGetEspecs(profId) {
     }
     especsAbortControl = new AbortController();
 
-    loadingGetEspecs();
+    loading();
+
+    // changes select placeholder
+    selectEspecsControl.settings.placeholder = "Aguarde um momento...";
+    selectEspecsControl.inputState();
+
     try {
         let response = await fetch(`./php/post/profissao/getEspecs.php`, {
             method: "POST",
@@ -66,9 +71,7 @@ async function fetchGetEspecs(profId) {
             body: `profId=${profId}`,
         });
         let data = await response.json();
-        console.log(data);
-
-        clearSelectEspecs();
+        clearLoading();
 
         if (data.dados) {
             return data.dados;
@@ -93,14 +96,19 @@ async function fetchAddEspec(profId, dscProf, especId, dscEspec) {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
+            credentials: "same-origin",
             signal: especsAbortControl.signal,
             body: `profId=${profId}&dscProf=${dscProf}&especId=${especId}&dscEspec=${dscEspec}`,
         });
-        let data = await response.text();
-        console.log(data);
+        let data = await response.json();
         feedbackDiv.style.display = "none";
 
-        if (data.action) {
+        if (data.erro) {
+            let { erro } = data;
+            formErro(erro);
+        }
+
+        if (data.dados) {
             setOpenToast(
                 "#notifyToast",
                 "Modificação de Profissões",
@@ -121,15 +129,7 @@ function loading() {
     feedbackDiv.innerText = "Aguarde um momento...";
 }
 
-function loadingGetEspecs() {
-    loading();
-
-    // changes select placeholder
-    selectEspecsControl.settings.placeholder = "Aguarde um momento...";
-    selectEspecsControl.inputState();
-}
-
-function clearSelectEspecs() {
+function clearLoading() {
     feedbackDiv.style.display = "none";
 
     selectEspecsControl.clear();
@@ -242,4 +242,35 @@ let selectEspecsControl = new TomSelect("#addEspec", {
     },
 });
 
-function deleteEspec() {}
+async function deleteEspec(event) {
+    let button = event.target.parentNode;
+    let especId = button.dataset.especid;
+
+    // pegando o card :/
+    let cardProfissao = button.parentNode.parentNode;
+    cardProfissao.remove();
+
+    try {
+        let response = await fetch(`./php/post/user/deletarEspec.php`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            credentials: "same-origin",
+            body: `especId=${especId}`,
+        });
+        let data = await response.json();
+
+        if (!data.dados) {
+            setOpenToast(
+                "#notifyToast",
+                "Modificação de Profissões",
+                "Erro ao deletar profissão"
+            );
+
+            window.location.reload();
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}

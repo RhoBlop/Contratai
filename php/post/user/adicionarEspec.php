@@ -22,11 +22,8 @@
     if ($especId === "new") {
         $dscEspec = $_POST["dscEspec"];
 
-        $especId = $profissao->insertEspec($dscEspec)["dados"];
+        $especId = $profissao->insertEspec($profId, $dscEspec)["dados"];
     }
-    var_dump($profId);
-    var_dump($especId);
-    exit();
 
     require("../../database/Usuario.php");
     $usr = new Usuario();

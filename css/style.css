@@ -1091,16 +1091,23 @@ p {
 
 /* Card Profissão */
 
-#cardProfissao p {
+.card-profissao p {
     font-size: 14px;
 }
 
-#cardProfissao a {
+.card-profissao button {
     display: block;
     position: relative;
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
 }
 
-#cardProfissao a .fa-trash-can {
+.card-profissao button .fa-trash-can {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1108,7 +1115,7 @@ p {
     opacity: 1;
     transition: all 0.3s ease-in-out;
 }
-#cardProfissao a .fa-xmark {
+.card-profissao button .fa-xmark {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1117,14 +1124,14 @@ p {
     transition: all 0.3s ease-in-out;
 }
 
-#cardProfissao a:hover .fa-trash-can {
+.card-profissao button:hover .fa-trash-can {
     opacity: 0;
 }
-#cardProfissao a:hover .fa-xmark {
+.card-profissao button:hover .fa-xmark {
     opacity: 1;
 }
 
-#cardProfissao .exclude {
+.card-profissao .exclude {
     width: 18px;
     height: 18px;
     display: flex;
@@ -1132,7 +1139,7 @@ p {
     align-items: center;
 }
 
-#cardProfissao .exclude i {
+.card-profissao .exclude i {
     width: 100%;
     height: 100%;
 }

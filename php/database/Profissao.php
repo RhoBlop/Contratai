@@ -188,13 +188,13 @@
                 $sql = <<<SQL
                     INSERT INTO profissao(dscProf) 
                     VALUES (:dscprof)
-                    RETURNING id
+                    RETURNING idprof
                 SQL;
                 
                 $stmt = Database::prepare($sql);
                 $stmt->execute([ ":dscprof" => $dscProf ]);
 
-                $profId = $stmt->fetch();
+                $profId = $stmt->fetch()["idprof"];
                 return ["dados" => $profId];
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
@@ -209,7 +209,7 @@
                 $sql = <<<SQL
                     INSERT INTO especializacao(idProf, dscEspec) 
                     VALUES (:idprof, :dscespec)
-                    RETURNING id
+                    RETURNING idespec
                 SQL;
                 
                 $stmt = Database::prepare($sql);
@@ -218,7 +218,7 @@
                     ":dscespec" => $dscEspec 
                 ]);
 
-                $especId = $stmt->fetch();
+                $especId = $stmt->fetch()["idespec"];
                 return ["dados" => $especId];
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
