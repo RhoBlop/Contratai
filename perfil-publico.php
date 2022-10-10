@@ -12,6 +12,8 @@
     <!-- HOME PAGE HEADER -->
         <?php include ("components/login-header.php") ?>
 
+        <?php include ("components/modal-contrato.html") ?>
+
         <?php 
             $userId = $_GET["id"];
             $perfPublico = $usuarioClass->selectPerfilPublicoById($userId);
@@ -63,7 +65,7 @@
                                         <p><?php echo is_null($perfNumContrato) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
                                         <a href="#avaliacao">[Desenvolvimento]</a><br>
                                     </div>
-                                    <a href="#" class="btn btn-outline-green mt-3">Contactar</a>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal-contrato" class="btn btn-outline-green mt-3">Contactar</a>
                                 </div>
 
                             </div>
@@ -195,5 +197,6 @@
         ></script>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
     </body>
 </html>
