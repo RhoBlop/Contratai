@@ -2,7 +2,6 @@
 <html lang="en">
     <head>
         <?php require("components/head.php") ?>
-        <script src="js/confirmaSenha.js"></script>
     </head>
 
     <body>
@@ -36,20 +35,20 @@
                                     <input type="text" class="form-control form-control-lg" id="cpf" name="cpf" placeholder="Digite seu CPF" required>
                                 </div>
 
-                                <!-- CPF -->
+                                <!-- TELEFONE -->
                                 <div class="form-group mb-3">
                                     <input type="text" class="form-control form-control-lg" id="telefone" name="telefone" placeholder="Digite seu telefone" required>
                                 </div>
 
                                 <!-- SENHA -->
                                 <div class="form-group mb-3">
-                                    <input type="password" class="form-control form-control-lg" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="off" required>
+                                    <input type="password" class="form-control form-control-lg" id="senha" name="senha" confirmarSenha="abc(event, '#confirmaSenha', '#senhaErrada')" placeholder="Digite sua senha" autocomplete="off" required>
                                 </div>
 
                                 <!-- CONFIRMAÇÃO SENHA -->
                                 <div class="form-group mb-3">
-                                    <input type="password" class="form-control form-control-lg" id="confirmSenha" name="confirmSenha" onchange="confirmaSenha(event, '#senha', '#senhaErrada')" placeholder="Digite sua senha" autocomplete="off" required>
-                                    <small class="formMsgErro">As senhas precisam ser iguais</small>
+                                    <input type="password" class="form-control form-control-lg" id="confirmaSenha" name="confirmaSenha" onchange="confirmarSenha(event, '#senha', '#senhaErrada')" placeholder="Confirme sua senha" autocomplete="off" required>
+                                    <small id="senhaErrada" class="formMsgErro">As senhas precisam ser iguais</small>
                                 </div>
 
                                 <!-- div para comunicação com usuário -->
@@ -57,7 +56,7 @@
 
                             <!-- BOTÕES AÇÃO -->
                             <div class="buttons d-flex justify-content-end align-items-center gap-3 my-3">
-                                    <a href="#" class="btn btn-link">Já sou usuário</a>
+                                    <button type="button" class="btn btn-link" onclick="redirectLogin()">Já sou usuário</button>
                                     <button type="submit" class="btn btn-green">Cadastrar</button>
                             </div>
                         </form>

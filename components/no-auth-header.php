@@ -1,3 +1,10 @@
+<?php
+    if ($auth) {
+        header("Location: home.php");
+        exit();
+    }
+?>
+
 <header id="mainHeader">
   <nav class="navbar navbar-expand-md fixed-top bg-light">
     <div class="container">
@@ -39,4 +46,4 @@
   </nav>
 </header>
 
-<?php include("components/login-modal.html"); ?>
+<?php include("components/modal-login.html"); ?>

@@ -1,22 +1,22 @@
 <?php 
     // header da requisição http para declarar que a resposta será um json
     header("Content-Type: application/json");
-    require ("../../php/verificacoes.php");
+    require ("../verificacoes.php");
 
-    verifyIsSetPost("senhaAtual", "senhaNova", "confirmSenhaNova");
+    verifyIsSetPost("senhaAtual", "senhaNova", "confirmaSenhaNova");
 
-    verifyIsEmptyPost("senhaAtual", "senhaNova", "confirmSenhaNova");
+    verifyIsEmptyPost("senhaAtual", "senhaNova", "confirmaSenhaNova");
 
     session_start();
     verifyIsAuthenticated();
 
     // classe PDO para realização de operações no BD
-    require ("../../php/database/Usuario.php");
+    require ("../../database/Usuario.php");
     $user = new Usuario();
 
-    [$senhaAtual, $senhaNova, $confirmSenhaNova] = [$_POST["senhaAtual"], $_POST["senhaNova"], $_POST["confirmSenhaNova"]];
+    [$senhaAtual, $senhaNova, $confirmaSenhaNova] = [$_POST["senhaAtual"], $_POST["senhaNova"], $_POST["confirmaSenhaNova"]];
 
-    if ($senhaNova == $confirmSenhaNova) {
+    if ($senhaNova == $confirmaSenhaNova) {
         $response = $user->updateSenha($_SESSION["idusr"], $senhaAtual, $senhaNova);
         
         echo json_encode($response);

@@ -1,19 +1,19 @@
 /* Montserrat Import */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
 
 /* VARIABLES */
 :root {
-    --background: #F8F8F8;
+    --background: #f8f8f8;
     --primary-green: #026773;
-    --light-green: #15A0B0;
-    --dark-green: #074A59;
+    --light-green: #15a0b0;
+    --dark-green: #074a59;
     --text-color: #000;
     --grey: #202020;
     --bootstrap-border: #ced4da;
     --danger-color: #cf1c0e;
-    --blue-vertical-gradient: linear-gradient(180deg, #15A0B0, #074A59);
+    --blue-vertical-gradient: linear-gradient(180deg, #15a0b0, #074a59);
     --navbar-height: 72px;
-    --font-family: 'Montserrat', sans-serif;
+    --font-family: "Montserrat", sans-serif;
 } /* VARIABLES */
 
 * {
@@ -26,7 +26,7 @@ html {
 
 body {
     background-color: var(--background);
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     -webkit-font-smoothing: antialized;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
@@ -35,9 +35,11 @@ body {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-} 
+}
 
-main h1, h2, h5{
+main h1,
+h2,
+h5 {
     font-weight: 700;
 }
 
@@ -60,7 +62,7 @@ a {
     color: var(--light-green);
 }
 
-a:hover{
+a:hover {
     color: var(--primary-green);
 }
 
@@ -129,7 +131,7 @@ header {
 
 header .navbar {
     height: var(--navbar-height);
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 header .btn {
@@ -141,19 +143,18 @@ header .dropdown-item:active {
 }
 
 @media screen and (max-width: 768px) {
-
     .offcanvas-header {
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     }
 
-    .offcanvas-body .navbar-nav .nav-item{
+    .offcanvas-body .navbar-nav .nav-item {
         display: flex;
         justify-content: center;
     }
 
     .offcanvas-body .navbar-nav {
         padding-bottom: 20px;
-        border-bottom: solid 1px rgba(0, 0, 0, .2);
+        border-bottom: solid 1px rgba(0, 0, 0, 0.2);
     }
 
     .offcanvas-body .header-buttons {
@@ -166,11 +167,9 @@ header .dropdown-item:active {
     .offcanvas-body .header-buttons a {
         font-size: 20px !important;
     }
-
 }
 
 /* Filtros de Serviço */
-
 
 .item-pesquisa {
     padding-right: 20px;
@@ -179,7 +178,7 @@ header .dropdown-item:active {
 
 /* Avaliações (Index) */
 
-.card-avaliacao .text-muted{
+.card-avaliacao .text-muted {
     font-size: 14px;
 }
 
@@ -198,17 +197,17 @@ header .dropdown-item:active {
 /* Gradient pro texto da home*/
 
 main h1.text-gradient {
-    background: linear-gradient(180deg, #15A0B0 0%, #074A59 100%);
+    background: linear-gradient(180deg, #15a0b0 0%, #074a59 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-
 /* Botões*/
 
 .btn {
-    transition: color .25s ease-in-out, background-color .25s ease-in-out, border-color .15s ease-in-out, transform .15s ease-in-out;
+    transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+        border-color 0.15s ease-in-out, transform 0.15s ease-in-out;
 }
 
 .btn:hover {
@@ -226,7 +225,7 @@ main h1.text-gradient {
 }
 
 .btn-login::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -239,8 +238,8 @@ main h1.text-gradient {
     transform-origin: center;
 }
 .btn-login:hover::after,
-.btn-login:focus::after{
-  transform: scale(1);
+.btn-login:focus::after {
+    transform: scale(1);
 }
 
 .btn-outline-green {
@@ -273,7 +272,6 @@ main h1.text-gradient {
     border-color: var(--primary-green);
 }
 
-
 .login-banner {
     height: 280px;
     display: flex;
@@ -289,7 +287,6 @@ main h1.text-gradient {
 }
 
 /* Principais Categorias */
-
 
 .badge-avaliacao {
     display: flex;
@@ -316,7 +313,7 @@ ion-icon {
 
 .card-categoria {
     border: none;
-    transition: all .25s ease-in-out;
+    transition: all 0.25s ease-in-out;
     position: relative;
 }
 
@@ -342,10 +339,10 @@ ion-icon {
 
 /* Card de Categoria */
 .clickable-card {
-    position:absolute; 
-    width:100%;
-    height:100%;
-    top:0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
     left: 0;
 
     z-index: 1;
@@ -364,7 +361,7 @@ ion-icon {
 
 .avaliacao-otima {
     background-color: #fef3cdc8;
-    color: #F4BF00;
+    color: #f4bf00;
 }
 
 .avaliacao-media {
@@ -396,30 +393,31 @@ ion-icon {
 }
 
 .active #searchBox {
-    border-radius: .5rem 0 0 0
+    border-radius: 0.5rem 0 0 0;
 }
 .active #searchButton {
-    border-radius: 0 .5rem 0 0
+    border-radius: 0 0.5rem 0 0;
 }
 .active .filters-group {
     display: flex;
     height: calc(1.5em + 1rem + 2px);
-    border-radius: 0 0 .5rem .5rem;
+    border-radius: 0 0 0.5rem 0.5rem;
     transform-origin: top left;
-    animation: fade-in .3s linear; 
+    animation: fade-in 0.3s linear;
 }
 
 .show-result {
     display: flex !important;
     transform-origin: center;
-    animation: collapse .2s ease-in-out !important;
+    animation: collapse 0.3s ease-in-out !important;
 }
 
 @keyframes collapse {
     from {
         transform: scaleY(0);
         opacity: 0;
-    } to {
+    }
+    to {
         transform: scaleY(1);
         opacity: 1;
     }
@@ -428,7 +426,8 @@ ion-icon {
 @keyframes fade-in {
     from {
         opacity: 0;
-    } to {
+    }
+    to {
         opacity: 1;
     }
 }
@@ -447,7 +446,7 @@ ion-icon {
     border: 1px solid var(--grey);
     border-radius: 15px;
     background-color: white;
-    transition: all .15s ease-in-out
+    transition: all 0.15s ease-in-out;
 }
 .search-filter + label:hover {
     cursor: pointer;
@@ -466,7 +465,7 @@ ion-icon {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.1);
-    border-radius: .5rem;
+    border-radius: 0.5rem;
 }
 
 .btn-continue-search {
@@ -477,7 +476,7 @@ ion-icon {
 .btn-continue-search i {
     font-size: 30px;
     color: var(--grey);
-    transform: none ;
+    transform: none;
 }
 .btn-continue-search:hover i {
     animation-name: up-down, up-down;
@@ -489,66 +488,67 @@ ion-icon {
 @keyframes up-down {
     from {
         transform: translateY(0);
-    } to {
+    }
+    to {
         transform: translateY(15px);
     }
 }
 
 /* Loading spinner */
 .lds-ellipsis {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
 }
 .lds-ellipsis div {
-  position: absolute;
-  top: 33px;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: #fff;
-  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--primary-green);
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .lds-ellipsis div:nth-child(1) {
-  left: 8px;
-  animation: lds-ellipsis1 0.6s infinite;
+    left: 8px;
+    animation: lds-ellipsis1 0.6s infinite;
 }
 .lds-ellipsis div:nth-child(2) {
-  left: 8px;
-  animation: lds-ellipsis2 0.6s infinite;
+    left: 8px;
+    animation: lds-ellipsis2 0.6s infinite;
 }
 .lds-ellipsis div:nth-child(3) {
-  left: 32px;
-  animation: lds-ellipsis2 0.6s infinite;
+    left: 32px;
+    animation: lds-ellipsis2 0.6s infinite;
 }
 .lds-ellipsis div:nth-child(4) {
-  left: 56px;
-  animation: lds-ellipsis3 0.6s infinite;
+    left: 56px;
+    animation: lds-ellipsis3 0.6s infinite;
 }
 @keyframes lds-ellipsis1 {
-  0% {
-    transform: scale(0);
-  }
-  100% {
-    transform: scale(1);
-  }
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 @keyframes lds-ellipsis3 {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0);
-  }
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
 }
 @keyframes lds-ellipsis2 {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(24px, 0);
-  }
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(24px, 0);
+    }
 }
 
 /* Card de Pesquisa */
@@ -562,7 +562,7 @@ ion-icon {
     margin: 10px 0;
     z-index: 2;
     opacity: 0;
-    animation: drop-in .4s ease-in-out forwards;
+    animation: drop-in 0.4s ease-in-out forwards;
 }
 
 .card-pesquisa .card-body {
@@ -586,13 +586,12 @@ ion-icon {
     align-self: center;
 }
 
-.card-pesquisa .search-profile-pic img{
+.card-pesquisa .search-profile-pic img {
     width: 100px;
     height: 100px;
     object-fit: cover;
     border-radius: 50%;
 }
-
 
 .card-pesquisa .badge-avaliacao {
     min-width: 70px;
@@ -607,7 +606,8 @@ ion-icon {
     from {
         transform: translateY(-50px);
         opacity: 0;
-    } to {
+    }
+    to {
         transform: translateY(0);
         opacity: 1;
     }
@@ -637,20 +637,19 @@ ion-icon {
 }
 
 /* Carousel em telas maiores */
-@media screen and ( min-width: 768px ) {
+@media screen and (min-width: 768px) {
     .carousel-inner {
         display: flex;
     }
     .carousel-item {
         display: block;
         margin-right: 0;
-        flex: 0 0 calc(100%/4);
+        flex: 0 0 calc(100% / 4);
     }
     .carousel-item p {
         font-size: 18px;
     }
-} 
-
+}
 
 /* Footer */
 
@@ -672,17 +671,16 @@ footer i {
     font-size: 24px;
 }
 
-.socials i{
+.socials i {
     color: white;
 }
 
-.socials{
+.socials {
     list-style: none;
     gap: 1rem;
 }
 
-@media screen and (max-width: 768px){
-
+@media screen and (max-width: 768px) {
     .socials {
         display: flex !important;
         justify-content: space-around !important;
@@ -710,10 +708,10 @@ footer i {
 
 /* Cadastro */
 
-.buttons > a, .buttons > button{
+.buttons > a,
+.buttons > button {
     font-size: 18px !important;
 }
-
 
 .cadastro-logo {
     position: absolute;
@@ -734,12 +732,11 @@ footer i {
     overflow: hidden;
 }
 
-.cadastro-side-image img{
+.cadastro-side-image img {
     object-fit: cover;
     width: 100%;
     height: 100%;
 }
-
 
 @media screen and (max-width: 1400px) {
     .cadastro-side-image {
@@ -776,17 +773,16 @@ footer i {
     border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-
 table .text-muted {
     font-size: 18px;
 }
 
 hr {
     size: 1px;
-    color: solid rgba(0, 0, 0, 0.1)
+    color: solid rgba(0, 0, 0, 0.1);
 }
 
-.active-link{
+.active-link {
     color: var(--primary-green) !important;
 }
 
@@ -798,7 +794,7 @@ hr {
 .nav-link {
     padding: 0.5rem 1rem;
     font-size: 16px;
-    transition: all .1s ease-in;
+    transition: all 0.1s ease-in;
 }
 
 .nav-link:hover {
@@ -808,8 +804,6 @@ hr {
 #side-bar {
     font-size: 20px;
 }
-
-
 
 /* Editar Perfil */
 
@@ -841,7 +835,7 @@ label {
 }
 
 .form-control:focus {
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     box-shadow: none;
     border: 1px solid var(--light-green);
     outline-style: solid;
@@ -862,7 +856,7 @@ label {
     filter: brightness(100%);
     width: 148px;
     height: 148px;
-    transition: all .1s ease-in-out;
+    transition: all 0.1s ease-in-out;
     overflow: hidden;
 }
 
@@ -879,7 +873,6 @@ label {
     border-radius: 50%;
     object-fit: cover;
 }
-
 
 /* HOVER */
 
@@ -951,7 +944,7 @@ label {
 
 #profileCard {
     font-size: 14px;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 #profileCard:hover {
@@ -961,15 +954,15 @@ label {
 #profileCard > .card-img-top {
     height: 100px;
     object-fit: cover;
-    border-top-right-radius: .375rem !important;
-    border-top-left-radius: .375rem !important;
+    border-top-right-radius: 0.375rem !important;
+    border-top-left-radius: 0.375rem !important;
 }
 
 #profileCard .profile-pic img {
     border: solid 2px #fff;
 }
 
-#profileCard > .card-body  {
+#profileCard > .card-body {
     margin-top: -50px;
 }
 
@@ -984,7 +977,6 @@ label {
 }
 
 /* Perfil Público */
-
 
 #profile .card .header-card {
     width: 100%;
@@ -1001,7 +993,7 @@ label {
     object-fit: cover;
 }
 
-#profile .card .card-body{
+#profile .card .card-body {
     padding: 15px;
 }
 
@@ -1009,8 +1001,8 @@ label {
     margin-top: -120px;
 }
 
-@media screen and (max-width: 992px){
-    #profile{
+@media screen and (max-width: 992px) {
+    #profile {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -1029,16 +1021,17 @@ label {
     #profile a {
         align-self: center;
     }
-
 }
 
-#profile .top-infos h3, p {
+#profile .top-infos h3,
+p {
     margin: 0;
 }
 
-#infos i, #infos p {
+#infos i,
+#infos p {
     font-size: 18px;
-    margin-right: .25rem;
+    margin-right: 0.25rem;
 }
 
 #fotos img {
@@ -1047,17 +1040,20 @@ label {
     object-fit: cover;
 }
 
-#fotos .sm-photo img{
+#fotos .sm-photo img {
     height: 48px;
     width: 100%;
     border-radius: 4px;
 }
 
-#fotos .big-photo img{
+#fotos .big-photo img {
     border-radius: 8px;
 }
 
-#sobre p, #avaliacao p, #anuncio p, #profileCard p {
+#sobre p,
+#avaliacao p,
+#anuncio p,
+#profileCard p {
     font-size: 16px;
 }
 
@@ -1083,7 +1079,7 @@ label {
 
 .grid {
     display: grid;
-    gap: .5rem;
+    gap: 0.5rem;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: repeat(2, 240px);
     border-radius: 1rem;
@@ -1099,7 +1095,8 @@ label {
     object-fit: cover;
 }
 
-.sm-photo1 img, .sm-photo2 img {
+.sm-photo1 img,
+.sm-photo2 img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -1118,16 +1115,16 @@ label {
 
 #cardProfissao a .fa-trash-can {
     position: absolute;
-    top: 50%;  
-    left: 50%; 
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     opacity: 1;
     transition: all 0.3s ease-in-out;
 }
 #cardProfissao a .fa-xmark {
     position: absolute;
-    top: 50%;  
-    left: 50%; 
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
     transition: all 0.3s ease-in-out;
@@ -1157,8 +1154,17 @@ label {
     display: none;
     opacity: 0;
     transition: all .3s;
+
 }
 
+@media screen and (max-width: 768px) {
+    .caixa-pesquisa {
+        width: 100%;
+    }
+    .imagem-trabalhador-home {
+        display: none;
+    }
+}
 
 #modaladdProf button:hover i {
     display: inline;
