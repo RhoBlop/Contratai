@@ -13,22 +13,26 @@
 
     [$profId, $especId] = [$_POST["profId"], $_POST["especId"]];
 
+    // criação caso não exista
     if ($profId === "new") {
         $dscProf = $_POST["dscProf"];
 
-        echo $dscProf;
+        $profId = $profissao->insertProf($dscProf)["dados"];
     }
-
     if ($especId === "new") {
         $dscEspec = $_POST["dscEspec"];
 
-        echo $dscEspec;
+        $especId = $profissao->insertEspec($dscEspec)["dados"];
     }
-    echo $profId;
-    echo $especId;
+    var_dump($profId);
+    var_dump($especId);
     exit();
 
-    $result = $profissao->selectEspecs($profId);
+    require("../../database/Usuario.php");
+    $usr = new Usuario();
+
+    // inserção da especialização no usuário
+    $result = $usr->insertEspec($_SESSION["idusr"], $especId);
 
     echo json_encode($result);
 ?>

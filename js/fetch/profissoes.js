@@ -34,12 +34,14 @@ selectProf.onchange = async () => {
 // adiciona a especialização
 confirmBtn.onclick = async () => {
     let profId = selectProf.value;
-    let dscProf = selectProfsControl.getItem(profId).innerText;
+    let dscProf;
+    if (profId) { dscProf = selectProfsControl.getItem(profId).innerText; }
     let especId = selectEspec.value;
-    let dscEspec = selectEspecsControl.getItem(especId).innerText;
+    let dscEspec;
+    if (especId) { dscEspec = selectEspecsControl.getItem(especId).innerText; }
 
     await fetchAddEspec(profId, dscProf, especId, dscEspec);
-
+    
     // if (profId && especId) {
     // } else {
     //     formErro("Selecione uma profissão e especialização");
@@ -83,6 +85,8 @@ async function fetchAddEspec(profId, dscProf, especId, dscEspec) {
     }
     especsAbortControl = new AbortController();
 
+    loading();
+
     try {
         let response = await fetch(`./php/post/user/adicionarEspec.php`, {
             method: "POST",
@@ -94,6 +98,7 @@ async function fetchAddEspec(profId, dscProf, especId, dscEspec) {
         });
         let data = await response.text();
         console.log(data);
+        feedbackDiv.style.display = "none";
 
         if (data.action) {
             setOpenToast(
@@ -110,10 +115,14 @@ async function fetchAddEspec(profId, dscProf, especId, dscEspec) {
 
 /* ========== USER FEEDBACK ========== */
 
-function loadingGetEspecs() {
+function loading() {
     feedbackDiv.style.display = "block";
     feedbackDiv.style.backgroundColor = "#026773";
     feedbackDiv.innerText = "Aguarde um momento...";
+}
+
+function loadingGetEspecs() {
+    loading();
 
     // changes select placeholder
     selectEspecsControl.settings.placeholder = "Aguarde um momento...";
