@@ -4,6 +4,10 @@
     
     class Profissao extends Database {
 
+        /* ================================
+                       SELECTS
+           ================================ */
+
         public function selectAll() {
             try {
                 $sql = <<<SQL
@@ -170,13 +174,54 @@
                 return [ "dados" => false ];
             }
         }
-    }
-    
-    // $prof = new Profissao();
-    // $profissoes = $prof->selectMaiorAvaliacao(3);
+        /* ================================
+                      /SELECTS
+           ================================ */
 
-    // foreach($profissoes as $profi) {
-    //     print_r($profi);
-    //     echo "<br>";
-    // }
+
+        /* ================================
+                       INSERTS
+           ================================ */
+
+        public function insertProf($dscProf) {
+            try {
+                $sql = <<<SQL
+                    INSERT INTO profissao(dscProf) 
+                    VALUES (:dscprof)
+                SQL;
+                
+                $stmt = Database::prepare($sql);
+                $stmt->execute([ ":dscprof" => $dscProf ]);
+
+                return ["dados" => true];
+            } catch(PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
+                
+                return [ "dados" => false ];
+            }
+        }
+
+        public function insertEspec($profId, $dscEspec) {
+            try {
+                $sql = <<<SQL
+                    INSERT INTO especializacao(idProf, dscEspec) 
+                    VALUES (:idprof, :dscespec)
+                SQL;
+                
+                $stmt = Database::prepare($sql);
+                $stmt->execute([ 
+                    ":idprof" => $profId,
+                    ":dscespec" => $dscEspec 
+                ]);
+
+                return ["dados" => true];
+            } catch(PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
+                
+                return [ "dados" => false ];
+            }
+        }
+    }
     ?>

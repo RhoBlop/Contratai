@@ -7,6 +7,7 @@
     ?>
     <head>
         <?php include ("components/head.php") ?>
+        <script src="js/profileAvalFilter.js"></script>
     </head>
     <body>
     <!-- HOME PAGE HEADER -->
@@ -37,6 +38,7 @@
                 $perfEspecs[] = $espec["dscespec"];
             }
 
+            $numAval = count($avaliacoes);
             [$perfNomUsr, $perfBiografiaUsr, $perfNumContrato, $perfMediaAval, $perfImgUsr] = [$perfPublico["nomusr"], $perfPublico["biografiausr"], $perfPublico['numcontrato'], $perfPublico["mediaavaliacao"], $perfPublico["imgusr"]];
         ?>
 
@@ -63,7 +65,7 @@
                                         <p><i class="fa-solid fa-location-dot fa-fw"></i>[Desenvolvimento no futuro]</p>
                                         <p><i class="fa-solid fa-star fa-fw"></i><?php echoDadosNotNull($perfMediaAval, "---"); ?></p>
                                         <p><?php echo is_null($perfNumContrato) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
-                                        <a href="#avaliacao">[Desenvolvimento]</a><br>
+                                        <a href="#avaliacao" class="text-decoration-none"><?php echoDadosNotNull("{$numAval} avaliações recebidas", "---"); ?></a><br>
                                     </div>
                                     <a href="#" class="btn btn-outline-green mt-3">Contactar</a>
                                 </div>
@@ -111,76 +113,72 @@
                                 </div>
                             </div>
                         </div> <!-- /ESPECIALIZAÇÕES -->
-
-                        <!-- AVALIAÇÕES -->
-                        <div class="card shadow-sm rounded-4 mb-3 d-flex" id="avaliacao">
-                            <div class="card-body d-flex flex-column justify-content-center">
-                                <h3 class="card-title mb-3">Avaliações</h3>
-
-                                <div class="subtitle d-flex gap-1 mb-3">
-                                <i class="fa-solid fa-star fa-fw"></i>
-                                    <h4 class="mb-3">4.5 de 50 Avaliações</h4>
-                                </div>
-
-                                <div class="row row-cols-1 row-cols-md-2 g-3">
-                                    <?php
-                                        foreach ($avaliacoes as $aval):
+                        
+                        <?php
+                            // display avaliações
+                            if ($avaliacoes):
+                        ?>
+                            <!-- AVALIAÇÕES -->
+                            <div class="card shadow-sm rounded-4 mb-3 d-flex" id="avaliacao">
+                                <div class="card-header filters-group" style="display: block">
+                                    <input type="radio" id="todos" class="search-filter" name="filterAval" value="todos" checked>
+                                    <label for="todos">Todos</label>
+                                    <?php 
+                                        foreach ($especializacoes as $espec) {
+                                            $especId = $espec["idespec"];
+                                            $dscEspec = ucfirst($espec["dscespec"]);
+                                            echo <<<ITEM
+                                                <input type="radio" id="{$especId}" class="search-filter" name="filterAval" value="{$especId}">
+                                                <label for="{$especId}">{$dscEspec}</label>
+                                            ITEM;
+                                        }
                                     ?>
-                                
-                                        <div class="avaliacao col mb-3">
-                                            <div class="avaliacao-header d-flex align-items-start gap-3 mb-3">
-                                                <div class="aval-pic">
-                                                    <img src="<?php echoProfileImage($aval["imgusr"]); ?>" class="rounded-circle">
+                                </div>
+                                <div class="card-body d-flex flex-column justify-content-center">
+                                    <h3 class="card-title mb-3">Avaliações</h3>
+
+                                    <div class="subtitle d-flex gap-1 mb-3">
+                                        <i class="fa-solid fa-star fa-fw"></i>
+                                        <h4 id="notaAvaliacoes" class="mb-3"><?php echo "{$perfMediaAval} de {$numAval} avaliações" ?></h4>
+                                    </div>
+
+                                    <div class="row row-cols-1 row-cols-md-2 g-3">
+                                        <?php
+                                            foreach ($avaliacoes as $aval):
+                                        ?>
+                                    
+                                            <div class="avaliacao col mb-3" data-especid="<?php echo $aval["idespec"]; ?>" data-nota=<?php echo $aval["notaavaliacao"]; ?>>
+                                                <div class="avaliacao-header d-flex align-items-start gap-3 mb-3">
+                                                    <div class="aval-pic">
+                                                        <img src="<?php echoProfileImage($aval["imgusr"]); ?>" class="rounded-circle">
+                                                    </div>
+                                                    <div class="d-flex flex-column">
+                                                        <h5 class="mb-0"><?php echo $aval["nomusr"]; ?></h5>
+                                                        <p class="text-muted">
+                                                            <i class="fa-solid fa-star fa-fw"></i>
+                                                            <?php echo $aval["notaavaliacao"] ?>
+                                                        </p>
+                                                        <p class="text-muted"><?php echo ucfirst($aval["dscespec"]) ?></p>
+                                                        <p class="text-muted">data [atualizar banco]</p>
+                                                    </div>
                                                 </div>
-                                                <div class="d-flex flex-column">
-                                                    <h5 class="mb-0"><?php echo $aval["nomusr"]; ?></h5>
-                                                    <p class="text-muted">[atualizar banco]</p>
-                                                </div>
+
+                                                <p><?php echo ucfirst($aval["comentarioavaliacao"]); ?></p>
                                             </div>
 
-                                            <p><?php echo ucfirst($aval["comentarioavaliacao"]); ?></p>
-                                        </div>
+                                        <?php 
+                                            endforeach;
+                                        ?>
+                                    </div>
 
-                                    <?php 
-                                        endforeach;
-                                    ?>
                                 </div>
-
-                            </div>
-                        </div> <!-- /AVALIAÇÕES -->
+                            </div> <!-- /AVALIAÇÕES -->
+                        <?php
+                            // display avaliações
+                            endif;
+                        ?>
 
                     </div>
-
-
-                    <!--
-                    <div class="col-4">
-
-                        <div class="row mb-5" id="fotos">
-                            <h3>Galeria</h3>
-
-                            <div class="col-10 p-0">
-                                <div class="big-photo">
-                                    <img src="images\temp\eletricista.png" alt="">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="row g-2">
-                                    <div class="sm-photo">
-                                        <img src="images\temp\eletricista.png" alt="">
-                                    </div>
-                                    <div class="sm-photo">
-                                        <img src="images\temp\eletricista.png" alt="">
-                                    </div>
-                                    <div class="sm-photo">
-                                        <img src="images\temp\eletricista.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    -->
-
-                    </div>
-
                 </div>
             </div>
         </main>

@@ -3,8 +3,12 @@
 
     class Usuario extends Database {
 
+        /* ================================
+                       SELECTS
+           ================================ */
+
         // retorna usuário com o id passado por parâmetro
-        public function selectBasicInfoById($id) {
+        public function selectBasicInfoById($usrId) {
             try {
                 $sql = <<<SQL
                     SELECT nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr 
@@ -13,7 +17,7 @@
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
-                    ":id" => $id
+                    ":id" => $usrId
                 ]);
                 
                 $result = $stmt->fetch();
@@ -28,7 +32,7 @@
         }
 
 
-        public function selectPerfilPublicoById($id) {
+        public function selectPerfilPublicoById($usrId) {
             try {
                 // tá feio :(
                 $sql = <<<SQL
@@ -46,7 +50,7 @@
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
-                    ":id" => $id
+                    ":id" => $usrId
                 ]);
                 
                 $result = $stmt->fetch();
@@ -88,7 +92,7 @@
         }
 
 
-        public function selectProfissoessById($id) {
+        public function selectProfissoessById($usrId) {
             try {
                 $sql = <<<SQL
                     SELECT usres.idusrespec, dscprof, dscespec
@@ -102,7 +106,7 @@
 
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
-                    ":id" => $id
+                    ":id" => $usrId
                 ]);
 
                 $result = $stmt->fetchAll();
@@ -116,7 +120,7 @@
         }
         
 
-        public function selectEspecsPerfPublicoById($id) {
+        public function selectEspecsPerfPublicoById($usrId) {
             try {
                 $sql = <<<SQL
                     SELECT espec.idespec, dscespec, round(avg(notaavaliacao), 1) AS mediaavaliacao
@@ -132,7 +136,7 @@
 
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
-                    ":id" => $id
+                    ":id" => $usrId
                 ]);
 
                 $result = $stmt->fetchAll();
@@ -146,22 +150,20 @@
         }
 
 
-        public function selectAvaliacoesById($id, $filterNota = "DESC") {
+        public function selectAvaliacoesById($usrId, $filterNota = "DESC") {
             try {
                 $sql = <<<SQL
-                    SELECT avalusr.nomusr, avalusr.imgusr, avalusr.comentarioavaliacao, round(avg(avalusr.notaavaliacao), 1) AS mediaavaliacao
-                    FROM (SELECT usr.idusr, usr.nomusr, imgusr, comentarioavaliacao, notaavaliacao
-                        FROM avaliacao AS aval
-                        INNER JOIN contrato AS contrt ON (aval.idcontrato = contrt.idcontrato)
-                        INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
-                        INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.idusr)
-                        WHERE contrt.idcontratado = :id
-                        ORDER BY aval.notaavaliacao DESC) AS avalusr
-                    GROUP BY avalusr.nomusr, avalusr.imgusr, avalusr.comentarioavaliacao
+                    SELECT usr.idusr, usr.nomusr, espec.idespec, dscespec, imgusr, comentarioavaliacao, round(notaavaliacao, 1) as notaavaliacao
+                    FROM avaliacao AS aval
+                    INNER JOIN contrato AS contrt ON (aval.idcontrato = contrt.idcontrato)
+                    INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
+                    INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.idusr)
+                    WHERE contrt.idcontratado = :id
+                    ORDER BY aval.notaavaliacao DESC
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
-                    ":id" => $id
+                    ":id" => $usrId
                 ]);
 
                 $result = $stmt->fetchAll();
@@ -173,7 +175,14 @@
                 return [ "dados" => false ];
             }
         }
+        /* ================================
+                       /SELECTS
+           ================================ */
 
+
+        /* ================================
+                       INSERTS
+           ================================ */
 
         // insere um usuário com as informações passadas por parâmetro
         public function insertBasicInfo($nome, $email, $cpf, $telefone, $senha) {
@@ -208,16 +217,63 @@
             }
         }
 
+        public function insertEspec($usrId, $especId) {
+            try {
+                // se o usuário já está cadastrado com essa especialização
+                $verifySQL = <<<SQL
+                    SELECT idUsr 
+                    FROM usuario AS usr
+                    INNER JOIN usrespec AS usres ON (usr.idusr = usres.idusr)
+                    WHERE (usr.idusr = :usrId) and (usres.idespec = :especId)
+                SQL;
+                $verifyEspec = Database::prepare($verifySQL);
+                $verifyEspec->execute([ 
+                    ":usrId" => $usrId,
+                    ":especId" => $especId
+                ]);
+
+                // realiza o insert caso o usuário já não tenha cadastrado tal profissão
+                if ($verifyEspec->rowCount() < 1) {
+                    // insert do registro de especialização
+                    $insertSQL = <<<SQL
+                        INSERT INTO usrespec(idusr, idespec) 
+                        VALUES (:usrId, :especId)
+                    SQL;
+                    $insertSTMT = Database::prepare($insertSQL);
+                    $insertSTMT->execute([
+                        ":usrId" => $usrId,
+                        ":especId" => $especId
+                    ]);
+
+                    return [ "dados" => true ];
+                } else {
+                    return [ "erro" => "Especialização já cadastrada" ];
+                }
+            } catch (PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
+
+                return [ "dados" => false ];
+            }
+        }
+        /* ================================
+                       /INSERTS
+           ================================ */
+
+
+        /* ================================
+                       UPDATES
+           ================================ */
 
         // altera as informações de um usuário com id para os dados recebidos por parâmetro
-        public function updateInfo($id, $nome, $email, $imgBase64, $nascimento, $telefone, $bio) {
+        public function updateInfo($usrId, $nome, $email, $imgBase64, $nascimento, $telefone, $bio) {
             try {
                 // verifica se não existe nenhum email idêntico cadastrado (desconsiderando o email do próprio usuário)
                 $verifySQL = "SELECT idUsr FROM usuario WHERE (emailUsr = :email) AND (idUsr <> :id)";
                 $verifySTMT = Database::prepare($verifySQL);
                 $verifySTMT->execute([ 
                     ":email" => $email,
-                    ":id" => $id
+                    ":id" => $usrId
                 ]);
 
                 if ($verifySTMT->rowCount() < 1) {
@@ -231,7 +287,7 @@
     
                         $stmt = Database::prepare($sql);
                         $stmt->execute([
-                            ":id" => $id,  // INT
+                            ":id" => $usrId,  // INT
                             ":nome" => $nome,  // STRING
                             ":email" => $email,  // STRING
                             ":img" => $imgBase64,  // STRING
@@ -248,7 +304,7 @@
     
                         $stmt = Database::prepare($sql);
                         $stmt->execute([
-                            ":id" => $id,  // INT
+                            ":id" => $usrId,  // INT
                             ":nome" => $nome,  // STRING
                             ":email" => $email,  // STRING
                             ":nascimento" => $nascimento,  // ?
@@ -272,12 +328,12 @@
         }
 
         
-        public function updateSenha($id, $senhaAtual, $senhaNova) {
+        public function updateSenha($usrId, $senhaAtual, $senhaNova) {
             try {
                 $verifySenhaSQL = "SELECT idusr FROM usuario WHERE (idusr = :id) AND (senhausr = :senhaAtual)";
                 $verifySTMT = Database::prepare($verifySenhaSQL);
                 $verifySTMT->execute([
-                    ":id" => $id,
+                    ":id" => $usrId,
                     ":senhaAtual" => $senhaAtual
                 ]);
 
@@ -285,7 +341,7 @@
                     $sql = "UPDATE usuario SET senhaUsr = :senhaNova WHERE idUsr = :id";
                     $stmt = Database::prepare($sql);
                     $stmt->execute([
-                        ":id" => $id,
+                        ":id" => $usrId,
                         ":senhaNova" => $senhaNova
                     ]);
         
@@ -302,16 +358,23 @@
                 return [ "dados" => false ];
             }
         }
+        /* ================================
+                       /UPDATES
+           ================================ */
 
+
+        /* ================================
+                       DELETES
+           ================================ */
 
         // deleta um usuário a partir do id passado por parâmetro
-        public function deleteById($id) {
+        public function deleteById($usrId) {
             try {
                 $sql = "DELETE FROM usuario WHERE idUsr = :id";
     
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
-                    ":id" => $id
+                    ":id" => $usrId
                 ]);
     
                 return [ "dados" => true ];
@@ -321,6 +384,10 @@
 
                 return [ "dados" => false ];
             }
+        }
+
+        public function deleteEspecById($usrId, $especId) {
+
         }
     }
 ?>
