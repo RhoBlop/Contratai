@@ -43,11 +43,11 @@
         <main>
             <div class="container my-3">
                 <div class="row gx-5 justify-content-center">
-                    <div class="col-12 col-lg-8" id="profile">
+                    <div class="col-12 col-lg-7" id="profile">
 
                         <!-- APRESENTAÇÃO PERFIL -->
                         <div class="card shadow-sm rounded-4 mb-3" id="infos">
-                            <div class="header-card rounded-4  rounded-bottom">
+                            <div class="header-card rounded-4">
                             </div>
                             <div class="card-body p-3 text-start">
                                 <div class="top-body p-3 mb-1">
