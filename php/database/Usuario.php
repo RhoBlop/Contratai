@@ -23,26 +23,26 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
 
         public function selectPerfilPublicoById($id) {
             try {
+                // tá feio :(
                 $sql = <<<SQL
-                    SELECT usr.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, mediaavaliacao, count(*) AS numcontrato, json_agg(dscespec) AS especsusr
-                    FROM usuario AS usr
-                    INNER JOIN usrespec AS usres ON (usres.idusr = usr.idusr)
-                    INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
-                    LEFT JOIN (SELECT usr.idusr, round(avg(notaavaliacao), 1) AS mediaavaliacao
+                        SELECT usrinfo.idusr, round(avg(notaavaliacao), 1) AS mediaavaliacao, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, numcontrato
+                        FROM (SELECT usr.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, count(*) AS numcontrato
                                 FROM usuario AS usr
-                                INNER JOIN contrato AS contrt ON (usr.idusr = contrt.idcontratado)
-                                INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                                INNER JOIN usrespec AS usres ON (usres.idusr = usr.idusr)
+                                INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
                                 WHERE usr.idusr = :id
-                                GROUP BY usr.idusr
-                                ) AS mediausr ON (usr.idusr = mediausr.idusr)
-                    GROUP BY usr.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, mediaavaliacao
+                                GROUP BY usr.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr
+                        ) AS usrinfo
+                        LEFT JOIN contrato AS contrt ON (usrinfo.idusr = contrt.idcontratado)
+                        LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                        GROUP BY usrinfo.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, numcontrato
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
@@ -51,16 +51,12 @@
                 
                 $result = $stmt->fetch();
 
-                if (isset($result["especsusr"])) {
-                    $result["especsusr"] = json_decode($result["especsusr"]);
-                }
-
                 return $result;
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
         
@@ -87,15 +83,21 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
-        
 
-        public function selectEspecsById($id) {
+
+        public function selectProfissoessById($id) {
             try {
                 $sql = <<<SQL
-                    SELECT dscespec, 
+                    SELECT usres.idusrespec, dscprof, dscespec
+                    FROM usuario AS usr
+                    INNER JOIN usrespec AS usres ON (usr.idusr = usres.idusr)
+                    INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
+                    INNER JOIN profissao AS prof ON (espec.idprof = prof.idprof)
+                    WHERE usr.idusr = :id
+                    ORDER BY dscprof ASC
                 SQL;
 
                 $stmt = Database::prepare($sql);
@@ -109,12 +111,42 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
+            }
+        }
+        
+
+        public function selectEspecsPerfPublicoById($id) {
+            try {
+                $sql = <<<SQL
+                    SELECT espec.idespec, dscespec, round(avg(notaavaliacao), 1) AS mediaavaliacao
+                    FROM usuario AS usr
+                    INNER JOIN usrespec AS usres ON (usr.idusr = usres.idusr)
+                    INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
+                    LEFT JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+                    LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    WHERE usr.idusr = :id
+                    GROUP BY espec.idespec, dscespec
+                    ORDER BY mediaavaliacao DESC NULLS LAST
+                SQL;
+
+                $stmt = Database::prepare($sql);
+                $stmt->execute([
+                    ":id" => $id
+                ]);
+
+                $result = $stmt->fetchAll();
+                return $result;
+            } catch (PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
+                
+                return [ "dados" => false ];
             }
         }
 
 
-        public function selectAvalById($id, $filterNota = "DESC") {
+        public function selectAvaliacoesById($id, $filterNota = "DESC") {
             try {
                 $sql = <<<SQL
                     SELECT avalusr.nomusr, avalusr.imgusr, avalusr.comentarioavaliacao, round(avg(avalusr.notaavaliacao), 1) AS mediaavaliacao
@@ -125,7 +157,7 @@
                         INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.idusr)
                         WHERE contrt.idcontratado = :id
                         ORDER BY aval.notaavaliacao DESC) AS avalusr
-                    GROUP BY avalusr.idusr
+                    GROUP BY avalusr.nomusr, avalusr.imgusr, avalusr.comentarioavaliacao
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
@@ -138,13 +170,13 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
 
         // insere um usuário com as informações passadas por parâmetro
-        public function insertBasicInfo($nome, $email, $senha) {
+        public function insertBasicInfo($nome, $email, $cpf, $telefone, $senha) {
             try {
                 // verifica se já existe um usuário cadastro com esse email
                 $verifySQL = "SELECT idUsr FROM usuario WHERE emailUsr = :email";
@@ -154,15 +186,17 @@
                 // se não existem usuários cadastrados com esse email, segue para insert
                 if ($verifyEmail->rowCount() < 1) {
                     // insert do novo usuário
-                    $insertSQL = "INSERT INTO usuario(nomUsr, emailUsr, senhaUsr) VALUES (:nome, :email, :senha)";
+                    $insertSQL = "INSERT INTO usuario(nomUsr, emailUsr, cpfUsr, telefoneUsr, senhaUsr) VALUES (:nome, :email, :cpf, :telefone, :senha)";
                     $insertSTMT = Database::prepare($insertSQL);
                     $insertSTMT->execute([
                         ":nome" => $nome,
                         ":email" => $email,
+                        ":cpf" => $cpf,
+                        ":telefone" => $telefone,
                         ":senha" => $senha
                     ]);
 
-                    return [ "action" => true ];
+                    return [ "dados" => true ];
                 } else {
                     return [ "erro" => "Email já cadastrado" ];
                 }
@@ -170,7 +204,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
@@ -224,7 +258,7 @@
                     }
 
     
-                    return [ "action" => true ];
+                    return [ "dados" => true ];
                 } else {
                     return [ "erro" => "Email já cadastrado" ];
                 }
@@ -233,7 +267,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
@@ -255,7 +289,7 @@
                         ":senhaNova" => $senhaNova
                     ]);
         
-                    return [ "action" => true ];
+                    return [ "dados" => true ];
                 } else {
                     return [
                         "erro" => "A senha atual digitada está incorreta"
@@ -265,7 +299,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
@@ -280,12 +314,12 @@
                     ":id" => $id
                 ]);
     
-                return [ "action" => true ];
+                return [ "dados" => true ];
             } catch (PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
     }

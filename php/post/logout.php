@@ -1,14 +1,14 @@
 <?php
     session_start();
-    require("../php/verificacoes.php");
-    require("../php/utils.php");
+    require("verificacoes.php");
+    require("../utils.php");
 
     verifyIsAuthenticated();
 
     logout();
 
     $resposta = [
-        "action" => true
+        "dados" => true
     ];
 
     echo json_encode($resposta);

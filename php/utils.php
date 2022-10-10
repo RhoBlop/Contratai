@@ -1,23 +1,16 @@
 <?php 
-    function isAuthenticated() {
-        if (isset($_SESSION["idusr"])) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     function logout() {
         session_unset();
         session_destroy();
         $_SESSION = array();
     }
 
+    // gera base64 das imagens, variável $_FILES passada por parâmetro
     function generateImgBase64($files) {
         $imgs = [];
 
         foreach($files as $f) {
-            // caminho salvo no servidor
+            // caminho da imagem salva temporariamente no servidor
             $tmpPath = $f["tmp_name"];
 
             // extensão da imagem (sem o .) 

@@ -2,63 +2,67 @@
 <html lang="en">
     <head>
         <?php require("components/head.php") ?>
-        <script src="js/confirmaSenha.js"></script>
     </head>
 
     <body>
         <main>
             <div class="container-fluid">
+                <a class="cadastro-logo" href="index.php">
+                    <img src="images/logo/favicon.svg" alt="Logo" height="48px">
+                </a>
                 <div class="form-row row">
-                    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
-                        <!-- LOGO -->
-                        <a class="cadastro-logo" href="index.php">
-                            <img src="images/logo/blue-logo.svg" alt="Logo" height="70px">
-                        </a>
-                        
+                    
+                    <div class="col-md-6 d-flex flex-column justify-content-start align-items-center my-5">
+                    
                         <!-- Título Formulário -->
-                        <div class="form-title d-flex flex-column mb-5">
+                        <div class="form-title my-3">
                             <h2>Crie sua conta!</h2>
-                            <h6>Preencha suas informações</h6>
                         </div>
                         
-                        <form id="cadastro" class="form-cadastro d-flex flex-column" onsubmit="sendCadastro(event, '#feedbackUsuario')">
+                        <form id="cadastro" class="form-cadastro row g-3" onsubmit="sendCadastro(event, '#feedbackUsuario')">
+                                <!-- NOME -->
+                                <div class="form-group mb-3">
+                                    <input type="text" class="form-control form-control-lg" id="nome" name="nome" placeholder="Digite seu nome" autocomplete="off" required>
+                                </div>
 
-                            <!-- NOME -->
-                            <div class="form-group mb-3">
-                                <label for="nome" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome" autocomplete="off" required>
+                                <!-- EMAIL -->
+                                <div class="form-group mb-3">
+                                    <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Digite seu email" required>
+                                </div>
+
+                                <!-- CPF -->
+                                <div class="form-group mb-3">
+                                    <input type="text" class="form-control form-control-lg" id="cpf" name="cpf" placeholder="Digite seu CPF" required>
+                                </div>
+
+                                <!-- TELEFONE -->
+                                <div class="form-group mb-3">
+                                    <input type="text" class="form-control form-control-lg" id="telefone" name="telefone" placeholder="Digite seu telefone" required>
+                                </div>
+
+                                <!-- SENHA -->
+                                <div class="form-group mb-3">
+                                    <input type="password" class="form-control form-control-lg" id="senha" name="senha" confirmarSenha="abc(event, '#confirmaSenha', '#senhaErrada')" placeholder="Digite sua senha" autocomplete="off" required>
+                                </div>
+
+                                <!-- CONFIRMAÇÃO SENHA -->
+                                <div class="form-group mb-3">
+                                    <input type="password" class="form-control form-control-lg" id="confirmaSenha" name="confirmaSenha" onchange="confirmarSenha(event, '#senha', '#senhaErrada')" placeholder="Confirme sua senha" autocomplete="off" required>
+                                    <small id="senhaErrada" class="formMsgErro">As senhas precisam ser iguais</small>
+                                </div>
+
+                                <!-- div para comunicação com usuário -->
+                                <div id="feedbackUsuario"></div>
+
+                            <!-- BOTÕES AÇÃO -->
+                            <div class="buttons d-flex justify-content-end align-items-center gap-3 my-3">
+                                    <button type="button" class="btn btn-link" onclick="redirectLogin()">Já sou usuário</button>
+                                    <button type="submit" class="btn btn-green">Cadastrar</button>
                             </div>
-
-                            <!-- EMAIL -->
-                            <div class="form-group mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
-                            </div>
-
-                            <!-- SENHA -->
-                            <div class="form-group mb-3">
-                                <label for="senha" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="off" required>
-                            </div>
-
-                            <!-- CONFIRMAÇÃO SENHA -->
-                            <div class="form-group mb-1">
-                                <label for="nome" class="form-label">Confirme sua senha</label>
-                                <input type="password" class="form-control" id="confirmSenha" name="confirmSenha" oninput="confirmaSenha(event, '#senha', '#senhaErrada')" placeholder="Digite sua senha" autocomplete="off" required>
-                                <small class="formMsgErro">As senhas precisam ser iguais</small>
-                            </div>
-
-                            <a class="ms-auto mb-2">Esqueci minha senha</a>
-
-                            <!-- div para comunicação com usuário -->
-                            <div id="feedbackUsuario"></div>
-
-                            <button type="submit" class="btn btn-green mt-4">Cadastrar</button>
                         </form>
                     </div>
 
-                    <div class="cadastro-side-image col-md-6"></div>
-                </div>
+                    <div class="cadastro-side-image col-md-6 px-0"><img src="images\teste2.jpg" alt=""></div>
             </div>
         </main>
     </body>

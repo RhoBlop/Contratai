@@ -1,3 +1,10 @@
+<?php
+    if ($auth) {
+        header("Location: home.php");
+        exit();
+    }
+?>
+
 <header id="mainHeader">
   <nav class="navbar navbar-expand-md fixed-top bg-light">
     <div class="container">
@@ -12,12 +19,12 @@
       <!-- SIDEBAR -->
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <!-- SIDEBAR HEADER -->
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Contratai</h5>
+        <div class="offcanvas-header px-4">
+          <h3 class="offcanvas-title" id="offcanvasNavbarLabel">Contratai</h3>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div> <!-- /SIDEBAR HEADER -->
         <!-- SIDEBAR BODY -->
-        <div class="offcanvas-body">
+        <div class="offcanvas-body px-4">
           <ul class="navbar-nav justify-content-center flex-grow-1">
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="index.php">Início</a>
@@ -29,8 +36,8 @@
               <a class="nav-link" href="ajuda.php">Ajuda</a>
             </li>
           </ul>
-          <div class="d-flex justify-content-end align-items-center flex-grow 1">
-            <a type="button" class="btn btn-login me-3 px-2" data-bs-toggle="modal" data-bs-target="#modal-login">Login</a>
+          <div class="header-buttons d-flex justify-content-end align-items-center gap-3 flex-grow 1">
+            <a type="button" class="btn btn-login px-2" data-bs-toggle="modal" data-bs-target="#modal-login">Login</a>
             <a type="button" class="btn btn-outline-green" href="cadastro.php">Cadastre-se</a>
           </div>
         </div><!-- /SIDEBAR BODY -->
@@ -39,4 +46,4 @@
   </nav>
 </header>
 
-<?php include("components/login-modal.html"); ?>
+<?php include("components/modal-login.html"); ?>

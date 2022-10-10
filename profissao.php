@@ -6,7 +6,7 @@
     <body>
         <?php 
             if ($auth) {
-                include("components/login-header.php");
+                include("components/auth-header.php");
             } else {
                 include("components/no-auth-header.php");
             }
@@ -14,7 +14,9 @@
 
         <main>
             <?php 
+                $profissaoClass = new Profissao();
                 $idprof = $_GET["id"];
+                
                 $users = $profissaoClass->selectProfissaoMaiorAvaliacao($idprof, $limit = 8);
                 $dscprof = $users[0]["dscprof"];
             ?>
@@ -37,7 +39,6 @@
             </div>
         </main>
 
-        <?php include ("components/footer.html")?>
     </body>
 
     <script

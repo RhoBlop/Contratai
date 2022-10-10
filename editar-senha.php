@@ -2,20 +2,19 @@
 <html lang="en">
     <head>
         <?php require("components/head.php") ?>
-        <script src="js/confirmaSenha.js"></script>
     </head>
     <body>
-        <?php include ("components/login-header.php") ?>
+        <?php include ("components/auth-header.php") ?>
 
         <main>
             <div class="container p-3 my-3">
                 <div class="row gx-5">
                     
-                    <?php include("components/modal-exclude.html")?>
+                    
 
-                    <?php include("components/sidebar.html")?>
+                    <?php include("components/sidebar.php")?>
 
-                    <div class="col-8 px-3" id="profile-content">
+                    <div class="col-8 px-3" id="settingsContent">
                         <div class="mb-4">
                             <h2>Editar senha</h2>
                             <h6 class="text-muted">Altere a senha da sua conta</h6>
@@ -31,12 +30,14 @@
 
                             <div class="form-group mb-3">
                                 <label for="senhaNova" class="form-label">Nova Senha</label>
-                                <input type="password" class="form-control" id="senhaNova" name="senhaNova" autocomplete="off" placeholder="Digite sua nova senha" required>
+                                <input type="password" class="form-control" id="senhaNova" name="senhaNova" autocomplete="off" onchange="confirmaSenha(event, '#confirmaSenhaNova', '#senhaErrada')" placeholder="Digite sua nova senha" required>
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="confirmSenhaNova" class="form-label">Confirme a nova senha</label>
-                                <input type="password" class="form-control" id="confirmSenhaNova" name="confirmSenhaNova" autocomplete="off" oninput="confirmaSenha(event, '#senhaNova')" placeholder="Repita sua nova senha" required>
+                                <label for="confirmaSenhaNova" class="form-label">Confirme a nova senha</label>
+                                <input type="password" class="form-control" id="confirmaSenhaNova" name="confirmaSenhaNova" autocomplete="off" onchange="confirmaSenha(event, '#senhaNova', '#senhaErrada')" placeholder="Repita sua nova senha" required>
+                                
+                                <small id="senhaErrada" class="formMsgErro">As senhas precisam ser iguais</small>
                             </div>
                             
                             <!-- div para comunicação com usuário -->

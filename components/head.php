@@ -1,5 +1,5 @@
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
 <title>Contrataí</title>
 
 <!-- SVG FAVICON -->
@@ -26,13 +26,16 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
 <link rel="stylesheet" href="css/style.css">
 
 <!-- COISOS QUE PISCAM NA TELA (MODAL, TOAST...) -->
-<script src="../js/popups.js"></script>
+<script src="js/popups.js"></script>
+
+<!-- FUNÇÕES GERAIS, SEM LIGAÇÃO COM ALGO ESPECÍFICO -->
+<script src="js/utils.js"></script>
 
 <!-- JAVASCRIPT PARA MUDAR A CLASSE DOS LINKS ATIVOS NO HEADER E SIDEBAR -->
-<script src="../js/activeLinks.js"></script>
+<script src="js/activeLinks.js"></script>
 
 <!-- REQUISIÇÕES PARA O BACKEND -->
-<script src="../js/requisicoesAPI.js"></script>
+<script src="js/fetch/formularios.js"></script>
 
 <?php
     session_start();
@@ -41,7 +44,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     require("php/impressaoDados.php");
     require("php/utils.php");
 
-    $auth = isAuthenticated();
-    $usuarioClass = new Usuario();
-    $profissaoClass = new Profissao();
+    if (isset($_SESSION["idusr"])) {
+        $auth = true;
+    } else {
+        $auth = false;
+    }
 ?>

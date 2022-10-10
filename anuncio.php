@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
-        <?php include ("components/head.html") ?>
+        <?php include ("components/head.php") ?>
     </head>
     <body>
     <!-- HOME PAGE HEADER -->
-        <?php include ("components/login-header.html") ?>
+        <?php include ("components/auth-header.php") ?>
 
         <main>
-            <div class="container my-5">
+            <div class="container my-3">
                 <h3>Faço ilustrações</h3>
-                <div class="grid">
-                    
+                <div class="row">
+                    <div class="col-9">
+                        <div class="grid">
+                            <div class="big-photo">
+                                <img src="images\temp\placeholder-card.jpg" alt="">
+                            </div>
+                            <div class="sm-photo1">
+                                <img src="images\temp\placeholder-card.jpg" alt="">
+                            </div>
+                            <div class="sm-photo2">
+                                <img src="images\temp\placeholder-card.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                
             </div>
         </main>
 

@@ -7,6 +7,7 @@
     <div id="topAval" class="container carousel multitem-car">
         <div class="carousel-inner">
         <?php 
+            $profissaoClass = new Profissao();
             $profsAv = $profissaoClass->selectMaiorAvaliacao($limit = 6);
             
             foreach ($profsAv as $prof): 
@@ -24,7 +25,7 @@
                     </div>
                     <div class="card-body">
                         <h4><?php echo ucfirst($dscprof); ?></h4>
-                        <p class="mb-2"><?php echo $numAv; ?> avalições de contratantes</p>
+                        <p class="mb-2"><?php echo $numAv; ?> avaliações de contratantes</p>
                         <a href="<?php echo "profissao.php?id={$idprof}" ?>" class="btn btn-outline-green">Ver mais</a>
                         <a href="<?php echo "profissao.php?id={$idprof}" ?>"><span class="clickable-card"></span></a>
                     </div>
@@ -41,7 +42,7 @@
                     </div>
                     <div class="card-body">
                         <h4><?php echo ucfirst($dscprof); ?></h4>
-                        <p class="mb-2"><?php echo $numAv; ?> avalições de contratantes</p>
+                        <p class="mb-2"><?php echo $numAv; ?> avaliações de contratantes</p>
                         <a href="<?php echo "profissao.php?id={$idprof}" ?>" class="btn btn-outline-green">Ver mais</a>
                         <a href="<?php echo "profissao.php?id={$idprof}" ?>"><span class="clickable-card"></span></a>
                     </div>

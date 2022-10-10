@@ -7,23 +7,23 @@
         public function selectAll() {
             try {
                 $sql = <<<SQL
-                    SELECT * FROM profissao
+                    SELECT idprof, dscprof FROM profissao
                 SQL;
 
                 $stmt = Database::prepare($sql);
                 $stmt->execute();
 
                 $result = $stmt->fetchAll();
-                return $result;
+                return [ "dados" => $result ];
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
-        public function selectEspecsGrouped($idprof) {
+        public function selectEspecs($idprof) {
             try {
                 $sql = <<<SQL
                     SELECT prof.idprof, espec.idespec, dscespec
@@ -39,12 +39,12 @@
                 ]);
 
                 $result = $stmt->fetchAll();
-                return $result;
+                return [ "dados" => $result ];
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
@@ -77,7 +77,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
@@ -108,7 +108,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
@@ -140,7 +140,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
 
@@ -167,7 +167,7 @@
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
-                return [ "action" => false ];
+                return [ "dados" => false ];
             }
         }
     }
