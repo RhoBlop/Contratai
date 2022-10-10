@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-addProf" tabindex="-1" role="dialog">
+<div class="modal fade" id="modalAddProf" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -6,43 +6,52 @@
         <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-      <form id="login" class="form-login d-flex flex-column" autocomplete="off" onsubmit="sendLogin(event)">
-        <div class="modal-body mx-0">
+        <div id="modalBody" class="modal-body mx-0">
+            <div class="form-group mb-3 text-muted text-center">
+                Caso não encontre sua profissão/especialização, é possível digitar uma nova categoria e adicioná-la, sendo mais tarde analisada por nossos especialistas (evite realizar tal ação). 
+            </div>
             
-              <!-- ESPECIALIZAÇÃO -->
-              <div class="form-group mb-3">
+            <!-- ESPECIALIZAÇÃO -->
+            <div class="form-group mb-3">
                 <label for="especializacao" class="form-label">Profissão</label>
                 <select name="profissao" id="addProf">
-                  <option value="" selected>Selecione uma profissão</option>
-                  <?php 
+                    <option value="" selected>Selecione uma profissão</option>
+                    <?php 
                     $profissaoClass = new Profissao();
-                    $profissoes = $profissaoClass->selectAll();
+                    $profissoes = $profissaoClass->selectAll()["dados"];
 
                     foreach ($profissoes as $prof):
 
-                      [$idprof, $dscprof] = [$prof['idprof'], ucfirst($prof['dscprof'])];
+                        [$idprof, $dscprof] = [$prof['idprof'], ucfirst($prof['dscprof'])];
 
-                      echo <<<ITEM
+                        echo <<<ITEM
                         <option value="{$idprof}">{$dscprof}</option>
-                      ITEM;
-                      
+                        ITEM;
+                        
                     endforeach;
-                  ?>
+                    ?>
                 </select>
-              </div>
+            </div>
 
-                <!-- div para comunicação com usuário -->
-                <div id="feedbackUsuario"></div>
+            <!-- ESPECIALIZAÇÃO -->
+            <div class="form-group mb-3">
+                <label for="especializacao" class="form-label">Especialização</label>
+                <select name="espec" id="addEspec">
+                    <option value="" selected>Selecione uma profissão primeiro</option>
+                </select>
+            </div>
+            <!-- div para comunicação com usuário -->
+            <div id="feedbackUsuario"></div>
         </div>
         <div class="modal-footer d-flex justify-content-center">
-          <button type="submit" class="btn btn-outline-green"><i class="fa-solid fa-arrow-right"></i></button>
+          <button id="addEspecBtn" class="btn btn-outline-green"><i class="fa-solid fa-arrow-right"></i></button>
         </div>
-      </form>
     </div>
   </div>
 </div>
 
-<!-- SELECT SEARCHABLE -->
+<!-- SEARCHABLE SELECT -->
 <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.1/dist/css/tom-select.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.1/dist/js/tom-select.complete.min.js"></script>
-<script src="js/fetch/addProf.js"></script>
+
+<script src="js/fetch/profissoes.js"></script>

@@ -12,6 +12,10 @@ function redirectLogin() {
     window.location.href = "index.php";
 }
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 // função executada sempre que uma imagem do input type=file é selecionada
 // lê os dados da imagem e coloca em uma tag img, com id passado por parâmetro (para que o usuário pode visualizar a imagem selecionada)
 function showSelectedImg(event, idImg) {

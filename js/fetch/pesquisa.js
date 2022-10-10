@@ -120,7 +120,7 @@ function createUserCard(user) {
     // join specs onto string
     especsusr = especsusr.join(", ");
     // capitalize string first letter
-    especsusr = especsusr[0].toUpperCase() + especsusr.slice(1);
+    especsusr = capitalizeFirstLetter(especsusr);
 
     card.innerHTML = `
         <div class="search-profile-pic ps-3">

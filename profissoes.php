@@ -53,7 +53,7 @@
                                 ?>
 
                                 <div class="mt-3 text-center">
-                                    <a data-bs-toggle="modal" data-bs-target="#modal-addProf" class="btn btn-link">Adicionar profissão</a>
+                                    <a data-bs-toggle="modal" data-bs-target="#modalAddProf" class="btn btn-link">Adicionar profissão</a>
                                 </div>
                                 
                             </div>
@@ -64,6 +64,7 @@
             </div>
         </main>
 
+        <?php include ("components/toast.html") ?>
     </body>
 
     <script
@@ -73,4 +74,8 @@
     ></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        checkForOpenToast();
+    </script>
 </html>
