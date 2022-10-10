@@ -53,7 +53,7 @@
                                 </div>
 
                                 <!-- div para comunicação com usuário -->
-                                <div id="feedbackUsuario"></div>
+                                <div id="feedbackUsuario" class="collapse"></div>
 
                             <!-- BOTÕES AÇÃO -->
                             <div class="buttons d-flex justify-content-end align-items-center gap-3 my-3">

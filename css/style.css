@@ -412,7 +412,7 @@ ion-icon {
 .show-result {
     display: flex !important;
     transform-origin: center;
-    animation: collapse .3s ease-in-out !important;
+    animation: collapse .2s ease-in-out !important;
 }
 
 @keyframes collapse {
@@ -926,6 +926,7 @@ label {
     padding: 10px 0;
     margin: 20px 0 0 0;
     border-radius: 8px;
+    animation: fade-in .3s ease-in;
     /* max-height: 0;
     transition: max-height 4s ease-in-out; */
 }
@@ -1205,7 +1206,6 @@ label {
     left: 20px;
     z-index: 3001;
     display: none;
-    font-family: arial;
     font-size: 15px;
     line-height: 1em;
   }
