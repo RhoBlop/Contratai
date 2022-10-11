@@ -13,6 +13,8 @@
     <!-- HOME PAGE HEADER -->
         <?php include ("components/auth-header.php") ?>
 
+        <?php include ("components/modal-contrato.html") ?>
+
         <?php 
             $usuarioClass = new Usuario();
             $userId = $_GET["id"];
@@ -45,11 +47,11 @@
         <main>
             <div class="container my-3">
                 <div class="row gx-5 justify-content-center">
-                    <div class="col-12 col-lg-8" id="profile">
+                    <div class="col-12 col-lg-7" id="profile">
 
                         <!-- APRESENTAÇÃO PERFIL -->
                         <div class="card shadow-sm rounded-4 mb-3" id="infos">
-                            <div class="header-card rounded-4  rounded-bottom">
+                            <div class="header-card rounded-4">
                             </div>
                             <div class="card-body p-3 text-start">
                                 <div class="top-body p-3 mb-1">
@@ -67,7 +69,7 @@
                                         <p><?php echo is_null($perfNumContrato) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
                                         <a href="#avaliacao" class="text-decoration-none"><?php echoDadosNotNull("{$numAval} avaliações recebidas", "---"); ?></a><br>
                                     </div>
-                                    <a href="#" class="btn btn-outline-green mt-3">Contactar</a>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal-contrato" class="btn btn-outline-green mt-3">Contactar</a>
                                 </div>
 
                             </div>
@@ -195,5 +197,6 @@
         ></script>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
     </body>
 </html>

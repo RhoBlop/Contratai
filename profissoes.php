@@ -53,7 +53,7 @@
                                 ?>
 
                                 <div class="mt-3 text-center">
-                                    <a data-bs-toggle="modal" data-bs-target="#modalAddProf" class="btn btn-link">Adicionar profissão</a>
+                                    <a data-bs-toggle="modal" data-bs-target="#modaladdProf" class="btn btn-link">Adicionar profissão</a>
                                 </div>
                                 
                             </div>
