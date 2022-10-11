@@ -53,7 +53,7 @@
                 "Março",
                 "Abril",
                 "Maio",
-                "Junhi",
+                "Junho",
                 "Julho",
                 "Agosto",
                 "Setembro",

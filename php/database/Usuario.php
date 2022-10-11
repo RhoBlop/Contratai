@@ -36,8 +36,8 @@
             try {
                 // tá feio :(
                 $sql = <<<SQL
-                        SELECT usrinfo.idusr, round(avg(notaavaliacao), 1) AS mediaavaliacao, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, numcontrato
-                        FROM (SELECT usr.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, count(*) AS numcontrato
+                        SELECT usrinfo.idusr, round(avg(notaavaliacao), 1) AS mediaavaliacao, count(*) AS numcontrato, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr
+                        FROM (SELECT usr.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr
                                 FROM usuario AS usr
                                 INNER JOIN usrespec AS usres ON (usres.idusr = usr.idusr)
                                 INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
@@ -46,7 +46,7 @@
                         ) AS usrinfo
                         LEFT JOIN contrato AS contrt ON (usrinfo.idusr = contrt.idcontratado)
                         LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                        GROUP BY usrinfo.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr, numcontrato
+                        GROUP BY usrinfo.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([

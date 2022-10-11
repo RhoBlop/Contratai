@@ -13,7 +13,7 @@
     <!-- HOME PAGE HEADER -->
         <?php include ("components/auth-header.php") ?>
 
-        <?php include ("components/modal-contrato.html") ?>
+        <?php include ("components/modal-contrato.php") ?>
 
         <?php 
             $usuarioClass = new Usuario();
@@ -69,7 +69,13 @@
                                         <p><?php echo is_null($perfNumContrato) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
                                         <a href="#avaliacao" class="text-decoration-none"><?php echoDadosNotNull("{$numAval} avaliações recebidas", "---"); ?></a><br>
                                     </div>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal-contrato" class="btn btn-outline-green mt-3">Contactar</a>
+                                    <?php
+                                        if ($_SESSION["idusr"] != $userId) {
+                                            echo <<<ITEM
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-contrato" class="btn btn-outline-green mt-3">Contactar</a>
+                                            ITEM;
+                                        }
+                                    ?>
                                 </div>
 
                             </div>
@@ -126,13 +132,18 @@
                                     <input type="radio" id="todos" class="search-filter" name="filterAval" value="todos" checked>
                                     <label for="todos">Todos</label>
                                     <?php 
-                                        foreach ($especializacoes as $espec) {
-                                            $especId = $espec["idespec"];
-                                            $dscEspec = ucfirst($espec["dscespec"]);
-                                            echo <<<ITEM
-                                                <input type="radio" id="{$especId}" class="search-filter" name="filterAval" value="{$especId}">
-                                                <label for="{$especId}">{$dscEspec}</label>
-                                            ITEM;
+                                        $noRepeat = [];
+                                        foreach ($avaliacoes as $aval) {
+                                            $especId = $aval["idespec"];
+                                            $dscEspec = ucfirst($aval["dscespec"]);
+
+                                            if (!in_array($dscEspec, $noRepeat)) {
+                                                echo <<<ITEM
+                                                    <input type="radio" id="{$especId}" class="search-filter" name="filterAval" value="{$especId}">
+                                                    <label for="{$especId}">{$dscEspec}</label>
+                                                ITEM;
+                                            }
+                                            $noRepeat[] = $dscEspec;
                                         }
                                     ?>
                                 </div>
@@ -150,7 +161,7 @@
                                         ?>
                                     
                                             <div class="avaliacao col mb-3" data-especid="<?php echo $aval["idespec"]; ?>" data-nota=<?php echo $aval["notaavaliacao"]; ?>>
-                                                <div class="avaliacao-header d-flex align-items-start gap-3 mb-3">
+                                                <div class="avaliacao-header d-flex align-items-center gap-3 mb-3">
                                                     <div class="aval-pic">
                                                         <img src="<?php echoProfileImage($aval["imgusr"]); ?>" class="rounded-circle">
                                                     </div>

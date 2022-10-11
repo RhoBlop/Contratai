@@ -18,25 +18,36 @@
                 $idprof = $_GET["id"];
                 
                 $users = $profissaoClass->selectProfissaoMaiorAvaliacao($idprof, $limit = 8);
-                $dscprof = $users[0]["dscprof"];
+                var_dump($users);
+                if ($users):
+                    $dscprof = $users[0]["dscprof"];
             ?>
 
-            <div class="container p-3 my-3 align-items-center">
-                <div class="mb-4">
-                    <h2><?php echo ucfirst($dscprof) ?></h2>
-                    <h6 class="text-muted">Encontre os melhores profissionais em nossa plataforma</h6>
-                </div>
+                <div class="container p-3 my-3 align-items-center">
+                    <div class="mb-4">
+                        <h2><?php echo ucfirst($dscprof) ?></h2>
+                        <h6 class="text-muted">Encontre os melhores profissionais em nossa plataforma</h6>
+                    </div>
 
-                <div class="d-flex justify-content-center align-items-center flex-column">
-                    <?php 
-                        foreach($users as $user) {
-                            [$idusr, $nomusr, $imgusr, $numcontrato, $mediaAv] = [$user["idusr"], $user["nomusr"], $user["imgusr"], $user["numcontrato"], $user["mediaavaliacao"]];
-                    
-                            include ("components/card-pesquisa-profissao.php");
-                        }
-                    ?>
+                    <div class="d-flex justify-content-center align-items-center flex-column">
+                        <?php 
+                            foreach($users as $user) {
+                                [$idusr, $nomusr, $imgusr, $numcontrato, $mediaAv] = [$user["idusr"], $user["nomusr"], $user["imgusr"], $user["numcontrato"], $user["mediaavaliacao"]];
+                        
+                                include ("components/card-pesquisa-profissao.php");
+                            }
+                        ?>
+                    </div>
                 </div>
-            </div>
+            <?php
+                else:
+            ?>
+                <div>
+                    Nenhum usuário cadastrado nessa profissão
+                </div>
+            <?php
+                endif;
+            ?>
         </main>
 
     </body>

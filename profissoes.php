@@ -13,10 +13,10 @@
 
                     <?php include("components/sidebar.php")?>
 
-                    <div class="col-md-8 px-3" id="settingsContent">
+                    <div class="col-7 px-3" id="settingsContent">
                         <div class="mb-4">
-                            <h2>Profissões</h2>
-                            <h6 class="text-muted">Veja e adicione suas Profissões</h6>
+                            <h2>Minhas profissões</h2>
+                            <h6 class="text-muted">Veja e adicione suas profissões disponíveis publicamente</h6>
                         </div>
 
                         <div class="row justify-content-center">
@@ -40,7 +40,7 @@
                                                 <p class="text-muted"><?php echo $dscespec ?></p>
                                             </div>
 
-                                            <button class="exclude" onclick="deleteEspec(event)" data-especid="<?php echo $idusres ?>">
+                                            <button class="exclude" onclick="deleteEspec(event)" data-especid="<?php echo $idespec ?>">
                                                 <i class="fa-solid fa-trash-can"></i>
                                                 <i class="fa-solid fa-xmark"></i>
                                             </button>
