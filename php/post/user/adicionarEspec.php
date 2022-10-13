@@ -15,21 +15,21 @@
 
     // criação caso não exista
     if ($profId === "new") {
-        $dscProf = $_POST["dscProf"];
+        $descrProf = $_POST["descrProf"];
 
-        $profId = $profissao->insertProf($dscProf)["dados"];
+        $profId = $profissao->insertProf($descrProf)["dados"];
     }
     if ($especId === "new") {
-        $dscEspec = $_POST["dscEspec"];
+        $descrEspec = $_POST["descrEspec"];
 
-        $especId = $profissao->insertEspec($profId, $dscEspec)["dados"];
+        $especId = $profissao->insertEspec($profId, $descrEspec)["dados"];
     }
 
     require("../../database/Usuario.php");
-    $usr = new Usuario();
+    $user = new Usuario();
 
     // inserção da especialização no usuário
-    $result = $usr->insertEspec($_SESSION["idusr"], $especId);
+    $result = $user->insertEspec($_SESSION["iduser"], $especId);
 
     echo json_encode($result);
 ?>

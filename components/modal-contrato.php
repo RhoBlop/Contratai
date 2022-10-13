@@ -1,7 +1,6 @@
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script>
+<link rel="stylesheet" href="css/flatpickr.css">
 
 <div class="modal fade" id="modal-contrato" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -10,12 +9,16 @@
           <h2 class="modal-title">Contratar</h2>
         </div>
   
-        <form id="login" class="form-login d-flex flex-column text-center">
-          <div class="modal-body mx-0">
+        <form id="login" class="form-login d-flex flex-column text-center" onsubmit="sendSolicitacaoContrato(event)">
+            <div class="modal-body mx-0">
+                <div class="form-group mb-3 text-muted text-center">
+                    Preencha o tipo de serviço do contrato e em quais dias planeja-se que ele será feito. Uma solicitação será enviada ao usuário contratado e você será notificado caso ele aceite!
+                </div>
+
                 <!-- EMAIL -->
                 <div class="form-group mb-3">
                     <label for="select-espec" class="form-label">Especialização</label>
-                    <select class="form-control form-select" id="select-espec" aria-label="select">
+                    <select id="select-espec" class="form-control form-select" aria-label="select" required>
                         <option value="" selected disabled>Selecione a especialização</option>
                         <option value="1">Professor de matemática</option>
                         <option value="2">Professor de física</option>
@@ -24,67 +27,33 @@
                 </div>
     
                 <!-- SENHA -->
-                <div class="form group mb-3">
-                    <label for="password" class="form-label">Período</label>
-                    <input type="text" class="form-control" name="datefilter" required>
+                <div id="dateWrapper" class="form group mb-3">
+                    <label for="multidate" class="form-label">Dias do contrato</label>
+                    <input id="multidate" type="text" class="form-control" name="multidate" placeholder="Selecione os dias do contrato" required data-input>
                 </div>
   
-          </div>
-          <div class="modal-footer d-flex justify-content-center">
-            <button type="submit" class="btn btn-outline-green">Solicitar</button>
-          </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="submit" class="btn btn-outline-green">Solicitar</button>
+            </div>
         </form>
       </div>
     </div>
   </div>
 
 <script>
-    $(function() {
+    const dateInputWrapper = document.querySelector("#dateWrapper");
+    let configs = {
+        locale: "pt",
+        mode: "multiple",
+        wrap: true,
+        dateFormat: "Y-m-d",
+        altInput: true,
+        altFormat: "j \\d\\e M, Y",
+        conjunction: " :: ",
+        minDate: "today",
+        maxDate: new Date().fp_incr(150),
+    }
 
-        $('input[name="datefilter"]').daterangepicker({
-            autoUpdateInput: false,
-            locale: {
-                format: 'DD/MM/YYYY',
-                applyLabel: 'Concluir',
-                cancelLabel: 'Limpar',
-                monthNames: [
-                "Janeiro",
-                "Fevereiro",
-                "Março",
-                "Abril",
-                "Maio",
-                "Junho",
-                "Julho",
-                "Agosto",
-                "Setembro",
-                "Outubro",
-                "Novembro",
-                "Dezembro"
-                ],
-
-                daysOfWeek: [
-                "Dom",
-                "Seg",
-                "Ter",
-                "Qua",
-                "Qui",
-                "Sex",
-                "Sab"
-                ],
-            },
-            buttonClasses: "btn",
-            applyButtonClasses: "btn-outline-green",
-            opens: 'center',
-            cancelClass: 'btn-link',
-        });
-
-        $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
-            $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
-        });
-
-        $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
-            $(this).val('');
-        });
-
-    });
+    const datePicker = flatpickr(dateInputWrapper, configs);
 </script>

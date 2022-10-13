@@ -8,16 +8,16 @@
            ================================ */
 
         // retorna usuário com o id passado por parâmetro
-        public function selectBasicInfoById($usrId) {
+        public function selectBasicInfoById($userId) {
             try {
                 $sql = <<<SQL
-                    SELECT nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr 
+                    SELECT *
                     FROM usuario
-                    WHERE idusr = :id;
+                    WHERE iduser = :id;
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
-                    ":id" => $usrId
+                    ":id" => $userId
                 ]);
                 
                 $result = $stmt->fetch();
@@ -32,25 +32,25 @@
         }
 
 
-        public function selectPerfilPublicoById($usrId) {
+        public function selectPerfilPublicoById($userId) {
             try {
                 // tá feio :(
                 $sql = <<<SQL
-                        SELECT usrinfo.idusr, round(avg(notaavaliacao), 1) AS mediaavaliacao, count(*) AS numcontrato, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr
-                        FROM (SELECT usr.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr
-                                FROM usuario AS usr
-                                INNER JOIN usrespec AS usres ON (usres.idusr = usr.idusr)
-                                INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
-                                WHERE usr.idusr = :id
-                                GROUP BY usr.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr
-                        ) AS usrinfo
-                        LEFT JOIN contrato AS contrt ON (usrinfo.idusr = contrt.idcontratado)
-                        LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                        GROUP BY usrinfo.idusr, nomusr, emailusr, cpfusr, imgusr, nascimentousr, telefoneusr, biografiausr
+                    SELECT userinfo.iduser, round(avg(notaavaliacao), 1) AS mediaavaliacao, count(*) AS numcontrato, nomuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
+                    FROM (SELECT usr.iduser, nomuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
+                            FROM usuario AS usr
+                            INNER JOIN userespec AS useres ON (useres.iduser = usr.iduser)
+                            INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
+                            WHERE usr.iduser = :id
+                            GROUP BY usr.iduser, nomuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
+                    ) AS userinfo
+                    LEFT JOIN contrato AS contrt ON (userinfo.iduser = contrt.idcontratado)
+                    LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    GROUP BY userinfo.iduser, nomuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
-                    ":id" => $usrId
+                    ":id" => $userId
                 ]);
                 
                 $result = $stmt->fetch();
@@ -68,7 +68,11 @@
         // retorna usuário para login, ou seja, a partir de um email e uma senha
         public function selectLogin($email, $senha) {
             try {
-                $sql = "SELECT idusr FROM usuario WHERE (emailUsr = :email) AND (senhaUsr = :senha)";
+                $sql = <<<SQL
+                    SELECT iduser, isadminuser
+                    FROM usuario 
+                    WHERE (emailuser = :email) AND (senhauser = :senha)
+                SQL;
                 
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
@@ -92,21 +96,21 @@
         }
 
 
-        public function selectProfissoessById($usrId) {
+        public function selectProfissoessById($userId) {
             try {
                 $sql = <<<SQL
-                    SELECT usres.idusrespec, dscprof, espec.idespec, dscespec
+                    SELECT useres.iduserespec, descrprof, espec.idespec, descrespec
                     FROM usuario AS usr
-                    INNER JOIN usrespec AS usres ON (usr.idusr = usres.idusr)
-                    INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
+                    INNER JOIN userespec AS useres ON (usr.iduser = useres.iduser)
+                    INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
                     INNER JOIN profissao AS prof ON (espec.idprof = prof.idprof)
-                    WHERE usr.idusr = :id
-                    ORDER BY dscprof ASC
+                    WHERE usr.iduser = :id
+                    ORDER BY descrprof ASC
                 SQL;
 
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
-                    ":id" => $usrId
+                    ":id" => $userId
                 ]);
 
                 $result = $stmt->fetchAll();
@@ -120,23 +124,23 @@
         }
         
 
-        public function selectEspecsPerfPublicoById($usrId) {
+        public function selectEspecsPerfPublicoById($userId) {
             try {
                 $sql = <<<SQL
-                    SELECT espec.idespec, dscespec, round(avg(notaavaliacao), 1) AS mediaavaliacao
+                    SELECT espec.idespec, descrespec, round(avg(notaavaliacao), 1) AS mediaavaliacao
                     FROM usuario AS usr
-                    INNER JOIN usrespec AS usres ON (usr.idusr = usres.idusr)
-                    INNER JOIN especializacao AS espec ON (usres.idespec = espec.idespec)
+                    INNER JOIN userespec AS useres ON (usr.iduser = useres.iduser)
+                    INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
                     LEFT JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
                     LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    WHERE usr.idusr = :id
-                    GROUP BY espec.idespec, dscespec
+                    WHERE usr.iduser = :id
+                    GROUP BY espec.idespec, descrespec
                     ORDER BY mediaavaliacao DESC NULLS LAST
                 SQL;
 
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
-                    ":id" => $usrId
+                    ":id" => $userId
                 ]);
 
                 $result = $stmt->fetchAll();
@@ -150,20 +154,20 @@
         }
 
 
-        public function selectAvaliacoesById($usrId, $filterNota = "DESC") {
+        public function selectAvaliacoesById($userId, $filterNota = "DESC") {
             try {
                 $sql = <<<SQL
-                    SELECT usr.idusr, usr.nomusr, espec.idespec, dscespec, imgusr, comentarioavaliacao, round(notaavaliacao, 1) as notaavaliacao
+                    SELECT usr.iduser, usr.nomuser, espec.idespec, descrespec, imguser, comentarioavaliacao, round(notaavaliacao, 1) as notaavaliacao
                     FROM avaliacao AS aval
                     INNER JOIN contrato AS contrt ON (aval.idcontrato = contrt.idcontrato)
                     INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
-                    INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.idusr)
+                    INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.iduser)
                     WHERE contrt.idcontratado = :id
                     ORDER BY aval.notaavaliacao DESC
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
-                    ":id" => $usrId
+                    ":id" => $userId
                 ]);
 
                 $result = $stmt->fetchAll();
@@ -188,14 +192,14 @@
         public function insertBasicInfo($nome, $email, $cpf, $telefone, $senha) {
             try {
                 // verifica se já existe um usuário cadastro com esse email
-                $verifySQL = "SELECT idUsr FROM usuario WHERE emailUsr = :email";
+                $verifySQL = "SELECT iduser FROM usuario WHERE emailuser = :email";
                 $verifyEmail = Database::prepare($verifySQL);
                 $verifyEmail->execute([ ":email" => $email ]);
 
                 // se não existem usuários cadastrados com esse email, segue para insert
                 if ($verifyEmail->rowCount() < 1) {
                     // insert do novo usuário
-                    $insertSQL = "INSERT INTO usuario(nomUsr, emailUsr, cpfUsr, telefoneUsr, senhaUsr) VALUES (:nome, :email, :cpf, :telefone, :senha)";
+                    $insertSQL = "INSERT INTO usuario(nomuser, emailuser, cpfuser, telefoneuser, senhauser) VALUES (:nome, :email, :cpf, :telefone, :senha)";
                     $insertSTMT = Database::prepare($insertSQL);
                     $insertSTMT->execute([
                         ":nome" => $nome,
@@ -217,18 +221,18 @@
             }
         }
 
-        public function insertEspec($usrId, $especId) {
+        public function insertEspec($userId, $especId) {
             try {
                 // se o usuário já está cadastrado com essa especialização
                 $verifySQL = <<<SQL
-                    SELECT usr.idUsr 
+                    SELECT usr.iduser 
                     FROM usuario AS usr
-                    INNER JOIN usrespec AS usres ON (usr.idusr = usres.idusr)
-                    WHERE (usr.idusr = :usrId) and (usres.idespec = :especId)
+                    INNER JOIN userespec AS useres ON (usr.iduser = useres.iduser)
+                    WHERE (usr.iduser = :userId) and (useres.idespec = :especId)
                 SQL;
                 $verifyEspec = Database::prepare($verifySQL);
                 $verifyEspec->execute([ 
-                    ":usrId" => $usrId,
+                    ":userId" => $userId,
                     ":especId" => $especId
                 ]);
 
@@ -236,12 +240,12 @@
                 if ($verifyEspec->rowCount() < 1) {
                     // insert do registro de especialização
                     $insertSQL = <<<SQL
-                        INSERT INTO usrespec(idusr, idespec) 
-                        VALUES (:usrId, :especId)
+                        INSERT INTO userespec(iduser, idespec) 
+                        VALUES (:userId, :especId)
                     SQL;
                     $insertSTMT = Database::prepare($insertSQL);
                     $insertSTMT->execute([
-                        ":usrId" => $usrId,
+                        ":userId" => $userId,
                         ":especId" => $especId
                     ]);
 
@@ -266,14 +270,14 @@
            ================================ */
 
         // altera as informações de um usuário com id para os dados recebidos por parâmetro
-        public function updateInfo($usrId, $nome, $email, $imgBase64, $nascimento, $telefone, $bio) {
+        public function updateInfo($userId, $nome, $email, $imgBase64, $nascimento, $telefone, $bio) {
             try {
                 // verifica se não existe nenhum email idêntico cadastrado (desconsiderando o email do próprio usuário)
-                $verifySQL = "SELECT idUsr FROM usuario WHERE (emailUsr = :email) AND (idUsr <> :id)";
+                $verifySQL = "SELECT iduser FROM usuario WHERE (emailuser = :email) AND (iduser <> :id)";
                 $verifySTMT = Database::prepare($verifySQL);
                 $verifySTMT->execute([ 
                     ":email" => $email,
-                    ":id" => $usrId
+                    ":id" => $userId
                 ]);
 
                 if ($verifySTMT->rowCount() < 1) {
@@ -281,13 +285,13 @@
                     if ($imgBase64 != "") {
                         $sql = <<<SQL
                         UPDATE usuario
-                        SET nomusr = :nome, emailUsr = :email, imgUsr = :img, nascimentoUsr = :nascimento, telefoneUsr = :telefone, biografiaUsr = :bio
-                        WHERE idusr = :id
+                        SET nomuser = :nome, emailuser = :email, imguser = :img, nascimentouser = :nascimento, telefoneuser = :telefone, biografiauser = :bio
+                        WHERE iduser = :id
                         SQL;
     
                         $stmt = Database::prepare($sql);
                         $stmt->execute([
-                            ":id" => $usrId,  // INT
+                            ":id" => $userId,  // INT
                             ":nome" => $nome,  // STRING
                             ":email" => $email,  // STRING
                             ":img" => $imgBase64,  // STRING
@@ -298,13 +302,13 @@
                     } else {
                         $sql = <<<SQL
                         UPDATE usuario
-                        SET nomusr = :nome, emailUsr = :email, nascimentoUsr = :nascimento, telefoneUsr = :telefone, biografiaUsr = :bio
-                        WHERE idusr = :id
+                        SET nomuser = :nome, emailuser = :email, nascimentouser = :nascimento, telefoneuser = :telefone, biografiauser = :bio
+                        WHERE iduser = :id
                         SQL;
     
                         $stmt = Database::prepare($sql);
                         $stmt->execute([
-                            ":id" => $usrId,  // INT
+                            ":id" => $userId,  // INT
                             ":nome" => $nome,  // STRING
                             ":email" => $email,  // STRING
                             ":nascimento" => $nascimento,  // ?
@@ -328,20 +332,20 @@
         }
 
         
-        public function updateSenha($usrId, $senhaAtual, $senhaNova) {
+        public function updateSenha($userId, $senhaAtual, $senhaNova) {
             try {
-                $verifySenhaSQL = "SELECT idusr FROM usuario WHERE (idusr = :id) AND (senhausr = :senhaAtual)";
+                $verifySenhaSQL = "SELECT iduser FROM usuario WHERE (iduser = :id) AND (senhauser = :senhaAtual)";
                 $verifySTMT = Database::prepare($verifySenhaSQL);
                 $verifySTMT->execute([
-                    ":id" => $usrId,
+                    ":id" => $userId,
                     ":senhaAtual" => $senhaAtual
                 ]);
 
                 if ($verifySTMT->rowCount() > 0) {
-                    $sql = "UPDATE usuario SET senhaUsr = :senhaNova WHERE idUsr = :id";
+                    $sql = "UPDATE usuario SET senhauser = :senhaNova WHERE iduser = :id";
                     $stmt = Database::prepare($sql);
                     $stmt->execute([
-                        ":id" => $usrId,
+                        ":id" => $userId,
                         ":senhaNova" => $senhaNova
                     ]);
         
@@ -368,13 +372,13 @@
            ================================ */
 
         // deleta um usuário a partir do id passado por parâmetro
-        public function deleteById($usrId) {
+        public function deleteById($userId) {
             try {
-                $sql = "DELETE FROM usuario WHERE idUsr = :id";
+                $sql = "DELETE FROM usuario WHERE iduser = :id";
     
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
-                    ":id" => $usrId
+                    ":id" => $userId
                 ]);
     
                 return [ "dados" => true ];
@@ -386,16 +390,16 @@
             }
         }
 
-        public function deleteEspecById($usrId, $especId) {
+        public function deleteEspecById($userId, $especId) {
             try {
                 $sql = <<<SQL
-                DELETE FROM usrespec
-                WHERE (idUsr = :usrId) and (idEspec = :especId)
+                DELETE FROM userespec
+                WHERE (iduser = :userId) and (idEspec = :especId)
                 SQL;
     
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
-                    ":usrId" => $usrId,
+                    ":userId" => $userId,
                     ":especId" => $especId
                 ]);
     

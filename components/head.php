@@ -45,7 +45,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     require("php/impressaoDados.php");
     require("php/utils.php");
 
-    if (isset($_SESSION["idusr"])) {
+    if (isset($_SESSION["iduser"])) {
         $auth = true;
     } else {
         $auth = false;

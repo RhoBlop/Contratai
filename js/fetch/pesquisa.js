@@ -114,23 +114,23 @@ function createUserCard(user) {
     let card = document.createElement("div");
     card.classList.add("card", "card-hover", "card-pesquisa");
 
-    let { idusr, imgusr, nomusr, mediaavaliacao, numcontrato, especsusr } =
+    let { iduser, imguser, nomuser, mediaavaliacao, numcontrato, especsuser } =
         user;
 
     // join specs onto string
-    especsusr = especsusr.join(", ");
+    especsuser = especsuser.join(", ");
     // capitalize string first letter
-    especsusr = capitalizeFirstLetter(especsusr);
+    especsuser = capitalizeFirstLetter(especsuser);
 
     card.innerHTML = `
         <div class="search-profile-pic ps-3">
             <img src="${
-                imgusr || "images/temp/default-pic.png"
+                imguser || "images/temp/default-pic.png"
             }" alt="Imagem de perfil">
         </div>
         <div class="card-body">
             <div class="card-title">
-                <h6>${nomusr}</h6>
+                <h6>${nomuser}</h6>
                 <span class="badge-avaliacao ${
                     mediaavaliacao > 4.5 ? "avaliacao-otima" : "avaliacao-media"
                 }">
@@ -141,11 +141,11 @@ function createUserCard(user) {
             </div>
             <div class="card-text">
                 <h7 class="text-muted">Total de ${numcontrato} contratações</h7>
-                <p>${especsusr}</p>
+                <p>${especsuser}</p>
 
                 <p>Em nossa plataforma desde</p>
 
-                <a href="perfil-publico.php?id=${idusr}"><span class="clickable-card"></span></a>
+                <a href="perfil-publico.php?id=${iduser}"><span class="clickable-card"></span></a>
             </div>
         </div>`;
 

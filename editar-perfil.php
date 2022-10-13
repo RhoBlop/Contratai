@@ -23,7 +23,7 @@
                         
                         <form id="updateUser" onsubmit="sendUpdate(event)">
                             <label id="inputFileLabel" for="inputImg" class="rounded-circle mb-4">
-                                <img src="<?php echoProfileImage($user["imgusr"]) ?>" id="imgPerfil" alt="">
+                                <img src="<?php echoProfileImage($user["imguser"]) ?>" id="imgPerfil" alt="">
                                 <div class="editar-hover">
                                     <i class="fa-solid fa-pen"></i>
                                     <p>Editar Foto</p>
@@ -33,27 +33,27 @@
 
                             <div class="form-group mb-3">
                                 <label for="nome" class="form-label">Nome Completo</label>
-                                <input type="text" class="form-control" id="nome" name="nome" required value="<?php echoDadosNotNull($user["nomusr"], null) ?>">
+                                <input type="text" class="form-control" id="nome" name="nome" required value="<?php echoDadosNotNull($user["nomuser"], null) ?>">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required value="<?php echoDadosNotNull($user["emailusr"], null) ?>">
+                                <input type="email" class="form-control" id="email" name="email" required value="<?php echoDadosNotNull($user["emailuser"], null) ?>">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="cpf" class="form-label">CPF</label>
-                                <input type="text" class="form-control" id="cpf" placeholder="" disabled value="<?php echoDadosNotNull($user["cpfusr"], null) ?>">
+                                <input type="text" class="form-control" id="cpf" placeholder="" disabled value="<?php echoDadosNotNull($user["cpfuser"], null) ?>">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="telefone" class="form-label">Telefone</label>
-                                <input type="text" class="form-control" id="telefone" name="telefone" value="<?php echoDadosNotNull($user["telefoneusr"], null) ?>">
+                                <input type="text" class="form-control" id="telefone" name="telefone" value="<?php echoDadosNotNull($user["telefoneuser"], null) ?>">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="nascimento" class="form-label">Data de Nascimento</label>
-                                <input type="date" class="form-control" id="nascimento" name="nascimento" value="<?php echoDadosNotNull($user["nascimentousr"], null) ?>">
+                                <input type="date" class="form-control" id="nascimento" name="nascimento" value="<?php echoDadosNotNull($user["nascimentouser"], null) ?>">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="bio" class="form-label">Bio</label>
-                                <textarea class="form-control" id="bio" name="bio" rows="5" style="white-space: pre-wrap;"><?php echoDadosNotNull($user["biografiausr"], null) ?></textarea>
+                                <textarea class="form-control" id="bio" name="bio" rows="5" style="white-space: pre-wrap;"><?php echoDadosNotNull($user["biografiauser"], null) ?></textarea>
                             </div>
 
                             <!-- div para comunicação com usuário -->

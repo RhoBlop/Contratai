@@ -4,14 +4,14 @@
         exit();
     }
 
-    if ((isset($_SESSION["admin"]))  && ($_SESSION["admin"] === true)) {
+    if ((isset($_SESSION["admin"])) && ($_SESSION["admin"] === true)) {
         $admin = true;
     } else {
         $admin = false;
     }
 
     $usuarioClass = new Usuario();
-    $user = $usuarioClass->selectBasicInfoById($_SESSION["idusr"]);
+    $user = $usuarioClass->selectBasicInfoById($_SESSION["iduser"]);
 ?>
 <header>
     <nav class="navbar navbar-expand-md fixed-top bg-light">
@@ -62,7 +62,7 @@
                 <li class="nav-item dropdown p-2">
                   <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
                     <!-- define uma imagem padrão caso o usuário não tenha nenhuma -->
-                    <img id="headerImgPerfil" src="<?php echoProfileImage($user["imgusr"]) ?>" alt="Imagem de perfil">
+                    <img id="headerImgPerfil" src="<?php echoProfileImage($user["imguser"]) ?>" alt="Imagem de perfil">
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end text-small shadow">
                     <li><a class="dropdown-item" href="perfil.php"><i class="fa-regular fa-user fa-lg pe-2"></i>Perfil</a></li>

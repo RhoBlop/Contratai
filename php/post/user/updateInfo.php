@@ -34,7 +34,7 @@
         $imgBase64 = "";
     }
 
-    $result = $user->updateInfo($_SESSION['idusr'], $nome, $email, $imgBase64, $nascimento, $telefone, $bio);
+    $result = $user->updateInfo($_SESSION['iduser'], $nome, $email, $imgBase64, $nascimento, $telefone, $bio);
 
     $response = $result;
 

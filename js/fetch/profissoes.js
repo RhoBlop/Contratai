@@ -19,11 +19,11 @@ selectProf.onchange = async () => {
 
         if (profEspecs) {
             for (let espec of profEspecs) {
-                let { idespec, dscespec } = espec;
-                dscespec = capitalizeFirstLetter(dscespec);
+                let { idespec, descrespec } = espec;
+                descrespec = capitalizeFirstLetter(descrespec);
                 selectEspecsControl.addOption({
                     value: idespec,
-                    text: dscespec,
+                    text: descrespec,
                 });
             }
             selectEspecsControl.refreshOptions();
@@ -34,15 +34,18 @@ selectProf.onchange = async () => {
 // adiciona a especialização
 confirmBtn.onclick = async () => {
     let profId = selectProf.value;
-    let dscProf;
-    if (profId) { dscProf = selectProfsControl.getItem(profId).innerText; }
+    let descrProf;
+    if (profId) {
+        descrProf = selectProfsControl.getItem(profId).innerText;
+    }
     let especId = selectEspec.value;
-    let dscEspec;
-    if (especId) { dscEspec = selectEspecsControl.getItem(especId).innerText; }
+    let descrEspec;
+    if (especId) {
+        descrEspec = selectEspecsControl.getItem(especId).innerText;
+    }
 
-    
     if (profId && especId) {
-        await fetchAddEspec(profId, dscProf, especId, dscEspec);
+        await fetchAddEspec(profId, descrProf, especId, descrEspec);
     } else {
         formErro("Selecione uma profissão e especialização");
     }
@@ -81,7 +84,7 @@ async function fetchGetEspecs(profId) {
     }
 }
 
-async function fetchAddEspec(profId, dscProf, especId, dscEspec) {
+async function fetchAddEspec(profId, descrProf, especId, descrEspec) {
     // aborts previous fetch if it exists and creates a new one
     if (especsAbortControl) {
         especsAbortControl.abort();
@@ -98,7 +101,7 @@ async function fetchAddEspec(profId, dscProf, especId, dscEspec) {
             },
             credentials: "same-origin",
             signal: especsAbortControl.signal,
-            body: `profId=${profId}&dscProf=${dscProf}&especId=${especId}&dscEspec=${dscEspec}`,
+            body: `profId=${profId}&descrProf=${descrProf}&especId=${especId}&descrEspec=${descrEspec}`,
         });
         let data = await response.json();
         feedbackDiv.style.display = "none";

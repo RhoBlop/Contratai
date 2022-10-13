@@ -8,19 +8,19 @@
                    (PROFISSIONAL)
            ================================ */
 
-        public function selectPedidosProfissional($idusr) {
+        public function selectPedidosProfissional($iduser) {
           try {
               $sql = <<<SQL
                   SELECT *
                   FROM contrato AS contrt
                   INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
-                  INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.idusr)
+                  INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.iduser)
                   WHERE contrt.idcontratado = :id
               SQL;
 
               $stmt = Database::prepare($sql);
               $stmt->execute([
-                  ":id" => $idusr
+                  ":id" => $iduser
               ]);
 
               $result = $stmt->fetchAll();

@@ -37,11 +37,11 @@
 
             $perfEspecs = [];
             foreach($especializacoes as $espec) {
-                $perfEspecs[] = $espec["dscespec"];
+                $perfEspecs[] = $espec["descrespec"];
             }
 
             $numAval = count($avaliacoes);
-            [$perfNomUsr, $perfBiografiaUsr, $perfNumContrato, $perfMediaAval, $perfImgUsr] = [$perfPublico["nomusr"], $perfPublico["biografiausr"], $perfPublico['numcontrato'], $perfPublico["mediaavaliacao"], $perfPublico["imgusr"]];
+            [$perfNomuser, $perfBiografiauser, $perfNumContrato, $perfMediaAval, $perfImguser] = [$perfPublico["nomuser"], $perfPublico["biografiauser"], $perfPublico['numcontrato'], $perfPublico["mediaavaliacao"], $perfPublico["imguser"]];
         ?>
 
         <main>
@@ -56,12 +56,12 @@
                             <div class="card-body p-3 text-start">
                                 <div class="top-body p-3 mb-1">
                                     <div class="profile-pic">
-                                        <img src="<?php echoProfileImage($perfImgUsr)?>" class="rounded-circle" alt="">
+                                        <img src="<?php echoProfileImage($perfImguser)?>" class="rounded-circle" alt="">
                                     </div>
                                 </div>
 
                                 <div class="text px-3">
-                                    <h3><?php echoDadosNotNull($perfNomUsr, "---"); ?></h3>
+                                    <h3><?php echoDadosNotNull($perfNomuser, "---"); ?></h3>
                                     <div class="body-text">
                                         <p><i class="fa-solid fa-briefcase fa-fw"></i><?php echo ucfirst(implode(", ", $perfEspecs)) ?></p>
                                         <p><i class="fa-solid fa-location-dot fa-fw"></i>[Desenvolvimento no futuro]</p>
@@ -70,7 +70,7 @@
                                         <a href="#avaliacao" class="text-decoration-none"><?php echoDadosNotNull("{$numAval} avaliações recebidas", "---"); ?></a><br>
                                     </div>
                                     <?php
-                                        if ($_SESSION["idusr"] != $userId) {
+                                        if ($_SESSION["iduser"] != $userId) {
                                             echo <<<ITEM
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#modal-contrato" class="btn btn-outline-green mt-3">Contactar</a>
                                             ITEM;
@@ -85,7 +85,7 @@
                         <div class="card shadow-sm rounded-4 mb-3" id="sobre">
                             <div class="card-body">
                                 <h3 class="card-title">Sobre</h3>
-                                <p><?php echoDadosBreakLine($perfBiografiaUsr); ?></p>
+                                <p><?php echoDadosBreakLine($perfBiografiauser); ?></p>
                             </div>
                         </div> <!-- /BIOGRAFIA -->
 
@@ -96,13 +96,13 @@
                                 <div class="d-flex flex-column align-items-center">
                                     <?php
                                         foreach($especializacoes as $espec):
-                                            [$dscEspec, $mediaEspec] = [$espec["dscespec"], $espec["mediaavaliacao"]]
+                                            [$descrEspec, $mediaEspec] = [$espec["descrespec"], $espec["mediaavaliacao"]]
                                     ?>
 
                                         <div class="card card-hover card-pesquisa">
                                             <div class="card-body">
                                                 <div class="card-title">
-                                                    <h5><?php echo ucfirst($dscEspec); ?></h5>
+                                                    <h5><?php echo ucfirst($descrEspec); ?></h5>
                                                     <span class="badge-avaliacao <?php echo echoAvaliacaoClass($mediaEspec); ?>">
                                                         <!-- STAR ICON -->
                                                         <ion-icon name="star"></ion-icon>
@@ -135,15 +135,15 @@
                                         $noRepeat = [];
                                         foreach ($avaliacoes as $aval) {
                                             $especId = $aval["idespec"];
-                                            $dscEspec = ucfirst($aval["dscespec"]);
+                                            $descrEspec = ucfirst($aval["descrespec"]);
 
-                                            if (!in_array($dscEspec, $noRepeat)) {
+                                            if (!in_array($descrEspec, $noRepeat)) {
                                                 echo <<<ITEM
                                                     <input type="radio" id="{$especId}" class="search-filter" name="filterAval" value="{$especId}">
-                                                    <label for="{$especId}">{$dscEspec}</label>
+                                                    <label for="{$especId}">{$descrEspec}</label>
                                                 ITEM;
                                             }
-                                            $noRepeat[] = $dscEspec;
+                                            $noRepeat[] = $descrEspec;
                                         }
                                     ?>
                                 </div>
@@ -163,15 +163,15 @@
                                             <div class="avaliacao col mb-3" data-especid="<?php echo $aval["idespec"]; ?>" data-nota=<?php echo $aval["notaavaliacao"]; ?>>
                                                 <div class="avaliacao-header d-flex align-items-center gap-3 mb-3">
                                                     <div class="aval-pic">
-                                                        <img src="<?php echoProfileImage($aval["imgusr"]); ?>" class="rounded-circle">
+                                                        <img src="<?php echoProfileImage($aval["imguser"]); ?>" class="rounded-circle">
                                                     </div>
                                                     <div class="d-flex flex-column">
-                                                        <h5 class="mb-0"><?php echo $aval["nomusr"]; ?></h5>
+                                                        <h5 class="mb-0"><?php echo $aval["nomuser"]; ?></h5>
                                                         <p class="text-muted">
                                                             <i class="fa-solid fa-star fa-fw"></i>
                                                             <?php echo $aval["notaavaliacao"] ?>
                                                         </p>
-                                                        <p class="text-muted"><?php echo ucfirst($aval["dscespec"]) ?></p>
+                                                        <p class="text-muted"><?php echo ucfirst($aval["descrespec"]) ?></p>
                                                         <p class="text-muted">data [atualizar banco]</p>
                                                     </div>
                                                 </div>

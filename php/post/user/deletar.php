@@ -11,7 +11,7 @@
     require ("../../database/Usuario.php");
     $user = new Usuario();
 
-    $result = $user->deleteById($_SESSION["idusr"]);
+    $result = $user->deleteById($_SESSION["iduser"]);
 
     // resposta da API
     if (isset($result["dados"]) && $result["dados"] === TRUE) {

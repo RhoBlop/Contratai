@@ -183,3 +183,34 @@ async function deleteUser() {
         window.location.href = "excluido.php";
     }
 }
+
+async function sendSolicitacaoContrato(event) {
+    event.preventDefault();
+
+    // transforma os dados do formulário para o formato x-www-form-urlencoded
+    let formData = new URLSearchParams(new FormData(event.target)).toString();
+
+    loading();
+    timeout = timeoutConnection();
+
+    let response = await fetch("./php/post/user/cadastro.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        credentials: "same-origin",
+        body: formData,
+    });
+    let data = await response.json();
+
+    if (data.erro) {
+        let { erro } = data;
+        formErro(erro);
+    }
+
+    if (data.dados) {
+        setOpenModal("#modal-login");
+        window.location.href = "index.php";
+    }
+    clearTimeout(timeout);
+}

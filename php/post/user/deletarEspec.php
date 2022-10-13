@@ -9,12 +9,12 @@
 
     // classe PDO para realização de operações no BD
     require ("../../database/Usuario.php");
-    $usr = new Usuario();
+    $user = new Usuario();
 
     $especId = $_POST["especId"];
 
     // inserção da especialização no usuário
-    $result = $usr->deleteEspecById($_SESSION["idusr"], $especId);
+    $result = $user->deleteEspecById($_SESSION["iduser"], $especId);
 
     echo json_encode($result);
 ?>

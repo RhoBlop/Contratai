@@ -22,10 +22,10 @@
 
                     foreach ($profissoes as $prof):
 
-                        [$idprof, $dscprof] = [$prof['idprof'], ucfirst($prof['dscprof'])];
+                        [$idprof, $descrprof] = [$prof['idprof'], ucfirst($prof['descrprof'])];
 
                         echo <<<ITEM
-                        <option value="{$idprof}">{$dscprof}</option>
+                        <option value="{$idprof}">{$descrprof}</option>
                         ITEM;
                         
                     endforeach;

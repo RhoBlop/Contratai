@@ -17,38 +17,38 @@
                             <h6 class="text-muted">Dados da conta</h6>
                         </div>
                         <div class="d-flex justify-content-center mb-4">
-                            <img id="imgPerfil" src="<?php echoProfileImage($user["imgusr"]); ?>" alt="Imagem de Perfil">
+                            <img id="imgPerfil" src="<?php echoProfileImage($user["imguser"]); ?>" alt="Imagem de Perfil">
                         </div>
                         <table class="table mb-5">
                             <tbody>
                                 <tr>
                                     <td>Nome</td>
-                                    <td class="text-muted" id="nome"><?php echoDadosNotNull($user["nomusr"], "---"); ?></td>
+                                    <td class="text-muted" id="nome"><?php echoDadosNotNull($user["nomuser"], "---"); ?></td>
                                 </tr>
 
                                 <tr>
                                     <td>Email</td>
-                                    <td class="text-muted" id="email"><?php echoDadosNotNull($user["emailusr"], "---"); ?></td>
+                                    <td class="text-muted" id="email"><?php echoDadosNotNull($user["emailuser"], "---"); ?></td>
                                 </tr>
 
                                 <tr>
                                     <td>CPF</td>
-                                    <td class="text-muted" id="nascimento"><?php echoDadosNotNUll($user["cpfusr"], "---"); ?></td>
+                                    <td class="text-muted" id="nascimento"><?php echoDadosNotNUll($user["cpfuser"], "---"); ?></td>
                                 </tr>
 
                                 <tr>
                                     <td>Data de Nascimento</td>
-                                    <td class="text-muted" id="nascimento"><?php echoFormattedDate($user["nascimentousr"]); ?></td>
+                                    <td class="text-muted" id="nascimento"><?php echoFormattedDate($user["nascimentouser"]); ?></td>
                                 </tr>
 
                                 <tr>
                                     <td>Telefone</td>
-                                    <td class="text-muted" id="telefone"><?php echoDadosNotNull($user["telefoneusr"], "---"); ?></td>
+                                    <td class="text-muted" id="telefone"><?php echoDadosNotNull($user["telefoneuser"], "---"); ?></td>
                                 </tr>
                                 
                                 <tr>
                                     <td>Bio</td>
-                                    <td class="text-muted" id="bio"><?php echoDadosBreakLine($user["biografiausr"]); ?></td>
+                                    <td class="text-muted" id="bio"><?php echoDadosBreakLine($user["biografiauser"]); ?></td>
                                 </tr>
 
                             </tbody>

@@ -24,11 +24,11 @@
                                 <?php
                                     $usuarioClass = new Usuario();
 
-                                    $profissoes = $usuarioClass->selectProfissoessById($_SESSION["idusr"]);
+                                    $profissoes = $usuarioClass->selectProfissoessById($_SESSION["iduser"]);
 
                                     foreach($profissoes as $prof):
 
-                                        [$idusres, $idespec, $dscespec, $dscprof] = [$prof["idusrespec"], $prof["idespec"], ucfirst($prof["dscespec"]), ucfirst($prof["dscprof"])];
+                                        [$iduseres, $idespec, $descrespec, $descrprof] = [$prof["iduserespec"], $prof["idespec"], ucfirst($prof["descrespec"]), ucfirst($prof["descrprof"])];
                                 ?>
 
                                     <!-- CARD PROFISSÃO -->
@@ -36,8 +36,8 @@
                                         <div class="card-body d-flex justify-content-between align-items-center px-4">
 
                                             <div class="card-text">
-                                                <h5 class="mb-0"><?php echo $dscprof ?></h5>
-                                                <p class="text-muted"><?php echo $dscespec ?></p>
+                                                <h5 class="mb-0"><?php echo $descrprof ?></h5>
+                                                <p class="text-muted"><?php echo $descrespec ?></p>
                                             </div>
 
                                             <button class="exclude" onclick="deleteEspec(event)" data-especid="<?php echo $idespec ?>">
