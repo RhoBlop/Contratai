@@ -33,8 +33,9 @@
                             <?php
                                 require("php/database/Contrato.php");
                                 $contrato = new Contrato();
+                                $idUser = $_SESSION["iduser"];
 
-                                $pedidosRecebidos = $contrato->selectPedidosProfissional();
+                                $pedidosRecebidos = $contrato->selectPedidosProfissional($idUser);
                             ?>
 
                             <div class="accordion tab-pane fade show active" id="contratante-pane" role="tabpanel">

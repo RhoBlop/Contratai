@@ -18,7 +18,6 @@
                 $idprof = $_GET["id"];
                 
                 $users = $profissaoClass->selectProfissaoMaiorAvaliacao($idprof, $limit = 8);
-                var_dump($users);
                 if ($users):
                     $descrprof = $users[0]["descrprof"];
             ?>

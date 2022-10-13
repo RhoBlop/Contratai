@@ -15,10 +15,13 @@
                     Preencha o tipo de serviço do contrato e em quais dias planeja-se que ele será feito. Uma solicitação será enviada ao usuário contratado e você será notificado caso ele aceite!
                 </div>
 
-                <!-- EMAIL -->
+                <!-- ID CONTRATADO -->
+                <input type="hidden" name="contratadoId" value="<?php echo $userId?>">
+
+                <!-- ESPECIALIZAÇÃO -->
                 <div class="form-group mb-3">
                     <label for="select-espec" class="form-label">Especialização</label>
-                    <select id="select-espec" class="form-control form-select" name="" aria-label="select" required>
+                    <select id="select-espec" class="form-control form-select" name="idEspec" aria-label="select" required>
                         <option value="" selected disabled>Selecione a especialização</option>
                         <?php 
                             foreach ($especializacoes as $espec) {
