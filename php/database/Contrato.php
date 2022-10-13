@@ -13,6 +13,8 @@
               $sql = <<<SQL
                   SELECT *
                   FROM contrato AS contrt
+                  INNER JOIN diacontrato AS diacontrt ON (contrt.idcontrato = diacontrt.idcontrato)
+                  INNER JOIN statuscontrato AS statcontrt ON (contrt.idStatus = statcontrt.idStatus)
                   INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
                   INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.iduser)
                   WHERE contrt.idcontratado = :id

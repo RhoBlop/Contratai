@@ -18,11 +18,17 @@
                 <!-- EMAIL -->
                 <div class="form-group mb-3">
                     <label for="select-espec" class="form-label">Especialização</label>
-                    <select id="select-espec" class="form-control form-select" aria-label="select" required>
+                    <select id="select-espec" class="form-control form-select" name="" aria-label="select" required>
                         <option value="" selected disabled>Selecione a especialização</option>
-                        <option value="1">Professor de matemática</option>
-                        <option value="2">Professor de física</option>
-                        <option value="3">Designer Gráfico</option>
+                        <?php 
+                            foreach ($especializacoes as $espec) {
+                                [$idespec, $descrespec] = [$_POST["idespec"], $_POST["descrespec"]];
+
+                                echo <<<OPTION
+                                    <option value="{$idespec}">{$descrespec}</option>
+                                OPTION;
+                            }
+                        ?>
                     </select>
                 </div>
     
