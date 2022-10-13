@@ -215,6 +215,10 @@ main h1.text-gradient {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
+.btn-login, .btn-link {
+    box-shadow: none;
+}
+
 .btn:hover {
     transform: scale(1.1);
 }
@@ -224,6 +228,7 @@ main h1.text-gradient {
     border: none;
     font-weight: 700;
 }
+
 .btn-login:hover {
     color: var(--primary-green);
     border: none;
@@ -797,17 +802,23 @@ hr {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
-.nav-link {
-    padding: 0.5rem 1rem;
-    font-size: 16px;
-    transition: all 0.1s ease-in;
+
+#sidebar .nav-item {
+    transition: .15s ease-in-out;
+    transition-delay: 0s;
 }
 
-.nav-link:hover {
+#sidebar .nav-item:hover {
     transform: scale(1.02);
 }
 
-#side-bar {
+.nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+    transition-delay: .15s;
+}
+
+#sidebar {
     font-size: 20px;
 }
 
