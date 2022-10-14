@@ -1,5 +1,5 @@
 <div class="card card-hover card-pesquisa">
-    <div class="search-profile-pic ps-3">
+    <div class="search-profile-pic px-3">
         <img src="<?php echo echoProfileImage($imguser) ?>" alt="Imagem de perfil">
     </div>
     <div class="card-body">
