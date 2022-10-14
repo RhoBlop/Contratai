@@ -52,8 +52,8 @@
                                                 <h7 class="m-0"><b>Rafael</b> quer lhe contratar!</h7>
                                                 <p class="text-muted"> Há 2 horas</p>
                                                 <div class="accordion-buttons d-flex gap-2">
-                                                    <a class="btn btn-green">Aceitar</a>
-                                                    <a class="btn btn-outline-dark">Recusar</a>
+                                                    <button class="btn btn-green">Aceitar</button>
+                                                    <button class="btn btn-outline-dark">Recusar</button>
                                                 </div>
                                             </div>
                                         </div>
