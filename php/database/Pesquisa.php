@@ -11,11 +11,11 @@
                     SELECT usr.iduser, usr.nomuser, usr.imguser, media.mediaavaliacao, media.numcontrato, json_agg(espec.descrespec) AS especsuser
                     FROM (SELECT usr.iduser, usr.nomuser, usr.imguser
                           FROM usuario AS usr
-                          INNER JOIN userespec AS useres ON (usr.iduser = useres.iduser)
+                          FULL OUTER JOIN userespec AS useres ON (usr.iduser = useres.iduser)
                           INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
                           WHERE usr.nomuser ILIKE :search OR espec.descrespec ILIKE :search
                           GROUP BY usr.iduser, usr.nomuser, usr.imguser
-                        ) AS user
+                        ) AS usr
                     INNER JOIN (SELECT usr.iduser, round(avg(notaavaliacao), 1) AS mediaavaliacao, count(*) AS numcontrato
                           FROM usuario AS usr
                           INNER JOIN userespec AS useres ON (usr.iduser = useres.iduser)
