@@ -24,8 +24,16 @@
             if (!$perfPublico):
                 ?>
                     <div>
-                        É necessário cadastrar uma profissão para que o perfil se torne público
-                        <a href="">Finalizar cadastro</a>
+                        O perfil não está público devido nenhuma profissão estar cadastrada
+
+                        <?php
+                            if ($_SESSION["iduser"] === $userId):
+                        ?>
+                            <a href="profissoes.php">Finalizar cadastro</a>
+                        <?php
+                            endif;
+                        ?>
+
                     </div>
                 <?php
                 exit();
@@ -72,7 +80,7 @@
                                     <?php
                                         if ($_SESSION["iduser"] != $userId) {
                                             echo <<<ITEM
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-contrato" class="btn btn-outline-green mt-3">Contactar</a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-contrato" class="btn btn-outline-green mt-3">Contratar</a>
                                             ITEM;
                                         }
                                     ?>
@@ -109,9 +117,9 @@
                                                         <?php echoDadosNotNull($mediaEspec, "---"); ?>
                                                     </span>
                                                 </div>
-                                                <div class="card-text">
-                                                    <p>[ Não sei fazer o SQL ] <?php echo is_null($perfPublico["numcontrato"]) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
-                                                </div>
+                                                <!-- <div class="card-text">
+                                                    <p>[ Não sei fazer o SQL ] <?php //echo is_null($perfPublico["numcontrato"]) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
+                                                </div> -->
                                             </div>
                                         </div>
 

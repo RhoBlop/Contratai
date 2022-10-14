@@ -113,9 +113,20 @@ function constructSearchCards(dados) {
 function createUserCard(user) {
     let card = document.createElement("div");
     card.classList.add("card", "card-hover", "card-pesquisa");
+    console.log(user);
+    let {
+        iduser,
+        imguser,
+        nomuser,
+        mediaavaliacao,
+        numcontrato,
+        especsuser,
+        datacriacaouser,
+    } = user;
 
-    let { iduser, imguser, nomuser, mediaavaliacao, numcontrato, especsuser } =
-        user;
+    datacriacaouser = dayjs(datacriacaouser)
+        .locale("pt-br")
+        .format("D [de] MMMM [de] YYYY");
 
     // join specs onto string
     especsuser = especsuser.join(", ");
@@ -136,14 +147,18 @@ function createUserCard(user) {
                 }">
                     <!-- STAR ICON -->
                     <ion-icon name="star"></ion-icon>
-                    ${mediaavaliacao}
+                    ${mediaavaliacao == null ? "---" : mediaavaliacao}
                 </span>
             </div>
             <div class="card-text">
-                <h7 class="text-muted">Total de ${numcontrato} contratações</h7>
+                <h7 class="text-muted">${
+                    numcontrato > 0
+                        ? `Total de ${numcontrato} contratações`
+                        : `Ainda não foi contratado nenhuma vez`
+                }</h7>
                 <p>${especsuser}</p>
 
-                <p>Em nossa plataforma desde</p>
+                <p>Em nossa plataforma desde ${datacriacaouser}</p>
 
                 <a href="perfil-publico.php?id=${iduser}"><span class="clickable-card"></span></a>
             </div>

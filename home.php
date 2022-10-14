@@ -24,7 +24,6 @@
                         </form>
 
                         <div id="searchResult">
-                            
                         </div>
                     </div>
                 </div>
@@ -35,11 +34,11 @@
                 </div>
                 -->
 
-                <div class="row row-cols-2 row-cols-lg-4 g-3 mb-3">
+                <!-- <div class="row row-cols-2 row-cols-lg-4 g-3 mb-3">
 
-                    <?php for($i=1; $i <=8; $i++) {include("components/card-perfil.html");}?>
+                    <?php //for($i=1; $i <=8; $i++) {include("components/card-perfil.html");}?>
                                             
-                </div>
+                </div> -->
 
             </div>
 
