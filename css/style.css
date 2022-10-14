@@ -404,8 +404,9 @@ ion-icon {
 .active #searchBox {
     border-radius: 0.5rem 0 0 0;
 }
-.active #searchButton {
-    border-radius: 0 0.5rem 0 0;
+#searchButton {
+    border-radius: 0 0.5rem .5rem 0;
+    transform: none;
 }
 .active .filters-group {
     display: flex;
@@ -786,8 +787,7 @@ table .text-muted {
 }
 
 hr {
-    size: 1px;
-    color: solid rgba(0, 0, 0, 0.1);
+    opacity: .1;
 }
 
 .active-link {
@@ -1233,6 +1233,7 @@ p {
     transition: background-color .2s ease-in-out, color .2s ease-in-out;
 }
 
+
 .filter-tablist a:nth-child(1) {
     border-right: 1px solid var(--bootstrap-border);
 }
@@ -1249,6 +1250,8 @@ p {
     transform: none;
 }
 
+
+
 /* Acordiões */ 
 
 .accordion { 
@@ -1262,11 +1265,17 @@ p {
     border-radius: .375rem !important;
 }
 
-.accordion-item {
+.accordion-item:active {
     border: none;
 }
 
+.accordion-body p {
+    font-size: 16px;
+}
 
+.accordion-body b {
+    font-weight: 500;
+}
 
 /* DatePicker */
 

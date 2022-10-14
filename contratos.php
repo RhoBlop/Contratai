@@ -46,8 +46,16 @@
                                     </button>
                                     </h2>
                                     <div id="pedidos" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#contratante-pane">
-                                        <div class="accordion-body">
-                                            [implement PHP]
+                                        <div class="accordion-body d-flex align-items-start gap-3">
+                                            <img id="profile-pic" src="images\temp\default-pic.png" width="52px">
+                                            <div class="text">
+                                                <h7 class="m-0"><b>Rafael</b> quer lhe contratar!</h7>
+                                                <p class="text-muted"> Há 2 horas</p>
+                                                <div class="accordion-buttons d-flex gap-2">
+                                                    <a class="btn btn-green">Aceitar</a>
+                                                    <a class="btn btn-outline-dark">Recusar</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
