@@ -4,7 +4,7 @@
         <?php require("components/head.php") ?>
     </head>
     <body>
-        <?php include ("components/login-header.php") ?>
+        <?php include ("components/auth-header.php") ?>
         <main>
             <div class="container my-3">
                 <div class="row py-3 d-flex justify-content-center align-items-center mb-3">
@@ -24,7 +24,6 @@
                         </form>
 
                         <div id="searchResult">
-                            
                         </div>
                     </div>
                 </div>
@@ -35,15 +34,15 @@
                 </div>
                 -->
 
-                <div class="row row-cols-2 row-cols-lg-4 g-3 mb-3">
+                <!-- <div class="row row-cols-2 row-cols-lg-4 g-3 mb-3">
 
-                    <?php for($i=1; $i <=8; $i++) {include("components/card-perfil.html");}?>
+                    <?php //for($i=1; $i <=8; $i++) {include("components/card-perfil.html");}?>
                                             
-                </div>
+                </div> -->
 
             </div>
 
-            <script src="js/pesquisa.js"></script>
+            <script src="js/fetch/pesquisa.js"></script>
 
 
             <!-- CAROUSEL DAS PROFISSÕES COM MAIS CONTRATOS -->

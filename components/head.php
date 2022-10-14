@@ -19,20 +19,27 @@
 rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
 />
-
 <script src="https://kit.fontawesome.com/d21e3e40d7.js" crossorigin="anonymous"></script>
+
+<!-- DAY.JS -->
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/locale/pt-br.js"></script>
 
 <!-- CUSTOM CSS -->
 <link rel="stylesheet" href="css/style.css">
 
 <!-- COISOS QUE PISCAM NA TELA (MODAL, TOAST...) -->
-<script src="../js/popups.js"></script>
+<script src="js/popups.js"></script>
+
+<!-- FUNÇÕES GERAIS, SEM LIGAÇÃO COM ALGO ESPECÍFICO -->
+<script src="js/utils.js"></script>
 
 <!-- JAVASCRIPT PARA MUDAR A CLASSE DOS LINKS ATIVOS NO HEADER E SIDEBAR -->
-<script src="../js/activeLinks.js"></script>
+<script src="js/activeLinks.js"></script>
 
 <!-- REQUISIÇÕES PARA O BACKEND -->
-<script src="../js/requisicoesAPI.js"></script>
+<script src="js/fetch/formularios.js"></script>
+
 
 <?php
     session_start();
@@ -41,7 +48,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     require("php/impressaoDados.php");
     require("php/utils.php");
 
-    $auth = isAuthenticated();
-    $usuarioClass = new Usuario();
-    $profissaoClass = new Profissao();
+    if (isset($_SESSION["iduser"])) {
+        $auth = true;
+    } else {
+        $auth = false;
+    }
 ?>

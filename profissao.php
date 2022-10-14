@@ -6,7 +6,7 @@
     <body>
         <?php 
             if ($auth) {
-                include("components/login-header.php");
+                include("components/auth-header.php");
             } else {
                 include("components/no-auth-header.php");
             }
@@ -14,27 +14,39 @@
 
         <main>
             <?php 
+                $profissaoClass = new Profissao();
                 $idprof = $_GET["id"];
+                
                 $users = $profissaoClass->selectProfissaoMaiorAvaliacao($idprof, $limit = 8);
-                $dscprof = $users[0]["dscprof"];
+                if ($users):
+                    $descrprof = $users[0]["descrprof"];
             ?>
 
-            <div class="container p-3 my-3 align-items-center">
-                <div class="mb-4">
-                    <h2><?php echo ucfirst($dscprof) ?></h2>
-                    <h6 class="text-muted">Encontre os melhores profissionais em nossa plataforma</h6>
-                </div>
+                <div class="container p-3 my-3 align-items-center">
+                    <div class="mb-4">
+                        <h2><?php echo ucfirst($descrprof) ?></h2>
+                        <h6 class="text-muted">Encontre os melhores profissionais em nossa plataforma</h6>
+                    </div>
 
-                <div class="d-flex justify-content-center align-items-center flex-column">
-                    <?php 
-                        foreach($users as $user) {
-                            [$idusr, $nomusr, $imgusr, $numcontrato, $mediaAv] = [$user["idusr"], $user["nomusr"], $user["imgusr"], $user["numcontrato"], $user["mediaavaliacao"]];
-                    
-                            include ("components/card-pesquisa-profissao.php");
-                        }
-                    ?>
+                    <div class="d-flex justify-content-center align-items-center flex-column">
+                        <?php 
+                            foreach($users as $user) {
+                                [$iduser, $nomuser, $imguser, $numcontrato, $mediaAv, $datacriacaouser] = [$user["iduser"], $user["nomuser"], $user["imguser"], $user["numcontrato"], $user["mediaavaliacao"], $user["datacriacaouser"]];
+                        
+                                include ("components/card-pesquisa-profissao.php");
+                            }
+                        ?>
+                    </div>
                 </div>
-            </div>
+            <?php
+                else:
+            ?>
+                <div>
+                    Nenhum usuário cadastrado nessa profissão
+                </div>
+            <?php
+                endif;
+            ?>
         </main>
 
     </body>

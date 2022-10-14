@@ -11,21 +11,24 @@
 
     session_start();
     // classe PDO para realização de operações no BD
-    require ("../php/database/Usuario.php");
+    require ("../database/Usuario.php");
     $user = new Usuario();
     
     // destructuring das variáveis recebidas pelo POST request
     [$email, $senha] = [$_POST["email"], $_POST["senha"]];
-    // retorna o id do usuário, caso exista um, ou "credenciais invalidas"
+    // retorna o id do usuário, caso exista um
     $result = $user->selectLogin($email, $senha);
 
 
     if (isset($result["dados"])) {
-        $idUsr = $result["dados"]["idusr"];
-        $_SESSION["idusr"] = $idUsr;
+        $iduser = $result["dados"]["iduser"];
+        $_SESSION["iduser"] = $iduser;
+
+        $admin = $result["dados"]["isadminuser"];
+        $_SESSION["admin"] = $admin;
 
         $result = [
-            "action" => true
+            "dados" => true
         ];
     }
 

@@ -1,7 +1,7 @@
 <?php 
     // checa se o id do usuário está setado na sessão
     function verifyIsAuthenticated() {
-        if (isset($_SESSION["idusr"])) {
+        if (isset($_SESSION["iduser"])) {
             return true;
         } else {
             echo json_encode([ "resposta" => "nao autenticado" ]);

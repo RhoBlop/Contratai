@@ -7,10 +7,11 @@
     <div id="topContrato" class="container carousel multitem-car">
         <div class="carousel-inner">
         <?php 
+            $profissaoClass = new Profissao();
             $profsAv = $profissaoClass->selectMaisContratos($limit = 6);
             
             foreach ($profsAv as $prof): 
-                [$idprof, $dscprof, $numcontrato, $mediaAv] = [$prof["idprof"], $prof["dscprof"], $prof["numcontrato"], $prof["mediaavaliacao"]];
+                [$idprof, $descrprof, $numcontrato, $mediaAv] = [$prof["idprof"], $prof["descrprof"], $prof["numcontrato"], $prof["mediaavaliacao"]];
         ?>
 
             <!-- CARD PROFISSÃO -->
@@ -23,7 +24,7 @@
                         <?php echo $mediaAv; ?>
                     </span>
                     <div class="card-body">
-                        <h4><?php echo ucfirst($dscprof); ?></h4>
+                        <h4><?php echo ucfirst($descrprof); ?></h4>
                         <p class="mb-2"><?php echo $numcontrato; ?> contratações</p>
                         <a href="<?php echo "profissao.php?id={$idprof}" ?>" class="btn btn-outline-green">Ver mais</a>
                         <a href="<?php echo "profissao.php?id={$idprof}" ?>"><span class="clickable-card"></span></a>
@@ -40,7 +41,7 @@
                         <?php echo $mediaAv; ?>
                     </span>
                     <div class="card-body">
-                        <h4><?php echo ucfirst($dscprof); ?></h4>
+                        <h4><?php echo ucfirst($descrprof); ?></h4>
                         <p class="mb-2"><?php echo $numcontrato; ?> contratações</p>
                         <a href="<?php echo "profissao.php?id={$idprof}" ?>" class="btn btn-outline-green">Ver mais</a>
                         <a href="<?php echo "profissao.php?id={$idprof}" ?>"><span class="clickable-card"></span></a>

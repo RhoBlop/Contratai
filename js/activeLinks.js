@@ -8,8 +8,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
         let links = sidebar.querySelectorAll(".nav-link");
         // spread da NodeList em uma array [...var]
         for (link of [...links]) {
-            // se href do link for igual 
-            if (link.getAttribute("href") == current) {
+            // se href do link for igual
+            if (link.getAttribute("href").includes(current)) {
                 link.classList.add("active");
             } else {
                 link.classList.add("link-secondary");
@@ -26,7 +26,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         for (link of [...links]) {
             let linkHref = link.getAttribute("href");
 
-            if (current === "" && linkHref === "index.php") {
+            if (current === "" && linkHref.includes("index.php")) {
                 // se o pathname atual for vazio, provavelmente estamos no index.php
                 link.classList.add("active-link");
             } else if (linkHref === current) {

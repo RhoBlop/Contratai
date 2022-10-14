@@ -1,19 +1,20 @@
 /* Montserrat Import */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
 
 /* VARIABLES */
 :root {
-    --background: #F8F8F8;
     --primary-green: #026773;
-    --light-green: #15A0B0;
-    --dark-green: #074A59;
+    --light-green: #15a0b0;
+    --dark-green: #074a59;
     --text-color: #000;
     --grey: #202020;
     --bootstrap-border: #ced4da;
     --danger-color: #cf1c0e;
-    --blue-vertical-gradient: linear-gradient(180deg, #15A0B0, #074A59);
+    --blue-vertical-gradient: linear-gradient(180deg, #15a0b0, #074a59);
     --navbar-height: 72px;
-    --font-family: 'Montserrat', sans-serif;
+    --font-family: "Montserrat", sans-serif;
+
+
 } /* VARIABLES */
 
 * {
@@ -26,7 +27,7 @@ html {
 
 body {
     background-color: var(--background);
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     -webkit-font-smoothing: antialized;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
@@ -35,9 +36,11 @@ body {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-} 
+}
 
-main h1, h2, h5{
+main h1,
+h2,
+h5 {
     font-weight: 700;
 }
 
@@ -60,7 +63,7 @@ a {
     color: var(--light-green);
 }
 
-a:hover{
+a:hover {
     color: var(--primary-green);
 }
 
@@ -129,7 +132,7 @@ header {
 
 header .navbar {
     height: var(--navbar-height);
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 header .btn {
@@ -141,19 +144,18 @@ header .dropdown-item:active {
 }
 
 @media screen and (max-width: 768px) {
-
     .offcanvas-header {
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     }
 
-    .offcanvas-body .navbar-nav .nav-item{
+    .offcanvas-body .navbar-nav .nav-item {
         display: flex;
         justify-content: center;
     }
 
     .offcanvas-body .navbar-nav {
         padding-bottom: 20px;
-        border-bottom: solid 1px rgba(0, 0, 0, .2);
+        border-bottom: solid 1px rgba(0, 0, 0, 0.2);
     }
 
     .offcanvas-body .header-buttons {
@@ -166,11 +168,9 @@ header .dropdown-item:active {
     .offcanvas-body .header-buttons a {
         font-size: 20px !important;
     }
-
 }
 
 /* Filtros de Serviço */
-
 
 .item-pesquisa {
     padding-right: 20px;
@@ -179,7 +179,7 @@ header .dropdown-item:active {
 
 /* Avaliações (Index) */
 
-.card-avaliacao .text-muted{
+.card-avaliacao .text-muted {
     font-size: 14px;
 }
 
@@ -198,17 +198,23 @@ header .dropdown-item:active {
 /* Gradient pro texto da home*/
 
 main h1.text-gradient {
-    background: linear-gradient(180deg, #15A0B0 0%, #074A59 100%);
+    background: linear-gradient(180deg, #15a0b0 0%, #074a59 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-
 /* Botões*/
 
 .btn {
-    transition: color .25s ease-in-out, background-color .25s ease-in-out, border-color .15s ease-in-out, transform .15s ease-in-out;
+    transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+        border-color 0.15s ease-in-out, transform 0.15s ease-in-out;
+
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn-login, .btn-link, .btn-close {
+    box-shadow: none;
 }
 
 .btn:hover {
@@ -220,13 +226,14 @@ main h1.text-gradient {
     border: none;
     font-weight: 700;
 }
+
 .btn-login:hover {
     color: var(--primary-green);
     border: none;
 }
 
 .btn-login::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -239,8 +246,8 @@ main h1.text-gradient {
     transform-origin: center;
 }
 .btn-login:hover::after,
-.btn-login:focus::after{
-  transform: scale(1);
+.btn-login:focus::after {
+    transform: scale(1);
 }
 
 .btn-outline-green {
@@ -273,7 +280,6 @@ main h1.text-gradient {
     border-color: var(--primary-green);
 }
 
-
 .login-banner {
     height: 280px;
     display: flex;
@@ -289,7 +295,6 @@ main h1.text-gradient {
 }
 
 /* Principais Categorias */
-
 
 .badge-avaliacao {
     display: flex;
@@ -311,12 +316,12 @@ ion-icon {
 
 /* hover de cards no geral*/
 .card {
-    background-color: var(--background) !important;
+    background-color: #fff;
 }
 
 .card-categoria {
     border: none;
-    transition: all .25s ease-in-out;
+    transition: all 0.25s ease-in-out;
     position: relative;
 }
 
@@ -342,10 +347,10 @@ ion-icon {
 
 /* Card de Categoria */
 .clickable-card {
-    position:absolute; 
-    width:100%;
-    height:100%;
-    top:0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
     left: 0;
 
     z-index: 1;
@@ -364,7 +369,7 @@ ion-icon {
 
 .avaliacao-otima {
     background-color: #fef3cdc8;
-    color: #F4BF00;
+    color: #f4bf00;
 }
 
 .avaliacao-media {
@@ -375,6 +380,7 @@ ion-icon {
 /* Filtros de pesquisa */
 #searchBox {
     border: 1px solid var(--bootstrap-border);
+    box-shadow: 0px 2px 0.5rem rgba(0, 0, 0, 0.1);
 }
 
 #cardsPesquisa {
@@ -396,30 +402,31 @@ ion-icon {
 }
 
 .active #searchBox {
-    border-radius: .5rem 0 0 0
+    border-radius: 0.5rem 0 0 0;
 }
 .active #searchButton {
-    border-radius: 0 .5rem 0 0
+    border-radius: 0 0.5rem 0 0;
 }
 .active .filters-group {
     display: flex;
     height: calc(1.5em + 1rem + 2px);
-    border-radius: 0 0 .5rem .5rem;
+    border-radius: 0 0 0.5rem 0.5rem;
     transform-origin: top left;
-    animation: fade-in .3s linear; 
+    animation: fade-in 0.3s linear;
 }
 
 .show-result {
     display: flex !important;
     transform-origin: center;
-    animation: collapse .3s ease-in-out !important;
+    animation: collapse 0.3s ease-in-out !important;
 }
 
 @keyframes collapse {
     from {
         transform: scaleY(0);
         opacity: 0;
-    } to {
+    }
+    to {
         transform: scaleY(1);
         opacity: 1;
     }
@@ -428,7 +435,8 @@ ion-icon {
 @keyframes fade-in {
     from {
         opacity: 0;
-    } to {
+    }
+    to {
         opacity: 1;
     }
 }
@@ -447,7 +455,7 @@ ion-icon {
     border: 1px solid var(--grey);
     border-radius: 15px;
     background-color: white;
-    transition: all .15s ease-in-out
+    transition: all 0.15s ease-in-out;
 }
 .search-filter + label:hover {
     cursor: pointer;
@@ -466,7 +474,7 @@ ion-icon {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.1);
-    border-radius: .5rem;
+    border-radius: 0.5rem;
 }
 
 .btn-continue-search {
@@ -477,7 +485,7 @@ ion-icon {
 .btn-continue-search i {
     font-size: 30px;
     color: var(--grey);
-    transform: none ;
+    transform: none;
 }
 .btn-continue-search:hover i {
     animation-name: up-down, up-down;
@@ -489,66 +497,67 @@ ion-icon {
 @keyframes up-down {
     from {
         transform: translateY(0);
-    } to {
+    }
+    to {
         transform: translateY(15px);
     }
 }
 
 /* Loading spinner */
 .lds-ellipsis {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
 }
 .lds-ellipsis div {
-  position: absolute;
-  top: 33px;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: #fff;
-  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--primary-green);
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .lds-ellipsis div:nth-child(1) {
-  left: 8px;
-  animation: lds-ellipsis1 0.6s infinite;
+    left: 8px;
+    animation: lds-ellipsis1 0.6s infinite;
 }
 .lds-ellipsis div:nth-child(2) {
-  left: 8px;
-  animation: lds-ellipsis2 0.6s infinite;
+    left: 8px;
+    animation: lds-ellipsis2 0.6s infinite;
 }
 .lds-ellipsis div:nth-child(3) {
-  left: 32px;
-  animation: lds-ellipsis2 0.6s infinite;
+    left: 32px;
+    animation: lds-ellipsis2 0.6s infinite;
 }
 .lds-ellipsis div:nth-child(4) {
-  left: 56px;
-  animation: lds-ellipsis3 0.6s infinite;
+    left: 56px;
+    animation: lds-ellipsis3 0.6s infinite;
 }
 @keyframes lds-ellipsis1 {
-  0% {
-    transform: scale(0);
-  }
-  100% {
-    transform: scale(1);
-  }
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 @keyframes lds-ellipsis3 {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0);
-  }
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
 }
 @keyframes lds-ellipsis2 {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(24px, 0);
-  }
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(24px, 0);
+    }
 }
 
 /* Card de Pesquisa */
@@ -562,7 +571,7 @@ ion-icon {
     margin: 10px 0;
     z-index: 2;
     opacity: 0;
-    animation: drop-in .4s ease-in-out forwards;
+    animation: drop-in 0.4s ease-in-out forwards;
 }
 
 .card-pesquisa .card-body {
@@ -586,13 +595,12 @@ ion-icon {
     align-self: center;
 }
 
-.card-pesquisa .search-profile-pic img{
+.card-pesquisa .search-profile-pic img {
     width: 100px;
     height: 100px;
     object-fit: cover;
     border-radius: 50%;
 }
-
 
 .card-pesquisa .badge-avaliacao {
     min-width: 70px;
@@ -607,7 +615,8 @@ ion-icon {
     from {
         transform: translateY(-50px);
         opacity: 0;
-    } to {
+    }
+    to {
         transform: translateY(0);
         opacity: 1;
     }
@@ -637,20 +646,19 @@ ion-icon {
 }
 
 /* Carousel em telas maiores */
-@media screen and ( min-width: 768px ) {
+@media screen and (min-width: 768px) {
     .carousel-inner {
         display: flex;
     }
     .carousel-item {
         display: block;
         margin-right: 0;
-        flex: 0 0 calc(100%/4);
+        flex: 0 0 calc(100% / 4);
     }
     .carousel-item p {
         font-size: 18px;
     }
-} 
-
+}
 
 /* Footer */
 
@@ -672,17 +680,16 @@ footer i {
     font-size: 24px;
 }
 
-.socials i{
+.socials i {
     color: white;
 }
 
-.socials{
+.socials {
     list-style: none;
     gap: 1rem;
 }
 
-@media screen and (max-width: 768px){
-
+@media screen and (max-width: 768px) {
     .socials {
         display: flex !important;
         justify-content: space-around !important;
@@ -710,10 +717,10 @@ footer i {
 
 /* Cadastro */
 
-.buttons > a, .buttons > button{
+.buttons > a,
+.buttons > button {
     font-size: 18px !important;
 }
-
 
 .cadastro-logo {
     position: absolute;
@@ -734,12 +741,11 @@ footer i {
     overflow: hidden;
 }
 
-.cadastro-side-image img{
+.cadastro-side-image img {
     object-fit: cover;
     width: 100%;
     height: 100%;
 }
-
 
 @media screen and (max-width: 1400px) {
     .cadastro-side-image {
@@ -760,12 +766,20 @@ footer i {
     }
 }
 
+@media screen and (max-width: 768px) {
+    .caixa-pesquisa {
+        width: 100%;
+    }
+    .imagem-trabalhador-home {
+        display: none;
+    }
+}
+
 /* Settings e Sidebar */
 
 #settingsContent {
     border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
-
 
 table .text-muted {
     font-size: 18px;
@@ -773,10 +787,10 @@ table .text-muted {
 
 hr {
     size: 1px;
-    color: solid rgba(0, 0, 0, 0.1)
+    color: solid rgba(0, 0, 0, 0.1);
 }
 
-.active-link{
+.active-link {
     color: var(--primary-green) !important;
 }
 
@@ -785,21 +799,25 @@ hr {
     color: white !important;
 }
 
-.nav-link {
-    padding: 0.5rem 1rem;
-    font-size: 16px;
-    transition: all .1s ease-in;
+
+#sidebar .nav-item {
+    transition: .15s ease-in-out;
+    transition-delay: 0s;
 }
 
-.nav-link:hover {
+#sidebar .nav-item:hover {
     transform: scale(1.02);
 }
 
-#side-bar {
-    font-size: 20px;
+.nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+    transition-delay: .15s;
 }
 
-
+#sidebar {
+    font-size: 20px;
+}
 
 /* Editar Perfil */
 
@@ -831,7 +849,7 @@ label {
 }
 
 .form-control:focus {
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     box-shadow: none;
     border: 1px solid var(--light-green);
     outline-style: solid;
@@ -852,7 +870,7 @@ label {
     filter: brightness(100%);
     width: 148px;
     height: 148px;
-    transition: all .1s ease-in-out;
+    transition: all 0.1s ease-in-out;
     overflow: hidden;
 }
 
@@ -869,7 +887,6 @@ label {
     border-radius: 50%;
     object-fit: cover;
 }
-
 
 /* HOVER */
 
@@ -916,6 +933,7 @@ label {
     padding: 10px 0;
     margin: 20px 0 0 0;
     border-radius: 8px;
+    animation: fade-in 0.3s ease-in;
     /* max-height: 0;
     transition: max-height 4s ease-in-out; */
 }
@@ -940,7 +958,7 @@ label {
 
 #profileCard {
     font-size: 14px;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 #profileCard:hover {
@@ -950,15 +968,15 @@ label {
 #profileCard > .card-img-top {
     height: 100px;
     object-fit: cover;
-    border-top-right-radius: .375rem !important;
-    border-top-left-radius: .375rem !important;
+    border-top-right-radius: 0.375rem !important;
+    border-top-left-radius: 0.375rem !important;
 }
 
 #profileCard .profile-pic img {
     border: solid 2px #fff;
 }
 
-#profileCard > .card-body  {
+#profileCard > .card-body {
     margin-top: -50px;
 }
 
@@ -974,12 +992,12 @@ label {
 
 /* Perfil Público */
 
-
 #profile .card .header-card {
     width: 100%;
     height: 150px;
-    background: #5a6363;
-
+    background: var(--grey);
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
 }
 
 .profile-pic img {
@@ -989,7 +1007,7 @@ label {
     object-fit: cover;
 }
 
-#profile .card .card-body{
+#profile .card .card-body {
     padding: 15px;
 }
 
@@ -997,8 +1015,8 @@ label {
     margin-top: -120px;
 }
 
-@media screen and (max-width: 992px){
-    #profile{
+@media screen and (max-width: 992px) {
+    #profile {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -1017,16 +1035,17 @@ label {
     #profile a {
         align-self: center;
     }
-
 }
 
-#profile .top-infos h3, p {
+#profile .top-infos h3,
+p {
     margin: 0;
 }
 
-#infos i, #infos p {
+#infos i,
+#infos p {
     font-size: 18px;
-    margin-right: .25rem;
+    margin-right: 0.25rem;
 }
 
 #fotos img {
@@ -1035,27 +1054,26 @@ label {
     object-fit: cover;
 }
 
-#fotos .sm-photo img{
+#fotos .sm-photo img {
     height: 48px;
     width: 100%;
     border-radius: 4px;
 }
 
-#fotos .big-photo img{
+#fotos .big-photo img {
     border-radius: 8px;
 }
 
-#sobre p, #avaliacao p, #anuncio p, #profileCard p {
+#sobre p,
+#avaliacao p,
+#anuncio p,
+#profileCard p {
     font-size: 16px;
 }
 
-#avaliacao .aval-pic {
-    width: 48px;
-    height: 48px;
-}
-
 #avaliacao .aval-pic img {
-    height: 100%;
+    width: 60px;
+    height: 60px;
     object-fit: cover;
 }
 
@@ -1071,7 +1089,7 @@ label {
 
 .grid {
     display: grid;
-    gap: .5rem;
+    gap: 0.5rem;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: repeat(2, 240px);
     border-radius: 1rem;
@@ -1087,7 +1105,8 @@ label {
     object-fit: cover;
 }
 
-.sm-photo1 img, .sm-photo2 img {
+.sm-photo1 img,
+.sm-photo2 img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -1095,40 +1114,47 @@ label {
 
 /* Card Profissão */
 
-#cardProfissao p {
+.card-profissao p {
     font-size: 14px;
 }
 
-#cardProfissao a {
+.card-profissao button {
     display: block;
     position: relative;
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
 }
 
-#cardProfissao a .fa-trash-can {
+.card-profissao button .fa-trash-can {
     position: absolute;
-    top: 50%;  
-    left: 50%; 
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     opacity: 1;
     transition: all 0.3s ease-in-out;
 }
-#cardProfissao a .fa-xmark {
+.card-profissao button .fa-xmark {
     position: absolute;
-    top: 50%;  
-    left: 50%; 
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
     opacity: 0;
     transition: all 0.3s ease-in-out;
 }
 
-#cardProfissao a:hover .fa-trash-can {
+.card-profissao button:hover .fa-trash-can {
     opacity: 0;
 }
-#cardProfissao a:hover .fa-xmark {
+.card-profissao button:hover .fa-xmark {
     opacity: 1;
 }
 
-#cardProfissao .exclude {
+.card-profissao .exclude {
     width: 18px;
     height: 18px;
     display: flex;
@@ -1136,16 +1162,537 @@ label {
     align-items: center;
 }
 
-#cardProfissao .exclude i {
+.card-profissao .exclude i {
     width: 100%;
     height: 100%;
 }
 
-@media screen and ( max-width: 768px ) {
+#modaladdProf button i {
+    display: none;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+@media screen and (max-width: 768px) {
     .caixa-pesquisa {
         width: 100%;
     }
     .imagem-trabalhador-home {
         display: none;
+    }
+}
+
+#modaladdProf button:hover i {
+    display: inline;
+    opacity: 1;
+}
+
+#modaladdProf button:hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#modaladdProf .ts-wrapper input,
+#modaladdProf .ts-wrapper .item {
+    font-size: 18px;
+}
+
+#modaladdProf .ts-wrapper .ts-dropdown-content .option {
+    font-size: 16px;
+}
+
+#modaladdProf .ts-wrapper .ts-control {
+    border-radius: 0.5rem;
+}
+
+#modaladdProf .ts-wrapper .ts-dropdown.single,
+#modaladdProf .ts-wrapper .ts-dropdown-content {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+/* FILTROS CONTRATOS */
+.filter-tablist {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: 300px;
+    overflow: hidden;
+    border: 1px solid var(--bootstrap-border);
+}
+
+.filter-tablist a {
+    color: inherit;
+    border: none;
+    padding: 10px 20px;
+    font: inherit;
+    transition: background-color .2s ease-in-out, color .2s ease-in-out;
+}
+
+.filter-tablist a:nth-child(1) {
+    border-right: 1px solid var(--bootstrap-border);
+}
+
+.filter-tablist a.active,
+.filter-tablist a:hover {
+    background: #015c67;
+    color: white;
+    cursor: pointer;
+    outline: inherit;
+}
+
+.filter-tablist .nav-link {
+    transform: none;
+}
+
+/* Acordiões */ 
+
+.accordion { 
+    --bs-accordion-active-color: var(--dark-green);
+    --bs-accordion-active-bg: #e2f3fa;
+    --bs-accordion-btn-focus-box-shadow: none;
+}
+
+.accordion-flush .accordion-button {
+    box-shadow: none !important;
+    border-radius: .375rem !important;
+}
+
+.accordion-item {
+    border: none;
+}
+
+
+
+/* DatePicker */
+
+.daterangepicker {
+    position: absolute;
+    color: inherit;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    width: 278px;
+    max-width: none;
+    padding: 0;
+    margin-top: 7px;
+    top: 100px;
+    left: 20px;
+    z-index: 3001;
+    display: none;
+    font-size: 15px;
+    line-height: 1em;
+}
+
+.daterangepicker:before,
+.daterangepicker:after {
+    position: absolute;
+    display: inline-block;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    content: "";
+}
+
+.daterangepicker:before {
+    top: -7px;
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+    border-bottom: 7px solid #ccc;
+}
+
+.daterangepicker:after {
+    top: -6px;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #fff;
+    border-left: 6px solid transparent;
+}
+
+.daterangepicker.opensleft:before {
+    right: 9px;
+}
+
+.daterangepicker.opensleft:after {
+    right: 10px;
+}
+
+.daterangepicker.openscenter:before {
+    left: 0;
+    right: 0;
+    width: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.daterangepicker.openscenter:after {
+    left: 0;
+    right: 0;
+    width: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.daterangepicker.opensright:before {
+    left: 9px;
+}
+
+.daterangepicker.opensright:after {
+    left: 10px;
+}
+
+.daterangepicker.drop-up {
+    margin-top: -7px;
+}
+
+.daterangepicker.drop-up:before {
+    top: initial;
+    bottom: -7px;
+    border-bottom: initial;
+    border-top: 7px solid #ccc;
+}
+
+.daterangepicker.drop-up:after {
+    top: initial;
+    bottom: -6px;
+    border-bottom: initial;
+    border-top: 6px solid #fff;
+}
+
+.daterangepicker.single .daterangepicker .ranges,
+.daterangepicker.single .drp-calendar {
+    float: none;
+}
+
+.daterangepicker.single .drp-selected {
+    display: none;
+}
+
+.daterangepicker.show-calendar .drp-calendar {
+    display: block;
+}
+
+.daterangepicker.show-calendar .drp-buttons {
+    display: block;
+}
+
+.daterangepicker.auto-apply .drp-buttons {
+    display: none;
+}
+
+.daterangepicker .drp-calendar {
+    display: none;
+    max-width: 270px;
+}
+
+.daterangepicker .drp-calendar.left {
+    padding: 8px 0 8px 8px;
+}
+
+.daterangepicker .drp-calendar.right {
+    padding: 8px;
+}
+
+.daterangepicker .drp-calendar.single .calendar-table {
+    border: none;
+}
+
+.daterangepicker .calendar-table .next span,
+.daterangepicker .calendar-table .prev span {
+    color: #fff;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    border-radius: 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.daterangepicker .calendar-table .next span {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.daterangepicker .calendar-table .prev span {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.daterangepicker .calendar-table th,
+.daterangepicker .calendar-table td {
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle;
+    min-width: 32px;
+    width: 32px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.daterangepicker .calendar-table {
+    border: 1px solid #fff;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.daterangepicker .calendar-table table {
+    width: 100%;
+    margin: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.daterangepicker td.available:hover,
+.daterangepicker th.available:hover {
+    background-color: #eee;
+    border-color: transparent;
+    color: inherit;
+}
+
+.daterangepicker td.week,
+.daterangepicker th.week {
+    font-size: 80%;
+    color: #ccc;
+}
+
+.daterangepicker td.off,
+.daterangepicker td.off.in-range,
+.daterangepicker td.off.start-date,
+.daterangepicker td.off.end-date {
+    background-color: #fff;
+    border-color: transparent;
+    color: #999;
+}
+
+.daterangepicker td.in-range {
+    background-color: #ebf8f8;
+    border-color: transparent;
+    color: #000;
+    border-radius: 0;
+}
+
+.daterangepicker td.start-date {
+    border-radius: 4px 0 0 4px;
+}
+
+.daterangepicker td.end-date {
+    border-radius: 0 4px 4px 0;
+}
+
+.daterangepicker td.start-date.end-date {
+    border-radius: 4px;
+}
+
+.daterangepicker td.active,
+.daterangepicker td.active:hover {
+    background-color: var(--primary-green);
+    border-color: transparent;
+    color: #fff;
+}
+
+.daterangepicker th.month {
+    width: auto;
+}
+
+.daterangepicker td.disabled,
+.daterangepicker option.disabled {
+    color: #999;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
+.daterangepicker select.monthselect,
+.daterangepicker select.yearselect {
+    font-size: 12px;
+    padding: 1px;
+    height: auto;
+    margin: 0;
+    cursor: default;
+}
+
+.daterangepicker select.monthselect {
+    margin-right: 2%;
+    width: 56%;
+}
+
+.daterangepicker select.yearselect {
+    width: 40%;
+}
+
+.daterangepicker select.hourselect,
+.daterangepicker select.minuteselect,
+.daterangepicker select.secondselect,
+.daterangepicker select.ampmselect {
+    width: 50px;
+    margin: 0 auto;
+    background: #eee;
+    border: 1px solid #eee;
+    padding: 2px;
+    outline: 0;
+    font-size: 12px;
+}
+
+.daterangepicker .calendar-time {
+    text-align: center;
+    margin: 4px auto 0 auto;
+    line-height: 30px;
+    position: relative;
+}
+
+.daterangepicker .calendar-time select.disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.daterangepicker .drp-buttons {
+    clear: both;
+    text-align: right;
+    padding: 8px;
+    border-top: 1px solid #ddd;
+    display: none;
+    line-height: 12px;
+    vertical-align: middle;
+}
+
+.daterangepicker .drp-selected {
+    display: inline-block;
+    font-size: 12px;
+    padding-right: 8px;
+}
+
+.daterangepicker .drp-buttons .btn {
+    margin-left: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 8px;
+}
+
+.daterangepicker.show-ranges.single.rtl .drp-calendar.left {
+    border-right: 1px solid #ddd;
+}
+
+.daterangepicker.show-ranges.single.ltr .drp-calendar.left {
+    border-left: 1px solid #ddd;
+}
+
+.daterangepicker.show-ranges.rtl .drp-calendar.right {
+    border-right: 1px solid #ddd;
+}
+
+.daterangepicker.show-ranges.ltr .drp-calendar.left {
+    border-left: 1px solid #ddd;
+}
+
+.daterangepicker .ranges {
+    float: none;
+    text-align: left;
+    margin: 0;
+}
+
+.daterangepicker.show-calendar .ranges {
+    margin-top: 8px;
+}
+
+.daterangepicker .ranges ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+}
+
+.daterangepicker .ranges li {
+    font-size: 12px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.daterangepicker .ranges li:hover {
+    background-color: #eee;
+}
+
+.daterangepicker .ranges li.active {
+    background-color: var(--dark-green);
+    color: #fff;
+}
+
+/*  Larger Screen Styling */
+@media (min-width: 564px) {
+    .daterangepicker {
+        width: auto;
+    }
+
+    .daterangepicker .ranges ul {
+        width: 140px;
+    }
+
+    .daterangepicker.single .ranges ul {
+        width: 100%;
+    }
+
+    .daterangepicker.single .drp-calendar.left {
+        clear: none;
+    }
+
+    .daterangepicker.single .ranges,
+    .daterangepicker.single .drp-calendar {
+        float: left;
+    }
+
+    .daterangepicker {
+        direction: ltr;
+        text-align: left;
+    }
+
+    .daterangepicker .drp-calendar.left {
+        clear: left;
+        margin-right: 0;
+    }
+
+    .daterangepicker .drp-calendar.left .calendar-table {
+        border-right: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .daterangepicker .drp-calendar.right {
+        margin-left: 0;
+    }
+
+    .daterangepicker .drp-calendar.right .calendar-table {
+        border-left: none;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .daterangepicker .drp-calendar.left .calendar-table {
+        padding-right: 8px;
+    }
+
+    .daterangepicker .ranges,
+    .daterangepicker .drp-calendar {
+        float: left;
+    }
+}
+
+@media (min-width: 730px) {
+    .daterangepicker .ranges {
+        width: auto;
+    }
+
+    .daterangepicker .ranges {
+        float: left;
+    }
+
+    .daterangepicker.rtl .ranges {
+        float: right;
+    }
+
+    .daterangepicker .drp-calendar.left {
+        clear: none !important;
     }
 }

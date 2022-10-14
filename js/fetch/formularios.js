@@ -7,12 +7,6 @@ function loading() {
     feedbackDiv.innerText = "Aguarde um instante...";
 }
 
-function timeoutConnection() {
-    return setTimeout(() => {
-        formErro("Algum erro ocorreu. Tente novamente mais tarde!");
-    }, 6000)
-}
-
 function formErro(textErro) {
     let feedbackDiv = document.querySelector(idDivFeedback);
     feedbackDiv.style.display = "block";
@@ -25,40 +19,40 @@ async function sendCadastro(event) {
     event.preventDefault();
 
     let senha = document.querySelector("#senha").value;
-    let confirmSenha = document.querySelector("#confirmSenha").value;
+    let confirmaSenha = document.querySelector("#confirmaSenha").value;
 
-    if (senha === confirmSenha) {
+    if (senha === confirmaSenha) {
         // transforma os dados do formulário para o formato x-www-form-urlencoded
-        let formData = new URLSearchParams(new FormData(event.target)).toString();
-    
+        let formData = new URLSearchParams(
+            new FormData(event.target)
+        ).toString();
+
         loading();
         timeout = timeoutConnection();
-    
-        let response = await fetch("./API/user/register.php", {
+
+        let response = await fetch("./php/post/user/cadastro.php", {
             method: "POST",
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
+                "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: formData
+            body: formData,
         });
         let data = await response.json();
-        
-        let { erro } = data;
-        if (erro) {
+
+        if (data.erro) {
+            let { erro } = data;
             formErro(erro);
-        } 
-        
-        let { action } = data;
-        if (action) {
+        }
+
+        if (data.dados) {
             setOpenModal("#modal-login");
-            clearTimeout(timeout);
             window.location.href = "index.php";
         }
+        clearTimeout(timeout);
     } else {
         formErro("As senhas não são iguais");
     }
 }
-
 
 // função de formulário responsável por criar uma nova sessão de usuário
 async function sendLogin(event) {
@@ -69,25 +63,24 @@ async function sendLogin(event) {
     loading();
     timeout = timeoutConnection();
 
-    let response = await fetch("./API/login.php", {
+    let response = await fetch("./php/post/login.php", {
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: formData
+        body: formData,
     });
     let data = await response.json();
 
-    let { erro } = data;
-    if (erro) {
+    if (data.erro) {
+        let { erro } = data;
         formErro(erro);
     }
-    
-    let { action } = data;
-    if (action) {
-        clearTimeout(timeout);
+
+    if (data.dados) {
         window.location.href = "home.php";
     }
+    clearTimeout(timeout);
 }
 
 // função que faz update das informações de usuário
@@ -98,94 +91,130 @@ async function sendUpdate(event) {
 
     loading();
     timeout = timeoutConnection();
-    
-    let response = await fetch("./API/user/updateInfo.php", {
+
+    let response = await fetch("./php/post/user/updateInfo.php", {
         method: "POST",
         credentials: "same-origin",
-        body: formData
+        body: formData,
     });
     let data = await response.json();
-    timeout = timeoutConnection();
 
-    let { erro } = data;
-    if (erro) {
+    if (data.erro) {
+        let { erro } = data;
         formErro(erro);
     }
-    
-    let { action } = data;
-    if (action) {
-        setOpenToast("#notifyToast", "Edição de perfil", "Edição de perfil realizada com sucesso");
-        clearTimeout(timeout);
+
+    if (data.dados) {
+        setOpenToast(
+            "#notifyToast",
+            "Edição de perfil",
+            "Edição de perfil realizada com sucesso"
+        );
         window.location.href = "perfil.php";
     }
+    clearTimeout(timeout);
 }
-
 
 async function sendUpdateSenha(event) {
     event.preventDefault();
 
     let senhaNova = document.querySelector("#senhaNova").value;
-    let confirmSenhaNova = document.querySelector("#confirmSenhaNova").value;
+    let confirmaSenhaNova = document.querySelector("#confirmaSenhaNova").value;
 
-    if (senhaNova === confirmSenhaNova) {
+    if (senhaNova === confirmaSenhaNova) {
         // transforma os dados do formulário para o formato x-www-form-urlencoded
-        let formData = new URLSearchParams(new FormData(event.target)).toString();
+        let formData = new URLSearchParams(
+            new FormData(event.target)
+        ).toString();
 
         loading();
         timeout = timeoutConnection();
-        
-        let response = await fetch("./API/user/updateSenha.php", {
+
+        let response = await fetch("./php/post/user/updateSenha.php", {
             method: "POST",
             credentials: "same-origin",
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
+                "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: formData
+            body: formData,
         });
         let data = await response.json();
 
-        let { erro } = data;
-        if (erro) {
+        if (data.erro) {
+            let { erro } = data;
             formErro(erro);
         }
-        
-        let { action } = data;
-        if (action) {
-            setOpenToast("#notifyToast", "Edição de senha", "Edição da senha realizada com sucesso");
-            clearTimeout(timeout);
+
+        if (data.dados) {
+            setOpenToast(
+                "#notifyToast",
+                "Edição de senha",
+                "Edição da senha realizada com sucesso"
+            );
             window.location.href = "perfil.php";
         }
+        clearTimeout(timeout);
     } else {
         formErro("As senhas não são iguais");
     }
 }
 
-
 async function logout() {
-    console.log("logging out");
-    let response = await fetch("./API/logout.php", {
+    let response = await fetch("./php/post/logout.php", {
         method: "GET",
         credentials: "same-origin",
     });
     let data = await response.json();
 
-    let { action } = data;
-    if (action) {
-        setOpenModal("#modal-login")
+    if (data.dados) {
+        setOpenModal("#modal-login");
         window.location.href = "index.php";
     }
 }
 
-
 async function deleteUser() {
-    let response = await fetch("./API/user/delete.php", {
+    let response = await fetch("./php/post/user/deletar.php", {
         method: "GET",
         credentials: "same-origin",
     });
     let data = await response.json();
 
-    let { deleted } = data;
-    if (deleted) {
+    if (data.dados) {
         window.location.href = "excluido.php";
     }
+}
+
+async function sendSolicitacaoContrato(event) {
+    event.preventDefault();
+
+    // transforma os dados do formulário para o formato x-www-form-urlencoded
+    let formData = new URLSearchParams(new FormData(event.target)).toString();
+
+    loading();
+    timeout = timeoutConnection();
+
+    let response = await fetch("./php/post/contrato/solicitacaoContrato.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        credentials: "same-origin",
+        body: formData,
+    });
+    let data = await response.json();
+
+    if (data.erro) {
+        let { erro } = data;
+        formErro(erro);
+    }
+
+    if (data.dados) {
+        setOpenToast(
+            "#notifyToast",
+            "Contratação",
+            "Solicitação de contratatação enviada com sucesso"
+        );
+        window.location.reload();
+    }
+    clearTimeout(timeout);
 }

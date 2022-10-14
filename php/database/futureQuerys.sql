@@ -1,44 +1,44 @@
 -- Usuários sem profissão cadastrada
-SELECT nomUsr as "Usuário", dscEmailUsr as "Email", datNascimentoUsr as "Nascimento", numCPFUsr as "CPF", dscBairro as "Bairro", dscCidade as "Cidade", dscEstado as "Estado"
-FROM usuario as usr 
-LEFT JOIN usrEspec as usres ON (usres.idUsr = usr.idUsr)
+SELECT nomuser as "Usuário", descrEmailuser as "Email", datNascimentouser as "Nascimento", numCPFuser as "CPF", descrBairro as "Bairro", descrCidade as "Cidade", descrEstado as "Estado"
+FROM usuario AS usr 
+LEFT JOIN userEspec as useres ON (useres.iduser = usr.iduser)
 INNER JOIN bairro as bair ON (usr.idBairro = bair.idBairro) 
 INNER JOIN cidade as cid ON (bair.idCidade = cid.idCidade)
 INNER JOIN estado as es ON (cid.idEstado = es.idEstado)
-WHERE usres.idEspec is NULL
+WHERE useres.idEspec is NULL
 
 -- Usuários com profissão cadastrada
-SELECT DISTINCT nomUsr as "Usuário", dscEmailUsr as "Email", datNascimentoUsr as "Nascimento", numCPFUsr as "CPF", dscBairro as "Bairro", dscCidade as "Cidade",
-dscEstado as "Estado", dscProf as "Profissão", dscEspec as "Especialização"
-FROM usuario as usr 
-INNER JOIN usrEspec as usres ON (usres.idUsr = usr.idUsr)
-INNER JOIN especializacao as espec ON (usres.idEspec = espec.idEspec)
+SELECT DISTINCT nomuser as "Usuário", descrEmailuser as "Email", datNascimentouser as "Nascimento", numCPFuser as "CPF", descrBairro as "Bairro", descrCidade as "Cidade",
+descrEstado as "Estado", descrProf as "Profissão", descrEspec as "Especialização"
+FROM usuario AS usr 
+INNER JOIN userEspec as useres ON (useres.iduser = usr.iduser)
+INNER JOIN especializacao as espec ON (useres.idEspec = espec.idEspec)
 INNER JOIN profissao as prof ON (espec.idProf = prof.idProf)
 INNER JOIN bairro as bair ON (usr.idBairro = bair.idBairro) 
 INNER JOIN cidade as cid ON (bair.idCidade = cid.idCidade)
 INNER JOIN estado as es ON (cid.idEstado = es.idEstado)
 
 -- Especializações e suas respectivas profissões
-SELECT dscEspec as "Especialização", dscProf as "Profissão"
+SELECT descrEspec as "Especialização", descrProf as "Profissão"
 FROM especializacao as espec
 INNER JOIN profissao as prof ON (espec.idProf = prof.idProf)
 
 -- Dias da semana disponíveis de um usuário
-SELECT DISTINCT dscDiaSemn as "DiaSemana", nomUsr as "Usuário", dscEmailUsr as "Email"
-FROM usuario as usr
-INNER JOIN usrDisp as usrdi ON (usr.idUsr = usrdi.idUsr)
-INNER JOIN disponibilidade as disp ON (usrdi.idDisp = disp.idDisp)
+SELECT DISTINCT descrDiaSemn as "DiaSemana", nomuser as "Usuário", descrEmailuser as "Email"
+FROM usuario AS usr
+INNER JOIN userDisp as userdi ON (usr.iduser = userdi.iduser)
+INNER JOIN disponibilidade as disp ON (userdi.idDisp = disp.idDisp)
 INNER JOIN diaSemana as diaSemn ON (disp.idDiaSemn = diaSemn.idDiaSemn)
-/* WHERE usr.idUsr = (X) */
+/* WHERE usr.iduser = (X) */
 
 -- PROFISSÕES MAIS CADASTRADAS + MÉDIA DE AVALIAÇÃO
-SELECT top.idprof, top.dscprof, top.numusr, avg(aval.notaavaliacao) AS mediaavaliacao 
-FROM (SELECT count(*) AS numUsr, prof.idprof, prof.dscProf
+SELECT top.idprof, top.descrprof, top.numuser, avg(aval.notaavaliacao) AS mediaavaliacao 
+FROM (SELECT count(*) AS numuser, prof.idprof, prof.descrProf
     FROM profissao AS prof
     INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
-    INNER JOIN usrEspec AS usres ON (espec.idespec = usres.idespec)
-    INNER JOIN usuario AS usr ON (usres.idusr = usr.idusr)
-    GROUP BY prof.idprof, prof.dscProf
+    INNER JOIN userEspec AS useres ON (espec.idespec = useres.idespec)
+    INNER JOIN usuario AS usr ON (useres.iduser = usr.iduser)
+    GROUP BY prof.idprof, prof.descrProf
     ORDER BY count(*) DESC
     LIMIT :limit) AS top
 
@@ -46,13 +46,13 @@ FROM (SELECT count(*) AS numUsr, prof.idprof, prof.dscProf
     INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
     INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
     INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-GROUP BY top.dscprof, top.numusr, top.idprof
-ORDER BY top.numusr DESC;
+GROUP BY top.descrprof, top.numuser, top.idprof
+ORDER BY top.numuser DESC;
 
 -- Média de avaliação por profissão - em construção
 SELECT *
-FROM usuario as usr
-INNER JOIN avaliacao as avl ON (usr.idUsr = avl.idAvaliado)
-INNER JOIN usrEspec as usres ON (usr.idUsr = usres.idUsr)
-INNER JOIN especializacao as espec ON (usres.idEspec = espec.idEspec)
+FROM usuario AS usr
+INNER JOIN avaliacao as avl ON (usr.iduser = avl.idAvaliado)
+INNER JOIN userEspec as useres ON (usr.iduser = useres.iduser)
+INNER JOIN especializacao as espec ON (useres.idEspec = espec.idEspec)
 INNER JOIN profissao as prof ON (espec.idProf = prof.idProf)

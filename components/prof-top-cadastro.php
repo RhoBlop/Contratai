@@ -7,10 +7,11 @@
     <div id="topCadastro" class="container carousel multitem-car">
         <div class="carousel-inner">
         <?php 
+            $profissaoClass = new Profissao();
             $profsAv = $profissaoClass->selectMaisCadastros($limit = 6);
             
             foreach ($profsAv as $prof): 
-                [$idprof, $dscprof, $numusr, $mediaAv] = [$prof["idprof"], $prof["dscprof"], $prof["numusr"], $prof["mediaavaliacao"]];
+                [$idprof, $descrprof, $numuser, $mediaAv] = [$prof["idprof"], $prof["descrprof"], $prof["numuser"], $prof["mediaavaliacao"]];
         ?>
 
             <!-- CARD PROFISSÃO -->
@@ -23,8 +24,8 @@
                         <?php echo $mediaAv; ?>
                     </div>
                     <div class="card-body">
-                        <h4><?php echo ucfirst($dscprof); ?></h4>
-                        <p class="mb-2"><?php echo $numusr; ?> anúncios de usuários</p>
+                        <h4><?php echo ucfirst($descrprof); ?></h4>
+                        <p class="mb-2"><?php echo $numuser; ?> anúncios de usuários</p>
                         <a href="<?php echo "profissao.php?id={$idprof}" ?>" class="btn btn-outline-green">Ver mais</a>
                         <a href="<?php echo "profissao.php?id={$idprof}" ?>"><span class="clickable-card"></span></a>
                     </div>
@@ -40,8 +41,8 @@
                         <?php echo $mediaAv; ?>
                     </div>
                     <div class="card-body">
-                        <h4><?php echo ucfirst($dscprof); ?></h4>
-                        <p class="mb-2"><?php echo $numusr; ?> anúncios de usuários</p>
+                        <h4><?php echo ucfirst($descrprof); ?></h4>
+                        <p class="mb-2"><?php echo $numuser; ?> anúncios de usuários</p>
                         <a href="<?php echo "profissao.php?id={$idprof}" ?>" class="btn btn-outline-green">Ver mais</a>
                         <a href="<?php echo "profissao.php?id={$idprof}" ?>"><span class="clickable-card"></span></a>
                     </div>

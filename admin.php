@@ -2,19 +2,17 @@
 <html lang="en">
     <head>
         <?php require("components/head.php") ?>
-        <script src="js/requisicoesAPI.js"></script>
-        <script src="js/selecionarImg.js"></script>
     </head>
     <body>
-        <?php include ("components/login-header.php") ?>
+        <?php include ("components/auth-header.php") ?>
 
         <main>
             <div class="container p-3 my-3">
                 <div class="row gx-5">
                     
-                    <?php include("components/modal-exclude.html")?>
+                    
 
-                    <?php include("components/sidebar.html")?>
+                    <?php include("components/sidebar.php")?>
 
                     <div class="col-8 px-3 flex-column text-center" id="settingsContent">
                         <h3>Esta pagina está em desenvolvimento...</h3>
