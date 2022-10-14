@@ -57,6 +57,17 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="accordion-body d-flex align-items-start gap-3">
+                                            <img id="profile-pic" src="images\temp\default-pic.png" width="52px">
+                                            <div class="text">
+                                                <h7 class="m-0"><b>Rafael</b> quer lhe contratar!</h7>
+                                                <p class="text-muted"> Há 2 horas</p>
+                                                <div class="accordion-buttons d-flex gap-2">
+                                                    <button class="btn btn-green">Aceitar</button>
+                                                    <button class="btn btn-outline-dark">Recusar</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="accordion-item">
