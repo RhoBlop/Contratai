@@ -14,7 +14,10 @@
                     <div class="col-7 px-3" id="settingsContent">
                         <div class="mb-5">
                             <h2>Meu Perfil</h2>
-                            <h6 class="text-muted">Dados da conta</h6>
+                            <div class="div d-flex justify-content-between align-items-center">
+                                <h6 class="text-muted m-0">Dados da conta</h6>
+                                <a href="#">Visualizar seu perfil público</a>
+                            </div>
                         </div>
                         <div class="d-flex justify-content-center mb-4">
                             <img id="imgPerfil" src="<?php echoProfileImage($user["imguser"]); ?>" alt="Imagem de Perfil">

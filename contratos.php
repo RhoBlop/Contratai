@@ -12,18 +12,18 @@
 
                     <?php include("components/sidebar.php")?>
 
-                    <div class="col-7 px-3" id="settingsContent">
+                    <div class="col-7 px-3 d-flex flex-column" id="settingsContent">
                         <div class="mb-4">
                             <h2>Meus contratos</h2>
                             <h6 class="text-muted">Aceite pedidos de contratos, visualize os que estão em andamento e finalize-os</h6>
                         </div>
 
-                        <div class="d-flex justify-content-center">
-                            <div class="filter-tablist mb-3" id="tablist" role="tablist">
-                                <button class="nav-link active" id="contratante-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratante-pane" role="tab">Contratei</button>
-                                <button class="nav-link" id="contratado-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratado-pane" role="tab">Contratado</button>
-                            </div>
-                        </div>
+                    <div class="nav nav-justified filter-tablist rounded-3 mb-3" id="tablist" role="tablist">
+                        <a class="nav-link active" id="contratante-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratante-pane" role="tab">Contratei</button>
+                        <a class="nav-link" id="contratado-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratado-pane" role="tab">Contratado</button>
+                    </div>
+
+
 
                         <div class="tab-content">
     
@@ -38,14 +38,14 @@
                                 $pedidosRecebidos = $contrato->selectPedidosProfissional($idUser);
                             ?>
 
-                            <div class="accordion tab-pane fade show active" id="contratante-pane" role="tabpanel">
+                            <div class="accordion accordion-flush tab-pane fade show active" id="contratante-pane" role="tabpanel">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingOne">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pedidos" aria-expanded="true" aria-controls="pedidos">
                                         Pedidos de contratação
                                     </button>
                                     </h2>
-                                    <div id="pedidos" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#contratos">
+                                    <div id="pedidos" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#contratante-pane">
                                         <div class="accordion-body">
                                             [implement PHP]
                                         </div>
@@ -57,7 +57,7 @@
                                         Contratos em andamento
                                     </button>
                                     </h2>
-                                    <div id="emAndamento" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#contratos">
+                                    <div id="emAndamento" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#contratante-pane">
                                         <div class="accordion-body">
                                             [implement PHP]
                                         </div>
@@ -69,7 +69,7 @@
                                         Contratos finalizados
                                     </button>
                                     </h2>
-                                    <div id="finalizados" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#contratos">
+                                    <div id="finalizados" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#contratante-pane">
                                         <div class="accordion-body">
                                             [implement PHP]
                                         </div>
@@ -84,14 +84,14 @@
                             <!-- ========================= 
                                         CONTRATADO
                                  ========================= -->
-                            <div class="accordion tab-pane fade" id="contratado-pane" role="tabpanel">
+                            <div class="accordion accordion-flush tab-pane fade" id="contratado-pane" role="tabpanel">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingOne">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pedidos" aria-expanded="true" aria-controls="pedidos">
                                         Teste1
                                     </button>
                                     </h2>
-                                    <div id="pedidos" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#contratos">
+                                    <div id="pedidos" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#contratado-pane">
                                         <div class="accordion-body">
                                             [implement PHP]
                                         </div>
@@ -99,11 +99,11 @@
                                 </div>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#emAndamento" aria-expanded="false" aria-controls="emAndamento">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#emAndamento" data-bs-parent="#contratado-pane" aria-expanded="false" aria-controls="emAndamento">
                                         Contratos em andamento
                                     </button>
                                     </h2>
-                                    <div id="emAndamento" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#contratos">
+                                    <div id="emAndamento" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#contratado-pane">
                                         <div class="accordion-body">
                                             [implement PHP]
                                         </div>
@@ -115,7 +115,7 @@
                                         Contratos finalizados
                                     </button>
                                     </h2>
-                                    <div id="finalizados" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#contratos">
+                                    <div id="finalizados" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#contratado-pane">
                                         <div class="accordion-body">
                                             [implement PHP]
                                         </div>
