@@ -51,7 +51,27 @@
         }
 
         public function setStatusContrato($idcontrato, $idstatus) {
-
+            try {
+                $sql = <<<SQL
+                    UPDATE contrato
+                    SET idstatus = :idstatus
+                    WHERE idcontrato = :idcontrato
+                SQL;
+  
+                $stmt = Database::prepare($sql);
+                $stmt->execute([
+                    ":idstatus" => $idstatus,
+                    ":idcontrato" => $idcontrato
+                ]);
+  
+                $result = $stmt->fetchAll();
+                return [ "dados" => $result ];
+            } catch(PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
+                
+                return [ "dados" => false ];
+            }
         }
 
         /* ================================

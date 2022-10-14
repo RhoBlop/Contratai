@@ -1,5 +1,5 @@
 -- Usuários sem profissão cadastrada
-SELECT nomuser as "Usuário", descrEmailuser as "Email", datNascimentouser as "Nascimento", numCPFuser as "CPF", descrBairro as "Bairro", descrCidade as "Cidade", descrEstado as "Estado"
+SELECT nomeuser as "Usuário", descrEmailuser as "Email", datNascimentouser as "Nascimento", numCPFuser as "CPF", descrBairro as "Bairro", descrCidade as "Cidade", descrEstado as "Estado"
 FROM usuario AS usr 
 LEFT JOIN userEspec as useres ON (useres.iduser = usr.iduser)
 INNER JOIN bairro as bair ON (usr.idBairro = bair.idBairro) 
@@ -8,7 +8,7 @@ INNER JOIN estado as es ON (cid.idEstado = es.idEstado)
 WHERE useres.idEspec is NULL
 
 -- Usuários com profissão cadastrada
-SELECT DISTINCT nomuser as "Usuário", descrEmailuser as "Email", datNascimentouser as "Nascimento", numCPFuser as "CPF", descrBairro as "Bairro", descrCidade as "Cidade",
+SELECT DISTINCT nomeuser as "Usuário", descrEmailuser as "Email", datNascimentouser as "Nascimento", numCPFuser as "CPF", descrBairro as "Bairro", descrCidade as "Cidade",
 descrEstado as "Estado", descrProf as "Profissão", descrEspec as "Especialização"
 FROM usuario AS usr 
 INNER JOIN userEspec as useres ON (useres.iduser = usr.iduser)
@@ -24,7 +24,7 @@ FROM especializacao as espec
 INNER JOIN profissao as prof ON (espec.idProf = prof.idProf)
 
 -- Dias da semana disponíveis de um usuário
-SELECT DISTINCT descrDiaSemn as "DiaSemana", nomuser as "Usuário", descrEmailuser as "Email"
+SELECT DISTINCT descrDiaSemn as "DiaSemana", nomeuser as "Usuário", descrEmailuser as "Email"
 FROM usuario AS usr
 INNER JOIN userDisp as userdi ON (usr.iduser = userdi.iduser)
 INNER JOIN disponibilidade as disp ON (userdi.idDisp = disp.idDisp)

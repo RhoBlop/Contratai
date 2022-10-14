@@ -36,17 +36,17 @@
             try {
                 // tá feio :(
                 $sql = <<<SQL
-                    SELECT userinfo.iduser, round(avg(notaavaliacao), 1) AS mediaavaliacao, count(contrt.idcontrato) AS numcontrato, nomuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
-                    FROM (SELECT usr.iduser, nomuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
+                    SELECT userinfo.iduser, round(avg(notaavaliacao), 1) AS mediaavaliacao, count(contrt.idcontrato) AS numcontrato, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
+                    FROM (SELECT usr.iduser, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
                             FROM usuario AS usr
                             INNER JOIN userespec AS useres ON (useres.iduser = usr.iduser)
                             INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
                             WHERE usr.iduser = :id
-                            GROUP BY usr.iduser, nomuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
+                            GROUP BY usr.iduser, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
                     ) AS userinfo
                     LEFT JOIN contrato AS contrt ON (userinfo.iduser = contrt.idcontratado)
                     LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    GROUP BY userinfo.iduser, nomuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
+                    GROUP BY userinfo.iduser, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
@@ -157,7 +157,7 @@
         public function selectAvaliacoesById($userId, $filterNota = "DESC") {
             try {
                 $sql = <<<SQL
-                    SELECT usr.iduser, usr.nomuser, espec.idespec, descrespec, imguser, comentarioavaliacao, round(notaavaliacao, 1) as notaavaliacao
+                    SELECT usr.iduser, usr.nomeuser, espec.idespec, descrespec, imguser, comentarioavaliacao, round(notaavaliacao, 1) as notaavaliacao
                     FROM avaliacao AS aval
                     INNER JOIN contrato AS contrt ON (aval.idcontrato = contrt.idcontrato)
                     INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
@@ -199,7 +199,7 @@
                 // se não existem usuários cadastrados com esse email, segue para insert
                 if ($verifyEmail->rowCount() < 1) {
                     // insert do novo usuário
-                    $insertSQL = "INSERT INTO usuario(nomuser, emailuser, cpfuser, telefoneuser, senhauser) VALUES (:nome, :email, :cpf, :telefone, :senha)";
+                    $insertSQL = "INSERT INTO usuario(nomeuser, emailuser, cpfuser, telefoneuser, senhauser) VALUES (:nome, :email, :cpf, :telefone, :senha)";
                     $insertSTMT = Database::prepare($insertSQL);
                     $insertSTMT->execute([
                         ":nome" => $nome,
@@ -285,7 +285,7 @@
                     if ($imgBase64 != "") {
                         $sql = <<<SQL
                         UPDATE usuario
-                        SET nomuser = :nome, emailuser = :email, imguser = :img, nascimentouser = :nascimento, telefoneuser = :telefone, biografiauser = :bio
+                        SET nomeuser = :nome, emailuser = :email, imguser = :img, nascimentouser = :nascimento, telefoneuser = :telefone, biografiauser = :bio
                         WHERE iduser = :id
                         SQL;
     
@@ -302,7 +302,7 @@
                     } else {
                         $sql = <<<SQL
                         UPDATE usuario
-                        SET nomuser = :nome, emailuser = :email, nascimentouser = :nascimento, telefoneuser = :telefone, biografiauser = :bio
+                        SET nomeuser = :nome, emailuser = :email, nascimentouser = :nascimento, telefoneuser = :telefone, biografiauser = :bio
                         WHERE iduser = :id
                         SQL;
     

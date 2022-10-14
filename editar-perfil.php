@@ -33,7 +33,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="nome" class="form-label">Nome Completo</label>
-                                <input type="text" class="form-control" id="nome" name="nome" required value="<?php echoDadosNotNull($user["nomuser"], null) ?>">
+                                <input type="text" class="form-control" id="nome" name="nome" required value="<?php echoDadosNotNull($user["nomeuser"], null) ?>">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="email" class="form-label">Email</label>

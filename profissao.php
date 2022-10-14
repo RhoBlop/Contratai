@@ -31,7 +31,7 @@
                     <div class="d-flex justify-content-center align-items-center flex-column">
                         <?php 
                             foreach($users as $user) {
-                                [$iduser, $nomuser, $imguser, $numcontrato, $mediaAv, $datacriacaouser] = [$user["iduser"], $user["nomuser"], $user["imguser"], $user["numcontrato"], $user["mediaavaliacao"], $user["datacriacaouser"]];
+                                [$iduser, $nomeuser, $imguser, $numcontrato, $mediaAv, $datacriacaouser] = [$user["iduser"], $user["nomeuser"], $user["imguser"], $user["numcontrato"], $user["mediaavaliacao"], $user["datacriacaouser"]];
                         
                                 include ("components/card-pesquisa-profissao.php");
                             }

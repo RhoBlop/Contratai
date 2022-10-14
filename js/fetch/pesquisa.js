@@ -117,7 +117,7 @@ function createUserCard(user) {
     let {
         iduser,
         imguser,
-        nomuser,
+        nomeuser,
         mediaavaliacao,
         numcontrato,
         especsuser,
@@ -141,7 +141,7 @@ function createUserCard(user) {
         </div>
         <div class="card-body">
             <div class="card-title">
-                <h6>${nomuser}</h6>
+                <h6>${nomeuser}</h6>
                 <span class="badge-avaliacao ${
                     mediaavaliacao > 4.5 ? "avaliacao-otima" : "avaliacao-media"
                 }">

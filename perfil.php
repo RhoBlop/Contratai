@@ -26,7 +26,7 @@
                             <tbody>
                                 <tr>
                                     <td>Nome</td>
-                                    <td class="text-muted" id="nome"><?php echoDadosNotNull($user["nomuser"], "---"); ?></td>
+                                    <td class="text-muted" id="nome"><?php echoDadosNotNull($user["nomeuser"], "---"); ?></td>
                                 </tr>
 
                                 <tr>

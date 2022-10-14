@@ -45,7 +45,7 @@
             }
 
             $numAval = count($avaliacoes);
-            [$perfNomuser, $perfBiografiauser, $perfNumContrato, $perfMediaAval, $perfImguser] = [$perfPublico["nomuser"], $perfPublico["biografiauser"], $perfPublico['numcontrato'], $perfPublico["mediaavaliacao"], $perfPublico["imguser"]];
+            [$perfnomeuser, $perfBiografiauser, $perfNumContrato, $perfMediaAval, $perfImguser] = [$perfPublico["nomeuser"], $perfPublico["biografiauser"], $perfPublico['numcontrato'], $perfPublico["mediaavaliacao"], $perfPublico["imguser"]];
         ?>
 
         <?php include ("components/auth-header.php") ?>
@@ -69,7 +69,7 @@
                                 </div>
 
                                 <div class="text px-3">
-                                    <h3><?php echoDadosNotNull($perfNomuser, "---"); ?></h3>
+                                    <h3><?php echoDadosNotNull($perfnomeuser, "---"); ?></h3>
                                     <div class="body-text">
                                         <p><i class="fa-solid fa-briefcase fa-fw"></i><?php echo ucfirst(implode(", ", $perfEspecs)) ?></p>
                                         <p><i class="fa-solid fa-location-dot fa-fw"></i>[Desenvolvimento no futuro]</p>
@@ -174,7 +174,7 @@
                                                         <img src="<?php echoProfileImage($aval["imguser"]); ?>" class="rounded-circle">
                                                     </div>
                                                     <div class="d-flex flex-column">
-                                                        <h5 class="mb-0"><?php echo $aval["nomuser"]; ?></h5>
+                                                        <h5 class="mb-0"><?php echo $aval["nomeuser"]; ?></h5>
                                                         <p class="text-muted">
                                                             <i class="fa-solid fa-star fa-fw"></i>
                                                             <?php echo $aval["notaavaliacao"] ?>

@@ -55,7 +55,7 @@
         public function selectProfissaoMaiorAvaliacao($idprof, $limit = 1) {
             try {
                 $users = <<<SQL
-                    SELECT prof.descrprof, espec.descrespec, usr.iduser, usr.nomuser, usr.imguser, datacriacaouser, count(contrt.idcontrato) AS numContrato, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
+                    SELECT prof.descrprof, espec.descrespec, usr.iduser, usr.nomeuser, usr.imguser, datacriacaouser, count(contrt.idcontrato) AS numContrato, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
                     FROM usuario AS usr
                     INNER JOIN userEspec AS useres ON (usr.iduser = useres.iduser)
                     INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)

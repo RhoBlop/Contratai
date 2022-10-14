@@ -4,7 +4,7 @@
     </div>
     <div class="card-body">
         <div class="card-title">
-            <h5><?php echo $nomuser; ?></h5>
+            <h5><?php echo $nomeuser; ?></h5>
             <span class="badge-avaliacao <?php echo echoAvaliacaoClass($mediaAv); ?>">
                 <!-- STAR ICON -->
                 <ion-icon name="star"></ion-icon>
