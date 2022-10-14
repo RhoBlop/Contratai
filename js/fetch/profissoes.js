@@ -65,7 +65,7 @@ async function fetchGetEspecs(profId) {
     selectEspecsControl.inputState();
 
     try {
-        let response = await fetch(`./php/post/profissao/getEspecs.php`, {
+        let response = await fetch(`./php/post/profissao/getProfEspecs.php`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",

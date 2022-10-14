@@ -12,10 +12,7 @@
     $contrato = new Contrato();
 
     $contratanteId = $_SESSION["iduser"];
-    [$contratadoId , $especId, $diasContrato] = [$_POST["contratadoId"], $_POST["idEspec"], $_POST["multidate"]];
-
-    var_dump($_POST);
-    exit();
+    [$contratadoId , $especId, $diasContrato] = [$_POST["contratadoId"], $_POST["idEspec"], explode(" || ", $_POST["multidate"])];
 
     // inserção da especialização no usuário
     $result = $contrato->insertContrato($contratanteId, $contratadoId, $especId, $diasContrato);

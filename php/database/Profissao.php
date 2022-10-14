@@ -55,7 +55,7 @@
         public function selectProfissaoMaiorAvaliacao($idprof, $limit = 1) {
             try {
                 $users = <<<SQL
-                    SELECT prof.descrprof, espec.descrespec, usr.iduser, usr.nomuser, usr.imguser, count(*) AS numContrato, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
+                    SELECT prof.descrprof, espec.descrespec, usr.iduser, usr.nomuser, usr.imguser, datacriacaouser, count(contrt.idcontrato) AS numContrato, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
                     FROM usuario AS usr
                     INNER JOIN userEspec AS useres ON (usr.iduser = useres.iduser)
                     INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
@@ -98,8 +98,8 @@
                         ORDER BY numuser DESC
                         LIMIT :limit) AS top
                     INNER JOIN especializacao AS espec ON (top.idprof = espec.idprof)
-                    INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
-                    INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    FULL OUTER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+                    FULL OUTER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                     GROUP BY top.descrprof, top.numuser, top.idprof
                     ORDER BY top.numuser DESC;
                 SQL;
@@ -121,7 +121,7 @@
             try {
                 $sql = <<<SQL
                     SELECT top.idprof, top.descrprof, top.numContrato, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
-                    FROM (SELECT prof.idprof, prof.descrprof, count(*) AS numContrato
+                    FROM (SELECT prof.idprof, prof.descrprof, count(contrt.idcontrato) AS numContrato
                         FROM profissao AS prof
                         INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
                         INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
@@ -129,8 +129,8 @@
                         ORDER BY numContrato DESC
                         LIMIT :limit) AS top
                     INNER JOIN especializacao AS espec ON (top.idprof = espec.idprof)
-                    INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
-                    INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    FULL OUTER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+                    FULL OUTER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                     GROUP BY top.descrprof, top.idprof, top.numContrato
                     ORDER BY top.numContrato DESC
                     LIMIT :limit
@@ -153,7 +153,7 @@
         public function selectMaiorAvaliacao($limit = 1) {
             try {
                 $sql = <<<SQL
-                    SELECT prof.idprof, prof.descrprof, count(*) AS numAvaliacao, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
+                    SELECT prof.idprof, prof.descrprof, count(aval.idavaliacao) AS numAvaliacao, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
                     FROM profissao AS prof
                     INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
                     INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)

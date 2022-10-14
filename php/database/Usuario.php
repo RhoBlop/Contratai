@@ -36,7 +36,7 @@
             try {
                 // tá feio :(
                 $sql = <<<SQL
-                    SELECT userinfo.iduser, round(avg(notaavaliacao), 1) AS mediaavaliacao, count(*) AS numcontrato, nomuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
+                    SELECT userinfo.iduser, round(avg(notaavaliacao), 1) AS mediaavaliacao, count(contrt.idcontrato) AS numcontrato, nomuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
                     FROM (SELECT usr.iduser, nomuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
                             FROM usuario AS usr
                             INNER JOIN userespec AS useres ON (useres.iduser = usr.iduser)

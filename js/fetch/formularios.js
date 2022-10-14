@@ -193,7 +193,7 @@ async function sendSolicitacaoContrato(event) {
     loading();
     timeout = timeoutConnection();
 
-    let response = await fetch("./php/post/user/cadastro.php", {
+    let response = await fetch("./php/post/contrato/solicitacaoContrato.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -209,8 +209,12 @@ async function sendSolicitacaoContrato(event) {
     }
 
     if (data.dados) {
-        setOpenModal("#modal-login");
-        window.location.href = "index.php";
+        setOpenToast(
+            "#notifyToast",
+            "Contratação",
+            "Solicitação de contratatação enviada com sucesso"
+        );
+        window.location.reload();
     }
     clearTimeout(timeout);
 }

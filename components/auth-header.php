@@ -65,6 +65,10 @@
                     <img id="headerImgPerfil" src="<?php echoProfileImage($user["imguser"]) ?>" alt="Imagem de perfil">
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end text-small shadow">
+                    <div class="text-center px-2">Olá, <?php echo $user["nomuser"] ?></div>
+                    
+                    <li><hr class="dropdown-divider"></li>
+
                     <li><a class="dropdown-item" href="perfil.php"><i class="fa-regular fa-user fa-lg pe-2"></i>Perfil</a></li>
 
                     <?php 

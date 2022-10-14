@@ -19,8 +19,11 @@
 rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
 />
-
 <script src="https://kit.fontawesome.com/d21e3e40d7.js" crossorigin="anonymous"></script>
+
+<!-- DAY.JS -->
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/locale/pt-br.js"></script>
 
 <!-- CUSTOM CSS -->
 <link rel="stylesheet" href="css/style.css">

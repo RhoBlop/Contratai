@@ -11,10 +11,6 @@
     </head>
     <body>
     <!-- HOME PAGE HEADER -->
-        <?php include ("components/auth-header.php") ?>
-
-        <?php include ("components/modal-contrato.php") ?>
-
         <?php 
             $usuarioClass = new Usuario();
             $userId = $_GET["id"];
@@ -24,8 +20,16 @@
             if (!$perfPublico):
                 ?>
                     <div>
-                        É necessário cadastrar uma profissão para que o perfil se torne público
-                        <a href="">Finalizar cadastro</a>
+                        O perfil não está público devido nenhuma profissão estar cadastrada
+
+                        <?php
+                            if ($_SESSION["iduser"] === $userId):
+                        ?>
+                            <a href="profissoes.php">Finalizar cadastro</a>
+                        <?php
+                            endif;
+                        ?>
+
                     </div>
                 <?php
                 exit();
@@ -43,6 +47,10 @@
             $numAval = count($avaliacoes);
             [$perfNomuser, $perfBiografiauser, $perfNumContrato, $perfMediaAval, $perfImguser] = [$perfPublico["nomuser"], $perfPublico["biografiauser"], $perfPublico['numcontrato'], $perfPublico["mediaavaliacao"], $perfPublico["imguser"]];
         ?>
+
+        <?php include ("components/auth-header.php") ?>
+
+        <?php include ("components/modal-contrato.php") ?>
 
         <main>
             <div class="container my-3">
@@ -72,7 +80,7 @@
                                     <?php
                                         if ($_SESSION["iduser"] != $userId) {
                                             echo <<<ITEM
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-contrato" class="btn btn-outline-green mt-3">Contactar</a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-contrato" class="btn btn-outline-green mt-3">Contratar</a>
                                             ITEM;
                                         }
                                     ?>
@@ -109,9 +117,9 @@
                                                         <?php echoDadosNotNull($mediaEspec, "---"); ?>
                                                     </span>
                                                 </div>
-                                                <div class="card-text">
-                                                    <p>[ Não sei fazer o SQL ] <?php echo is_null($perfPublico["numcontrato"]) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
-                                                </div>
+                                                <!-- <div class="card-text">
+                                                    <p>[ Não sei fazer o SQL ] <?php //echo is_null($perfPublico["numcontrato"]) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
+                                                </div> -->
                                             </div>
                                         </div>
 
@@ -200,6 +208,8 @@
         <!-- FOOTER -->
         <?php include ("components/footer.html") ?>
 
+        <?php include ("components/toast.html") ?>
+
         <!-- JS BOOTSTRAP BUNDLE -->
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
@@ -209,5 +219,8 @@
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     
+        <script>
+            checkForOpenToast();
+        </script>
     </body>
 </html>

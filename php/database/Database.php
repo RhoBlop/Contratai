@@ -22,6 +22,7 @@ class Database {
 
                 // faz com que o PDO lance uma PDOException em qualquer problema que acontecer (teoricamente) 
                 self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                self::$conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
                 echo json_encode(["resposta" => "Conexão falhou: {$e->getMessage()}"]);
                 exit();
