@@ -11,10 +11,6 @@
     </head>
     <body>
     <!-- HOME PAGE HEADER -->
-        <?php include ("components/auth-header.php") ?>
-
-        <?php include ("components/modal-contrato.php") ?>
-
         <?php 
             $usuarioClass = new Usuario();
             $userId = $_GET["id"];
@@ -51,6 +47,10 @@
             $numAval = count($avaliacoes);
             [$perfNomuser, $perfBiografiauser, $perfNumContrato, $perfMediaAval, $perfImguser] = [$perfPublico["nomuser"], $perfPublico["biografiauser"], $perfPublico['numcontrato'], $perfPublico["mediaavaliacao"], $perfPublico["imguser"]];
         ?>
+
+        <?php include ("components/auth-header.php") ?>
+
+        <?php include ("components/modal-contrato.php") ?>
 
         <main>
             <div class="container my-3">
@@ -208,6 +208,8 @@
         <!-- FOOTER -->
         <?php include ("components/footer.html") ?>
 
+        <?php include ("components/toast.html") ?>
+
         <!-- JS BOOTSTRAP BUNDLE -->
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
@@ -217,5 +219,8 @@
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     
+        <script>
+            checkForOpenToast();
+        </script>
     </body>
 </html>

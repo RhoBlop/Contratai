@@ -37,11 +37,6 @@
                     ]);
                 }
 
-                $stmt = $conn->prepare($diasContratoSQL);
-                $stmt->execute([
-
-                ]);
-
                 $conn->commit();
 
                 return ["dados" => true];

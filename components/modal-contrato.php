@@ -25,7 +25,7 @@
                         <option value="" selected disabled>Selecione a especialização</option>
                         <?php 
                             foreach ($especializacoes as $espec) {
-                                [$idespec, $descrespec] = [$_POST["idespec"], $_POST["descrespec"]];
+                                [$idespec, $descrespec] = [$espec["idespec"], ucfirst($espec["descrespec"])];
 
                                 echo <<<OPTION
                                     <option value="{$idespec}">{$descrespec}</option>
@@ -35,11 +35,14 @@
                     </select>
                 </div>
     
-                <!-- SENHA -->
+                <!-- DIAS DO CONTRATO -->
                 <div id="dateWrapper" class="form group mb-3">
                     <label for="multidate" class="form-label">Dias do contrato</label>
                     <input id="multidate" type="text" class="form-control" name="multidate" placeholder="Selecione os dias do contrato" required data-input>
                 </div>
+
+                <!-- div para comunicação com usuário -->
+                <div id="feedbackUsuario" class="collapse"></div>
   
             </div>
             <div class="modal-footer d-flex justify-content-center">
@@ -59,7 +62,7 @@
         dateFormat: "Y-m-d",
         altInput: true,
         altFormat: "j \\d\\e M, Y",
-        conjunction: " :: ",
+        conjunction: " || ",
         minDate: "today",
         maxDate: new Date().fp_incr(150),
     }
