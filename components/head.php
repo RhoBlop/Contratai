@@ -1,3 +1,16 @@
+<?php
+    require("php/database/Usuario.php");
+    require("php/database/Profissao.php");
+    require("php/impressaoDados.php");
+    require("php/utils.php");
+
+    if (isset($_SESSION["iduser"])) {
+        $auth = true;
+    } else {
+        $auth = false;
+    }
+?>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
 <title>Contrataí</title>
@@ -39,18 +52,3 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
 
 <!-- REQUISIÇÕES PARA O BACKEND -->
 <script src="js/fetch/formularios.js"></script>
-
-
-<?php
-    session_start();
-    require("php/database/Usuario.php");
-    require("php/database/Profissao.php");
-    require("php/impressaoDados.php");
-    require("php/utils.php");
-
-    if (isset($_SESSION["iduser"])) {
-        $auth = true;
-    } else {
-        $auth = false;
-    }
-?>
