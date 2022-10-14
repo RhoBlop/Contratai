@@ -1273,12 +1273,20 @@ p {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.accordion-body:last-child {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .accordion-body p {
     font-size: 16px;
 }
 
 .accordion-body b {
     font-weight: 500;
+}
+
+.accordion-button {
+    font-size: 20px;
 }
 
 /* DatePicker */
