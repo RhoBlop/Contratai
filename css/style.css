@@ -13,8 +13,6 @@
     --blue-vertical-gradient: linear-gradient(180deg, #15a0b0, #074a59);
     --navbar-height: 72px;
     --font-family: "Montserrat", sans-serif;
-
-
 } /* VARIABLES */
 
 * {
@@ -213,7 +211,9 @@ main h1.text-gradient {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
-.btn-login, .btn-link, .btn-close {
+.btn-login,
+.btn-link,
+.btn-close {
     box-shadow: none;
 }
 
@@ -405,7 +405,7 @@ ion-icon {
     border-radius: 0.5rem 0 0 0;
 }
 #searchButton {
-    border-radius: 0 0.5rem .5rem 0;
+    border-radius: 0 0.5rem 0.5rem 0;
     transform: none;
 }
 .active .filters-group {
@@ -787,7 +787,7 @@ table .text-muted {
 }
 
 hr {
-    opacity: .1;
+    opacity: 0.1;
 }
 
 .active-link {
@@ -799,9 +799,8 @@ hr {
     color: white !important;
 }
 
-
 #sidebar .nav-item {
-    transition: .15s ease-in-out;
+    transition: 0.15s ease-in-out;
     transition-delay: 0s;
 }
 
@@ -812,7 +811,7 @@ hr {
 .nav-link {
     padding: 0.5rem 1rem;
     font-size: 16px;
-    transition-delay: .15s;
+    transition-delay: 0.15s;
 }
 
 #sidebar {
@@ -888,6 +887,13 @@ label {
     object-fit: cover;
 }
 
+.img-contrato {
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+}
 /* HOVER */
 
 #inputFileLabel {
@@ -1230,9 +1236,8 @@ p {
     border: none;
     padding: 10px 20px;
     font: inherit;
-    transition: background-color .2s ease-in-out, color .2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
-
 
 .filter-tablist a:nth-child(1) {
     border-right: 1px solid var(--bootstrap-border);
@@ -1250,11 +1255,9 @@ p {
     transform: none;
 }
 
+/* Acordiões */
 
-
-/* Acordiões */ 
-
-.accordion { 
+.accordion {
     --bs-accordion-active-color: var(--dark-green);
     --bs-accordion-active-bg: #e2f3fa;
     --bs-accordion-btn-focus-box-shadow: none;
@@ -1262,10 +1265,10 @@ p {
 
 .accordion-flush .accordion-button {
     box-shadow: none !important;
-    border-radius: .375rem !important;
+    border-radius: 0.375rem !important;
 }
 
-.accordion-item{
+.accordion-item {
     border: none;
 }
 
@@ -1287,6 +1290,15 @@ p {
 
 .accordion-button {
     font-size: 20px;
+}
+
+.accordion-buttons {
+    position: relative;
+    z-index: 100;
+}
+
+.item-contrato {
+    position: relative;
 }
 
 /* DatePicker */
