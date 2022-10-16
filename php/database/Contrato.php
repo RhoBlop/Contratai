@@ -67,8 +67,7 @@ class Contrato extends Database
                 ":idcontrato" => $idcontrato
             ]);
 
-            $result = $stmt->fetchAll();
-            return ["dados" => $result];
+            return ["dados" => true];
         } catch (PDOException $e) {
             echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
             exit();

@@ -16,6 +16,17 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+function setAttributes(el, attrs) {
+    for (var key in attrs) {
+        el.setAttribute(key, attrs[key]);
+    }
+}
+
+function findClosestAncestor(el, cls) {
+    while ((el = el.parentElement) && !el.classList.contains(cls));
+    return el;
+}
+
 // função executada sempre que uma imagem do input type=file é selecionada
 // lê os dados da imagem e coloca em uma tag img, com id passado por parâmetro (para que o usuário pode visualizar a imagem selecionada)
 function showSelectedImg(event, idImg) {
