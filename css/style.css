@@ -1245,7 +1245,7 @@ p {
 
 .filter-tablist a.active,
 .filter-tablist a:hover {
-    background: #015c67;
+    background: #054249d9;
     color: white;
     cursor: pointer;
     outline: inherit;
@@ -1288,6 +1288,10 @@ p {
     font-weight: 500;
 }
 
+.accordion-body .text-muted {
+    font-weight: 400;
+}
+
 .accordion-button {
     font-size: 20px;
 }
@@ -1299,6 +1303,12 @@ p {
 
 .item-contrato {
     position: relative;
+}
+
+#accordionProfilePic {
+    border-radius: 50%;
+    object-fit: cover;
+    display: inline;
 }
 
 /* DatePicker */

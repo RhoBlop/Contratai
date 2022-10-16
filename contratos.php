@@ -63,15 +63,22 @@
                                             foreach ($solicitacoesRecebidas as $contrt) :
                                         ?>
 
-                                                <div class="item-contrato accordion-body d-flex align-items-start gap-3" data-contratoid="<?php echo $contrt["idcontrato"]; ?>">
-                                                    <img id="profile-pic" src="<?php echoProfileImage($contrt["imguser"]); ?>" width="52px">
-                                                    <div class="text">
-                                                        <h7 class="m-0">Você enviou uma solicitação de contrato para <b><?php echo $contrt["nomeuser"] ?></b>! Aguarde o usuário aceitar ou rejeitar seu pedido.</h7>
-                                                        <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                        <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
+                                                <div class="item-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid="<?php echo $contrt["idcontrato"]; ?>">
+                                                    <div class="d-flex gap-3">
+                                                        <img id="accordionProfilePic" src="<?php echoProfileImage($contrt["imguser"]); ?>" height="64px" width="64px">
+                                                        <div class="text">
+                                                            <h8>Você enviou uma solicitação para <b><?php echo $contrt["nomeuser"] ?></b>!</h8>
+                                                            <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
+                                                            <p class="text-muted">Aguarde o usuário aceitar ou rejeitar seu pedido</p>
+                                                        </div>
                                                     </div>
 
-                                                    <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
+                                                    <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
+
+                                                    <!-- <a href="<?php /* echo "perfil-publico.php?id={$contrt['iduser']}"; */?>" class="stretched-link"></a> O
+                                                    O LINK TA BUGANDO A BOX, PQ ELE TA CONTANDO COMO UM FLEX ITEM...
+                                                    DAI EU TIREI ELE POR ENQUANTO 
+                                                    -->
                                                 </div>
 
                                         <?php
