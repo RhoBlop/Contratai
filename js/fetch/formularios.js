@@ -106,9 +106,9 @@ async function sendUpdate(event) {
 
     if (data.dados) {
         setOpenToast(
-            "#notifyToast",
             "Edição de perfil",
-            "Edição de perfil realizada com sucesso"
+            "Edição de perfil realizada com sucesso",
+            "success-notify"
         );
         window.location.href = "perfil.php";
     }
@@ -147,9 +147,9 @@ async function sendUpdateSenha(event) {
 
         if (data.dados) {
             setOpenToast(
-                "#notifyToast",
                 "Edição de senha",
-                "Edição da senha realizada com sucesso"
+                "Edição da senha realizada com sucesso",
+                "success-notify"
             );
             window.location.href = "perfil.php";
         }
@@ -210,9 +210,9 @@ async function sendSolicitacaoContrato(event) {
 
     if (data.dados) {
         setOpenToast(
-            "#notifyToast",
             "Contratação",
-            "Solicitação de contratatação enviada com sucesso"
+            "Solicitação de contratatação enviada com sucesso",
+            "success-notify"
         );
         window.location.reload();
     }

@@ -6,8 +6,8 @@ function setOpenModal(idModal) {
     localStorage.setItem("openModal", idModal);
 }
 
-function setOpenToast(idToast, title, message) {
-    localStorage.setItem("openToast", `${idToast},${title},${message}`);
+function setOpenToast(title, message, classNotify) {
+    localStorage.setItem("openToast", `${title},${message},${classNotify}`);
 }
 
 function checkForOpenModal() {
@@ -24,8 +24,8 @@ function checkForOpenToast() {
     let storage = localStorage.getItem("openToast");
 
     if (storage) {
-        let [idToast, title, message] = storage.split(",");
-        openToast(idToast, title, message);
+        let [title, message, classNotify] = storage.split(",");
+        createToast(title, message, classNotify);
 
         localStorage.removeItem("openToast");
     }
@@ -34,17 +34,6 @@ function checkForOpenToast() {
 function openModal(idModal) {
     let modal = new bootstrap.Modal(document.querySelector(idModal), {});
     modal.show();
-}
-
-function openToast(idToast, title, message) {
-    let divTitle = document.querySelector(`${idToast} .toast-header strong`);
-    divTitle.textContent = title;
-
-    let divMessage = document.querySelector(`${idToast} .toast-body`);
-    divMessage.textContent = message;
-
-    let toast = new bootstrap.Toast(document.querySelector(idToast));
-    toast.show();
 }
 
 function createToast(title, message, toastClass, idToast = "notifyToast") {
@@ -65,7 +54,7 @@ function createToast(title, message, toastClass, idToast = "notifyToast") {
 
     // DIV MAIS EXTERNA DE UM TOAST
     let toast = document.createElement("div");
-    toast.classList.add("toast");
+    toast.classList.add("toast", toastClass);
     setAttributes(toast, {
         id: idToast,
         role: "alert",

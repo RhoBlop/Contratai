@@ -113,9 +113,9 @@ async function fetchAddEspec(profId, descrProf, especId, descrEspec) {
 
         if (data.dados) {
             setOpenToast(
-                "#notifyToast",
                 "Modificação de Profissões",
-                "Sua profissão foi adicionada com sucesso"
+                "Sua profissão foi adicionada com sucesso",
+                "success-notify"
             );
             window.location.reload();
         }
@@ -266,9 +266,9 @@ async function deleteEspec(event) {
 
         if (!data.dados) {
             setOpenToast(
-                "#notifyToast",
                 "Modificação de Profissões",
-                "Erro ao deletar profissão"
+                "Erro ao deletar profissão",
+                "failure-notify"
             );
 
             window.location.reload();

@@ -19,14 +19,14 @@ async function aceitarContrato(event) {
         createToast(
             "Status do contrato atualizado",
             "O contrato foi aceito com sucesso! Agora é hora de pôr a mão na massa",
-            null,
+            "success-notify",
             idContrato
         );
     } else {
         createToast(
             "Erro na operação",
             "Não foi possível atualizar o status do contrato, recarregue a página e tente novamente",
-            null,
+            "failure-notify",
             idContrato
         );
     }
@@ -47,14 +47,14 @@ async function recusarContrato(event) {
         createToast(
             "Status do contrato atualizado",
             "O contrato foi recusado com sucesso",
-            null,
+            "success-notify",
             idContrato
         );
     } else {
         createToast(
             "Erro na operação",
             "Não foi possível atualizar o status do contrato, recarregue a página e tente novamente",
-            null,
+            "failure-notify",
             idContrato
         );
     }
