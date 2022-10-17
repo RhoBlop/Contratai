@@ -151,14 +151,14 @@ function createUserCard(user) {
                 </span>
             </div>
             <div class="card-text">
-                <h7 class="text-muted">${
+                <h8>${
                     numcontrato > 0
                         ? `Total de ${numcontrato} contratações`
                         : `Ainda não foi contratado nenhuma vez`
-                }</h7>
-                <p>${especsuser}</p>
+                }</h8>
+                <p class="text-muted">${especsuser}</p>
 
-                <p>Em nossa plataforma desde ${datacriacaouser}</p>
+                <p class="text-muted">Em nossa plataforma desde ${datacriacaouser}</p>
 
                 <a href="perfil-publico.php?id=${iduser}"><span class="clickable-card"></span></a>
             </div>

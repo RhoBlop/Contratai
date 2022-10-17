@@ -69,9 +69,17 @@
                                                         <div class="text">
                                                             <h8>Você enviou uma solicitação para <b><?php echo $contrt["nomeuser"] ?></b>!</h8>
                                                             <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
+                                                            <p class="text-muted">Dias agendados:</p>
+                                                            <div class="contract-dates my-1">
+                                                                <div class="date-chip">
+                                                                    13 de set.
+                                                                </div>
+                                                                <div class="date-chip outline">
+                                                                    13 de set.
+                                                                </div>
+                                                            </div>
                                                             <p class="text-muted">Aguarde o usuário aceitar ou rejeitar seu pedido</p>
                                                         </div>
-                                                    </div>
 
                                                     <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
 
@@ -106,17 +114,6 @@
                                         else :
                                             foreach ($emAndamento as $contrt) :
                                         ?>
-
-                                                <div class="item-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
-                                                    <img id="profile-pic" src="<?php echoProfileImage($contrt["imguser"]); ?>" width="52px">
-                                                    <div class="text">
-                                                        <h7 class="m-0">O contrato com <b><?php echo $contrt["nomeuser"] ?></b> está em andamento! Após o fim das datas previstas você poderá avaliá-lo.</h7>
-                                                        <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                        <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
-                                                    </div>
-
-                                                    <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
-                                                </div>
 
                                         <?php
                                             endforeach;

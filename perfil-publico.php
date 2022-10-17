@@ -57,7 +57,7 @@
     <main>
         <div class="container my-3">
             <div class="row gx-5 justify-content-center">
-                <div class="col-12 col-lg-7" id="profile">
+                <div class="col-12 col-lg-8" id="profile">
 
                     <!-- APRESENTAÇÃO PERFIL -->
                     <div class="card shadow-sm rounded-4 mb-3" id="infos">
@@ -161,32 +161,32 @@
                             <div class="card-body d-flex flex-column justify-content-center">
                                 <h3 class="card-title mb-3">Avaliações</h3>
 
-                                <div class="subtitle d-flex gap-1 mb-3">
+                                <div class="subtitle d-flex mb-3 align-items-center">
                                     <i class="fa-solid fa-star fa-fw"></i>
-                                    <h4 id="notaAvaliacoes" class="mb-3"><?php echo "{$perfMediaAval} de {$numAval} avaliações" ?></h4>
+                                    <h4 id="notaAvaliacoes" class="mb-0"><?php echo "{$perfMediaAval} de {$numAval} avaliações" ?></h4>
                                 </div>
 
-                                <div class="row row-cols-1 row-cols-md-2 g-3">
+                                <div class="row row-cols-1 row-cols-md-2 g-3 px-3">
                                     <?php
                                     foreach ($avaliacoes as $aval) :
                                     ?>
 
-                                        <div class="avaliacao col mb-3" data-especid="<?php echo $aval["idespec"]; ?>" data-nota=<?php echo $aval["notaavaliacao"]; ?>>
-                                            <div class="avaliacao-header d-flex align-items-center gap-3 mb-3">
+                                        <div class="avaliacao col mb-2" data-especid="<?php echo $aval["idespec"]; ?>" data-nota=<?php echo $aval["notaavaliacao"]; ?>>
+                                            <div class="avaliacao-header d-flex align-items-start gap-3 mb-2">
                                                 <div class="aval-pic">
                                                     <img src="<?php echoProfileImage($aval["imguser"]); ?>" class="rounded-circle">
                                                 </div>
                                                 <div class="d-flex flex-column">
                                                     <h5 class="mb-0"><?php echo $aval["nomeuser"]; ?></h5>
-                                                    <p class="text-muted">
+                                                    <p>
                                                         <i class="fa-solid fa-star fa-fw"></i>
                                                         <?php echo $aval["notaavaliacao"] ?>
                                                     </p>
-                                                    <p class="text-muted"><?php echo ucfirst($aval["descrespec"]) ?></p>
                                                     <p class="text-muted">data [atualizar banco]</p>
                                                 </div>
                                             </div>
-
+                                            
+                                            <p class="text-muted"><?php echo ucfirst($aval["descrespec"]) ?></p>
                                             <p><?php echo ucfirst($aval["comentarioavaliacao"]); ?></p>
                                         </div>
 
