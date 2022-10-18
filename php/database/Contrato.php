@@ -148,9 +148,9 @@ class Contrato extends Database
             $result = $stmt->fetchAll();
 
             // converte json_agg() [String] para array associativa
-            // for ($i = 0; $i < count($result); $i++) {
-            //     $result[$i]["diascontrato"] = json_decode($result[$i]["diascontrato"]);
-            // }
+            for ($i = 0; $i < count($result); $i++) {
+                $result[$i]["diascontrato"] = json_decode($result[$i]["diascontrato"]);
+            }
 
             return $result;
         } catch (PDOException $e) {

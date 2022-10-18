@@ -27,6 +27,16 @@ function echoFullDate($date)
     echo $formatter->format($dateTime);
 }
 
+function echoMediumDate($date)
+{
+    $locale = "pt_BR";
+    $dateType = IntlDateFormatter::MEDIUM; //type of date formatting
+    $timeType = IntlDateFormatter::NONE; //type of time formatting setting to none, will give you date itself
+    $formatter = new IntlDateFormatter($locale, $dateType, $timeType);
+    $dateTime = new DateTime($date);
+    echo $formatter->format($dateTime);
+}
+
 // imprime a imagem de perfil padrão caso o parâmetro seja nulo
 function echoProfileImage($img)
 {

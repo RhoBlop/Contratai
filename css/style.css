@@ -78,7 +78,6 @@ h7 {
     font-size: 20px;
 }
 
-
 @media screen and (max-width: 992px) {
     h1 {
         font-size: 56px;
@@ -1293,14 +1292,16 @@ p {
     z-index: 100;
 }
 
-.item-contrato {
+.clickable-image {
     position: relative;
 }
 
-#accordionProfilePic {
+.clickable-image img {
     border-radius: 50%;
     object-fit: cover;
     display: inline;
+    width: 64px;
+    height: 64px;
 }
 
 /* Date Chips */
@@ -1323,7 +1324,6 @@ p {
     background: white;
     border: 1px solid var(--primary-green);
     color: var(--primary-green);
-
 }
 
 /* DatePicker */

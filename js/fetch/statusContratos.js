@@ -60,6 +60,36 @@ async function recusarContrato(event) {
     }
 }
 
+async function solicitarFimContrato(event) {
+    let btn = event.target;
+    let contratoEl = findClosestAncestor(btn, "item-contrato");
+
+    contratoEl.remove();
+
+    let idContrato = contratoEl.dataset.contratoid;
+    // problemas de segurança, mas né... :/
+    let idStatus = 4;
+    let data = await updateStatusContrato(idContrato, idStatus);
+
+    if (data.dados) {
+        createToast(
+            "Status do contrato atualizado",
+            "O contrato foi recusado com sucesso",
+            "success-notify",
+            idContrato
+        );
+    } else {
+        createToast(
+            "Erro na operação",
+            "Não foi possível atualizar o status do contrato, recarregue a página e tente novamente",
+            "failure-notify",
+            idContrato
+        );
+    }
+}
+
+async function aceitarFimContrato(event) {}
+
 async function updateStatusContrato(idContrato, idStatus) {
     try {
         let response = await fetch(

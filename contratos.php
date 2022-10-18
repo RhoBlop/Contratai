@@ -57,7 +57,7 @@
                                         <?php
                                         if (empty($solicitacoesRecebidas)) :
                                             echo <<<ERROR
-                                            <div class="empty-accordion d-flex justify-content-center">Nenhum contrato por aqui.</div>
+                                            <div class="empty-accordion d-flex justify-content-center">Nenhuma solicitação de contratação pendente.</div>
                                         ERROR;
                                         else :
                                             foreach ($solicitacoesRecebidas as $contrt) :
@@ -65,29 +65,28 @@
 
                                                 <div class="item-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid="<?php echo $contrt["idcontrato"]; ?>">
                                                     <div class="d-flex gap-3">
-                                                        <img id="accordionProfilePic" src="<?php echoProfileImage($contrt["imguser"]); ?>" height="64px" width="64px">
+                                                        <div class="clickable-image">
+                                                            <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
+                                                            <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
+                                                        </div>
                                                         <div class="text">
                                                             <h8>Você enviou uma solicitação para <b><?php echo $contrt["nomeuser"] ?></b>!</h8>
                                                             <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
                                                             <p class="text-muted">Dias agendados:</p>
                                                             <div class="contract-dates my-1">
-                                                                <div class="date-chip">
-                                                                    13 de set.
-                                                                </div>
-                                                                <div class="date-chip outline">
-                                                                    13 de set.
-                                                                </div>
+                                                                <?php
+                                                                foreach ($contrt["diascontrato"] as $diacontrato) {
+                                                                    echo '<div class="date-chip">';
+                                                                    echoMediumDate($diacontrato);
+                                                                    echo '</div>';
+                                                                }
+                                                                ?>
                                                             </div>
                                                             <p class="text-muted">Aguarde o usuário aceitar ou rejeitar seu pedido</p>
                                                         </div>
                                                     </div>
 
                                                     <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
-
-                                                    <!-- <a href="<?php /* echo "perfil-publico.php?id={$contrt['iduser']}"; */?>" class="stretched-link"></a> O
-                                                    O LINK TA BUGANDO A BOX, PQ ELE TA CONTANDO COMO UM FLEX ITEM...
-                                                    DAI EU TIREI ELE POR ENQUANTO 
-                                                    -->
                                                 </div>
 
                                         <?php
@@ -115,7 +114,19 @@
                                         else :
                                             foreach ($emAndamento as $contrt) :
                                         ?>
+                                                <div class="item-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
+                                                    <div class="clickable-image">
+                                                        <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
+                                                        <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
+                                                    </div>
+                                                    <div class="text">
+                                                        <h7 class="m-0">O contrato com <b><?php echo $contrt["nomeuser"] ?></b> está em andamento! Após o fim das datas previstas você poderá avaliá-lo.</h7>
+                                                        <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
+                                                        <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
+                                                    </div>
 
+                                                    <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
+                                                </div>
                                         <?php
                                             endforeach;
                                         endif;
@@ -143,7 +154,10 @@
                                         ?>
 
                                                 <div class="item-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
-                                                    <img id="profile-pic" src="<?php echoProfileImage($contrt["imguser"]); ?>" width="52px">
+                                                    <div class="clickable-image">
+                                                        <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
+                                                        <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
+                                                    </div>
                                                     <div class="text">
                                                         <h7 class="m-0">O contrato com <b><?php echo $contrt["nomeuser"]; ?></b> foi finalizado em <?php echo $contrt["timefinalizacaocontrato"]; ?>. Agora você pode avaliá-lo pelo serviço!</h7>
                                                         <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
@@ -192,14 +206,17 @@
                                     <?php
                                     if (empty($solicitacoesRecebidas)) :
                                         echo <<<ERROR
-                                            <div class="empty-accordion d-flex justify-content-center">Nenhum contrato por aqui.</div>
+                                            <div class="empty-accordion d-flex justify-content-center">Nenhuma solicitação de contratação pendente.</div>
                                         ERROR;
                                     else :
                                         foreach ($solicitacoesRecebidas as $contrt) :
                                     ?>
 
                                             <div class="item-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
-                                                <img id="profile-pic" src="<?php echoProfileImage($contrt["imguser"]); ?>" width="52px">
+                                                <div class="clickable-image">
+                                                    <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
+                                                    <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
+                                                </div>
                                                 <div class="text">
                                                     <h7 class="m-0"><b><?php echo $contrt["nomeuser"] ?></b> quer te contratar como <?php echo ucfirst($contrt["descrespec"]); ?>!</h7>
                                                     <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
@@ -240,7 +257,10 @@
                                         ?>
 
                                                 <div class="item-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
-                                                    <img id="profile-pic" src="<?php echoProfileImage($contrt["imguser"]); ?>" width="52px">
+                                                    <div class="clickable-image">
+                                                        <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
+                                                        <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
+                                                    </div>
                                                     <div class="text">
                                                         <h7 class="m-0">O contrato com <b><?php echo $contrt["nomeuser"] ?></b> está em andamento! Faça o serviço combinado para ganhar uma boa avaliação no final.</h7>
                                                         <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
@@ -277,7 +297,10 @@
                                         ?>
 
                                                 <div class="item-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
-                                                    <img id="profile-pic" src="<?php echoProfileImage($contrt["imguser"]); ?>" width="52px">
+                                                    <div class="clickable-image">
+                                                        <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
+                                                        <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
+                                                    </div>
                                                     <div class="text">
                                                         <h7 class="m-0">O contrato com <b><?php echo $contrt["nomeuser"]; ?></b> foi finalizado em <?php echo $contrt["timefinalizacaocontrato"]; ?>. Agora você pode avaliá-lo pelo serviço!</h7>
                                                         <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
