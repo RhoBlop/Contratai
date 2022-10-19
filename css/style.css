@@ -771,6 +771,10 @@ footer i {
     }
 }
 
+.step {
+    display: none;
+}
+
 /* Settings e Sidebar */
 
 #settingsContent {

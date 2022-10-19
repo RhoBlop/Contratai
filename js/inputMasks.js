@@ -23,3 +23,8 @@ function maskTelefone(v) {
     v = v.replace(/(\d{5})(\d)/, "$1-$2") // Adiciona um hífen entre o quarto e quinto dígitos
     return v 
 }
+function maskCEP(v) {
+    v = v.replace(/\D/g, "") //Remove tudo que nao é dígito
+    v = v.replace(/(\d{5})(\d)/, "$1-$2")
+    return v 
+}
