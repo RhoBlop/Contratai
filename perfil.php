@@ -18,7 +18,7 @@
                         <h2>Meu Perfil</h2>
                         <div class="div d-flex justify-content-between align-items-center">
                             <h6 class="text-muted m-0">Dados da conta</h6>
-                            <a href="<?php echo "perfil-publico.php?id={$user["iduser"]}" ?>">Visualizar seu perfil público</a>
+                            <a href="<?php echo "perfil-publico.php?id={$user["iduser"]}" ?>" class="text-decoration-none">Visualizar seu perfil público</a>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center mb-4">

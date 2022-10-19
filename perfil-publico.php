@@ -177,10 +177,9 @@
                                                     <img src="<?php echoProfileImage($aval["imguser"]); ?>" class="rounded-circle">
                                                 </div>
                                                 <div class="d-flex flex-column">
-                                                    <h5 class="mb-0"><?php echo $aval["nomeuser"]; ?></h5>
+                                                    <h5><?php echo $aval["nomeuser"]; ?></h5>
                                                     <p>
                                                         <?php 
-                                                        var_dump(intval($aval["notaavaliacao"]));
                                                         for ($i=0; $i < 5; $i++) {
                                                             if (intval($aval["notaavaliacao"]) > $i)  {
                                                                 echo "<i class='fa-solid fa-star'></i>";
