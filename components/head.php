@@ -46,3 +46,6 @@ if (isset($_SESSION["iduser"])) {
 
 <!-- REQUISIÇÕES PARA O BACKEND -->
 <script src="js/fetch/formularios.js"></script>
+
+<!-- INPUT MASKS --> 
+<script src="js/inputMasks.js"></script>

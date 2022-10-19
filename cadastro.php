@@ -32,12 +32,14 @@
 
                                 <!-- CPF -->
                                 <div class="form-group mb-3">
-                                    <input type="text" class="form-control form-control-lg" id="cpf" name="cpf" placeholder="Digite seu CPF" required>
+                                    <input type="text" class="form-control form-control-lg" id="cpf" name="cpf" 
+                                    placeholder="Digite seu CPF" required onkeypress="setMask(this, maskCPF)" maxlength="14">
                                 </div>
 
                                 <!-- TELEFONE -->
                                 <div class="form-group mb-3">
-                                    <input type="text" class="form-control form-control-lg" id="telefone" name="telefone" placeholder="Digite seu telefone" required>
+                                    <input type="text" class="form-control form-control-lg" id="telefone" name="telefone" 
+                                    placeholder="Digite seu telefone" required onkeypress="setMask(this, maskTelefone)" maxlength="15">
                                 </div>
 
                                 <!-- SENHA -->
