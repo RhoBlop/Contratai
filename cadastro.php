@@ -20,7 +20,7 @@
                         <h2>Crie sua conta!</h2>
                     </div>
 
-                    <form id="cadastro" class="form-cadastro row g-3 my-3" onsubmit="sendCadastro(event, '#feedbackUsuario')">
+                    <form id="cadastro" class="form-cadastro row g-3 my-3" autocomplete="off" onsubmit="sendCadastro(event, '#feedbackUsuario')">
                         <div class="step">
                             <!-- NOME -->
                             <div class="form-group mb-3">
@@ -41,6 +41,30 @@
                             <div class="form-group mb-3">
                                 <input type="text" class="form-control form-control-lg" id="telefone" name="telefone" placeholder="Digite seu telefone" required oninput="setMask(this, maskTelefone)" maxlength="15">
                             </div>
+
+                        </div>
+
+                        <div class="step">
+                            <!-- CEP -->
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control form-control-lg" id="cep" name="cep" placeholder="Digite seu cep" required oninput="setMask(this, maskCEP)" maxlength="10" onblur="pesquisaCEP(this.value);">
+                            </div>
+
+                            <!-- BAIRRO -->
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control form-control-lg" id="bairro" name="bairro" placeholder="Bairro" disabled>
+                            </div>
+
+                            <!-- CIDADE -->
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control form-control-lg" id="cidade" name="cidade" placeholder="Cidade" disabled>
+                            </div>
+
+                            <!-- ESTADO -->
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control form-control-lg" id="estado" name="estado" placeholder="Estado" disabled>
+                            </div>
+
                         </div>
 
                         <div class="step">
@@ -75,6 +99,9 @@
 
     <!-- FORM STEPS -->
     <script src="js/stepForm.js"></script>
+
+    <!-- SCRIPT PARA CEP -->
+    <script src="js/buscaCEP.js"></script>
 </body>
 
 </html>
