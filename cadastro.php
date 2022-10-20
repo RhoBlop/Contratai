@@ -13,75 +13,84 @@
             </a>
             <div class="form-row row">
 
-                <div class="col-md-6 d-flex flex-column justify-content-start align-items-center my-5">
+                <div class="col-md-6 d-flex flex-column justify-content-start align-items-center my-3">
 
                     <!-- Título Formulário -->
                     <div class="form-title my-3">
                         <h2>Crie sua conta!</h2>
                     </div>
 
-                    <form id="cadastro" class="form-cadastro row g-3 my-3" autocomplete="off" onsubmit="sendCadastro(event, '#feedbackUsuario')">
+                    <form id="cadastro" class="form-cadastro row" autocomplete="off" onsubmit="sendCadastro(event, '#feedbackUsuario')">
                         <div class="step">
                             <!-- NOME -->
-                            <div class="form-group mb-3">
-                                <input type="text" class="form-control form-control-lg" id="nome" name="nome" placeholder="Digite seu nome" autocomplete="off" required>
+                            <div class="form-group mb-2">
+                                <label for="nome" class="mb-1">Nome</label>
+                                <input type="text" class="form-control form-control-lg" id="nome" name="nome" placeholder="Rafael Rodrigues " autocomplete="off" required>
                             </div>
 
                             <!-- EMAIL -->
-                            <div class="form-group mb-3">
-                                <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Digite seu email" required>
+                            <div class="form-group mb-2">
+                                <label for="email" class="mb-1">Email</label>
+                                <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="exemplo@exemplo.com" required>
                             </div>
 
-                            <!-- CPF -->
-                            <div class="form-group mb-3">
-                                <input type="text" class="form-control form-control-lg" id="cpf" name="cpf" placeholder="Digite seu CPF" required oninput="setMask(this, maskCPF)" maxlength="14">
+                            <!-- TELEFONE --> 
+                            <div class="form-group mb-2">
+                                <label for="telefone" class="mb-1">Telefone</label>
+                                <input type="text" class="form-control form-control-lg" id="telefone" name="telefone" placeholder="(__) ____-____" required oninput="setMask(this, maskTelefone)" maxlength="15">
                             </div>
 
-                            <!-- TELEFONE -->
-                            <div class="form-group mb-3">
-                                <input type="text" class="form-control form-control-lg" id="telefone" name="telefone" placeholder="Digite seu telefone" required oninput="setMask(this, maskTelefone)" maxlength="15">
-                            </div>
-
-                        </div>
-
-                        <div class="step">
-                            <!-- CEP -->
-                            <div class="form-group mb-3">
-                                <input type="text" class="form-control form-control-lg" id="cep" name="cep" placeholder="Digite seu cep" required oninput="setMask(this, maskCEP)" maxlength="10" onblur="pesquisaCEP(this.value);">
-                            </div>
-
-                            <!-- BAIRRO -->
-                            <div class="form-group mb-3">
-                                <input type="text" class="form-control form-control-lg" id="bairro" name="bairro" placeholder="Bairro" disabled>
-                            </div>
-
-                            <!-- CIDADE -->
-                            <div class="form-group mb-3">
-                                <input type="text" class="form-control form-control-lg" id="cidade" name="cidade" placeholder="Cidade" disabled>
-                            </div>
-
-                            <!-- ESTADO -->
-                            <div class="form-group mb-3">
-                                <input type="text" class="form-control form-control-lg" id="estado" name="estado" placeholder="Estado" disabled>
-                            </div>
-
-                        </div>
-
-                        <div class="step">
                             <!-- SENHA -->
-                            <div class="form-group mb-3">
-                                <input type="password" class="form-control form-control-lg" id="senha" name="senha" confirmarSenha="abc(event, '#confirmaSenha', '#senhaErrada')" placeholder="Digite sua senha" autocomplete="off" required>
+                            <div class="form-group mb-2">
+                                <label for="senha" class="mb-1">Senha</label>
+                                <input type="password" class="form-control form-control-lg" id="senha" name="senha" confirmarSenha="abc(event, '#confirmaSenha', '#senhaErrada')" autocomplete="off" required>
                             </div>
 
                             <!-- CONFIRMAÇÃO SENHA -->
-                            <div class="form-group mb-3">
-                                <input type="password" class="form-control form-control-lg" id="confirmaSenha" name="confirmaSenha" onchange="confirmarSenha(event, '#senha', '#senhaErrada')" placeholder="Confirme sua senha" autocomplete="off" required>
+                            <div class="form-group mb-2">
+                                <label for="confirmaSenha" class="mb-1">Confirme sua senha</label>
+                                <input type="password" class="form-control form-control-lg" id="confirmaSenha" name="confirmaSenha" onchange="confirmarSenha(event, '#senha', '#senhaErrada')" autocomplete="off" required>
                                 <small id="senhaErrada" class="formMsgErro">As senhas precisam ser iguais</small>
                             </div>
-
-                            <!-- div para comunicação com usuário -->
-                            <div id="feedbackUsuario" class="collapse"></div>
                         </div>
+
+                        <div class="step">
+                            <!-- CPF -->
+                            <div class="form-group mb-2">
+                                <label for="cpf" class="mb-1">CPF</label>
+                                <input type="text" class="form-control form-control-lg" id="cpf" name="cpf" placeholder="___.____.___-__" required oninput="setMask(this, maskCPF)" maxlength="14">
+                            </div>
+
+                            <!-- CEP -->
+                            <div class="form-group mb-2">
+                                <label for="cep" class="mb-1">CEP</label>
+                                <input type="text" class="form-control form-control-lg" id="cep" name="cep" placeholder="_____-___" required oninput="setMask(this, maskCEP)" maxlength="10" onblur="pesquisaCEP(this.value);">
+                            </div>
+
+                            <!-- BAIRRO -->
+                            <div class="form-group mb-2">
+                                <label for="bairro" class="mb-1">Bairro</label>
+                                <input type="text" class="form-control form-control-lg" id="bairro" name="bairro" placeholder="Bairro" disabled>
+                            </div>
+
+                            <div class="row">
+                                <!-- CIDADE -->
+                                <div class="form-group mb-2 col-8">
+                                    <label for="cidade" class="mb-1">Cidade</label>
+                                    <input type="text" class="form-control form-control-lg" id="cidade" name="cidade" placeholder="São Paulo" disabled>
+                                </div>
+    
+                                <!-- ESTADO -->
+                                <div class="form-group mb-2 col-4">
+                                    <label for="estado" class="mb-1">Estado</label>
+                                    <input type="text" class="form-control form-control-lg" id="estado" name="estado" placeholder="SP" disabled>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        <!-- div para comunicação com usuário -->
+                        <div id="feedbackUsuario" class="collapse"></div>
 
                         <!-- BOTÕES AÇÃO -->
                         <div class="buttons d-flex justify-content-center align-items-center gap-3 my-3">
