@@ -4,6 +4,10 @@
 <head>
     <?php require("components/head.php") ?>
     <script src="js/fetch/statusContratos.js"></script>
+
+    <!-- EVO CALENDAR CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/evo-calendar-royal-navy.css" />
 </head>
 
 <body>
@@ -22,11 +26,18 @@
                     </div>
 
                     <div class="nav nav-justified filter-tablist rounded-3 mb-3" id="tablist" role="tablist">
-                        <a class="nav-link active" id="contratante-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratante-pane" role="tab">Contratei</a>
+                        <a class="nav-link" id="contratante-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratante-pane" role="tab">Contratei</a>
                         <a class="nav-link" id="contratado-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratado-pane" role="tab">Contratado</a>
+                        <a class="nav-link active" id="calendario-tab" data-bs-toggle="tab" type="button" data-bs-target="#calendario-pane" role="tab">Calendário</a>
                     </div>
 
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="calendario-pane" role="tabpanel">
+                            <div id="calendar">
 
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="tab-content">
 
@@ -43,7 +54,7 @@
                         $finalizados = $contrato->selectContratosContratante($idUser, 3);
                         ?>
 
-                        <div class="accordion accordion-flush tab-pane fade show active" id="contratante-pane" role="tabpanel">
+                        <div class="accordion accordion-flush tab-pane fade show" id="contratante-pane" role="tabpanel">
 
                             <!-- SOLICITAÇÕES -->
                             <div class="accordion-item">
@@ -123,6 +134,10 @@
                                                         <h7 class="m-0">O contrato com <b><?php echo $contrt["nomeuser"] ?></b> está em andamento! Após o fim das datas previstas você poderá avaliá-lo.</h7>
                                                         <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
                                                         <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
+
+                                                        <div class="accordion-buttons d-flex gap-2">
+                                                            <button onclick="solicitarFimContrato(event)" class="btn btn-green">O contrato foi realizado!</button>
+                                                        </div>
                                                     </div>
 
                                                     <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
@@ -164,7 +179,7 @@
                                                         <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
 
                                                         <div class="accordion-buttons d-flex gap-2">
-                                                            <button class="btn btn-green">Avaliar o contrato</button>
+                                                            <a href="<?php echo "avaliacao.php?id={$contrt['idcontrato']}" ?>" class="btn btn-green">Avaliar o contrato</a>
                                                         </div>
                                                     </div>
 
@@ -265,6 +280,10 @@
                                                         <h7 class="m-0">O contrato com <b><?php echo $contrt["nomeuser"] ?></b> está em andamento! Faça o serviço combinado para ganhar uma boa avaliação no final.</h7>
                                                         <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
                                                         <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
+
+                                                        <div class="accordion-buttons d-flex gap-2">
+                                                            <button onclick="solicitarFimContrato(event)" class="btn btn-green">O contrato foi realizado!</button>
+                                                        </div>
                                                     </div>
 
                                                     <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
@@ -305,10 +324,6 @@
                                                         <h7 class="m-0">O contrato com <b><?php echo $contrt["nomeuser"]; ?></b> foi finalizado em <?php echo $contrt["timefinalizacaocontrato"]; ?>. Agora você pode avaliá-lo pelo serviço!</h7>
                                                         <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
                                                         <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
-
-                                                        <div class="accordion-buttons d-flex gap-2">
-                                                            <button class="btn btn-green">Avaliar o contrato</button>
-                                                        </div>
                                                     </div>
 
                                                     <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
@@ -330,10 +345,22 @@
                 </div>
             </div>
     </main>
+
+    <!-- Add jQuery library (required) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+    <!-- Add the evo-calendar.js for.. obviously, functionality! -->
+    <script src="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/js/evo-calendar.min.js"></script>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script>
+    // Initialize evo-calendar in your script file or an inline <script> tag
+    $(document).ready(function() {
+        $('#calendar').evoCalendar()
+    })
+</script>
 
 </html>

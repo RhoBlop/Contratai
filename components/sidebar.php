@@ -15,14 +15,14 @@
         <a class="nav-link" href="editar-senha.php"><i class="fa-solid fa-lock fa-fw me-1"></i>Editar Senha</a>
     </li>
 
-    <?php 
-        if ($admin === true):
+    <?php
+    if ($admin === true) :
     ?>
         <li class="nav-item">
             <a class="nav-link" href="admin.php"><i class="fa-solid fa-screwdriver-wrench fa-fw me-1"></i>Admin</a>
         </li>
     <?php
-        endif;
+    endif;
     ?>
 
     <hr>

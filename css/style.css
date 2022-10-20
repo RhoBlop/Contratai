@@ -817,13 +817,12 @@ hr {
     color: white !important;
 }
 
-#sidebar .nav-link.link-danger:hover { 
+#sidebar .nav-link.link-danger:hover {
     background: #dc3545;
-
 }
 
 .nav-item {
-    margin-bottom: .2rem;
+    margin-bottom: 0.2rem;
 }
 
 /* Editar Perfil */
