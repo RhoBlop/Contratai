@@ -20,7 +20,7 @@
                         <h2>Crie sua conta!</h2>
                     </div>
 
-                    <form id="cadastro" class="form-cadastro row g-3" onsubmit="sendCadastro(event, '#feedbackUsuario')">
+                    <form id="cadastro" class="form-cadastro row g-3 my-3" onsubmit="sendCadastro(event, '#feedbackUsuario')">
                         <div class="step">
                             <!-- NOME -->
                             <div class="form-group mb-3">
@@ -62,9 +62,9 @@
                         <!-- BOTÕES AÇÃO -->
                         <div class="buttons d-flex justify-content-center align-items-center gap-3 my-3">
                             <!-- <button type="button" class="btn btn-link" onclick="redirectLogin()">Já sou usuário</button> -->
-                            <button type="button" id="btnPrev" class="btn btn-green">Anterior</button>
-                            <button type="button" id="btnNext" class="btn btn-green">Próximo</button>
-                            <button type="submit" id="btnSubmit" class="btn btn-green">Cadastrar</button>
+                            <button type="button" id="btnPrev" class="btn btn-dark">Anterior</button>
+                            <button type="button" id="btnNext" class="btn btn-outline-dark">Próximo</button>
+                            <button type="submit" id="btnSubmit" class="btn btn-outline-green">Cadastrar</button>
                         </div>
                     </form>
                 </div>
