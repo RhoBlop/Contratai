@@ -78,10 +78,11 @@
                     <?php
                         endif;
                     ?>
+                    <li><a class="dropdown-item" href="profissoes.php"><i class="fa-solid fa-user-tie fa-fw me-1"></i>Profissões</a></li>
 
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#"><i class="fa-regular fa-bell fa-lg pe-2"></i>Notificações</a></li>
                     <li><a class="dropdown-item" href="contratos.php"><i class="fa-solid fa-address-book fa-lg pe-2"></i>Contratos</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa-regular fa-bell fa-lg pe-2"></i>Notificações</a></li>
                     <li><a class="dropdown-item" href="#"><i class="fa-regular fa-comment fa-lg pe-2"></i>Mensagens</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket fa-lg pe-2"></i>Sair</a></li>

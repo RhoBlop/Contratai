@@ -13,7 +13,7 @@
             </a>
             <div class="form-row row">
 
-                <div class="col-md-6 d-flex flex-column justify-content-start align-items-center my-3">
+                <div class="col-md-6 d-flex flex-column justify-content-start align-items-center my-2">
 
                     <!-- Título Formulário -->
                     <div class="form-title my-3">
