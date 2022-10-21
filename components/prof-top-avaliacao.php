@@ -8,11 +8,14 @@
         <div class="carousel-inner">
         <?php 
             $profissaoClass = new Profissao();
-            $profsAv = $profissaoClass->selectMaiorAvaliacao($limit = 6);
+            $profsAv = $profissaoClass->selectMaiorAvaliacao($limit = 10);
             
             foreach ($profsAv as $prof): 
                 [$idprof, $descrprof, $numAv, $mediaAv] = [$prof["idprof"], $prof["descrprof"], $prof["numavaliacao"], $prof["mediaavaliacao"]];
+
         ?>
+
+        
 
             <!-- CARD PROFISSÃO -->
             <div class="carousel-item">
@@ -31,24 +34,7 @@
                     </div>
                 </div>
             </div> <!-- /CARD PROFISSÃO -->
-            <!-- CARD PROFISSÃO -->
-            <div class="carousel-item">
-                <div class="card card-categoria rounded-3 shadow-sm">
-                    <img src="images/temp/placeholder-card.jpg" class="card-img-top">
-                    <div class="badge-avaliacao px-2 <?php echo $mediaAv > 4.5 ? "avaliacao-otima" : "avaliacao-media" ?>">
-                        <!-- STAR ICON -->
-                        <ion-icon name="star"></ion-icon>
-                        <?php echo $mediaAv; ?>
-                    </div>
-                    <div class="card-body">
-                        <h4><?php echo ucfirst($descrprof); ?></h4>
-                        <p class="mb-2"><?php echo $numAv; ?> avaliações de contratantes</p>
-                        <a href="<?php echo "profissao.php?id={$idprof}" ?>" class="btn btn-outline-green">Ver mais</a>
-                        <a href="<?php echo "profissao.php?id={$idprof}" ?>"><span class="clickable-card"></span></a>
-                    </div>
-                </div>
-            </div> <!-- /CARD PROFISSÃO -->
-            
+        
         <?php
             endforeach;
         ?>
