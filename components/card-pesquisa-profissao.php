@@ -3,7 +3,7 @@
         <img src="<?php echo echoProfileImage($imguser) ?>" alt="Imagem de perfil">
     </div>
     <div class="card-body">
-        <div class="card-title">
+        <div class="card-title d-flex justify-content-between align-items-center">
             <h5><?php echo $nomeuser; ?></h5>
             <span class="badge-avaliacao <?php echo echoAvaliacaoClass($mediaAv); ?>">
                 <!-- STAR ICON -->

@@ -605,7 +605,7 @@ ion-icon {
     text-align: center;
     vertical-align: center;
     position: static;
-    margin-left: 5px;
+    margin-bottom: 8px;
 }
 
 @keyframes drop-in {
@@ -751,15 +751,20 @@ footer i {
 }
 
 @media screen and (max-width: 768px) {
+
     .cadastro-side-image {
-        z-index: -1;
+        /*z-index: -1;
         min-height: 100vh;
-        position: absolute;
+        position: absolute;*/
+        display: none;
+    }
+    .form-row {
+        align-items: center;
     }
     .form-cadastro {
         background: #fff;
         border-radius: 12px;
-        padding: 50px;
+        align-self: center;
     }
 }
 
@@ -774,6 +779,7 @@ footer i {
 
 .step {
     display: none;
+    padding: 0;
 }
 
 /* Settings e Sidebar */
@@ -945,7 +951,7 @@ label {
     font-weight: 700;
     text-align: center;
     padding: 10px 0;
-    margin: 20px 0 0 0;
+    margin: 1rem 0;
     border-radius: 8px;
     animation: fade-in 0.3s ease-in;
     /* max-height: 0;

@@ -20,7 +20,7 @@
                         <h2>Crie sua conta!</h2>
                     </div>
 
-                    <form id="cadastro" class="form-cadastro row" autocomplete="off" onsubmit="sendCadastro(event, '#feedbackUsuario')">
+                    <form id="cadastro" class="form-cadastro row p-3 p-lg-0" autocomplete="off" onsubmit="sendCadastro(event, '#feedbackUsuario')">
                         <div class="step">
                             <!-- NOME -->
                             <div class="form-group mb-2">
@@ -58,13 +58,13 @@
                             <!-- CPF -->
                             <div class="form-group mb-2">
                                 <label for="cpf" class="mb-1">CPF</label>
-                                <input type="text" class="form-control form-control-lg" id="cpf" name="cpf" placeholder="___.____.___-__" required oninput="setMask(this, maskCPF)" maxlength="14">
+                                <input type="text" class="form-control form-control-lg" id="cpf" name="cpf" placeholder="___.____.___-__" required oninput="setMask(this, maskCPF)" maxlength="14" onblur="validaCPF(this.value)">
                             </div>
                             
                             <!-- CEP -->
                             <div class="form-group mb-2">
                                 <label for="cep" class="mb-1">CEP</label>
-                                <input type="text" class="form-control form-control-lg" id="cep" name="cep" placeholder="_____-___" required oninput="setMask(this, maskCEP)" maxlength="10" onblur="pesquisaCEP(this.value);">
+                                <input type="text" class="form-control form-control-lg" id="cep" name="cep" placeholder="_____-___" required oninput="setMask(this, maskCEP)" maxlength="9" onblur="pesquisaCEP(this.value);">
                             </div>
 
                             <!-- BAIRRO -->
@@ -111,6 +111,9 @@
 
     <!-- SCRIPT PARA CEP -->
     <script src="js/buscaCEP.js"></script>
+
+    <script src="js/validaCPF.js"></script>
+
 </body>
 
 </html>

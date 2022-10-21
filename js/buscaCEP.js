@@ -7,7 +7,7 @@ function limpaFormCEP() {
 function cepCallback(c) {
     if ("erro" in c) {
         limpaFormCEP();
-        alert("Seu CEP não foi encontrado");
+        formErro("Seu CEP não foi encontrado");
     }
 
     else {
@@ -37,7 +37,7 @@ function pesquisaCEP(v) {
         }
         else {
             limpaFormCEP();
-            alert("Formato de CEP inválido");
+            formErro("Formato de CEP inválido")
         }
     }
     else {
