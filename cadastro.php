@@ -13,7 +13,7 @@
             </a>
             <div class="form-row row">
 
-                <div class="col-md-6 d-flex flex-column justify-content-start align-items-center my-2">
+                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center my-2">
 
                     <!-- Título Formulário -->
                     <div class="form-title my-3">
@@ -60,7 +60,7 @@
                                 <label for="cpf" class="mb-1">CPF</label>
                                 <input type="text" class="form-control form-control-lg" id="cpf" name="cpf" placeholder="___.____.___-__" required oninput="setMask(this, maskCPF)" maxlength="14">
                             </div>
-
+                            
                             <!-- CEP -->
                             <div class="form-group mb-2">
                                 <label for="cep" class="mb-1">CEP</label>
