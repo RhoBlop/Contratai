@@ -14,6 +14,7 @@ if (current_step == 0) {
 }
 
 btnNext.addEventListener("click", () => {
+    if (!validateForm()) return false;
     current_step++;
     let previous_step = current_step - 1;
     if (current_step > 0 && current_step <= step_count) {
@@ -57,3 +58,15 @@ btnPrev.addEventListener("click", () => {
         btnPrev.classList.add("d-none");
     }
 });
+
+function validateForm() {
+    valid = true
+    inputs = step[current_step].getElementsByTagName("input");
+    for (i = 0; i < inputs.length; i++) {
+        if (inputs[i].value == "") {
+            form.classList.add('was-validated')
+            valid = false
+        }
+    }
+    return valid; 
+}

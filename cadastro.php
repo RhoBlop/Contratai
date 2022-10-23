@@ -58,7 +58,7 @@
                             <!-- CPF -->
                             <div class="form-group mb-2">
                                 <label for="cpf" class="mb-1">CPF</label>
-                                <input type="text" class="form-control form-control-lg" id="cpf" name="cpf" placeholder="___.____.___-__" required oninput="setMask(this, maskCPF)" maxlength="14" onblur="validaCPF(this.value)">
+                                <input type="text" class="form-control form-control-lg" id="cpf" name="cpf" placeholder="___.____.___-__" required oninput="setMask(this, maskCPF)" maxlength="14" onchange  ="validaCPF(this.value)">
                             </div>
                             
                             <!-- CEP -->
@@ -95,7 +95,7 @@
                         <!-- BOTÕES AÇÃO -->
                         <div class="buttons d-flex justify-content-center align-items-center gap-3 my-3">
                             <!-- <button type="button" class="btn btn-link" onclick="redirectLogin()">Já sou usuário</button> -->
-                            <button type="button" id="btnPrev" class="btn btn-dark">Anterior</button>
+                            <button type="button" id="btnPrev" class="btn btn-dark" onclick="">Anterior</button>
                             <button type="button" id="btnNext" class="btn btn-outline-dark">Próximo</button>
                             <button type="submit" id="btnSubmit" class="btn btn-outline-green">Cadastrar</button>
                         </div>
