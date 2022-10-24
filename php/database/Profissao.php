@@ -133,7 +133,6 @@
                     FULL OUTER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                     GROUP BY top.descrprof, top.idprof, top.numContrato
                     ORDER BY top.numContrato DESC
-                    LIMIT :limit
                 SQL;
                 
                 $stmt = Database::prepare($sql);
