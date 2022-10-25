@@ -1,4 +1,55 @@
 <?php
+
+/**
+ * Makes a call to an API and return its response JSON decoded.
+ * 
+ * @param string $method HTTP method to be used GET|POST|PUT.
+ * @param string $url Url to be fetched.
+ * @param array|bool $data (optional => defaults to false) Data to be sent.
+ * 
+ * @return array API response decoded to associative array.
+ */
+function callAPI($method, $url, $data = false)
+{
+    $curl = curl_init();
+
+    switch ($method) {
+        case "GET":
+            curl_setopt($curl, CURLOPT_HTTPGET, 1);
+            break;
+        case "POST":
+            curl_setopt($curl, CURLOPT_POST, 1);
+
+            if ($data)
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+            break;
+        case "PUT":
+            curl_setopt($curl, CURLOPT_PUT, 1);
+            break;
+        default:
+            if ($data)
+                $url = sprintf("%s?%s", $url, http_build_query($data));
+    }
+
+    // Optional Authentication:
+    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    curl_setopt($curl, CURLOPT_USERPWD, "username:password");
+
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+    $result = curl_exec($curl);
+
+    curl_close($curl);
+
+    return json_decode($result, true);
+}
+
+/**
+ * Destroys session superglobal, effectively logging out.
+ * 
+ * @return null.
+ */
 function logout()
 {
     session_unset();
@@ -6,7 +57,13 @@ function logout()
     $_SESSION = array();
 }
 
-// gera base64 das imagens, variável $_FILES passada por parâmetro
+/**
+ * Takes files as parameters and converts them into base64.
+ * 
+ * @param array $files $_FILES superglobal populated with one or more files.
+ * 
+ * @return array array filled with base64 for each object in $files.
+ */
 function generateImgBase64($files)
 {
     $imgs = [];
@@ -35,7 +92,15 @@ function generateImgBase64($files)
     return $imgs;
 }
 
-// usado em updates, para que os campos ainda não cadastrados continuem como NULL no BD
+/**
+ * Replace empty values in associative array for nulls.
+ * 
+ * Used, for example, when updating values to BD (empty HTML inputs do not return null).
+ * 
+ * @param array $array array to have its values changed.
+ * 
+ * @return array newly created array with ("") changed for NULL.
+ */
 function replaceEmptysForNulls($array)
 {
     if (is_array($array)) {
@@ -46,6 +111,16 @@ function replaceEmptysForNulls($array)
     }
 }
 
+/**
+ * Returns string with elapsed time since some date.
+ * 
+ * Creates messages like "2 hours ago" or "1 month ago".
+ * 
+ * @param string $datetime string formatted as DATE or TIMESTAMP value.
+ * @param bool $full (optional => defaults to false) Defines if the full elapsed time should be returned or only the bigger Hierarchy (2 hours ago, 2 minutes, 38 seconds vs 2 hours ago)
+ * 
+ * @return string time elapsed
+ */
 function time_elapsed_string($datetime, $full = false)
 {
     $now = new DateTime;
