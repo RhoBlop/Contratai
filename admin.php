@@ -13,7 +13,7 @@
                     
 
                     <?php include("components/sidebar.php")?>
-
+                    <!-- REVIEW Deixar o template da tabela pronto para depois preenchê-la. -->
                     <div class="col-8 px-3 flex-column text-center" id="settingsContent">
                         <h3>Esta pagina está em desenvolvimento...</h3>
                         <img src="images\storyset\Work time-pana.svg" width="50%"alt="">

@@ -16,8 +16,8 @@
     background-color: #fbfbfb;
     color: #5a5a5a;
     width: 100%;
-    -webkit-box-shadow: 0 10px 50px -20px #8773c1;
-    box-shadow: 0 10px 50px -20px #8773c1;
+    -webkit-box-shadow: 0 10px 50px -20px var(--primary-green);
+    box-shadow: 0 10px 50px -20px var(--primary-green);
     margin: 0 auto;
     overflow: hidden;
     z-index: 1;
@@ -29,11 +29,11 @@
     width: 200px;
     height: 100%;
     float: left;
-    background-color: #8773c1;
+    background-color: var(--primary-green);
     color: #fff;
     z-index: 1;
-    -webkit-box-shadow: 5px 0 18px -3px #8773c1;
-    box-shadow: 5px 0 18px -3px #8773c1;
+    -webkit-box-shadow: 5px 0 18px -3px var(--primary-green);
+    box-shadow: 5px 0 18px -3px var(--primary-green);
     -webkit-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
@@ -51,6 +51,7 @@
     box-shadow: none;
 }
 .calendar-sidebar > span#sidebarToggler {
+    display: flex;
     position: absolute;
     width: 40px;
     height: 40px;
@@ -59,11 +60,11 @@
     -webkit-transform: translate(100%, 0);
     -ms-transform: translate(100%, 0);
     transform: translate(100%, 0);
-    background-color: #8773c1;
+    background-color: var(--primary-green);
     padding: 10px 8px;
     cursor: pointer;
-    -webkit-box-shadow: 5px 0 18px -3px #8773c1;
-    box-shadow: 5px 0 18px -3px #8773c1;
+    -webkit-box-shadow: 5px 0 18px -3px var(--primary-green);
+    box-shadow: 5px 0 18px -3px var(--primary-green);
 }
 
 .calendar-sidebar > .calendar-year {
@@ -118,10 +119,10 @@
     font-size: 16px;
 }
 .calendar-sidebar > .month-list > .calendar-months > li:hover {
-    background-color: #a692e0;
+    background-color: var(--light-green);
 }
 .calendar-sidebar > .month-list > .calendar-months > li.active-month {
-    background-color: #755eb5;
+    background-color: #02424a;
 }
 
 .calendar-inner {
@@ -173,7 +174,7 @@ th[colspan="7"] {
     text-transform: uppercase;
     font-weight: 600;
     font-size: 30px;
-    color: #8773c1;
+    color: var(--primary-green);
 }
 th[colspan="7"]::after {
     content: "";
@@ -234,11 +235,11 @@ tr.calendar-body .calendar-day .day.calendar-active:hover {
 
 tr.calendar-body .calendar-day .day.calendar-today {
     color: #fff;
-    background-color: #8773c1;
+    background-color: var(--primary-green);
 }
 tr.calendar-body .calendar-day .day.calendar-today:hover {
     color: #fff;
-    background-color: #755eb5;
+    background-color: #02424a;
 }
 tr.calendar-body .calendar-day .day[disabled] {
     pointer-events: none;
@@ -287,11 +288,11 @@ tr.calendar-body .calendar-day .day[disabled] {
     height: 40px;
     top: 0;
     right: 0;
-    background-color: #8773c1;
+    background-color: var(--primary-green);
     padding: 10px;
     cursor: pointer;
-    -webkit-box-shadow: 5px 0 18px -3px #8773c1;
-    box-shadow: 5px 0 18px -3px #8773c1;
+    -webkit-box-shadow: 5px 0 18px -3px var(--primary-green);
+    box-shadow: 5px 0 18px -3px var(--primary-green);
     z-index: 1;
 }
 .event-list::after {
@@ -301,12 +302,12 @@ tr.calendar-body .calendar-day .day[disabled] {
 }
 .event-list > .event-empty {
     padding: 15px 10px;
-    background-color: rgba(135, 115, 193, 0.15);
-    border: 1px solid #8773c1;
+    background-color: rgba(115, 186, 193, 0.15);
+    border: 1px solid var(--primary-green);
 }
 .event-list > .event-empty > p {
     margin: 0;
-    color: #755eb5;
+    color: #02424a;
 }
 .event-container {
     position: relative;
@@ -396,8 +397,8 @@ tr.calendar-body .calendar-day .day[disabled] {
     right: 0;
     font-size: 12px;
     font-weight: normal;
-    color: #755eb5;
-    border: 1px solid #755eb5;
+    color: #02424a;
+    border: 1px solid #02424a;
     border-radius: 3px;
     background-color: rgb(237 234 246);
     padding: 3px 6px;
@@ -437,7 +438,7 @@ tr.calendar-body .calendar-day .day[disabled] {
 /* fallback color */
 .event-container > .event-icon > div[class^="event-bullet-"],
 .event-indicator > .type-bullet > div[class^="type-"] {
-    background-color: #8773c1;
+    background-color: var(--primary-green);
 }
 .event-container > .event-icon > div.event-bullet-event,
 .event-indicator > .type-bullet > div.type-event {
@@ -747,7 +748,7 @@ button.icon-button > span.chevron-arrow-right {
         position: relative;
         padding: 10px 20px;
         text-align: center;
-        background-color: #8773c1;
+        background-color: var(--primary-green);
         -webkit-box-shadow: 0 3px 8px -3px rgba(53, 43, 80, 0.65);
         box-shadow: 0 3px 8px -3px rgba(53, 43, 80, 0.65);
     }
@@ -768,7 +769,7 @@ button.icon-button > span.chevron-arrow-right {
         width: 100%;
         height: calc(100% - 43px);
         overflow-y: auto;
-        background-color: #8773c1;
+        background-color: var(--primary-green);
         -webkit-transform: translateY(0);
         -ms-transform: translateY(0);
         transform: translateY(0);

@@ -24,6 +24,7 @@
                         <?php echo $mediaAv; ?>
                     </span>
                     <div class="card-body">
+                        <!-- FIXME plmdds ajeita essa merda thiago -->
                         <h4><?php echo ucfirst($descrprof); ?></h4>
                         <p class="mb-2"><?php echo $numcontrato; ?> contratações</p>
                         <a href="<?php echo "profissao.php?id={$idprof}" ?>" class="btn btn-outline-green">Ver mais</a>
