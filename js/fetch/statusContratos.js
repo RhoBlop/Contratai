@@ -1,6 +1,8 @@
+//TODO[epic=MudancaStatus]: Rodar o banco novamente para atualizar os status de contrato (adicionar "solicitação de finalizacao") e alterar os status nos formulários a seguir
+
 async function aceitarContrato(event) {
     let btn = event.target;
-    let contratoEl = findClosestAncestor(btn, "item-contrato");
+    let contratoEl = findClosestAncestorByClass(btn, "item-contrato");
     let emAndamentoEl = document.querySelector("#emAndamentoContratado");
 
     // moves contratoEl to another accordion item and, if the accordion has empty message, deletes it
@@ -8,6 +10,17 @@ async function aceitarContrato(event) {
     if (emptyAccordion) {
         emptyAccordion.remove();
     }
+    // deleta os botões de "aceitar" e "recusar" do card
+    let buttons = contratoEl.querySelector(".accordion-buttons");
+    buttons.textContent = "";
+
+    // adiciona o botão de "finalizar contrato" no card
+    let btnFinalizar = document.createElement("button");
+    btnFinalizar.classList.add("btn", "btn-green");
+    btnFinalizar.textContent = "O contrato foi realizado!";
+    btnFinalizar.addEventListener("click", solicitarFimContrato);
+    buttons.appendChild(btnFinalizar);
+
     emAndamentoEl.appendChild(contratoEl);
 
     let idContrato = contratoEl.dataset.contratoid;
@@ -34,12 +47,12 @@ async function aceitarContrato(event) {
 
 async function recusarContrato(event) {
     let btn = event.target;
-    let contratoEl = findClosestAncestor(btn, "item-contrato");
+    let contratoEl = findClosestAncestorByClass(btn, "item-contrato");
 
     contratoEl.remove();
 
     let idContrato = contratoEl.dataset.contratoid;
-    // problemas de segurança, mas né... :/
+    //NOTE: Novo id - 5
     let idStatus = 4;
     let data = await updateStatusContrato(idContrato, idStatus);
 
@@ -62,19 +75,19 @@ async function recusarContrato(event) {
 
 async function solicitarFimContrato(event) {
     let btn = event.target;
-    let contratoEl = findClosestAncestor(btn, "item-contrato");
+    let contratoEl = findClosestAncestorByClass(btn, "item-contrato");
 
     contratoEl.remove();
 
     let idContrato = contratoEl.dataset.contratoid;
-    // problemas de segurança, mas né... :/
+    //NOTE: Novo id - 3
     let idStatus = 4;
     let data = await updateStatusContrato(idContrato, idStatus);
 
     if (data.dados) {
         createToast(
             "Status do contrato atualizado",
-            "O contrato foi recusado com sucesso",
+            "Uma solicitação foi enviada ao próximo usuário",
             "success-notify",
             idContrato
         );
@@ -88,7 +101,33 @@ async function solicitarFimContrato(event) {
     }
 }
 
-async function aceitarFimContrato(event) {}
+async function aceitarFimContrato(event) {
+    let btn = event.target;
+    let contratoEl = findClosestAncestorByClass(btn, "item-contrato");
+
+    contratoEl.remove();
+
+    let idContrato = contratoEl.dataset.contratoid;
+    //NOTE: Novo id - 4
+    let idStatus = 5;
+    let data = await updateStatusContrato(idContrato, idStatus);
+
+    if (data.dados) {
+        createToast(
+            "Status do contrato atualizado",
+            "O contrato foi finalizado com sucesso",
+            "success-notify",
+            idContrato
+        );
+    } else {
+        createToast(
+            "Erro na operação",
+            "Não foi possível atualizar o status do contrato, recarregue a página e tente novamente",
+            "failure-notify",
+            idContrato
+        );
+    }
+}
 
 async function updateStatusContrato(idContrato, idStatus) {
     try {

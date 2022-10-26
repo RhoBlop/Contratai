@@ -52,7 +52,7 @@
 
     <?php include("components/auth-header.php") ?>
 
-    <?php include("components/modal-contrato.php") ?>
+    <?php include("components/modal-addContrato.php") ?>
 
     <main>
         <div class="container my-3">

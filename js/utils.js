@@ -12,17 +12,23 @@ function redirectLogin() {
     window.location.href = "index.php";
 }
 
+function redirectAval(idContrato) {
+    setOpenModal(`#modalAvaliacao-${idContrato}`);
+    window.location.href = "contratos.php";
+}
+
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+// seta multiplos atributos para um elemento DOM
 function setAttributes(el, attrs) {
     for (var key in attrs) {
         el.setAttribute(key, attrs[key]);
     }
 }
 
-function findClosestAncestor(el, cls) {
+function findClosestAncestorByClass(el, cls) {
     while ((el = el.parentElement) && !el.classList.contains(cls));
     return el;
 }

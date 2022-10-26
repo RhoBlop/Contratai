@@ -31,4 +31,4 @@
     </li>
 </ul>
 
-<?php include("components/modal-exclude.php"); ?>
+<?php include("components/modal-excludeUser.php"); ?>

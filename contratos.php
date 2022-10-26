@@ -34,18 +34,14 @@
                     </div>
 
                     <div class="tab-content">
+
+                        <!-- SECTION - Calendário -->
                         <div class="tab-pane fade show active" id="calendario-pane" role="tabpanel">
-                            <div id="calendar">
-
-                            </div>
+                            <div id="calendar"></div>
                         </div>
-                    </div>
+                        <!-- !SECTION - Calendário -->
 
-                    <div class="tab-content">
-
-                        <!-- ========================= 
-                                        CONTRATANTE
-                                 ========================= -->
+                        <!-- SECTION - Contratante -->
                         <?php
                         require("php/database/Contrato.php");
                         $contrato = new Contrato();
@@ -58,7 +54,7 @@
 
                         <div class="accordion accordion-flush tab-pane fade show" id="contratante-pane" role="tabpanel">
 
-                            <!-- SOLICITAÇÕES -->
+                            <!-- SECTION - Solicitações -->
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#solicitacoesContratante" aria-expanded="true" aria-controls="solicitacoesContratante">
@@ -109,8 +105,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- !SECTION - Solicitações -->
 
-                            <!-- EM ANDAMENTO -->
+                            <!-- SECTION - Em andamento -->
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingTwo">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#emAndamentoContratante" aria-expanded="false" aria-controls="emAndamentoContratante">
@@ -151,8 +148,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- !SECTION - Em andamento -->
 
-                            <!-- FINALIZADOS -->
+                            <!-- SECTION - Finalizados -->
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingThree">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#finalizadosContratante" aria-expanded="false" aria-controls="finalizadosContratante">
@@ -195,15 +193,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- !SECTION - Finalizados -->
                         </div>
-                        <!-- ========================= 
-                                        CONTRATANTE
-                                 ========================= -->
+                        <!-- !SECTION - Contratante -->
 
-
-                        <!-- ========================= 
-                                        CONTRATADO
-                                 ========================= -->
+                        <!-- SECTION - Profissional -->
                         <?php
                         $solicitacoesRecebidas = $contrato->selectContratosProfissional($idUser, 1);
                         $emAndamento = $contrato->selectContratosProfissional($idUser, 2);
@@ -212,7 +206,7 @@
 
                         <div class="accordion accordion-flush tab-pane fade" id="contratado-pane" role="tabpanel">
 
-                            <!-- SOLICITAÇÕES -->
+                            <!-- SECTION - Solicitações -->
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#solicitacoesContratado" aria-expanded="true" aria-controls="solicitacoesContratado">
@@ -254,8 +248,9 @@
                                     ?>
                                 </div>
                             </div>
+                            <!-- !SECTION - Solicitações -->
 
-                            <!-- EM ANDAMENTO -->
+                            <!-- SECTION - Em andamento -->
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingTwo">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#emAndamentoContratado" data-bs-parent="#contratado-pane" aria-expanded="false" aria-controls="emAndamentoContratado">
@@ -298,8 +293,9 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- !SECTION - Em andamento -->
 
-                            <!-- FINALIZADO -->
+                            <!-- SECTION - Finalizados -->
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingThree">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#finalizadosContratado" aria-expanded="false" aria-controls="finalizadosContratado">
@@ -338,11 +334,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- ========================= 
-                                        CONTRATADO
-                                 ========================= -->
-
+                            <!-- !SECTION - Finalizados -->
                         </div>
+                        <!-- !SECTION - Profissional -->
                     </div>
                 </div>
             </div>

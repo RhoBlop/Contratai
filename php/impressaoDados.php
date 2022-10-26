@@ -17,6 +17,7 @@ function echoFormattedDate($date)
     echo is_null($date) ? "---" : date("d/m/Y", strtotime($date));
 }
 
+// 12 de outubro de 2022
 function echoFullDate($date)
 {
     $locale = "pt_BR";
@@ -27,6 +28,7 @@ function echoFullDate($date)
     echo $formatter->format($dateTime);
 }
 
+// 12 de out. de 2022
 function echoMediumDate($date)
 {
     $locale = "pt_BR";
