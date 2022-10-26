@@ -43,13 +43,11 @@
 
                         <!-- SECTION - Contratante -->
                         <?php
-                        require("php/database/Contrato.php");
-                        $contrato = new Contrato();
                         $idUser = $_SESSION["iduser"];
 
-                        $solicitacoesRecebidas = $contrato->selectContratosContratante($idUser, 1);
-                        $emAndamento = $contrato->selectContratosContratante($idUser, 2);
-                        $finalizados = $contrato->selectContratosContratante($idUser, 3);
+                        $solicitacoesRecebidas = $usuarioClass->selectContratosContratante($idUser, 1);
+                        $emAndamento = $usuarioClass->selectContratosContratante($idUser, 2);
+                        $finalizados = $usuarioClass->selectContratosContratante($idUser, 3);
                         ?>
 
                         <div class="accordion accordion-flush tab-pane fade show" id="contratante-pane" role="tabpanel">
@@ -199,9 +197,9 @@
 
                         <!-- SECTION - Profissional -->
                         <?php
-                        $solicitacoesRecebidas = $contrato->selectContratosProfissional($idUser, 1);
-                        $emAndamento = $contrato->selectContratosProfissional($idUser, 2);
-                        $finalizados = $contrato->selectContratosProfissional($idUser, 3);
+                        $solicitacoesRecebidas = $usuarioClass->selectContratosProfissional($idUser, 1);
+                        $emAndamento = $usuarioClass->selectContratosProfissional($idUser, 2);
+                        $finalizados = $usuarioClass->selectContratosProfissional($idUser, 3);
                         ?>
 
                         <div class="accordion accordion-flush tab-pane fade" id="contratado-pane" role="tabpanel">
@@ -231,6 +229,7 @@
                                                 <div class="text">
                                                     <h7 class="m-0"><b><?php echo $contrt["nomeuser"] ?></b> quer te contratar como <?php echo ucfirst($contrt["descrespec"]); ?>!</h7>
                                                     <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
+                                                    //FIXME - Não tá funfando
                                                     <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
 
                                                     <div class="accordion-buttons d-flex gap-2">

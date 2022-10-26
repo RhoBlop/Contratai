@@ -13,6 +13,7 @@
     require ("../../database/Usuario.php");
     $user = new Usuario();
     
+    //TODO: adicionar verificação do CEP e insert no cadastro
     // destructuring das variáveis recebidas pelo POST request
     [$nome, $email, $cpf, $telefone, $senha, $confirmaSenha] = [$_POST["nome"], $_POST["email"], $_POST["cpf"], $_POST["telefone"], $_POST["senha"], $_POST["confirmaSenha"]];
 

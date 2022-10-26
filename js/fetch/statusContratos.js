@@ -52,7 +52,7 @@ async function recusarContrato(event) {
     contratoEl.remove();
 
     let idContrato = contratoEl.dataset.contratoid;
-    //NOTE: Novo id - 5
+    //NOTE: Recusar - novo id 5
     let idStatus = 4;
     let data = await updateStatusContrato(idContrato, idStatus);
 
@@ -80,7 +80,7 @@ async function solicitarFimContrato(event) {
     contratoEl.remove();
 
     let idContrato = contratoEl.dataset.contratoid;
-    //NOTE: Novo id - 3
+    //NOTE: Solicitacao fim - novo id 3
     let idStatus = 4;
     let data = await updateStatusContrato(idContrato, idStatus);
 
@@ -108,7 +108,7 @@ async function aceitarFimContrato(event) {
     contratoEl.remove();
 
     let idContrato = contratoEl.dataset.contratoid;
-    //NOTE: Novo id - 4
+    //NOTE: Aceitar fim - novo id 4
     let idStatus = 5;
     let data = await updateStatusContrato(idContrato, idStatus);
 
@@ -132,7 +132,7 @@ async function aceitarFimContrato(event) {
 async function updateStatusContrato(idContrato, idStatus) {
     try {
         let response = await fetch(
-            `./php/post/contrato/updateStatusContrato.php`,
+            `./php/post/contrato/updateStatus.php`,
             {
                 method: "POST",
                 headers: {

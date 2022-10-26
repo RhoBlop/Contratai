@@ -193,7 +193,7 @@ async function sendSolicitacaoContrato(event) {
     loading();
     timeout = timeoutConnection();
 
-    let response = await fetch("./php/post/contrato/solicitacaoContrato.php", {
+    let response = await fetch("./php/post/contrato/solicitar.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -228,7 +228,7 @@ async function sendAvaliacao(event) {
     loading();
     timeout = timeoutConnection();
 
-    let response = await fetch("./php/post/contrato/avaliacaoContrato.php", {
+    let response = await fetch("./php/post/contrato/avaliar.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
