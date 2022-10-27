@@ -1778,3 +1778,25 @@ p {
         clear: none !important;
     }
 }
+
+
+/* CRUD / ADMIN */
+
+.crud .table-title {
+    color: white;
+    /* background-image: linear-gradient(to right, #074a59, #095e6f, #0c7385, #10899a, #15a0b0); */
+    background: var(--primary-green);
+    padding: 20px 25px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    vertical-align: middle;
+}
+
+.crud .table-title h4{
+    margin: 0;
+}
+
+.crud .table-title .crud-buttons a{
+    font-size: 12px;
+    font-weight: 500
+}

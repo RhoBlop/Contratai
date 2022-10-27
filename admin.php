@@ -14,13 +14,26 @@
 
                     <?php include("components/sidebar.php")?>
                     <!-- REVIEW Deixar o template da tabela pronto para depois preenchê-la. -->
-                    <div class="col-8 px-3 flex-column text-center" id="settingsContent">
-                        <h3>Esta pagina está em desenvolvimento...</h3>
-                        <img src="images\storyset\Work time-pana.svg" width="50%"alt="">
+                    <div class="col-10 px-3 flex-column" id="settingsContent">
+                        <div class="crud">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4>Gerenciamento de [tabela]</h4>
+                                    </div>
+                                    <div class="col">
+                                        <div class="crud-buttons d-flex gap-3 justify-content-end">
+                                            <a href="#add" class="btn btn-success">Adicionar [item]</a>
+                                            <a href="#exclude" class="btn btn-danger">Excluir [item]</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </main>
+        </main> 
 
     </body>
 

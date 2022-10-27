@@ -21,7 +21,7 @@
 
                 <?php include("components/sidebar.php") ?>
 
-                <div class="col-10 px-3 d-flex flex-column" id="settingsContent">
+                <div class="col-10 px-4 d-flex flex-column" id="settingsContent">
                     <!-- TODO Colocar a descrição dos contratos nos accordions e ajeitar as boxes de datas -->
                     <div class="mb-4">
                         <h2>Meus contratos</h2>
@@ -41,7 +41,7 @@
 
                         <!-- SECTION - Calendário -->
                         <div class="tab-pane fade show active" id="calendario-pane" role="tabpanel">
-                            <div id="calendar"></div>
+                            <div id="calendar" class="shadow"></div>
                         </div>
                         <!-- !SECTION - Calendário -->
 
