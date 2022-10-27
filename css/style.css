@@ -1332,16 +1332,23 @@ p {
 
 .contract-dates {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
+}
+
+.time {
+    min-width: 10%;
 }
 
 .date-chip {
     display: inline-block;
     background: var(--primary-green);
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 500;
     color: white;
-    padding: 4px 10px;
+    padding: 5px 12px;
     border-radius: 1rem;
+    user-select: none;
 }
 
 .date-chip.outline {
