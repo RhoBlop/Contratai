@@ -1797,6 +1797,53 @@ p {
 }
 
 .crud .table-title .crud-buttons a{
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500
 }
+
+    /* Custom checkbox
+
+    .crud .table label {
+        position: relative;
+        display: block;
+    }
+    
+    .crud .table input[type="checkbox"] {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .crud .table .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 24px;
+        width: 24px;
+        background: #999;
+        border-radius: 4px;
+    }
+    
+    .crud .table #selectAll:hover input + .checkmark {
+        background: #999;
+    }
+
+    .crud .table #selectAll input:checked + .checkmark { 
+        background: var(--light-green);
+    } */
+
+.crud .table .action-buttons{
+    display: flex;
+    gap: 20px;
+}
+
+/* REVIEW Cores dos botões */
+
+.crud .table .action-buttons #editButton{
+    color: yellow;
+}
+
+.crud .table .action-buttons #excludeButton{
+    color: red;
+}
+
