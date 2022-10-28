@@ -13,15 +13,16 @@ class Contrato extends Database
 
             // idstatus = 1 é o estado de solicitação
             $contratoSQL = <<<SQL
-                    INSERT INTO contrato(idcontratado, idcontratante, idespec, idstatus) VALUES
-                    (:idcontratado, :idcontratante, :idespec, 1)
+                    INSERT INTO contrato(idcontratado, idcontratante, idespec, idstatus, timecriacaocontrato) VALUES
+                    (:idcontratado, :idcontratante, :idespec, 1, :timestamp)
                     RETURNING idcontrato
                 SQL;
             $stmt = $conn->prepare($contratoSQL);
             $stmt->execute([
                 ":idcontratado" => $idContratado,
                 ":idcontratante" => $idContratante,
-                ":idespec" => $idEspec
+                ":idespec" => $idEspec,
+                ":timestamp" => getCurrentTimestamp()
             ]);
 
             $idContrato = $stmt->fetch()["idcontrato"];

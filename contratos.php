@@ -49,9 +49,9 @@
                         <?php
                         $idUser = $_SESSION["iduser"];
 
-                        $solicitacoesRecebidas = $usuarioClass->selectContratosContratante($idUser, 1);
-                        $emAndamento = $usuarioClass->selectContratosContratante($idUser, 2);
-                        $finalizados = $usuarioClass->selectContratosContratante($idUser, 3);
+                        $solicitacoesEnviadas = $usuarioClass->selectContratosContratante($idUser, 1);
+                        $emAndamentoEnviados = $usuarioClass->selectContratosContratante($idUser, 2);
+                        $finalizadosEnviados = $usuarioClass->selectContratosContratante($idUser, 3);
                         ?>
 
                         <div class="accordion accordion-flush tab-pane fade show" id="contratante-pane" role="tabpanel">
@@ -66,12 +66,12 @@
                                 <div id="solicitacoesContratante" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#contratante-pane">
                                     <div>
                                         <?php
-                                        if (empty($solicitacoesRecebidas)) :
+                                        if (empty($solicitacoesEnviadas)) :
                                             echo <<<ERROR
                                             <div class="empty-accordion d-flex justify-content-center">Nenhuma solicitação de contratação pendente.</div>
                                         ERROR;
                                         else :
-                                            foreach ($solicitacoesRecebidas as $contrt) :
+                                            foreach ($solicitacoesEnviadas as $contrt) :
                                         ?>
 
                                                 <div class="item-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid="<?php echo $contrt["idcontrato"]; ?>">
@@ -97,7 +97,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
+                                                    <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
                                                 </div>
 
                                         <?php
@@ -119,29 +119,53 @@
                                 <div id="emAndamentoContratante" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#contratante-pane">
                                     <div>
                                         <?php
-                                        if (empty($emAndamento)) :
+                                        if (empty($emAndamentoEnviados)) :
                                             echo <<<ERROR
                                                 <div class="empty-accordion d-flex justify-content-center">Nenhum contrato por aqui.</div>
                                             ERROR;
                                         else :
-                                            foreach ($emAndamento as $contrt) :
+                                            foreach ($emAndamentoEnviados as $contrt) :
                                         ?>
-                                                <div class="item-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
-                                                    <div class="clickable-image">
-                                                        <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
-                                                        <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
-                                                    </div>
-                                                    <div class="text">
-                                                        <h7 class="m-0">O contrato com <b><?php echo $contrt["nomeuser"] ?></b> está em andamento! Após o fim das datas previstas você poderá avaliá-lo.</h7>
-                                                        <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                        <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
+                                                <div class="item-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid="<?php echo $contrt["idcontrato"]; ?>">
+                                                    <div class="d-flex gap-3">
+                                                        <div class="clickable-image">
+                                                            <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
+                                                            <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
+                                                        </div>
+                                                        <div class="text">
+                                                            <?php
+                                                                if ($contrt["idstatus"] === 3):
+                                                            ?> 
 
-                                                        <div class="accordion-buttons my-2 d-flex gap-2">
-                                                            <button onclick="solicitarFimContrato(event)" class="btn btn-green">O contrato foi realizado!</button>
+                                                                <h8>O contrato com <b><?php echo $contrt["nomeuser"] ?></b> está em andamento! Após o fim das datas previstas você poderá avaliá-lo.</h8>
+
+                                                            <?php
+                                                                elseif ($contrt["idstatus"] === 4):
+                                                            ?>
+
+                                                                <h8>O contratado <b><?php echo $contrt["nomeuser"] ?></b> solicitou o fim do contrato, ou seja, ele está declarando que realizou o contrato. Caso isso seja verdadeiro, clique no botão abaixo</h8>
+                                                            
+                                                            <?php
+                                                                endif;
+                                                            ?>
+                                                            <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
+                                                            <p class="text-muted">Dias agendados:</p>
+                                                            <div class="contract-dates my-1">
+                                                                <?php
+                                                                foreach ($contrt["diascontrato"] as $diacontrato) {
+                                                                    echo '<div class="date-chip">';
+                                                                    echoMediumDate($diacontrato);
+                                                                    echo '</div>';
+                                                                }
+                                                                ?>
+                                                            </div>
+                                                            <div class="accordion-buttons my-2 d-flex gap-2">
+                                                                <button onclick="solicitarFimContrato(event)" class="btn btn-green">O contrato foi realizado!</button>
+                                                            </div>
                                                         </div>
                                                     </div>
 
-                                                    <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
+                                                    <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
                                                 </div>
                                         <?php
                                             endforeach;
@@ -162,12 +186,12 @@
                                 <div id="finalizadosContratante" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#contratante-pane">
                                     <div>
                                         <?php
-                                        if (empty($finalizados)) :
+                                        if (empty($finalizadosEnviados)) :
                                             echo <<<ERROR
                                                 <div class="empty-accordion d-flex justify-content-center">Nenhum contrato por aqui.</div>
                                             ERROR;
                                         else :
-                                            foreach ($finalizados as $contrt) :
+                                            foreach ($finalizadosEnviados as $contrt) :
                                         ?>
 
                                                 <div class="item-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
@@ -178,9 +202,9 @@
                                                     <div class="text">
                                                         <h7 class="m-0">O contrato com <b><?php echo $contrt["nomeuser"]; ?></b> foi finalizado em <?php echo $contrt["timefinalizacaocontrato"]; ?>. Agora você pode avaliá-lo pelo serviço!</h7>
                                                         <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                        <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
+                                                        <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
 
-                                                        <div class="accordion-buttons my-2 d-flex gap-2">
+                                                        <div class="accordion-buttons my-2 d-flex gap-2"></div>
                                                    
                                                     </div>
 
@@ -201,8 +225,8 @@
                         <!-- SECTION - Profissional -->
                         <?php
                         $solicitacoesRecebidas = $usuarioClass->selectContratosProfissional($idUser, 1);
-                        $emAndamento = $usuarioClass->selectContratosProfissional($idUser, 2);
-                        $finalizados = $usuarioClass->selectContratosProfissional($idUser, 3);
+                        $emAndamentoRecebidos = $usuarioClass->selectContratosProfissional($idUser, 2);
+                        $finalizadosRecebidos = $usuarioClass->selectContratosProfissional($idUser, 3);
                         ?>
 
                         <div class="accordion accordion-flush tab-pane fade" id="contratado-pane" role="tabpanel">
@@ -232,8 +256,7 @@
                                                 <div class="text">
                                                     <h7 class="m-0"><b><?php echo $contrt["nomeuser"] ?></b> quer te contratar como <?php echo ucfirst($contrt["descrespec"]); ?>!</h7>
                                                     <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                    <!-- FIXME - Não tá funfando -->
-                                                    <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
+                                                    <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
 
                                                     <div class="accordion-buttons my-2 d-flex gap-2">
                                                         <button class="btn btn-green" onclick="aceitarContrato(event)">Aceitar</button>
@@ -262,12 +285,12 @@
                                 <div id="emAndamentoContratado" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#contratado-pane">
                                     <div>
                                         <?php
-                                        if (empty($emAndamento)) :
+                                        if (empty($emAndamentoRecebidos)) :
                                             echo <<<ERROR
                                             <div class="empty-accordion d-flex justify-content-center">Nenhum contrato por aqui.</div>
                                         ERROR;
                                         else :
-                                            foreach ($emAndamento as $contrt) :
+                                            foreach ($emAndamentoRecebidos as $contrt) :
                                         ?>
 
                                                 <div class="item-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
@@ -278,7 +301,7 @@
                                                     <div class="text">
                                                         <h7 class="m-0">O contrato com <b><?php echo $contrt["nomeuser"] ?></b> está em andamento! <br>Faça o serviço combinado para ganhar uma boa avaliação no final.</h7>
                                                         <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                        <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
+                                                        <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
 
                                                         <div class="accordion-buttons my-2 d-flex gap-2">
                                                             <button onclick="solicitarFimContrato(event)" class="btn btn-green">O contrato foi realizado!</button>
@@ -307,12 +330,12 @@
                                 <div id="finalizadosContratado" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#contratado-pane">
                                     <div>
                                         <?php
-                                        if (empty($finalizados)) :
+                                        if (empty($finalizadosRecebidos)) :
                                             echo <<<ERROR
                                             <div class="empty-accordion d-flex justify-content-center">Nenhum contrato por aqui.</div>
                                         ERROR;
                                         else :
-                                            foreach ($finalizados as $contrt) :
+                                            foreach ($finalizadosRecebidos as $contrt) :
                                         ?>
 
                                                 <div class="item-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
@@ -323,7 +346,7 @@
                                                     <div class="text">
                                                         <h7 class="m-0">O contrato com <b><?php echo $contrt["nomeuser"]; ?></b> foi finalizado em <?php echo $contrt["timefinalizacaocontrato"]; ?>. Agora você pode avaliá-lo pelo serviço!</h7>
                                                         <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                        <p class="text-muted"><?php echo time_elapsed_string($contrt["timecriacaocontrato"]); ?></p>
+                                                        <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
                                                     </div>
 
                                                     <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>

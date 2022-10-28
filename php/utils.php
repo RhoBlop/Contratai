@@ -93,6 +93,16 @@ function generateImgBase64($files)
 }
 
 /**
+ * Returns current time in string SQL formatted
+ * 
+ * @return string String of current timestamp
+ */
+function getCurrentTimestamp() {
+    $timestamp = date('Y-m-d H:i:s');
+    return $timestamp;
+}
+
+/**
  * Replace empty values in associative array for nulls.
  * 
  * Used, for example, when updating values to BD (empty HTML inputs do not return null).
@@ -121,7 +131,7 @@ function replaceEmptysForNulls($array)
  * 
  * @return string time elapsed
  */
-function time_elapsed_string($datetime, $full = false)
+function timeElapsedString($datetime, $full = false)
 {
     $now = new DateTime;
     $ago = new DateTime($datetime);

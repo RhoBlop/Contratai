@@ -63,8 +63,6 @@
                 </div>
             </div>
         </main>
-
-        <?php include ("components/toast.html") ?>
     </body>
 
     <script

@@ -1,5 +1,3 @@
-//TODO[epic=MudancaStatus]: Rodar o banco novamente para atualizar os status de contrato (adicionar "solicitação de finalizacao") e alterar os status nos formulários a seguir
-
 async function aceitarContrato(event) {
     let btn = event.target;
     let contratoEl = findClosestAncestorByClass(btn, "item-contrato");
@@ -52,8 +50,7 @@ async function recusarContrato(event) {
     contratoEl.remove();
 
     let idContrato = contratoEl.dataset.contratoid;
-    //NOTE: Recusar - novo id 5
-    let idStatus = 4;
+    let idStatus = 5;
     let data = await updateStatusContrato(idContrato, idStatus);
 
     if (data.dados) {
@@ -80,8 +77,7 @@ async function solicitarFimContrato(event) {
     contratoEl.remove();
 
     let idContrato = contratoEl.dataset.contratoid;
-    //NOTE: Solicitacao fim - novo id 3
-    let idStatus = 4;
+    let idStatus = 3;
     let data = await updateStatusContrato(idContrato, idStatus);
 
     if (data.dados) {
@@ -108,8 +104,7 @@ async function aceitarFimContrato(event) {
     contratoEl.remove();
 
     let idContrato = contratoEl.dataset.contratoid;
-    //NOTE: Aceitar fim - novo id 4
-    let idStatus = 5;
+    let idStatus = 4;
     let data = await updateStatusContrato(idContrato, idStatus);
 
     if (data.dados) {
