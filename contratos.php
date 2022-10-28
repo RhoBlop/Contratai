@@ -21,29 +21,21 @@
 
                 <?php include("components/sidebar.php") ?>
 
-                <div class="col-10 px-3 d-flex flex-column" id="settingsContent">
+                <div class="col-10 px-4 d-flex flex-column" id="settingsContent">
                     <!-- TODO Colocar a descrição dos contratos nos accordions e ajeitar as boxes de datas -->
                     <div class="mb-4">
                         <h2>Meus contratos</h2>
                         <h6 class="text-muted">Aceite solicitações de contratos, visualize os que estão em andamento e finalize-os</h6>
                     </div>
 
+
                     <!-- REVIEW Ajeitar a borda que ta muito zuada -->
                     <div class="nav nav-justified filter-tablist rounded-3 mb-3" id="tablist" role="tablist">
                         <a class="nav-link" id="contratante-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratante-pane" role="tab">Contratei</a>
                         <a class="nav-link" id="contratado-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratado-pane" role="tab">Contratado</a>
-                        <a class="nav-link active" id="calendario-tab" data-bs-toggle="tab" type="button" data-bs-target="#calendario-pane" role="tab">Calendário</a>
-                    </div>
-                    <div class="col-7">
-                        
                     </div>
                     <div class="tab-content">
 
-                        <!-- SECTION - Calendário -->
-                        <div class="tab-pane fade show active" id="calendario-pane" role="tabpanel">
-                            <div id="calendar"></div>
-                        </div>
-                        <!-- !SECTION - Calendário -->
 
                         <!-- SECTION - Contratante -->
                         <?php
@@ -54,7 +46,7 @@
                         $finalizadosEnviados = $usuarioClass->selectContratosContratante($idUser, 3);
                         ?>
 
-                        <div class="accordion accordion-flush tab-pane fade show" id="contratante-pane" role="tabpanel">
+                        <div class="accordion accordion-flush tab-pane fade show active" id="contratante-pane" role="tabpanel">
 
                             <!-- SECTION - Solicitações -->
                             <div class="accordion-item">
@@ -83,8 +75,8 @@
                                                         <div class="text">
                                                             <h8>Você enviou uma solicitação para <b><?php echo $contrt["nomeuser"] ?></b>!</h8>
                                                             <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                            <p class="text-muted">Dias agendados:</p>
-                                                            <div class="contract-dates my-1">
+                                                            <p>Dias agendados:</p>
+                                                            <div class="contract-dates my-2">
                                                                 <?php
                                                                 foreach ($contrt["diascontrato"] as $diacontrato) {
                                                                     echo '<div class="date-chip">';
@@ -93,11 +85,12 @@
                                                                 }
                                                                 ?>
                                                             </div>
-                                                            <p class="text-muted">Aguarde o usuário aceitar ou rejeitar seu pedido</p>
+                                                            <p>Aguarde o usuário aceitar ou rejeitar seu pedido</p>
                                                         </div>
                                                     </div>
-
-                                                    <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
+                                                    <div class="time text-end">
+                                                        <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
+                                                    </div>
                                                 </div>
 
                                         <?php
@@ -362,6 +355,10 @@
                             <!-- !SECTION - Finalizados -->
                         </div>
                         <!-- !SECTION - Profissional -->
+                        <!-- SECTION - Calendário -->
+                        <div id="calendar" class="my-4"></div>
+                        <!-- !SECTION - Calendário -->
+
                     </div>
                 </div>
             </div>
