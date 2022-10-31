@@ -61,11 +61,20 @@
 
                   <ul class="dropdown-menu dropdown-menu-end text-small shadow">
                     <?php
-                        foreach ($notificacoes as $notific):
-                            //TODO - Adicionar items de notificação do dropdown
-                        endforeach;
+                        if ($numNotific < 1) {
+                            echo <<<HTML
+                            <li class="dropdown-item">
+                                Nenhuma notificação nova!
+                            </li>
+                            HTML;
+                        } else {
+                            foreach ($notificacoes as $notific):
+                                //TODO - Adicionar items de notificação do dropdown
+                            endforeach;
+                        }
                     ?>
 
+                    <li><hr class="dropdown-divider"></li>
                     <div class="text-center px-2">
                         <a class="dropdown-item" href="notificacoes.php">Veja mais</a>
                     </div>

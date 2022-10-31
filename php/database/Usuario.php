@@ -298,7 +298,7 @@ class Usuario extends Database
                     FROM usuario AS usr
                     INNER JOIN notificacaocontrato as notific ON (usr.iduser = notific.iddestinatario)
                     INNER JOIN contrato as contrt ON (notific.idcontrato = contrt.idcontrato)
-                    WHERE (notific.iddestinatario = :id) AND (isavaliado = FALSE);
+                    WHERE (notific.iddestinatario = :id) AND (isvisualizado = FALSE);
                 SQL;
 
             $stmt = Database::prepare($sql);
@@ -317,31 +317,47 @@ class Usuario extends Database
     }
 
     public function selectCalendario($idUser) {
+        $conn = Database::getInstance();
+
         try {
-            $sql = <<<SQL
-                    SELECT contrt.idContrato, descrContrato, descrStatus, corCalendario, json_agg(diaContrato) AS diascontrato
+            $conn->beginTransaction();
+
+            $sqlContratado = <<<SQL
+                    SELECT contrt.idContrato, usr.nomeuser, descrContrato, descrEspec, descrStatus, corCalendario, diacontrato
                     FROM contrato AS contrt
                     INNER JOIN diacontrato as dias ON (contrt.idcontrato = dias.idcontrato)
                     INNER JOIN statusContrato as stat ON (contrt.idStatus = stat.idStatus)
-                    WHERE (contrt.idcontratante = :id) OR (contrt.idcontratado = :id)
-                    GROUP BY contrt.idContrato, descrContrato, corCalendario, descrStatus
+                    INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
+                    INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.iduser)
+                    WHERE (contrt.idcontratado = :id)
                 SQL;
 
-            $stmt = Database::prepare($sql);
+            $stmt = $conn->prepare($sqlContratado);
             $stmt->execute([
                 ":id" => $idUser
             ]);
 
-            $result = $stmt->fetchAll();
+            $contratado = $stmt->fetchAll();
 
-            // converte json_agg() [String] para array associativa
-            for ($i = 0; $i < count($result); $i++) {
-                $result[$i]["diascontrato"] = json_decode($result[$i]["diascontrato"]);
-                
-                
-            }
+            $sqlContratante = <<<SQL
+                SELECT contrt.idContrato, usr.nomeuser, descrContrato, descrEspec, descrStatus, corCalendario, diacontrato
+                FROM contrato AS contrt
+                INNER JOIN diacontrato as dias ON (contrt.idcontrato = dias.idcontrato)
+                INNER JOIN statusContrato as stat ON (contrt.idStatus = stat.idStatus)
+                INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
+                INNER JOIN usuario AS usr ON (contrt.idcontratado = usr.iduser)
+                WHERE (contrt.idcontratante = :id)
+            SQL;
 
-            return $result;
+            $stmt = $conn->prepare($sqlContratante);
+            $stmt->execute([
+                ":id" => $idUser
+            ]);
+
+            $contratante = $stmt->fetchAll();
+
+            $conn->commit();
+            return [$contratado, $contratante];
         } catch (PDOException $e) {
             echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
             exit();

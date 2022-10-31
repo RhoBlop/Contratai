@@ -799,14 +799,32 @@
         if (_.options.sidebarToggler) {
             _.$elements.sidebarToggler
                 .off("click.evocalendar")
-                .on("click.evocalendar", _.toggleSidebar);
+                .on("click.evocalendar", function(event) {
+                    if (_.$UI.hasSidebar) {
+                        _.toggleSidebar(false);
+                    } else if (_.$UI.hasEvent && !_.$UI.hasSidebar) {
+                        _.toggleSidebar(true);
+                        _.toggleEventList(false);
+                    } else {
+                        _.toggleSidebar(true);
+                    }
+                });
         }
 
         // IF eventListToggler: set event listener: toggleEventList
         if (_.options.eventListToggler) {
             _.$elements.eventListToggler
                 .off("click.evocalendar")
-                .on("click.evocalendar", _.toggleEventList);
+                .on("click.evocalendar", function(event) {
+                    if (_.$UI.hasEvent) {
+                        _.toggleEventList(false);
+                    } else if (_.$UI.hasSidebar && !_.$UI.hasEvent) {
+                        _.toggleEventList(true);
+                        _.toggleSidebar(false);
+                    } else {
+                        _.toggleEventList(true);
+                    }
+                });
         }
 
         // set event listener for each month
@@ -1102,7 +1120,7 @@
         }
         markup +=
             '></div></div><div class="event-info"><p class="event-title">' +
-            _.limitTitle(event_data.name);
+            event_data.name;
         if (event_data.badge) markup += "<span>" + event_data.badge + "</span>";
         markup += "</p>";
         if (event_data.description)

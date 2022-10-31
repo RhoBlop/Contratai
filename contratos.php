@@ -432,34 +432,53 @@
     <?php
         $eventos = json_encode($usuarioClass->selectCalendario($idUser));
     ?>
-    
-    
-    let json = JSON.parse('<?php echo $eventos; ?>');
-    console.log(eventos);
-
-    let eventos = {
-
-    };
 
     // Initialize evo-calendar in your script file or an inline <script> tag
-    // $(document).ready(function() {
-    //     $('#calendar').evoCalendar({
-    //         'language': 'pt',
-    //         'todayHighlight': true,
-    //         'sidebarDisplayDefault': false
-    //         'calendarEvents': [
-    //             {
-    //                 id: idContrato,
-    //                 type: descrStatus,
-    //                 description: descrContrato,
-    //                 date: diaContrato,
-    //                 color: corCalendario
-    //             }
-    //         ]
-    //     })
-    // })
+    $(document).ready(function() {
+        // a coisa mais triste de toda a minha vida
+        let [ contratado, contratante ] = JSON.parse('<?php echo $eventos; ?>');
+        let calendarEvents = [];
 
-    
+        // adicionando eventos de contratado
+        for (let contrato of contratado) {
+            let { idcontrato, nomeuser, descrespec, descrstatus, descrcontrato, diacontrato, corcalendario } = contrato;
+
+            let evento = {  
+                "id": idcontrato,
+                "name": "Contratado",
+                "type": descrstatus,
+                "description": `${nomeuser}<br>Serviço: ${capitalizeFirstLetter(descrespec)}`,
+                "date": diacontrato,
+                "color": corcalendario,
+            }
+
+            calendarEvents.push(evento);
+        }
+
+        // adicionando eventos de contratante
+        for (let contrato of contratante) {
+            let { idcontrato, nomeuser, descrespec, descrstatus, descrcontrato, diacontrato, corcalendario } = contrato;
+
+            let evento = {  
+                "id": idcontrato,
+                "name": "Contratante",
+                "type": descrstatus,
+                "description": `${nomeuser}<br>Contrato: ${descrcontrato}<br>Serviço: ${capitalizeFirstLetter(descrespec)}`,
+                "date": diacontrato,
+                "color": corcalendario,
+            }
+
+            calendarEvents.push(evento);
+        }
+
+        $('#calendar').evoCalendar({
+            'language': 'pt',
+            'format': "yyyy/mm/dd",
+            'todayHighlight': true,
+            'sidebarDisplayDefault': false,
+            'calendarEvents': calendarEvents
+        })
+    })
 </script>
 
 </html>
