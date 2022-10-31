@@ -6,9 +6,9 @@
     <body>
         <?php 
             if ($auth) {
-                include("components/auth-header.php");
+                include("components/header-auth.php");
             } else {
-                include("components/no-auth-header.php");
+                include("components/header-no-auth.php");
             }
         ?>
 

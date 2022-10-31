@@ -8,7 +8,7 @@
         <div class="carousel-inner">
         <?php 
             $profissaoClass = new Profissao();
-            $profsAv = $profissaoClass->selectMaiorAvaliacao($limit = 10);
+            $profsAv = $profissaoClass->selectMaiorAvaliacao($limit = 6);
             
             foreach ($profsAv as $prof): 
                 [$idprof, $descrprof, $numAv, $mediaAv] = [$prof["idprof"], $prof["descrprof"], $prof["numavaliacao"], $prof["mediaavaliacao"]];

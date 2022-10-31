@@ -8,7 +8,7 @@
         <div class="carousel-inner">
         <?php 
             $profissaoClass = new Profissao();
-            $profsAv = $profissaoClass->selectMaisCadastros($limit = 10);
+            $profsAv = $profissaoClass->selectMaisCadastros($limit = 6);
             
             foreach ($profsAv as $prof): 
                 [$idprof, $descrprof, $numuser, $mediaAv] = [$prof["idprof"], $prof["descrprof"], $prof["numuser"], $prof["mediaavaliacao"]];

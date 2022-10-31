@@ -1,4 +1,5 @@
 <?php 
+date_default_timezone_set('America/Sao_Paulo');
 
 // classe que controla a conexão com o banco de dados
 class Database {

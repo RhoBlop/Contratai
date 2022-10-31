@@ -1,17 +1,22 @@
 var idDivFeedback = "#feedbackUsuario";
 
 function loading() {
-    let feedbackDiv = document.querySelector(idDivFeedback);
+    const feedbackDiv = document.querySelector(idDivFeedback);
     feedbackDiv.style.display = "block";
     feedbackDiv.style.backgroundColor = "#026773";
     feedbackDiv.innerText = "Aguarde um instante...";
 }
 
 function formErro(textErro) {
-    let feedbackDiv = document.querySelector(idDivFeedback);
+    const feedbackDiv = document.querySelector(idDivFeedback);
     feedbackDiv.style.display = "block";
     feedbackDiv.style.backgroundColor = "#cf1c0e";
     feedbackDiv.innerText = textErro;
+}
+
+function hideFeedback() {
+    const feedbackDiv = document.querySelector(idDivFeedback);
+    feedbackDiv.style.display = "none";
 }
 
 // função de formulário responsável por criar um novo usuário
@@ -186,9 +191,10 @@ async function deleteUser() {
 
 async function sendSolicitacaoContrato(event) {
     event.preventDefault();
+    const form = event.target;
 
     // transforma os dados do formulário para o formato x-www-form-urlencoded
-    let formData = new URLSearchParams(new FormData(event.target)).toString();
+    let formData = new URLSearchParams(new FormData(form)).toString();
 
     loading();
     timeout = timeoutConnection();
@@ -214,16 +220,22 @@ async function sendSolicitacaoContrato(event) {
             "Solicitação de contratatação enviada com sucesso",
             "success-notify"
         );
-        // TODO: fechar modal de contratação
+
+        const modalContrato = findClosestAncestorByClass(form, "modal");
+        const bsModal = bootstrap.Modal.getInstance(modalContrato);
+        bsModal.hide();
+
+        hideFeedback();
     }
     clearTimeout(timeout);
 }
 
 async function sendAvaliacao(event) {
     event.preventDefault();
+    const form = event.target;
 
     // transforma os dados do formulário para o formato x-www-form-urlencoded
-    let formData = new URLSearchParams(new FormData(event.target)).toString();
+    let formData = new URLSearchParams(new FormData(form)).toString();
 
     loading();
     timeout = timeoutConnection();
@@ -249,7 +261,9 @@ async function sendAvaliacao(event) {
             "O contrato foi avaliado com sucesso e adicionado no perfil público do usuário",
             "success-notify"
         );
-        //TODO - deletar modal da avaliação e alterar card
+
+        const modalAvalia = findClosestAncestorByClass(form, "modal");
+        modalAvalia.remove();
     }
     clearTimeout(timeout);
 }

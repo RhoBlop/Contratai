@@ -1778,6 +1778,24 @@ p {
     }
 }
 
+/* Badge com contagem para notificações/chat */
+.notify-badge:after{
+    content: attr(data-count);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background: var(--danger-color);
+    height: .9rem;
+    width: .9rem;
+    bottom: -.2rem;
+    right: -.5rem;
+    font-size: .5rem;
+    border-radius: 50%;
+    color:white;
+    border: 1px solid var(--danger-color);
+}
+
 
 /* CRUD / ADMIN */
 

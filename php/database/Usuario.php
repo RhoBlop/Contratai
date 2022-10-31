@@ -184,26 +184,25 @@ class Usuario extends Database
         }
     }
 
-    public function selectContratosProfissional($idcontratante, $idstatus)
+    public function selectContratosProfissional($idcontratante)
     {
         try {
             $sql = <<<SQL
-                  SELECT contrt.idcontrato, idcontratante, json_agg(diacontrato) AS diascontrato, timecriacaocontrato, timefinalizacaocontrato, descrespec, usr.iduser, nomeuser, imguser
+                  SELECT contrt.idcontrato, idcontratante, json_agg(diacontrato) AS diascontrato, statcontrt.idstatus, timecriacaocontrato, timefinalizacaocontrato, descrespec, usr.iduser, nomeuser, imguser
                   FROM contrato AS contrt
                   INNER JOIN diacontrato AS diacontrt ON (contrt.idcontrato = diacontrt.idcontrato)
                   INNER JOIN statuscontrato AS statcontrt ON (contrt.idStatus = statcontrt.idStatus)
                   INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
                   INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.iduser)
-                  WHERE (contrt.idcontratado = :idcontratante) AND (contrt.idstatus = :idstatus)
-                  GROUP BY contrt.idcontrato, descrespec, nomeuser, imguser, usr.iduser
+                  WHERE (contrt.idcontratado = :idcontratante)
+                  GROUP BY contrt.idcontrato, statcontrt.idstatus, descrespec, nomeuser, imguser, usr.iduser
               SQL;
 
 
 
             $stmt = Database::prepare($sql);
             $stmt->execute([
-                ":idcontratante" => $idcontratante,
-                ":idstatus" => $idstatus
+                ":idcontratante" => $idcontratante
             ]);
 
             $result = $stmt->fetchAll();
@@ -211,6 +210,11 @@ class Usuario extends Database
             // converte json_agg() [String] para array associativa
             for ($i = 0; $i < count($result); $i++) {
                 $result[$i]["diascontrato"] = json_decode($result[$i]["diascontrato"]);
+            }
+            
+            // ordena as datas do contrato
+            for ($i = 0; $i < count($result); $i++) {
+                sort($result[$i]["diascontrato"]);
             }
 
             return $result;
@@ -222,24 +226,23 @@ class Usuario extends Database
         }
     }
 
-    public function selectContratosContratante($idcontratante, $idstatus)
+    public function selectContratosContratante($idcontratante)
     {
         try {
             $sql = <<<SQL
-                    SELECT contrt.idcontrato, idcontratado, json_agg(diacontrato) AS diascontrato, timecriacaocontrato, timefinalizacaocontrato, descrespec, usr.iduser, nomeuser, imguser
+                    SELECT contrt.idcontrato, idcontratado, json_agg(diacontrato) AS diascontrato, statcontrt.idstatus, timecriacaocontrato, timefinalizacaocontrato, descrespec, usr.iduser, nomeuser, imguser
                     FROM contrato AS contrt
                     INNER JOIN diacontrato AS diacontrt ON (contrt.idcontrato = diacontrt.idcontrato)
                     INNER JOIN statuscontrato AS statcontrt ON (contrt.idStatus = statcontrt.idStatus)
                     INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
                     INNER JOIN usuario AS usr ON (contrt.idcontratado = usr.iduser)
-                    WHERE (contrt.idcontratante = :idcontratante) AND (contrt.idstatus = :idstatus)
-                    GROUP BY contrt.idcontrato, descrespec, nomeuser, imguser, usr.iduser
+                    WHERE (contrt.idcontratante = :idcontratante)
+                    GROUP BY contrt.idcontrato, statcontrt.idstatus, descrespec, nomeuser, imguser, usr.iduser
                 SQL;
 
             $stmt = Database::prepare($sql);
             $stmt->execute([
-                ":idcontratante" => $idcontratante,
-                ":idstatus" => $idstatus
+                ":idcontratante" => $idcontratante
             ]);
 
             $result = $stmt->fetchAll();
@@ -249,6 +252,57 @@ class Usuario extends Database
                 $result[$i]["diascontrato"] = json_decode($result[$i]["diascontrato"]);
             }
 
+            // ordena as datas do contrato
+            for ($i = 0; $i < count($result); $i++) {
+                sort($result[$i]["diascontrato"]);
+            }
+
+            return $result;
+        } catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+    }
+
+    public function selectNotificacoesDropdown($idUser) {
+        try {
+            $sql = <<<SQL
+                    SELECT *
+                    FROM usuario AS usr
+                    INNER JOIN notificacaocontrato as notific ON (usr.iduser = notific.iddestinatario)
+                    INNER JOIN contrato as contrt ON (notific.idcontrato = contrt.idcontrato)
+                    WHERE (notific.iddestinatario = :id) AND (isavaliado = FALSE);
+                SQL;
+
+            $stmt = Database::prepare($sql);
+            $stmt->execute([
+                ":id" => $idUser
+            ]);
+
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+    }
+
+    public function selectCalendario($idUser) {
+        try {
+            $sql = <<<SQL
+
+                SQL;
+
+            $stmt = Database::prepare($sql);
+            $stmt->execute([
+                ":id" => $idUser
+            ]);
+
+            $result = $stmt->fetchAll();
             return $result;
         } catch (PDOException $e) {
             echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);

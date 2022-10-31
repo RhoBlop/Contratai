@@ -117,7 +117,7 @@ async function fetchAddEspec(profId, descrProf, especId, descrEspec) {
                 "Sua profissão foi adicionada com sucesso",
                 "success-notify"
             );
-            window.location.reload();
+            //TODO: Fechar modal da profissão
         }
     } catch (error) {
         console.error(error);
