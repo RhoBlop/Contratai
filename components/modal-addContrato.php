@@ -43,7 +43,7 @@
                 
                 <!-- DESCRIÇÃO -->
                 <div class="form-group mb-3">
-                    <label for="bio" class="form-label">Descrição</label>
+                    <label for="descricao" class="form-label">Descrição</label>
                     <textarea class="form-control" id="descricao" name="descricao" rows="4" style="white-space: pre-wrap;"></textarea>
                 </div>
 

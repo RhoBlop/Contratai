@@ -4,7 +4,7 @@
         <?php require("components/head.php") ?>
     </head>
     <body>
-        <?php include ("components/auth-header.php") ?>
+        <?php include ("components/header-auth.php") ?>
         <main>
             <div class="container my-3">
                 <div class="row py-3 d-flex justify-content-center align-items-center mb-3">

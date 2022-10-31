@@ -12,6 +12,8 @@
 
     $usuarioClass = new Usuario();
     $user = $usuarioClass->selectBasicInfoById($_SESSION["iduser"]);
+
+    $notificacoes = $usuarioClass->selectNotificacoesDropdown($_SESSION["iduser"]);
 ?>
 <header>
     <nav class="navbar navbar-expand-md fixed-top bg-light">
@@ -42,9 +44,34 @@
                 <li class="nav-item">
                   <a class="nav-link" href="contratos.php"><i class="fa-solid fa-address-book"></i></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="notificacoes.php"><i class="fa-regular fa-bell"></i></a>
+
+                <!-- NOTIFICAÇÕES DROPDOWN -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link" data-bs-toggle="dropdown">
+                    <?php
+                        $numNotific = count($notificacoes);
+
+                        if ($numNotific > 0) {
+                            echo "<i class='fa-regular fa-bell notify-badge' data-count={$numNotific}></i>";
+                        } else {
+                            echo "<i class='fa-regular fa-bell'></i>";
+                        }
+                    ?>  
+                  </a>
+
+                  <ul class="dropdown-menu dropdown-menu-end text-small shadow">
+                    <?php
+                        foreach ($notificacoes as $notific):
+                            //TODO - Adicionar items de notificação do dropdown
+                        endforeach;
+                    ?>
+
+                    <div class="text-center px-2">
+                        <a class="dropdown-item" href="notificacoes.php">Veja mais</a>
+                    </div>
+                  </ul>
                 </li>
+
                 <li class="nav-item">
                   <a class="nav-link" href="#"><i class="fa-regular fa-comments"></i></a>
                 </li>
@@ -59,13 +86,17 @@
                     endif;
                 ?>
 
+                <!-- USER DROPDOWN -->
                 <li class="nav-item dropdown p-2">
                   <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
                     <!-- define uma imagem padrão caso o usuário não tenha nenhuma -->
                     <img id="headerImgPerfil" src="<?php echoProfileImage($user["imguser"]) ?>" alt="Imagem de perfil">
                   </a>
+
                   <ul class="dropdown-menu dropdown-menu-end text-small shadow">
-                    <div class="text-center px-2">Olá, <?php echo $user["nomeuser"] ?></div>
+                    <div class="text-center px-2">
+                        Olá, <?php echo $user["nomeuser"] ?>
+                    </div>
                     
                     <li><hr class="dropdown-divider"></li>
 

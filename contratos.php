@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <?php include("components/auth-header.php") ?>
+    <?php include("components/header-auth.php") ?>
 
     <main>
         <div class="container p-3 my-3">
@@ -31,7 +31,7 @@
 
                     <!-- REVIEW Ajeitar a borda que ta muito zuada -->
                     <div class="nav nav-justified filter-tablist rounded-3 mb-3" id="tablist" role="tablist">
-                        <a class="nav-link" id="contratante-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratante-pane" role="tab">Contratei</a>
+                        <a class="nav-link active" id="contratante-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratante-pane" role="tab">Contratei</a>
                         <a class="nav-link" id="contratado-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratado-pane" role="tab">Contratado</a>
                     </div>
                     <div class="tab-content">
@@ -41,9 +41,27 @@
                         <?php
                         $idUser = $_SESSION["iduser"];
 
-                        $solicitacoesEnviadas = $usuarioClass->selectContratosContratante($idUser, 1);
-                        $emAndamentoEnviados = $usuarioClass->selectContratosContratante($idUser, 2);
-                        $finalizadosEnviados = $usuarioClass->selectContratosContratante($idUser, 3);
+                        $contratosSolicitados = $usuarioClass->selectContratosContratante($idUser);
+
+                        $solicitacoesEnviadas = [];
+                        $emAndamentoEnviados = [];
+                        $finalizadosEnviados = [];
+
+                        foreach ($contratosSolicitados as $contrt) {
+                            switch ($contrt["idstatus"]) {
+                                case 1:
+                                    $solicitacoesEnviadas[] = $contrt;
+                                    break;
+                                case 2:
+                                case 3:
+                                case 5:
+                                    $emAndamentoEnviados[] = $contrt;
+                                    break;
+                                case 4:
+                                    $finalizadosEnviados[] = $contrt;
+                            }
+                        }
+
                         ?>
 
                         <div class="accordion accordion-flush tab-pane fade show active" id="contratante-pane" role="tabpanel">
@@ -60,11 +78,11 @@
                                         <?php
                                         if (empty($solicitacoesEnviadas)) :
                                             echo <<<ERROR
-                                            <div class="empty-accordion d-flex justify-content-center">Nenhuma solicitação de contratação pendente.</div>
+                                            <div class="empty-accordion accordion-body d-flex justify-content-center">Nenhuma solicitação de contratação pendente.</div>
                                         ERROR;
                                         else :
                                             foreach ($solicitacoesEnviadas as $contrt) :
-                                        ?>
+                                        ?> 
 
                                                 <div class="item-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid="<?php echo $contrt["idcontrato"]; ?>">
                                                     <div class="d-flex gap-3">
@@ -114,7 +132,7 @@
                                         <?php
                                         if (empty($emAndamentoEnviados)) :
                                             echo <<<ERROR
-                                                <div class="empty-accordion d-flex justify-content-center">Nenhum contrato por aqui.</div>
+                                                <div class="empty-accordion accordion-body d-flex justify-content-center">Nenhum contrato por aqui.</div>
                                             ERROR;
                                         else :
                                             foreach ($emAndamentoEnviados as $contrt) :
@@ -181,8 +199,8 @@
                                         <?php
                                         if (empty($finalizadosEnviados)) :
                                             echo <<<ERROR
-                                                <div class="empty-accordion d-flex justify-content-center">Nenhum contrato por aqui.</div>
-                                            ERROR;
+                                                <div class="empty-accordion accordion-body d-flex justify-content-center">Nenhum contrato por aqui.</div>
+                                            ERROR; 
                                         else :
                                             foreach ($finalizadosEnviados as $contrt) :
                                         ?>
@@ -197,12 +215,31 @@
                                                         <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
                                                         <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
 
-                                                        <div class="accordion-buttons my-2 d-flex gap-2"></div>
+                                                        <div class="accordion-buttons my-2 d-flex gap-2">
+                                                            <?php
+                                                                if (!$contrt["isavaliado"]):
+                                                            ?>
+
+                                                                <a type="button" class="btn btn-login px-2" data-bs-toggle="modal" data-bs-target="<?php echo "avaliacao{$contrt['idcontrato']}"; ?>">Avaliar</a>
+
+                                                            <?php
+                                                                else:
+                                                            ?>
+
+                                                                <p class="text-muted">Esse contrato já foi avaliado</p>
+
+                                                            <?php endif; ?>
+                                                        </div>
                                                    
                                                     </div>
 
-                                                    <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
+                                                    
                                                 </div>
+
+                                                <!-- MODAL DE AVALIAÇÃO -->
+                                                <?php
+                                                    include("components/modal-avaliacao.php");
+                                                ?>
 
                                         <?php
                                             endforeach;
@@ -217,9 +254,27 @@
 
                         <!-- SECTION - Profissional -->
                         <?php
-                        $solicitacoesRecebidas = $usuarioClass->selectContratosProfissional($idUser, 1);
-                        $emAndamentoRecebidos = $usuarioClass->selectContratosProfissional($idUser, 2);
-                        $finalizadosRecebidos = $usuarioClass->selectContratosProfissional($idUser, 3);
+
+                        $contratosRecebidos = $usuarioClass->selectContratosProfissional($idUser);
+
+                        $solicitacoesRecebidas = [];
+                        $emAndamentoRecebidos = [];
+                        $finalizadosRecebidos = [];
+
+                        foreach ($contratosRecebidos as $contrt) {
+                            switch ($contrt["idstatus"]) {
+                                case 1:
+                                    $solicitacoesRecebidas[] = $contrt;
+                                    break;
+                                case 2:
+                                case 3:
+                                case 5:
+                                    $emAndamentoRecebidos[] = $contrt;
+                                    break;
+                                case 4:
+                                    $finalizadosRecebidos[] = $contrt;
+                            }
+                        }
                         ?>
 
                         <div class="accordion accordion-flush tab-pane fade" id="contratado-pane" role="tabpanel">
@@ -235,7 +290,7 @@
                                     <?php
                                     if (empty($solicitacoesRecebidas)) :
                                         echo <<<ERROR
-                                            <div class="empty-accordion d-flex justify-content-center">Nenhuma solicitação de contratação pendente.</div>
+                                            <div class="empty-accordion accordion-body d-flex justify-content-center">Nenhuma solicitação de contratação pendente.</div>
                                         ERROR;
                                     else :
                                         foreach ($solicitacoesRecebidas as $contrt) :
@@ -256,8 +311,6 @@
                                                         <button class="btn btn-outline-dark" onclick="recusarContrato(event)">Recusar</button>
                                                     </div>
                                                 </div>
-
-                                                <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
                                             </div>
 
                                     <?php
@@ -280,7 +333,7 @@
                                         <?php
                                         if (empty($emAndamentoRecebidos)) :
                                             echo <<<ERROR
-                                            <div class="empty-accordion d-flex justify-content-center">Nenhum contrato por aqui.</div>
+                                            <div class="empty-accordion accordion-body d-flex justify-content-center">Nenhum contrato por aqui.</div>
                                         ERROR;
                                         else :
                                             foreach ($emAndamentoRecebidos as $contrt) :
@@ -300,8 +353,6 @@
                                                             <button onclick="solicitarFimContrato(event)" class="btn btn-green">O contrato foi realizado!</button>
                                                         </div>
                                                     </div>
-
-                                                    <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
                                                 </div>
 
                                         <?php
@@ -325,7 +376,7 @@
                                         <?php
                                         if (empty($finalizadosRecebidos)) :
                                             echo <<<ERROR
-                                            <div class="empty-accordion d-flex justify-content-center">Nenhum contrato por aqui.</div>
+                                            <div class="empty-accordion accordion-body d-flex justify-content-center">Nenhum contrato por aqui.</div>
                                         ERROR;
                                         else :
                                             foreach ($finalizadosRecebidos as $contrt) :
@@ -341,8 +392,6 @@
                                                         <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
                                                         <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
                                                     </div>
-
-                                                    <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
                                                 </div>
 
                                         <?php

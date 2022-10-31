@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <?php include("components/auth-header.php") ?>
+    <?php include("components/header-auth.php") ?>
 
     <main>
         <div class="container p-3 my-3 mb-5">

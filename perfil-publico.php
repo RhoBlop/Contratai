@@ -50,7 +50,7 @@
     [$perfnomeuser, $perfBiografiauser, $perfNumContrato, $perfMediaAval, $perfImguser] = [$perfPublico["nomeuser"], $perfPublico["biografiauser"], $perfPublico['numcontrato'], $perfPublico["mediaavaliacao"], $perfPublico["imguser"]];
     ?>
 
-    <?php include("components/auth-header.php") ?>
+    <?php include("components/header-auth.php") ?>
 
     <?php include("components/modal-addContrato.php") ?>
 

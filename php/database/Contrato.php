@@ -1,6 +1,6 @@
 <?php
 require_once "Database.php";
-require_once "Notificacao.php";
+
 
 class Contrato extends Database
 {
@@ -27,6 +27,7 @@ class Contrato extends Database
 
             $idContrato = $stmt->fetch()["idcontrato"];
 
+            // DIAS CONTRATOS
             $diasContratoSQL = <<<SQL
                     INSERT INTO diacontrato(idcontrato, diacontrato) VALUES
                     (:idcontrato, :diacontrato)
@@ -40,12 +41,85 @@ class Contrato extends Database
                 ]);
             }
 
-            $conn->commit();
+            // NOTIFICACAO
+            //TODO - inserir os dados no texto diretamente no insert da notificação?
+            $this->insertNotificacao($idContrato, $idContratante, $idContratado, "Nova solicitação de contrato", "O usuário {1} solicitou você para um contrato de {2}");
 
+            $conn->commit();
             return ["dados" => true];
         } catch (PDOException $e) {
             $conn->rollback();
 
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+    }
+
+    public function insertNotificacao($idContrato, $idRemetente, $idDestinatario, $titleNotific, $descrNotific) {
+        try {
+            $sql = <<<SQL
+                    INSERT INTO notificacao(idContrato, idRemetente, idDestinatario, titleNotific, descrNotific, timeCriacaoNotific)
+                    VALUES (:contrato, :remetente, :destinatario, :title, :descr, :timestamp)
+                SQL;
+
+            $stmt = Database::prepare($sql);
+            $stmt->execute([
+                ":contrato" => $idContrato,
+                ":remetente" => $idRemetente,
+                ":destinatario" => $idDestinatario,
+                ":title" => $titleNotific,
+                ":descr" => $descrNotific,
+                ":timestamp" => getCurrentTimestamp()
+            ]);
+
+            return ["dados" => true];
+        } catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+    }
+
+    public function insertAvaliacao($idContrato, $idUser, $nota, $comentario) {
+        $conn = Database::getInstance();
+
+        try {
+            $conn->beginTransaction();
+            
+            // verificar se quem está tentando avaliar realmente está no contrato
+            $verifySQL = "SELECT idcontrato FROM contrato WHERE idContratante = :idUser";
+            $verifyAvaliador = $conn::prepare($verifySQL);
+            $verifyAvaliador->execute([":idUser" => $idUser]);
+
+            if ($verifyAvaliador->rowCount() > 0) {
+                $sql = <<<SQL
+                        INSERT INTO Avaliacao(idContrato, notaAvaliacao, comentarioAvaliacao)
+                        VALUES (:idcontrato, :nota, :comentario)
+                    SQL;
+    
+                $stmt = $conn::prepare($sql);
+                $stmt->execute([
+                    ":idcontrato" => $idContrato,
+                    ":nota" => $nota,
+                    ":comentario" => $comentario
+                ]);
+
+                $sql = <<<SQL
+                    UPDATE contrato
+                    SET isavaliado = TRUE
+                    WHERE idcontrato = :idcontrato
+                SQL;
+    
+                $conn->commit();
+                return ["dados" => true];
+            } else {
+                return ["dados" => false];
+            }
+
+        } catch (PDOException $e) {
             echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
             exit();
 
