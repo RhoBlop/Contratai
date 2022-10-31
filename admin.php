@@ -19,7 +19,10 @@
                     <div class="mb-4">
                         <h2>Administração do sistema</h2>
                     </div>
+                        <?php 
+                        $users = $usuarioClass->selectAllUsers();
 
+                        ?>
                         
                         <div class="crud">
                             <div class="table-title">
@@ -30,7 +33,6 @@
                                     <div class="col">
                                         <div class="crud-buttons d-flex gap-3 justify-content-end">
                                             <a href="#add" class="btn btn-success">Adicionar [item]</a>
-                                            <a href="#exclude" class="btn btn-danger">Excluir [item]</a>
                                         </div>
                                     </div>
                                 </div>
@@ -38,67 +40,40 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                    <th scope="col">
-                                        <label for="#selectAll">
-                                            <input type="checkbox" id="selectAll" class="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </th>
-                                    <th scope="col">[Atributo 1]</th>
-                                    <th scope="col">[Atributo 2]</th>
-                                    <th scope="col">[Atributo 3]</th>
-                                    <th scope="col">[Atributo 4]</th>
-                                    <th scope="col">[Atributo 5]</th>
-                                    <th scope="col">[Atributo 6]</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">CPF</th>
+                                    <th scope="col">Telefone</th>
+                                    <th scope="col">Admin?</th>
                                     <th scope="col">Ação</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1 <!-- Checkbox (?)--></th>
-                                        <td>[info 1]</td>
-                                        <td>[info 2]</td>
-                                        <td>[info 3]</td>
-                                        <td>[info 4]</td>
-                                        <td>[info 5]</td>
-                                        <td>[info 6]</td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <a href="#edit" id="editButton"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="#exlude" id="excludeButton"><i class="fa-solid fa-trash"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2  <!-- Checkbox (?)--></th>
-                                        <td>[info 1]</td>
-                                        <td>[info 2]</td>
-                                        <td>[info 3]</td>
-                                        <td>[info 4]</td>
-                                        <td>[info 5]</td>
-                                        <td>[info 6]</td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <a href="#edit" id="editButton"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="#exlude" id="excludeButton"><i class="fa-solid fa-trash"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                    <th scope="row">3  <!-- Checkbox (?)--></th>
-                                    <td>[info 1]</td>
-                                    <td>[info 2]</td>
-                                    <td>[info 3]</td>
-                                    <td>[info 4]</td>
-                                    <td>[info 5]</td>
-                                    <td>[info 6]</td>
-                                    <td>
-                                        <div class="action-buttons">
-                                            <a href="#edit" id="editButton"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <a href="#exlude" id="excludeButton"><i class="fa-solid fa-trash"></i></a>
-                                        </div>
-                                    </td>
-                                    </tr>
+                                    <?php 
+
+                                        foreach($users as $user) {
+                                            $admin = ($user["isadminuser"] == true) ? "Sim" : "Não";
+
+                                            echo <<<HTML
+                                                <tr>
+                                                    <th scope="row">{$user["iduser"]}</th>
+                                                    <td>{$user["nomeuser"]}</td>
+                                                    <td>{$user["emailuser"]}</td>
+                                                    <td>{$user["cpfuser"]}</td>
+                                                    <td>{$user["telefoneuser"]}</td>
+                                                    <td>$admin</td>
+                                                    <td>
+                                                        <div class="action-buttons">
+                                                            <a href="#info" id="infoButton"><i class="fa-solid fa-circle-info"></i></a>
+                                                            <a href="#exlude" id="excludeButton"><i class="fa-solid fa-trash"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            HTML; 
+
+                                        }
+                                    ?>
                                 </tbody>
                                 </table>
                         </div>

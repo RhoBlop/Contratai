@@ -1813,6 +1813,10 @@ p {
     margin: 0;
 }
 
+.crud tbody {
+    font-size: 15px;
+}
+
 .crud .table-title .crud-buttons a{
     font-size: 13px;
     font-weight: 500
@@ -1851,16 +1855,13 @@ p {
 
 .crud .table .action-buttons{
     display: flex;
-    gap: 20px;
+    justify-content: space-around;
+    font-size: 16px;
 }
 
 /* REVIEW Cores dos botões */
 
-.crud .table .action-buttons #editButton{
-    color: yellow;
-}
-
 .crud .table .action-buttons #excludeButton{
-    color: red;
+    color: var(--danger-color)
 }
 

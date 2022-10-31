@@ -4,7 +4,31 @@ require_once "Database.php";
 class Usuario extends Database
 {
 
-    //SECTION - SELECTS
+    //SECTION - 
+    
+    //seleciona todos os usuários da tabela usuário
+    public function selectAllUsers() 
+    {
+        try {
+            $sql = <<<SQL
+                    SELECT * 
+                    FROM usuario
+                SQL;
+            
+            $stmt = Database::prepare($sql);
+            $stmt->execute();
+
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+
+    }
+
     // retorna usuário com o id passado por parâmetro
     public function selectBasicInfoById($userId)
     {
@@ -225,6 +249,7 @@ class Usuario extends Database
             return ["dados" => false];
         }
     }
+
 
     public function selectContratosContratante($idcontratante)
     {
