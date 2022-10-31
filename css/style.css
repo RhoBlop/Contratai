@@ -1242,14 +1242,15 @@ p {
     align-self: center;
     width: 300px;
     overflow: hidden;
-    border: 1px solid var(--bootstrap-border);
+    border: .5px solid var(--primary-green);
 }
 
 .filter-tablist a {
-    color: inherit;
+    color: var(--primary-green);
     border: none;
     padding: 10px 20px;
-    font: inherit;
+    font-weight: 500;
+    font-size: 18px;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
@@ -1282,21 +1283,12 @@ p {
 }
 
 .accordion-flush .accordion-button {
-    box-shadow: none !important;
     border-radius: 0.375rem !important;
-}
-
-.accordion-item {
-    border: none;
 }
 
 .accordion-body {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     position: relative;
-}
-
-.accordion-body:last-child {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .accordion-body p {

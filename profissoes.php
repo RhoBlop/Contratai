@@ -13,14 +13,14 @@
 
                     <?php include("components/sidebar.php")?>
 
-                    <div class="col-7 px-3" id="settingsContent">
+                    <div class="col-10 px-4" id="settingsContent">
                         <div class="mb-4">
                             <h2>Minhas profissões</h2>
                             <h6 class="text-muted">Veja e adicione suas profissões disponíveis publicamente</h6>
                         </div>
 
                         <div class="row justify-content-center">
-                            <div class="col-8 d-flex flex-column justify-content-center">
+                            <div class="col-6 d-flex flex-column justify-content-center">
                                 <?php
                                     $usuarioClass = new Usuario();
 

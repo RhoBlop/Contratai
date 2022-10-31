@@ -31,7 +31,7 @@
 
                     <!-- REVIEW Ajeitar a borda que ta muito zuada -->
                     <div class="nav nav-justified filter-tablist rounded-3 mb-3" id="tablist" role="tablist">
-                        <a class="nav-link" id="contratante-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratante-pane" role="tab">Contratei</a>
+                        <a class="nav-link active" id="contratante-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratante-pane" role="tab">Contratei</a>
                         <a class="nav-link" id="contratado-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratado-pane" role="tab">Contratado</a>
                     </div>
                     <div class="tab-content">
@@ -60,7 +60,7 @@
                                         <?php
                                         if (empty($solicitacoesRecebidas)) :
                                             echo <<<ERROR
-                                            <div class="empty-accordion d-flex justify-content-center">Nenhuma solicitação de contratação pendente.</div>
+                                            <div class="empty-accordion accordion-body"><span class="text-muted">Nenhuma solicitação de contratação pendente.</span></div>
                                         ERROR;
                                         else :
                                             foreach ($solicitacoesRecebidas as $contrt) :
@@ -114,7 +114,7 @@
                                         <?php
                                         if (empty($emAndamento)) :
                                             echo <<<ERROR
-                                                <div class="empty-accordion d-flex justify-content-center">Nenhum contrato por aqui.</div>
+                                                <div class="empty-accordion accordion-body"><span class="text-muted">Nenhum contrato por aqui.</span></div>
                                             ERROR;
                                         else :
                                             foreach ($emAndamento as $contrt) :
@@ -157,7 +157,7 @@
                                         <?php
                                         if (empty($finalizados)) :
                                             echo <<<ERROR
-                                                <div class="empty-accordion d-flex justify-content-center">Nenhum contrato por aqui.</div>
+                                                <div class="empty-accordion accordion-body"><span class="text-muted">Nenhum contrato por aqui.</span>.</div>
                                             ERROR;
                                         else :
                                             foreach ($finalizados as $contrt) :
@@ -211,7 +211,7 @@
                                     <?php
                                     if (empty($solicitacoesRecebidas)) :
                                         echo <<<ERROR
-                                            <div class="empty-accordion d-flex justify-content-center">Nenhuma solicitação de contratação pendente.</div>
+                                            <div class="empty-accordion accordion-body"><span class="text-muted">Nenhuma solicitação de contratação pendente.<span></div>
                                         ERROR;
                                     else :
                                         foreach ($solicitacoesRecebidas as $contrt) :
@@ -257,7 +257,7 @@
                                         <?php
                                         if (empty($emAndamento)) :
                                             echo <<<ERROR
-                                            <div class="empty-accordion d-flex justify-content-center">Nenhum contrato por aqui.</div>
+                                            <div class="empty-accordion accordion-body"><span class="text-muted">Nenhum contrato por aqui.</span></div>
                                         ERROR;
                                         else :
                                             foreach ($emAndamento as $contrt) :
@@ -302,7 +302,7 @@
                                         <?php
                                         if (empty($finalizados)) :
                                             echo <<<ERROR
-                                            <div class="empty-accordion d-flex justify-content-center">Nenhum contrato por aqui.</div>
+                                            <div class="empty-accordion accordion-body"><span class="text-muted">Nenhum contrato por aqui.</span></div>
                                         ERROR;
                                         else :
                                             foreach ($finalizados as $contrt) :
@@ -332,10 +332,16 @@
                             <!-- !SECTION - Finalizados -->
                         </div>
                         <!-- !SECTION - Profissional -->
-                        <!-- SECTION - Calendário -->
-                        <div id="calendar" class="my-4"></div>
-                        <!-- !SECTION - Calendário -->
 
+                        <!-- SECTION Agenda  -->
+                        <div class="agenda my-5">
+                            <h2>Agenda</h2>
+                            <h6 class="text-muted">Veja quais são seus próximos compromissos</h6>
+                            <!-- SECTION - Calendário -->
+                            <div id="calendar" class="my-4"></div>
+                            <!-- !SECTION - Calendário -->
+                        </div>
+                        <!-- !SECTION Agenda -->
                     </div>
                 </div>
             </div>

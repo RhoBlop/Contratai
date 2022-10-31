@@ -14,7 +14,12 @@
 
                     <?php include("components/sidebar.php")?>
                     <!-- REVIEW Deixar o template da tabela pronto para depois preenchê-la. -->
-                    <div class="col-10 px-3 flex-column" id="settingsContent">
+                    <div class="col-10 px-4 flex-column" id="settingsContent">
+
+                    <div class="mb-4">
+                        <h2>Administração do sistema</h2>
+                    </div>
+                        
                         <div class="crud">
                             <div class="table-title">
                                 <div class="row">
@@ -29,7 +34,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="table">
+                            <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                     <th scope="col">

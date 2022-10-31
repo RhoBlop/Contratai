@@ -13,7 +13,7 @@
             <div class="row gx-5">
                 <?php include("components/sidebar.php") ?>
 
-                <div class="col-7 px-3" id="settingsContent">
+                <div class="col-8 px-4" id="settingsContent">
                     <div class="mb-5">
                         <h2>Meu Perfil</h2>
                         <div class="div d-flex justify-content-between align-items-center">
