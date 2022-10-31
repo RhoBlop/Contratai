@@ -19,12 +19,13 @@
                     <div class="mb-4">
                         <h2>Administração do sistema</h2>
                     </div>
+
                         
                         <div class="crud">
                             <div class="table-title">
                                 <div class="row">
                                     <div class="col">
-                                        <h4>Gerenciamento de [tabela]</h4>
+                                        <h4>Gerenciamento de Usuários</h4>
                                     </div>
                                     <div class="col">
                                         <div class="crud-buttons d-flex gap-3 justify-content-end">
