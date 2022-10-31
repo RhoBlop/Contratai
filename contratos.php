@@ -421,7 +421,6 @@
 
     <!-- Add jQuery library (required) -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-    <!-- Add the evo-calendar.js for.. obviously, functionality! -->
     <script src="js/plugin/evoCalendar.js"></script>
 </body>
 
@@ -430,12 +429,37 @@
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 <script>
+    <?php
+        $eventos = json_encode($usuarioClass->selectCalendario($idUser));
+    ?>
+    
+    
+    let json = JSON.parse('<?php echo $eventos; ?>');
+    console.log(eventos);
+
+    let eventos = {
+
+    };
+
     // Initialize evo-calendar in your script file or an inline <script> tag
-    $(document).ready(function() {
-        $('#calendar').evoCalendar({
-            'language': 'pt'
-        })
-    })
+    // $(document).ready(function() {
+    //     $('#calendar').evoCalendar({
+    //         'language': 'pt',
+    //         'todayHighlight': true,
+    //         'sidebarDisplayDefault': false
+    //         'calendarEvents': [
+    //             {
+    //                 id: idContrato,
+    //                 type: descrStatus,
+    //                 description: descrContrato,
+    //                 date: diaContrato,
+    //                 color: corCalendario
+    //             }
+    //         ]
+    //     })
+    // })
+
+    
 </script>
 
 </html>

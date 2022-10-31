@@ -4,7 +4,7 @@ require_once "Database.php";
 
 class Contrato extends Database
 {
-    public function insertContrato($idContratante, $idContratado, $idEspec, $diasContrato)
+    public function insertContrato($idContratante, $idContratado, $idEspec, $descricao, $diasContrato)
     {
         $conn = Database::getInstance();
 
@@ -13,8 +13,8 @@ class Contrato extends Database
 
             // idstatus = 1 é o estado de solicitação
             $contratoSQL = <<<SQL
-                    INSERT INTO contrato(idcontratado, idcontratante, idespec, idstatus, timecriacaocontrato) VALUES
-                    (:idcontratado, :idcontratante, :idespec, 1, :timestamp)
+                    INSERT INTO contrato(idcontratado, idcontratante, idespec, descrContrato, idstatus, timecriacaocontrato) VALUES
+                    (:idcontratado, :idcontratante, :idespec, :descricao, 1, :timestamp)
                     RETURNING idcontrato
                 SQL;
             $stmt = $conn->prepare($contratoSQL);
@@ -22,6 +22,7 @@ class Contrato extends Database
                 ":idcontratado" => $idContratado,
                 ":idcontratante" => $idContratante,
                 ":idespec" => $idEspec,
+                ":descricao" => $descricao,
                 ":timestamp" => getCurrentTimestamp()
             ]);
 
@@ -60,7 +61,7 @@ class Contrato extends Database
     public function insertNotificacao($idContrato, $idRemetente, $idDestinatario, $titleNotific, $descrNotific) {
         try {
             $sql = <<<SQL
-                    INSERT INTO notificacao(idContrato, idRemetente, idDestinatario, titleNotific, descrNotific, timeCriacaoNotific)
+                    INSERT INTO notificacaoContrato(idContrato, idRemetente, idDestinatario, titleNotific, descrNotific, timeCriacaoNotific)
                     VALUES (:contrato, :remetente, :destinatario, :title, :descr, :timestamp)
                 SQL;
 

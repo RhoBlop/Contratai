@@ -14,6 +14,7 @@ function cepCallback(c) {
         document.getElementById('bairro').value=(c.bairro);
         document.getElementById('cidade').value=(c.localidade);
         document.getElementById('estado').value=(c.uf);    
+        hideFeedback();
     }
 
 }
@@ -25,9 +26,9 @@ function pesquisaCEP(v) {
         var validacep = /^[0-9]{8}$/;
 
         if (validacep.test(cep)) {
-            document.getElementById('bairro').value="...";
-            document.getElementById('cidade').value="...";
-            document.getElementById('estado').value="...";    
+            document.getElementById('bairro').value="---";
+            document.getElementById('cidade').value="---";
+            document.getElementById('estado').value="---";    
         
             var script = document.createElement('script');
 

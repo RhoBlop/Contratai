@@ -294,7 +294,12 @@ class Usuario extends Database
     public function selectCalendario($idUser) {
         try {
             $sql = <<<SQL
-
+                    SELECT contrt.idContrato, descrContrato, descrStatus, corCalendario, json_agg(diaContrato) AS diascontrato
+                    FROM contrato AS contrt
+                    INNER JOIN diacontrato as dias ON (contrt.idcontrato = dias.idcontrato)
+                    INNER JOIN statusContrato as stat ON (contrt.idStatus = stat.idStatus)
+                    WHERE (contrt.idcontratante = :id) OR (contrt.idcontratado = :id)
+                    GROUP BY contrt.idContrato, descrContrato, corCalendario, descrStatus
                 SQL;
 
             $stmt = Database::prepare($sql);
@@ -303,6 +308,14 @@ class Usuario extends Database
             ]);
 
             $result = $stmt->fetchAll();
+
+            // converte json_agg() [String] para array associativa
+            for ($i = 0; $i < count($result); $i++) {
+                $result[$i]["diascontrato"] = json_decode($result[$i]["diascontrato"]);
+                
+                
+            }
+
             return $result;
         } catch (PDOException $e) {
             echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);

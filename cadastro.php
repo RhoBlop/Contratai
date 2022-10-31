@@ -64,26 +64,26 @@
                             <!-- CEP -->
                             <div class="form-group mb-2">
                                 <label for="cep" class="mb-1">CEP</label>
-                                <input type="text" class="form-control form-control-lg" id="cep" name="cep" placeholder="_____-___" required oninput="setMask(this, maskCEP)" maxlength="9" onblur="pesquisaCEP(this.value);">
+                                <input type="text" class="form-control form-control-lg" id="cep" name="cep" placeholder="_____-___" required oninput="setMask(this, maskCEP)" maxlength="9" onchange="pesquisaCEP(this.value);">
                             </div>
 
                             <!-- BAIRRO -->
                             <div class="form-group mb-2">
                                 <label for="bairro" class="mb-1">Bairro</label>
-                                <input type="text" class="form-control form-control-lg" id="bairro" name="bairro" placeholder="Bairro" disabled>
+                                <input type="text" class="form-control form-control-lg" id="bairro" name="bairro" placeholder="---" disabled>
                             </div>
 
                             <div class="row">
                                 <!-- CIDADE -->
                                 <div class="form-group mb-2 col-8">
                                     <label for="cidade" class="mb-1">Cidade</label>
-                                    <input type="text" class="form-control form-control-lg" id="cidade" name="cidade" placeholder="São Paulo" disabled>
+                                    <input type="text" class="form-control form-control-lg" id="cidade" name="cidade" placeholder="---" disabled>
                                 </div>
     
                                 <!-- ESTADO -->
                                 <div class="form-group mb-2 col-4">
                                     <label for="estado" class="mb-1">Estado</label>
-                                    <input type="text" class="form-control form-control-lg" id="estado" name="estado" placeholder="SP" disabled>
+                                    <input type="text" class="form-control form-control-lg" id="estado" name="estado" placeholder="---" disabled>
                                 </div>
                             </div>
 
