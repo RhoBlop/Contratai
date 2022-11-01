@@ -323,7 +323,7 @@ class Usuario extends Database
             $conn->beginTransaction();
 
             $sqlContratado = <<<SQL
-                    SELECT contrt.idContrato, usr.nomeuser, descrContrato, descrEspec, descrStatus, corCalendario, diacontrato
+                    SELECT contrt.idContrato, usr.nomeuser, descrContrato, descrEspec, stat.idStatus, descrStatus, corCalendario, diacontrato
                     FROM contrato AS contrt
                     INNER JOIN diacontrato as dias ON (contrt.idcontrato = dias.idcontrato)
                     INNER JOIN statusContrato as stat ON (contrt.idStatus = stat.idStatus)

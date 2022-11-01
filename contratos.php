@@ -47,6 +47,7 @@
                         $emAndamentoEnviados = [];
                         $finalizadosEnviados = [];
 
+                        // preenchendo as arrays de acordo com o status do contrato
                         foreach ($contratosSolicitados as $contrt) {
                             switch ($contrt["idstatus"]) {
                                 case 1:
@@ -84,7 +85,7 @@
                                             foreach ($solicitacoesEnviadas as $contrt) :
                                         ?> 
 
-                                                <div class="item-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid="<?php echo $contrt["idcontrato"]; ?>">
+                                                <div class="id-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid="<?php echo $contrt["idcontrato"]; ?>">
                                                     <div class="d-flex gap-3">
                                                         <div class="clickable-image">
                                                             <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
@@ -137,7 +138,7 @@
                                         else :
                                             foreach ($emAndamentoEnviados as $contrt) :
                                         ?>
-                                                <div class="item-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid="<?php echo $contrt["idcontrato"]; ?>">
+                                                <div class="id-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid="<?php echo $contrt["idcontrato"]; ?>">
                                                     <div class="d-flex gap-3">
                                                         <div class="clickable-image">
                                                             <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
@@ -170,8 +171,8 @@
                                                                 }
                                                                 ?>
                                                             </div>
-                                                            <div class="accordion-buttons my-2 d-flex gap-2">
-                                                                <button onclick="solicitarFimContrato(event)" class="btn btn-green">O contrato foi realizado!</button>
+                                                            <div class="contrato-buttons my-2 d-flex gap-2">
+                                                                <button class="btn btn-green" onclick="solicitarFimContrato(event)">O contrato foi realizado!</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -205,7 +206,7 @@
                                             foreach ($finalizadosEnviados as $contrt) :
                                         ?>
 
-                                                <div class="item-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
+                                                <div class="id-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
                                                     <div class="clickable-image">
                                                         <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
                                                         <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
@@ -215,7 +216,7 @@
                                                         <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
                                                         <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
 
-                                                        <div class="accordion-buttons my-2 d-flex gap-2">
+                                                        <div class="contrato-buttons my-2 d-flex gap-2">
                                                             <?php
                                                                 if (!$contrt["isavaliado"]):
                                                             ?>
@@ -261,6 +262,7 @@
                         $emAndamentoRecebidos = [];
                         $finalizadosRecebidos = [];
 
+                        // preenchendo as arrays de acordo com o status do contrato
                         foreach ($contratosRecebidos as $contrt) {
                             switch ($contrt["idstatus"]) {
                                 case 1:
@@ -296,7 +298,7 @@
                                         foreach ($solicitacoesRecebidas as $contrt) :
                                     ?>
 
-                                            <div class="item-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
+                                            <div class="id-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
                                                 <div class="clickable-image">
                                                     <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
                                                     <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
@@ -306,7 +308,7 @@
                                                     <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
                                                     <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
 
-                                                    <div class="accordion-buttons my-2 d-flex gap-2">
+                                                    <div class="contrato-buttons my-2 d-flex gap-2">
                                                         <button class="btn btn-green" onclick="aceitarContrato(event)">Aceitar</button>
                                                         <button class="btn btn-outline-dark" onclick="recusarContrato(event)">Recusar</button>
                                                     </div>
@@ -339,7 +341,7 @@
                                             foreach ($emAndamentoRecebidos as $contrt) :
                                         ?>
 
-                                                <div class="item-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
+                                                <div class="id-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
                                                     <div class="clickable-image">
                                                         <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
                                                         <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
@@ -349,7 +351,7 @@
                                                         <p class="text-muted"><?php echo ucfirst($contrt["descrespec"]); ?></p>
                                                         <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
 
-                                                        <div class="accordion-buttons my-2 d-flex gap-2">
+                                                        <div class="contrato-buttons my-2 d-flex gap-2">
                                                             <button onclick="solicitarFimContrato(event)" class="btn btn-green">O contrato foi realizado!</button>
                                                         </div>
                                                     </div>
@@ -382,7 +384,7 @@
                                             foreach ($finalizadosRecebidos as $contrt) :
                                         ?>
 
-                                                <div class="item-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
+                                                <div class="id-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
                                                     <div class="clickable-image">
                                                         <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
                                                         <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
@@ -406,6 +408,11 @@
                         <!-- !SECTION - Profissional -->
 
                         <!-- SECTION Agenda  -->
+                        <?php
+                            $eventos = json_encode($usuarioClass->selectCalendario($idUser));
+                        ?>
+                        <input id="eventos" type="hidden" value='<?php echo $eventos; ?>'>
+
                         <div class="agenda my-5">
                             <h2>Agenda</h2>
                             <h6 class="text-muted">Veja quais são seus próximos compromissos</h6>
@@ -428,57 +435,6 @@
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-<script>
-    <?php
-        $eventos = json_encode($usuarioClass->selectCalendario($idUser));
-    ?>
-
-    // Initialize evo-calendar in your script file or an inline <script> tag
-    $(document).ready(function() {
-        // a coisa mais triste de toda a minha vida
-        let [ contratado, contratante ] = JSON.parse('<?php echo $eventos; ?>');
-        let calendarEvents = [];
-
-        // adicionando eventos de contratado
-        for (let contrato of contratado) {
-            let { idcontrato, nomeuser, descrespec, descrstatus, descrcontrato, diacontrato, corcalendario } = contrato;
-
-            let evento = {  
-                "id": idcontrato,
-                "name": "Contratado",
-                "type": descrstatus,
-                "description": `${nomeuser}<br>Serviço: ${capitalizeFirstLetter(descrespec)}`,
-                "date": diacontrato,
-                "color": corcalendario,
-            }
-
-            calendarEvents.push(evento);
-        }
-
-        // adicionando eventos de contratante
-        for (let contrato of contratante) {
-            let { idcontrato, nomeuser, descrespec, descrstatus, descrcontrato, diacontrato, corcalendario } = contrato;
-
-            let evento = {  
-                "id": idcontrato,
-                "name": "Contratante",
-                "type": descrstatus,
-                "description": `${nomeuser}<br>Contrato: ${descrcontrato}<br>Serviço: ${capitalizeFirstLetter(descrespec)}`,
-                "date": diacontrato,
-                "color": corcalendario,
-            }
-
-            calendarEvents.push(evento);
-        }
-
-        $('#calendar').evoCalendar({
-            'language': 'pt',
-            'format': "yyyy/mm/dd",
-            'todayHighlight': true,
-            'sidebarDisplayDefault': false,
-            'calendarEvents': calendarEvents
-        })
-    })
-</script>
-
+<!-- Initializes Evo-Calendar -->
+<script src="js/loadCalendar.js"></script>
 </html>

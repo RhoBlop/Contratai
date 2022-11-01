@@ -1,6 +1,6 @@
 async function aceitarContrato(event) {
     let btn = event.target;
-    let contratoEl = findClosestAncestorByClass(btn, "item-contrato");
+    let contratoEl = findClosestAncestorByClass(btn, "id-contrato");
     let emAndamentoEl = document.querySelector("#emAndamentoContratado");
 
     // moves contratoEl to another accordion item and, if the accordion has empty message, deletes it
@@ -9,7 +9,7 @@ async function aceitarContrato(event) {
         emptyAccordion.remove();
     }
     // deleta os botões de "aceitar" e "recusar" do card
-    let buttons = contratoEl.querySelector(".accordion-buttons");
+    let buttons = contratoEl.querySelector(".contrato-buttons");
     buttons.textContent = "";
 
     // adiciona o botão de "finalizar contrato" no card
@@ -45,7 +45,7 @@ async function aceitarContrato(event) {
 
 async function recusarContrato(event) {
     let btn = event.target;
-    let contratoEl = findClosestAncestorByClass(btn, "item-contrato");
+    let contratoEl = findClosestAncestorByClass(btn, "id-contrato");
 
     contratoEl.remove();
 
@@ -72,7 +72,7 @@ async function recusarContrato(event) {
 
 async function solicitarFimContrato(event) {
     let btn = event.target;
-    let contratoEl = findClosestAncestorByClass(btn, "item-contrato");
+    let contratoEl = findClosestAncestorByClass(btn, "id-contrato");
 
     contratoEl.remove();
 
@@ -99,7 +99,7 @@ async function solicitarFimContrato(event) {
 
 async function aceitarFimContrato(event) {
     let btn = event.target;
-    let contratoEl = findClosestAncestorByClass(btn, "item-contrato");
+    let contratoEl = findClosestAncestorByClass(btn, "id-contrato");
 
     contratoEl.remove();
 
