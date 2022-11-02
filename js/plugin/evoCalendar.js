@@ -1257,7 +1257,13 @@
             .find(".calendar-day")
             .children()
             .off("click.evocalendar")
-            .on("click.evocalendar", _.selectDate);
+            .on("click.evocalendar", function(event) {
+                _.selectDate(event);
+
+                // opens event list sidebar when day is clicked
+                _.toggleEventList(true);
+                _.toggleSidebar(false);
+            });
 
         var selectedDate = _.$elements.innerEl.find(
             "[data-date-val='" + _.$active.date + "']"
