@@ -103,6 +103,20 @@ function getCurrentTimestamp() {
 }
 
 /**
+ * Returns true if date is past today
+ * 
+ * @param string $date SQL formatted string of certain date
+ * 
+ * @return boolean
+ */
+function isDateExpired($date) {
+    $date = new DateTime($date);
+    $now = new DateTime();
+
+    return $date < $now;
+}
+
+/**
  * Replace empty values in associative array for nulls.
  * 
  * Used, for example, when updating values to BD (empty HTML inputs do not return null).

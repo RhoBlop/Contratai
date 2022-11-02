@@ -13,11 +13,7 @@ $(document).ready(function() {
             "type": descrstatus,
             "description": `${nomeuser}
                             <br>Contrato: ${descrcontrato}
-                            <br>Serviço: ${capitalizeFirstLetter(descrespec)}
-                            ${ idstatus === 1 ? `<br><div class="id-contrato my-2 d-flex gap-2" data-contratoid=${idcontrato}>
-                                                        <button class="btn btn-green" onclick="aceitarContrato(event)">Aceitar</button>
-                                                        <button class="btn btn-outline-dark" onclick="recusarContrato(event)">Recusar</button>
-                                                    </div>` : null}`,
+                            <br>Serviço: ${capitalizeFirstLetter(descrespec)}`,
             "date": diacontrato,
             "color": corcalendario,
         }
