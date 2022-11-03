@@ -98,10 +98,10 @@
                         ORDER BY numuser DESC
                         LIMIT :limit) AS top
                     INNER JOIN especializacao AS espec ON (top.idprof = espec.idprof)
-                    FULL OUTER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
-                    FULL OUTER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+                    INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                     GROUP BY top.descrprof, top.numuser, top.idprof
-                    ORDER BY top.numuser DESC;
+                    ORDER BY top.numuser DESC, mediaavaliacao DESC;
                 SQL;
                 
                 $stmt = Database::prepare($sql);
@@ -129,10 +129,10 @@
                         ORDER BY numContrato DESC
                         LIMIT :limit) AS top
                     INNER JOIN especializacao AS espec ON (top.idprof = espec.idprof)
-                    FULL OUTER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
-                    FULL OUTER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+                    INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                     GROUP BY top.descrprof, top.idprof, top.numContrato
-                    ORDER BY top.numContrato DESC
+                    ORDER BY top.numContrato DESC, mediaavaliacao DESC;
                 SQL;
                 
                 $stmt = Database::prepare($sql);
@@ -227,4 +227,11 @@
             }
         }
     }
-    ?>
+
+    $prof = new Profissao();
+    $abc = $prof->selectMaisContratos($limit=6);
+    foreach ($abc as $prof) {
+        var_dump($prof);
+        echo "<br>";
+    }
+?>
