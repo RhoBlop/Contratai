@@ -70,6 +70,11 @@
                         } else {
                             foreach ($notificacoes as $notific):
                                 //TODO - Adicionar items de notificação do dropdown
+                                echo <<<HTML
+                                <li class="dropdown-item">
+                                  {$notific['descrnotific']}
+                                </li>
+                                HTML;
                             endforeach;
                         }
                     ?>

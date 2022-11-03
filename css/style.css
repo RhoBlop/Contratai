@@ -1790,15 +1790,15 @@ p {
     justify-content: center;
     align-items: center;
     position: absolute;
-    background: var(--danger-color);
+    background: var(--primary-green);
     height: .9rem;
     width: .9rem;
     bottom: -.2rem;
-    right: -.5rem;
+    right: -.2rem;
     font-size: .5rem;
     border-radius: 50%;
     color:white;
-    border: 1px solid var(--danger-color);
+    border: 1px solid var(--primary-green);
 }
 
 
