@@ -13,10 +13,7 @@
 </head>
 
 <body>
-    <?php include("components/header-auth.php") ;
-    
-    var_dump($notificacoes);
-    ?>
+    <?php include("components/header-auth.php");?>
 
     <main>
         <div class="container p-3 my-3">
@@ -31,8 +28,6 @@
                         <h6 class="text-muted">Aceite solicitações de contratos, visualize os que estão em andamento e finalize-os</h6>
                     </div>
 
-
-                    <!-- REVIEW Ajeitar a borda que ta muito zuada -->
                     <div class="nav nav-justified filter-tablist rounded-3 mb-3" id="tablist" role="tablist">
                         <a class="nav-link active" id="contratante-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratante-pane" role="tab">Contratei</a>
                         <a class="nav-link" id="contratado-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratado-pane" role="tab">Contratado</a>
@@ -523,7 +518,7 @@
                                                                     <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
                                                                 </div>
                                                                 <div class="text">
-                                                                    <h8 class="m-0">Voçê enviou uma solicitação ao contratante <b><?php echo $contrt["nomeuser"] ?></b> para finalizar o contrato.</h8>
+                                                                    <h8 class="m-0">Você enviou uma solicitação ao contratante <b><?php echo $contrt["nomeuser"] ?></b> para finalizar o contrato.</h8>
                                                                     
                                                                     <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
                                                                     <p>Dias agendados:</p>
@@ -599,7 +594,6 @@
                                         ?>
                                     </div>
                                 </div>
-                            </div>
                             </div>
                             <!-- !SECTION - Em andamento -->
 
@@ -677,7 +671,9 @@
                                 </div>
                             </div>
                             <!-- !SECTION - Finalizados -->
+                            </div>
                         </div>
+
                         <!-- !SECTION - Profissional -->
 
                         <!-- SECTION Agenda  -->
