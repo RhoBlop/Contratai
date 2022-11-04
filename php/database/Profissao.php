@@ -227,11 +227,4 @@
             }
         }
     }
-
-    $prof = new Profissao();
-    $abc = $prof->selectMaisContratos($limit=6);
-    foreach ($abc as $prof) {
-        var_dump($prof);
-        echo "<br>";
-    }
 ?>

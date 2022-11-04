@@ -8,14 +8,18 @@
                 $search = "{$search}%";
 
                 $sql = <<<SQL
-                    SELECT usr.iduser, nomeuser, imguser, datacriacaouser, round(avg(notaavaliacao), 1) AS mediaavaliacao, count(contrt.idcontrato) AS numcontrato, json_agg(espec.descrespec) AS especsuser
-                    FROM usuario AS usr
-                    INNER JOIN userespec AS useres ON (usr.iduser = useres.iduser)
-                    INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
-                    FULL OUTER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+                    SELECT top.iduser, nomeuser, imguser, datacriacaouser, array_to_json(especsuser) AS especsuser, round(avg(notaavaliacao), 1) AS mediaavaliacao, count(contrt.idcontrato) AS numcontrato
+                    FROM ( SELECT usr.iduser, nomeuser, imguser, datacriacaouser, array_agg(espec.descrespec) AS especsuser
+                        FROM usuario AS usr
+                        INNER JOIN userespec AS useres ON (usr.iduser = useres.iduser)
+                        INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
+                        WHERE usr.nomeuser ILIKE :search OR espec.descrespec ILIKE :search
+                        GROUP BY usr.iduser, nomeuser, imguser, datacriacaouser
+                    ) AS top
+                    FULL OUTER JOIN contrato AS contrt ON (top.iduser = contrt.idcontratado)
                     FULL OUTER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    WHERE usr.nomeuser ILIKE :search OR espec.descrespec ILIKE :search
-                    GROUP BY usr.iduser, nomeuser, imguser, datacriacaouser
+                    WHERE contrt.idcontratado = top.iduser
+                    GROUP BY top.iduser, nomeuser, imguser, datacriacaouser, especsuser
                     ORDER BY mediaavaliacao DESC
                     LIMIT :limit
                     OFFSET :offset
