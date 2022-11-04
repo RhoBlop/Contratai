@@ -1860,15 +1860,10 @@ p {
         background: var(--light-green);
     } */
 
-.crud .table .action-buttons{
-    display: flex;
-    justify-content: space-around;
-    font-size: 16px;
+.crud .table .action-buttons a{
+    font-size: 12px;
+    font-weight: 500;
 }
 
 /* REVIEW Cores dos botões */
-
-.crud .table .action-buttons #excludeButton{
-    color: var(--danger-color)
-}
 

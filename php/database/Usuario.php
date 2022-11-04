@@ -13,6 +13,7 @@ class Usuario extends Database
             $sql = <<<SQL
                     SELECT * 
                     FROM usuario
+                    ORDER BY iduser
                 SQL;
             
             $stmt = Database::prepare($sql);
