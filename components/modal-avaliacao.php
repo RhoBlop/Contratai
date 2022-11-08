@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-contrato" tabindex="-1" role="dialog">
+<div class="modal fade" id="<?php echo "avaliacao{$contrt['idcontrato']}"; ?>" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header justify-content-center shadow-sm">

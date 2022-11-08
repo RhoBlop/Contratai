@@ -92,7 +92,7 @@ class Contrato extends Database
             
             // verificar se quem está tentando avaliar realmente está no contrato
             $verifySQL = "SELECT idcontrato FROM contrato WHERE idContratante = :idUser";
-            $verifyAvaliador = $conn::prepare($verifySQL);
+            $verifyAvaliador = $conn->prepare($verifySQL);
             $verifyAvaliador->execute([":idUser" => $idUser]);
 
             if ($verifyAvaliador->rowCount() > 0) {
@@ -101,7 +101,7 @@ class Contrato extends Database
                         VALUES (:idcontrato, :nota, :comentario)
                     SQL;
     
-                $stmt = $conn::prepare($sql);
+                $stmt = $conn->prepare($sql);
                 $stmt->execute([
                     ":idcontrato" => $idContrato,
                     ":nota" => $nota,
@@ -113,6 +113,10 @@ class Contrato extends Database
                     SET isavaliado = TRUE
                     WHERE idcontrato = :idcontrato
                 SQL;
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([
+                    ":idcontrato" => $idContrato
+                ]);
     
                 $conn->commit();
                 return ["dados" => true];
@@ -142,6 +146,20 @@ class Contrato extends Database
                 ":idstatus" => $idstatus,
                 ":idcontrato" => $idcontrato
             ]);
+
+            if ($idstatus == 4) {
+                $sql = <<<SQL
+                    UPDATE contrato
+                    SET timefinalizacaocontrato = :timestamp
+                    WHERE idcontrato = :idcontrato
+                SQL;
+                $stmt = Database::prepare($sql);
+                $stmt->execute([
+                    ":idstatus" => $idstatus,
+                    ":idcontrato" => $idcontrato,
+                    ":timestamp" => getCurrentTimestamp()
+                ]);
+            }
 
             return ["dados" => true];
         } catch (PDOException $e) {

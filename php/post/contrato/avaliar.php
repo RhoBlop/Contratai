@@ -15,7 +15,7 @@
     [$contratoId, $nota, $comentario] = [$_POST["contratoId"], $_POST["nota"], $_POST["comentario"]];
 
     // inserção da especialização no usuário
-    $result = $contrato->avaliarContrato($contratoId, $idUser, $nota, $comentario);
+    $result = $contrato->insertAvaliacao($contratoId, $idUser, $nota, $comentario);
 
     echo json_encode($result);
 ?>

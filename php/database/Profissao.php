@@ -55,15 +55,15 @@
         public function selectProfissaoMaiorAvaliacao($idprof, $limit = 1) {
             try {
                 $users = <<<SQL
-                    SELECT prof.descrprof, espec.descrespec, usr.iduser, usr.nomeuser, usr.imguser, datacriacaouser, count(contrt.idcontrato) AS numContrato, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
+                    SELECT prof.descrprof, usr.iduser, usr.nomeuser, usr.imguser, datacriacaouser, count(contrt.idcontrato) AS numContrato, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
                     FROM usuario AS usr
                     INNER JOIN userEspec AS useres ON (usr.iduser = useres.iduser)
                     INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
                     INNER JOIN profissao AS prof ON (espec.idprof = prof.idprof)
                     INNER JOIN contrato AS contrt ON (usr.iduser = contrt.idcontratado AND contrt.idespec = espec.idespec)
                     INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    WHERE (prof.idprof = :id)
-                    GROUP BY usr.iduser, prof.descrprof, espec.descrespec
+                    WHERE (prof.idprof = :id) AND (contrt.idstatus = 4)
+                    GROUP BY usr.iduser, prof.descrprof
                     ORDER BY mediaavaliacao DESC
                     LIMIT :limit
                 SQL;
@@ -100,6 +100,7 @@
                     INNER JOIN especializacao AS espec ON (top.idprof = espec.idprof)
                     INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
                     INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    WHERE (contrt.idstatus = 4)
                     GROUP BY top.descrprof, top.numuser, top.idprof
                     ORDER BY top.numuser DESC, mediaavaliacao DESC;
                 SQL;
@@ -125,12 +126,14 @@
                         FROM profissao AS prof
                         INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
                         INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+                        WHERE contrt.idstatus = 4
                         GROUP BY prof.idprof, prof.descrprof
                         ORDER BY numContrato DESC
                         LIMIT :limit) AS top
                     INNER JOIN especializacao AS espec ON (top.idprof = espec.idprof)
                     INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
                     INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    WHERE contrt.idstatus = 4
                     GROUP BY top.descrprof, top.idprof, top.numContrato
                     ORDER BY top.numContrato DESC, mediaavaliacao DESC;
                 SQL;
@@ -157,6 +160,7 @@
                     INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
                     INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
                     INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    WHERE (contrt.idstatus = 4)
                     GROUP BY prof.descrprof, prof.idprof
                     ORDER BY mediaavaliacao DESC
                     LIMIT :limit

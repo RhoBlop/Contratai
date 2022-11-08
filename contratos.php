@@ -249,7 +249,7 @@
                                                                         if (!$contrt["isavaliado"]):
                                                                     ?>
 
-                                                                        <a type="button" class="btn btn-login px-2" data-bs-toggle="modal" data-bs-target="<?php echo "avaliacao{$contrt['idcontrato']}"; ?>">Avaliar</a>
+                                                                        <button type="button" class="btn btn-green px-2" data-bs-toggle="modal" data-bs-target="#<?php echo "avaliacao{$contrt['idcontrato']}"; ?>">Avaliar</button>
 
                                                                     <?php
                                                                         else:
@@ -330,7 +330,7 @@
                                                                 if (!$contrt["isavaliado"]):
                                                             ?>
 
-                                                                <a type="button" class="btn btn-login px-2" data-bs-toggle="modal" data-bs-target="<?php echo "avaliacao{$contrt['idcontrato']}"; ?>">Avaliar</a>
+                                                                <a type="button" class="btn btn-green px-2" data-bs-toggle="modal" data-bs-target="#<?php echo "avaliacao{$contrt['idcontrato']}"; ?>">Avaliar</a>
 
                                                             <?php
                                                                 else:

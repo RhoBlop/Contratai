@@ -18,7 +18,7 @@
                     ) AS top
                     FULL OUTER JOIN contrato AS contrt ON (top.iduser = contrt.idcontratado)
                     FULL OUTER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    WHERE contrt.idcontratado = top.iduser
+                    WHERE (contrt.idcontratado = top.iduser) AND (contrt.idstatus = 4)
                     GROUP BY top.iduser, nomeuser, imguser, datacriacaouser, especsuser
                     ORDER BY mediaavaliacao DESC
                     LIMIT :limit

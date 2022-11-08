@@ -190,7 +190,7 @@
                                                         ?>
                                                     </p>
                                                     <!-- TODO - Data avaliação -->
-                                                    <p class="text-muted">data [atualizar banco]</p>
+                                                    <p class="text-muted"><?php echoFormattedDate($aval["dataavaliacao"]); ?></p>
                                                 </div>
                                             </div>
                                             

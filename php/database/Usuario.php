@@ -71,6 +71,7 @@ class Usuario extends Database
                     ) AS userinfo
                     LEFT JOIN contrato AS contrt ON (userinfo.iduser = contrt.idcontratado)
                     LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    WHERE (contrt.idstatus = 4)
                     GROUP BY userinfo.iduser, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
                 SQL;
             $stmt = Database::prepare($sql);
@@ -161,7 +162,7 @@ class Usuario extends Database
                     INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
                     LEFT JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
                     LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    WHERE usr.iduser = :id
+                    WHERE (usr.iduser = :id) AND (contrt.idstatus = 4)
                     GROUP BY espec.idespec, descrespec
                     ORDER BY mediaavaliacao DESC NULLS LAST
                 SQL;
@@ -186,12 +187,12 @@ class Usuario extends Database
     {
         try {
             $sql = <<<SQL
-                    SELECT usr.iduser, usr.nomeuser, espec.idespec, descrespec, imguser, comentarioavaliacao, round(notaavaliacao, 1) as notaavaliacao
+                    SELECT usr.iduser, usr.nomeuser, espec.idespec, descrespec, imguser, comentarioavaliacao, dataavaliacao, round(notaavaliacao, 1) as notaavaliacao
                     FROM avaliacao AS aval
                     INNER JOIN contrato AS contrt ON (aval.idcontrato = contrt.idcontrato)
                     INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
                     INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.iduser)
-                    WHERE contrt.idcontratado = :id
+                    WHERE (contrt.idcontratado = :id) AND (contrt.idstatus = 4)
                     ORDER BY aval.notaavaliacao DESC
                 SQL;
             $stmt = Database::prepare($sql);
@@ -213,7 +214,7 @@ class Usuario extends Database
     {
         try {
             $sql = <<<SQL
-                  SELECT contrt.idcontrato, idcontratante, json_agg(diacontrato) AS diascontrato, statcontrt.idstatus, timecriacaocontrato, timefinalizacaocontrato, descrespec, usr.iduser, nomeuser, imguser
+                  SELECT contrt.idcontrato, idcontratante, json_agg(diacontrato) AS diascontrato, statcontrt.idstatus, contrt.isavaliado, timecriacaocontrato, timefinalizacaocontrato, descrespec, usr.iduser, nomeuser, imguser
                   FROM contrato AS contrt
                   INNER JOIN diacontrato AS diacontrt ON (contrt.idcontrato = diacontrt.idcontrato)
                   INNER JOIN statuscontrato AS statcontrt ON (contrt.idStatus = statcontrt.idStatus)
@@ -256,7 +257,7 @@ class Usuario extends Database
     {
         try {
             $sql = <<<SQL
-                    SELECT contrt.idcontrato, idcontratado, json_agg(diacontrato) AS diascontrato, statcontrt.idstatus, timecriacaocontrato, timefinalizacaocontrato, descrespec, usr.iduser, nomeuser, imguser
+                    SELECT contrt.idcontrato, idcontratado, json_agg(diacontrato) AS diascontrato, statcontrt.idstatus, contrt.isavaliado, timecriacaocontrato, timefinalizacaocontrato, descrespec, usr.iduser, nomeuser, imguser
                     FROM contrato AS contrt
                     INNER JOIN diacontrato AS diacontrt ON (contrt.idcontrato = diacontrt.idcontrato)
                     INNER JOIN statuscontrato AS statcontrt ON (contrt.idStatus = statcontrt.idStatus)

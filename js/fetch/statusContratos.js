@@ -1,13 +1,9 @@
 async function aceitarContrato(event) {
     let btn = event.target;
     let contratoEl = findClosestAncestorByClass(btn, "id-contrato");
-    let emAndamentoEl = document.querySelector("#emAndamentoContratado");
 
-    // moves contratoEl to another accordion item and, if the accordion has empty message, deletes it
-    let emptyAccordion = emAndamentoEl.querySelector(".empty-accordion");
-    if (emptyAccordion) {
-        emptyAccordion.remove();
-    }
+    moveContrato(contratoEl, "#")
+    
     // deleta os botões de "aceitar" e "recusar" do card
     let buttons = contratoEl.querySelector(".contrato-buttons");
     buttons.textContent = "";
@@ -19,7 +15,7 @@ async function aceitarContrato(event) {
     btnFinalizar.addEventListener("click", solicitarFimContrato);
     buttons.appendChild(btnFinalizar);
 
-    emAndamentoEl.appendChild(contratoEl);
+    
 
     let idContrato = contratoEl.dataset.contratoid;
     // problemas de segurança, mas né... :/
@@ -144,3 +140,17 @@ async function updateStatusContrato(idContrato, idStatus) {
         console.error(error);
     }
 }
+
+function moveContrato(contrato, divId) {
+    let targetAccordion = document.querySelector(`#${divId}`);
+    let isEmptyAccordion = targetDiv.querySelector(".empty-accordion");
+
+    // if the accordion has an empty message, deletes the message
+    if (isEmptyAccordion) {
+        emptyAccordion.remove();
+    }
+
+    targetAccordion.appendChild(contrato);
+}
+
+function addButtonsContrato(contrato)

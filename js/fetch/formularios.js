@@ -264,6 +264,8 @@ async function sendAvaliacao(event) {
         );
 
         const modalAvalia = findClosestAncestorByClass(form, "modal");
+        const bsModal = bootstrap.Modal.getInstance(modalAvalia);
+        bsModal.hide();
         modalAvalia.remove();
     }
     clearTimeout(timeout);

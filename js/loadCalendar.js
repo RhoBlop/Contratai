@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    // input com o JSON dos contratos
     const inputEventos = document.querySelector("#eventos");
     let [ contratado, contratante ] = JSON.parse(inputEventos.value);
     let calendarEvents = [];
