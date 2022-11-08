@@ -12,9 +12,10 @@ class Contrato extends Database
             $conn->beginTransaction();
 
             // idstatus = 1 é o estado de solicitação
+            $solicitacaoStatus = 1;
             $contratoSQL = <<<SQL
                     INSERT INTO contrato(idcontratado, idcontratante, idespec, descrContrato, idstatus, timecriacaocontrato) VALUES
-                    (:idcontratado, :idcontratante, :idespec, :descricao, 1, :timestamp)
+                    (:idcontratado, :idcontratante, :idespec, :descricao, :idstatus, :timestamp)
                     RETURNING idcontrato
                 SQL;
             $stmt = $conn->prepare($contratoSQL);
@@ -23,6 +24,7 @@ class Contrato extends Database
                 ":idcontratante" => $idContratante,
                 ":idespec" => $idEspec,
                 ":descricao" => $descricao,
+                ":idstatus" => $solicitacaoStatus,
                 ":timestamp" => getCurrentTimestamp()
             ]);
 
@@ -44,7 +46,7 @@ class Contrato extends Database
 
             // NOTIFICACAO
             //TODO - inserir os dados no texto diretamente no insert da notificação?
-            $this->insertNotificacao($idContrato, $idContratante, $idContratado, "Nova solicitação de contrato", "O usuário {1} solicitou você para um contrato de {2}");
+            $this->insertNotificacao($solicitacaoStatus, $idContrato, $idContratante, $idContratado, "Nova solicitação de contrato", "O usuário {1} solicitou você para um contrato de {2}");
 
             $conn->commit();
             return ["dados" => true];
@@ -58,8 +60,16 @@ class Contrato extends Database
         }
     }
 
-    public function insertNotificacao($idContrato, $idRemetente, $idDestinatario, $titleNotific, $descrNotific) {
+    public function insertNotificacao($idstatus, $idContrato, $idRemetente, $idDestinatario, $titleNotific, $descrNotific) {
         try {
+            switch ($idstatus) {
+                // solicitação de contrato
+                case 1:
+                    break;
+                case 2:
+                    break;
+            }
+
             $sql = <<<SQL
                     INSERT INTO notificacaoContrato(idContrato, idRemetente, idDestinatario, titleNotific, descrNotific, timeCriacaoNotific)
                     VALUES (:contrato, :remetente, :destinatario, :title, :descr, :timestamp)
