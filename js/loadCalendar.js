@@ -40,6 +40,7 @@ $(document).ready(function() {
         calendarEvents.push(evento);
     }
 
+    // inicializando calendário
     $('#calendar').evoCalendar({
         'language': 'pt',
         'format': "yyyy/mm/dd",

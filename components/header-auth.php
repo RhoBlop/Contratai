@@ -58,7 +58,6 @@
                         }
                     ?>  
                   </a>
-
                   <ul class="dropdown-menu dropdown-menu-end text-small shadow">
                     <?php
                         if ($numNotific < 1) {
@@ -87,7 +86,7 @@
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link" href="#"><i class="fa-regular fa-comments"></i></a>
+                  <a class="nav-link" href="chat.php"><i class="fa-regular fa-comments"></i></a>
                 </li>
 
                 <?php 
