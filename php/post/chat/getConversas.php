@@ -12,9 +12,7 @@
     require ("../../database/Chat.php");
     $chat = new Chat($idSender);
 
-    [$idDestinatario, $mensagem] = [$_POST["idDestinatario"], $_POST["mensagem"]];
-
-    $result = $chat->sendMessage($idDestinatario, $mensagem);
+    $result = $chat->getContacts();
 
     echo json_encode($result);
 ?>

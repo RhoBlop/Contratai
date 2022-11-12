@@ -26,7 +26,7 @@ $(document).ready(function() {
     for (let contrato of contratante) {
         let { idcontrato, nomeuser, descrespec, idstatus, descrstatus, descrcontrato, diacontrato, corcalendario } = contrato;
 
-        let evento = {  
+        let evento = {
             "id": idcontrato,
             "name": "Contratante",
             "type": descrstatus,
