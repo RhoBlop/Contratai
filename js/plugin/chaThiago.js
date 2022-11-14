@@ -51,31 +51,96 @@ async function getContactMessages(idReceiver) {
 class chaThiago {
     constructor(elementId, contacts) {
         // HTML elements
-        this.messagesBox = this.createChatSkeleton(elementId);
-        this.chatSidebar = this.createChatSidebar(contacts);
+        this.chat = this.createChatSkeleton(elementId, contacts);
+        this.messagesBox = chat.querySelector(`${elementId} .messages`);
+        this.chatSidebar = chat.querySelector(`${elementId} .sidebar`);
 
         // data
-        this.contacts;
+        this.contacts = new Map();
+
+        // deal with sockets
     }
 
-    createChatSkeleton(elementId) {
-        // const container = document.querySelector(`#${elementId}`);
+    createChatSkeleton(elementId, contacts) {
+        const container = document.querySelector(elementId);
+        const sidebar = this.createChatSidebar(contacts);
 
+        container.appendChild(sidebar);
 
-        return "Skeleton";
+        return container;
     }
 
     createChatSidebar(contacts) {
-        return contacts;
+        const sidebar = document.createElement("div");
+        for (contact of contacts) {
+            let { idUser, userName, imgUser } = contact;
+
+            const guid = guidGenerator();
+            const contactDiv = document.createElement("div");
+            contactDiv.id = guid;
+
+            this.contacts.set(guid, {
+                "userName": userName,
+                "idUser": idUser,
+                "messages": []
+            })
+            
+            const userImg = document.createElement("img");
+            userImg.src = imgUser
+            
+            const textDiv = document.createElement("div");
+            textDiv.textContent = userName
+            
+            contactDiv.addEventListener("click", () => {
+                // change message box accordingly to contact id
+            })
+
+            contactDiv.appendChild(userImg);
+            contactDiv.appendChild(textDiv);
+            sidebar.prepend(contactDiv);
+        }
+
+        return sidebar;
+    }
+
+    changeMessageBox(idUser) {
+
     }
 }
 
+(async () => {
+    const contacts = await getContacts();
+
+    const chat = new chaThiago("#chat", contacts);
+})();
 
 /*
+getContacts()
+
+[0] => Array
+    (
+        [idUser] => 1
+        [userName] => Mr White
+        [imgUser] => null
+    )
+
+[1] => Array
+    (
+        [idUser] => 6
+        [userName] => Thiago Neves Luz
+        [imgUser] => null
+    )
+
+)
+*/
+
+
+/*
+
 const contacts = {
-    htmlElement: {
+    htmlElementGuid: {
         "userName": "Rafael Rodrigues",
-        "userId": 2,
+        "idUser": 2,
         "messages": [
             { 
                 "text": "Vai tomar no cu",
@@ -89,9 +154,9 @@ const contacts = {
             }
         ]
     },
-    htmlElement: {
+    htmlElementGuid: {
         "userName": "Thiago Neves",
-        "userId": 6,
+        "idUser": 6,
         "messages": [
             { 
                 "text": "Nossa mlk vai se foder pra krl",

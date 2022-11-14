@@ -9,14 +9,9 @@
         <input type="hidden" id="userId" value="<?php echo $_SESSION["iduser"]; ?>">
 
         <main>
-            <ul id="messagesBox">
+            <div id="chat">
 
-            </ul>
-
-            <form id="chat">
-                <input id="message" type="text" autocomplete="off">
-                <button id="sendMessage" class="btn btn-green">Send</button>
-            </form>
+            </div>
         </main>
         <?php include ("components/footer.html")?>
     </body>
