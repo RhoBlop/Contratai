@@ -1,62 +1,13 @@
-async function sendMessage(idReceiver, message) {
-    let response = await fetch(
-        `./php/post/chat/adicionarMensagem.php`,
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            credentials: "same-origin",
-            body: `idDestinatario=${idReceiver}&mensagem=${message}`,
-        }
-    );
-    let data = await response.json();
-
-    return data;
-}
-
-async function getContacts() {
-    let response = await fetch(
-        `./php/post/chat/getConversas.php`,
-        {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            credentials: "same-origin"
-        }
-    );
-    let data = await response.json();
-
-    return data;
-}
-
-async function getContactMessages(idReceiver) {
-    let response = await fetch(
-        `./php/post/chat/getMensagensConversa.php`,
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            credentials: "same-origin",
-            body: `idDestinatario=${idReceiver}`,
-        }
-    );
-    let data = await response.json();
-
-    return data;
-}
-
 class chaThiago {
     constructor(elementId, contacts) {
         // HTML elements
         this.chat = this.createChatSkeleton(elementId, contacts);
-        this.messagesBox = chat.querySelector(`${elementId} .messages`);
+        this.messagesBox = chat.querySelector(`${elementId} .box-messages`);
         this.chatSidebar = chat.querySelector(`${elementId} .sidebar`);
 
         // data
         this.contacts = new Map();
+        this.currentContact = null;
 
         // deal with sockets
     }
@@ -64,8 +15,9 @@ class chaThiago {
     createChatSkeleton(elementId, contacts) {
         const container = document.querySelector(elementId);
         const sidebar = this.createChatSidebar(contacts);
+        const messageBox = this.createChatMessageBox();
 
-        container.appendChild(sidebar);
+        container.append(sidebar, messageBox);
 
         return container;
     }
@@ -82,6 +34,7 @@ class chaThiago {
             this.contacts.set(guid, {
                 "userName": userName,
                 "idUser": idUser,
+                "imgUser": imgUser,
                 "messages": []
             })
             
@@ -91,20 +44,43 @@ class chaThiago {
             const textDiv = document.createElement("div");
             textDiv.textContent = userName
             
-            contactDiv.addEventListener("click", () => {
-                // change message box accordingly to contact id
+            contactDiv.addEventListener("click", (event) => {
+                let contactId = event.target.id;
+                console.log("GUID: " + contactId);
+                // FETCH FOR MESSAGES
+                this.changeContact(contactId);
             })
 
             contactDiv.appendChild(userImg);
             contactDiv.appendChild(textDiv);
             sidebar.prepend(contactDiv);
         }
+        console.log(`CONTACTS: ${this.contacts}`);
 
         return sidebar;
     }
 
-    changeMessageBox(idUser) {
+    changeContact(contactId) {
+        const { idUser, userName, imgUser, messages } = this.contacts.get(contactId);
+        this.currentContact = idUser;
 
+        // change messageBox header (userName and imgUser)
+
+        const messagesDiv = this.messagesBox.querySelector(".messages");
+        messagesDiv.innerHTML = "";
+        for (let msg of messages) {
+            const { text, timestamp, sent } = msg;
+            let message = document.createElement("div");
+            message.textContent = text;
+
+            // maybe doesn't works
+            message.classList.add(sent ? "sent" : "received");
+
+            // add timestamp styling
+            console.log(`Text: ${text}\nTime: ${timestamp}\nSent: ${sent}`);
+            
+            messagesDiv.appendChild(message);
+        }
     }
 }
 
@@ -172,5 +148,53 @@ const contacts = {
     }
 };
 */
-let chat = new chaThiago("#chat", contacts);
-console.log(chat);
+
+async function sendMessage(idReceiver, message) {
+    let response = await fetch(
+        `./php/post/chat/adicionarMensagem.php`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            credentials: "same-origin",
+            body: `idDestinatario=${idReceiver}&mensagem=${message}`,
+        }
+    );
+    let data = await response.json();
+
+    return data;
+}
+
+async function getContacts() {
+    let response = await fetch(
+        `./php/post/chat/getConversas.php`,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            credentials: "same-origin"
+        }
+    );
+    let data = await response.json();
+
+    return data;
+}
+
+async function getContactMessages(idReceiver) {
+    let response = await fetch(
+        `./php/post/chat/getMensagensConversa.php`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            credentials: "same-origin",
+            body: `idDestinatario=${idReceiver}`,
+        }
+    );
+    let data = await response.json();
+
+    return data;
+}
