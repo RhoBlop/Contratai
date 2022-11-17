@@ -1,13 +1,13 @@
 class chaThiago {
     constructor(elementId, contacts) {
-        // HTML elements
-        this.chat = this.createChatSkeleton(elementId, contacts);
-        this.messagesBox = chat.querySelector(`${elementId} .box-messages`);
-        this.chatSidebar = chat.querySelector(`${elementId} .sidebar`);
-
         // data
         this.contacts = new Map();
         this.currentContact = null;
+
+        // HTML elements
+        this.chat = this.createChatSkeleton(elementId, contacts);
+        this.conversationBox = chat.querySelector(`${elementId} .conversation-box`);
+        this.chatSidebar = chat.querySelector(`${elementId} .sidebar`);
 
         // deal with sockets
     }
@@ -15,21 +15,62 @@ class chaThiago {
     createChatSkeleton(elementId, contacts) {
         const container = document.querySelector(elementId);
         const sidebar = this.createChatSidebar(contacts);
-        const messageBox = this.createChatMessageBox();
+        const conversationBox = this.createConversationBox();
 
-        container.append(sidebar, messageBox);
-
+        container.appendChild(sidebar);
+        container.appendChild(conversationBox);
         return container;
     }
 
+    createConversationBox() {
+        const conversationBox = document.createElement("div");
+        conversationBox.classList.add("conversation-box");
+        
+        const headerBox = document.createElement("div");
+        headerBox.classList.add("conversation-header");
+        headerBox.innerHTML = "HEADER"
+
+        const messagesDiv = document.createElement("div");
+        messagesDiv.classList.add("messages");
+
+        const textingBox = document.createElement("div");
+        textingBox.classList.add("conversation-texting");
+        const messagingForm = document.createElement("form");
+        messagingForm.setAttribute("action", "javascript:void(0);");
+        const messageInput = document.createElement("input");
+        messageInput.classList.add("message-input");
+        const sendMessageBtn = document.createElement("button");
+        sendMessageBtn.innerHTML = "Send";
+
+        messagingForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            // SEND MESSAGE
+            console.log(messageInput.value);
+            console.log(this.currentContact);
+        })
+
+        messagingForm.appendChild(messageInput);
+        messagingForm.appendChild(sendMessageBtn);
+        textingBox.appendChild(messagingForm);
+
+        conversationBox.appendChild(headerBox);
+        conversationBox.appendChild(messagesDiv);
+        conversationBox.appendChild(textingBox);
+
+        return conversationBox;
+    };
+
     createChatSidebar(contacts) {
         const sidebar = document.createElement("div");
-        for (contact of contacts) {
+        sidebar.classList.add("sidebar");
+        for (let contact of contacts) {
             let { idUser, userName, imgUser } = contact;
 
             const guid = guidGenerator();
             const contactDiv = document.createElement("div");
             contactDiv.id = guid;
+            contactDiv.classList.add("contact");
 
             this.contacts.set(guid, {
                 "userName": userName,
@@ -39,34 +80,35 @@ class chaThiago {
             })
             
             const userImg = document.createElement("img");
-            userImg.src = imgUser
+            userImg.src = imgUser ? imgUser : "images/temp/default-pic.png";
+            // delete later
+            userImg.style.width = "50px";
             
             const textDiv = document.createElement("div");
             textDiv.textContent = userName
             
-            contactDiv.addEventListener("click", (event) => {
-                let contactId = event.target.id;
-                console.log("GUID: " + contactId);
+            contactDiv.addEventListener("click", async (event) => {
+                console.log(event.currentTarget);
+                let contactId = event.currentTarget.id;
                 // FETCH FOR MESSAGES
-                this.changeContact(contactId);
+                this.currentContact = this.changeContact(this.contacts, contactId, this.conversationBox);
             })
 
             contactDiv.appendChild(userImg);
             contactDiv.appendChild(textDiv);
             sidebar.prepend(contactDiv);
         }
-        console.log(`CONTACTS: ${this.contacts}`);
 
         return sidebar;
     }
 
-    changeContact(contactId) {
-        const { idUser, userName, imgUser, messages } = this.contacts.get(contactId);
-        this.currentContact = idUser;
+    changeContact(contacts, contactId, conversationBox) {
+        const { idUser, userName, imgUser, messages } = contacts.get(contactId);
+        console.table(idUser, userName, imgUser, messages);
 
-        // change messageBox header (userName and imgUser)
+        // change conversationBox header (userName and imgUser)
 
-        const messagesDiv = this.messagesBox.querySelector(".messages");
+        const messagesDiv = conversationBox.querySelector(".messages");
         messagesDiv.innerHTML = "";
         for (let msg of messages) {
             const { text, timestamp, sent } = msg;
@@ -81,6 +123,8 @@ class chaThiago {
             
             messagesDiv.appendChild(message);
         }
+
+        return idUser;
     }
 }
 
@@ -163,7 +207,8 @@ async function sendMessage(idReceiver, message) {
     );
     let data = await response.json();
 
-    return data;
+    let { dados } = data;
+    return dados;
 }
 
 async function getContacts() {
@@ -178,8 +223,9 @@ async function getContacts() {
         }
     );
     let data = await response.json();
-
-    return data;
+    
+    let { dados } = data;
+    return dados;
 }
 
 async function getContactMessages(idReceiver) {
@@ -196,5 +242,6 @@ async function getContactMessages(idReceiver) {
     );
     let data = await response.json();
 
-    return data;
+    let { dados } = data;
+    return dados;
 }

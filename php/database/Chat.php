@@ -1,6 +1,5 @@
 <?php
     require_once "Database.php";
-    require_once "../utils.php";
 
     class Chat extends Database {
         public $idUser;
@@ -118,8 +117,8 @@
     // var_dump($chat->getContactMessages(2));
     // print_r($chat->sendMessage(2, "Nossa cara vou te dar um atiro amanhã"));
 
-    $chat = new Chat(2);
-    var_dump($chat->getContacts());
+    // $chat = new Chat(2);
+    // var_dump($chat->getContacts());
     // print_r($chat->sendMessage(1, "Vou fazer merda nenhuma não cara"));
 ?>
 
