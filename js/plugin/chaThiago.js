@@ -1,4 +1,4 @@
-//TODO SEND MESSAGES, INTEGRATE SOCKET.IO, STYLE CSS, ADD PAGINATION
+//TODO INTEGRATE SOCKET.IO, VISUALIZED MESSAGES, STYLE CSS, ADD PAGINATION
 
 class chaThiago {
     constructor(elementId, contacts) {
@@ -13,6 +13,28 @@ class chaThiago {
         this.chatSidebar = chat.querySelector(`${elementId} .sidebar`);
 
         // deal with sockets
+        this.socket = this.setChatSocket();
+    }
+
+    setChatSocket() {
+        let socket = io('http://localhost:3000', {
+            transports: ['websocket', 'polling', 'flashsocket'],
+            withCredentials: true,
+        });
+        // get userId somewhere
+        socket.emit("setSocketId", 1);
+
+        socket.on("disconnect", function(reason) {
+            console.log(reason);
+        });
+
+        socket.on("newMessage", function(messageJson) {
+            console.log(messageJson);
+            
+            appendNewMessages([ messageJson ]);
+        });
+
+        return socket;
     }
 
     createChatSkeleton(elementId, contacts) {
@@ -48,8 +70,17 @@ class chaThiago {
         messagingForm.addEventListener("submit", async (event) => {
             event.preventDefault();
 
-            // SEND MESSAGE
-            console.log(messageInput.value);
+            const input = event.currentTarget.querySelector("input");
+            const message = input.value;
+            
+            if (message) {
+                const timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
+                console.log("sending message");
+                this.appendNewMessages([{ text: message, timestamp: timestamp, sent: true }]);
+                await sendMessage(this.getCurrUserId(), message, timestamp);
+                console.log("message sent");
+                input.value = "";
+            }
         })
 
         messagingForm.appendChild(messageInput);
@@ -124,17 +155,16 @@ class chaThiago {
         this.appendNewMessages(messages);
 
         this.messageLoading();
-        fetchMessages = await getContactMessages(getContactUserId(this.currContactGuid));
+        fetchMessages = await getContactMessages(this.getCurrUserId());
         this.clearMessageLoading();
 
         this.appendNewMessages(fetchMessages);
         messages = [...messages, ...fetchMessages];
         this.contacts[contactId]["messages"] = messages;
-        console.log(messages);
     }
 
-    getContactUserId(contactGuid) {
-        return this.contacts[contactGuid]["idUser"];
+    getCurrUserId() {
+        return this.contacts[this.currContactGuid]["idUser"];
     }
 
     appendNewMessages(messages) {
@@ -156,6 +186,8 @@ class chaThiago {
             
             messagesDiv.appendChild(message);
         }
+
+        window.scrollTo(0, messagesDiv.body.scrollHeight);
     }
 
     prependOldMessages() {
@@ -244,7 +276,7 @@ const contacts = {
 };
 */
 
-async function sendMessage(idReceiver, message) {
+async function sendMessage(idReceiver, message, timestamp) {
     let response = await fetch(
         `./php/post/chat/adicionarMensagem.php`,
         {
@@ -253,10 +285,11 @@ async function sendMessage(idReceiver, message) {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
             credentials: "same-origin",
-            body: `idDestinatario=${idReceiver}&mensagem=${message}`,
+            body: `idDestinatario=${idReceiver}&mensagem=${message}&timestamp=${timestamp}`,
         }
     );
-    let data = await response.json();
+    let data = await response.text();
+    console.log(data);
 
     let { dados } = data;
     return dados;

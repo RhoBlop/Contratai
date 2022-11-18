@@ -59,7 +59,7 @@
                     INNER JOIN usuario AS receiver ON (msg.iddestinatario = receiver.iduser)
                     WHERE ((msg.iddestinatario = :iduser) AND (msg.idremetente = :idUserContact)) OR
                           ((msg.iddestinatario = :idUserContact) AND (msg.idremetente = :iduser))
-                    ORDER BY timecriacaomensagem DESC
+                    ORDER BY timecriacaomensagem
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
@@ -85,7 +85,7 @@
             }
         }
 
-        public function sendMessage($idReceiver, $msg) {
+        public function sendMessage($idReceiver, $msg, $timestamp) {
             try {
                 if ($msg === "") {
                     return;
@@ -100,7 +100,7 @@
                     ":idRemetente" => $this->idUser,
                     ":idDestinatario" => $idReceiver,
                     ":msg" => $msg,
-                    ":timestamp" => getCurrentTimestamp()
+                    ":timestamp" => $timestamp
                 ]);
 
                 return [ "dados" => true ];
