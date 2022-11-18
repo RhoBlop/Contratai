@@ -74,7 +74,7 @@
                     ":limit" => $limit 
                 ]);
 
-                $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $users = $stmt->fetchAll();
 
                 return $users;
             } catch(PDOException $e) {
@@ -108,7 +108,7 @@
                 $stmt = Database::prepare($sql);
                 $stmt->execute([ ":limit" => $limit ]);
 
-                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $stmt->fetchAll();
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
@@ -141,7 +141,7 @@
                 $stmt = Database::prepare($sql);
                 $stmt->execute([ ":limit" => $limit ]);
 
-                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $stmt->fetchAll();
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
@@ -169,7 +169,7 @@
                 $stmt = Database::prepare($sql);
                 $stmt->execute([ ":limit" => $limit ]);
 
-                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $stmt->fetchAll();
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();

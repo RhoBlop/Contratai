@@ -8,9 +8,8 @@ class Contrato extends Database
     {
         $conn = Database::getInstance();
 
+        $conn->beginTransaction();
         try {
-            $conn->beginTransaction();
-
             // idstatus = 1 é o estado de solicitação
             $solicitacaoStatus = 1;
             $contratoSQL = <<<SQL
@@ -52,7 +51,6 @@ class Contrato extends Database
             return ["dados" => true];
         } catch (PDOException $e) {
             $conn->rollback();
-
             echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
             exit();
 
@@ -97,9 +95,8 @@ class Contrato extends Database
     public function insertAvaliacao($idContrato, $idUser, $nota, $comentario) {
         $conn = Database::getInstance();
 
+        $conn->beginTransaction();
         try {
-            $conn->beginTransaction();
-            
             // verificar se quem está tentando avaliar realmente está no contrato
             $verifySQL = "SELECT idcontrato FROM contrato WHERE idContratante = :idUser";
             $verifyAvaliador = $conn->prepare($verifySQL);
@@ -135,6 +132,7 @@ class Contrato extends Database
             }
 
         } catch (PDOException $e) {
+            $conn->rollback();
             echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
             exit();
 

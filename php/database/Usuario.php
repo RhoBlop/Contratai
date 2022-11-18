@@ -321,9 +321,8 @@ class Usuario extends Database
     public function selectCalendario($idUser) {
         $conn = Database::getInstance();
 
+        $conn->beginTransaction();
         try {
-            $conn->beginTransaction();
-
             $sqlContratado = <<<SQL
                     SELECT contrt.idContrato, usr.nomeuser, descrContrato, descrEspec, stat.idStatus, descrStatus, corCalendario, diacontrato
                     FROM contrato AS contrt
@@ -361,6 +360,7 @@ class Usuario extends Database
             $conn->commit();
             return [$contratado, $contratante];
         } catch (PDOException $e) {
+            $conn->rollback();
             echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
             exit();
 
