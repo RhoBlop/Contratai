@@ -1,10 +1,13 @@
+//TODO SEND MESSAGES, INTEGRATE SOCKET.IO, STYLE CSS, ADD PAGINATION
+
 class chaThiago {
     constructor(elementId, contacts) {
         // data
-        this.contacts = new Map();
-        this.currentContact = null;
+        this.contacts = {};
+        this.currContactGuid = null;
 
         // HTML elements
+        this.fetchMessageLoading = this.createMessageLoading();
         this.chat = this.createChatSkeleton(elementId, contacts);
         this.conversationBox = chat.querySelector(`${elementId} .conversation-box`);
         this.chatSidebar = chat.querySelector(`${elementId} .sidebar`);
@@ -34,7 +37,7 @@ class chaThiago {
         messagesDiv.classList.add("messages");
 
         const textingBox = document.createElement("div");
-        textingBox.classList.add("conversation-texting");
+        textingBox.classList.add("texting-box");
         const messagingForm = document.createElement("form");
         messagingForm.setAttribute("action", "javascript:void(0);");
         const messageInput = document.createElement("input");
@@ -47,7 +50,6 @@ class chaThiago {
 
             // SEND MESSAGE
             console.log(messageInput.value);
-            console.log(this.currentContact);
         })
 
         messagingForm.appendChild(messageInput);
@@ -72,26 +74,31 @@ class chaThiago {
             contactDiv.id = guid;
             contactDiv.classList.add("contact");
 
-            this.contacts.set(guid, {
+            this.contacts[guid] = {
                 "userName": userName,
                 "idUser": idUser,
                 "imgUser": imgUser,
                 "messages": []
-            })
+            };
             
             const userImg = document.createElement("img");
             userImg.src = imgUser ? imgUser : "images/temp/default-pic.png";
-            // delete later
+            // ADD TO CSS LATER
             userImg.style.width = "50px";
             
             const textDiv = document.createElement("div");
             textDiv.textContent = userName
             
             contactDiv.addEventListener("click", async (event) => {
-                console.log(event.currentTarget);
-                let contactId = event.currentTarget.id;
-                // FETCH FOR MESSAGES
-                this.currentContact = this.changeContact(this.contacts, contactId, this.conversationBox);
+                const contactDiv = event.currentTarget;
+                const activeConversation = this.chatSidebar.querySelector("active");
+
+                if (activeConversation) {
+                    activeConversation.classList.remove("active");
+                }
+
+                contactDiv.classList.add("active");
+                await this.changeContact(contactDiv.id);
             })
 
             contactDiv.appendChild(userImg);
@@ -102,14 +109,40 @@ class chaThiago {
         return sidebar;
     }
 
-    changeContact(contacts, contactId, conversationBox) {
-        const { idUser, userName, imgUser, messages } = contacts.get(contactId);
-        console.table(idUser, userName, imgUser, messages);
+    async changeContact(contactId) {
+        if (contactId === this.currContactGuid) {
+            return;
+        }
+
+        let { idUser, userName, imgUser, messages } = this.contacts[contactId];
+        let fetchMessages;
+        this.currContactGuid = contactId;
+        console.log(idUser, userName, imgUser, messages);
 
         // change conversationBox header (userName and imgUser)
+        this.clearMessages();
+        this.appendNewMessages(messages);
 
-        const messagesDiv = conversationBox.querySelector(".messages");
-        messagesDiv.innerHTML = "";
+        this.messageLoading();
+        fetchMessages = await getContactMessages(getContactUserId(this.currContactGuid));
+        this.clearMessageLoading();
+
+        this.appendNewMessages(fetchMessages);
+        messages = [...messages, ...fetchMessages];
+        this.contacts[contactId]["messages"] = messages;
+        console.log(messages);
+    }
+
+    getContactUserId(contactGuid) {
+        return this.contacts[contactGuid]["idUser"];
+    }
+
+    appendNewMessages(messages) {
+        if (!messages) {
+            return;
+        }
+
+        const messagesDiv = this.conversationBox.querySelector(".messages");
         for (let msg of messages) {
             const { text, timestamp, sent } = msg;
             let message = document.createElement("div");
@@ -123,8 +156,26 @@ class chaThiago {
             
             messagesDiv.appendChild(message);
         }
+    }
 
-        return idUser;
+    prependOldMessages() {
+
+    }
+
+    clearMessages() {
+        this.conversationBox.querySelector(".messages").innerHTML = "";
+    }
+
+    createMessageLoading() {
+
+    }
+
+    messageLoading() {
+        console.log("loading...");
+    }
+
+    clearMessageLoading() {
+        console.log("loaded");
     }
 }
 
