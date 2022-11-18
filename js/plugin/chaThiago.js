@@ -44,6 +44,7 @@ class chaThiago {
 
         container.appendChild(sidebar);
         container.appendChild(conversationBox);
+        
         return container;
     }
 
@@ -76,8 +77,11 @@ class chaThiago {
             if (message) {
                 const timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
                 console.log("sending message");
+
+                // SEND SOCKET
+                this.socket.emit("sendMessage");
                 this.appendNewMessages([{ text: message, timestamp: timestamp, sent: true }]);
-                await sendMessage(this.getCurrUserId(), message, timestamp);
+                sendMessage(this.getCurrUserId(), message, timestamp);
                 console.log("message sent");
                 input.value = "";
             }
@@ -187,7 +191,7 @@ class chaThiago {
             messagesDiv.appendChild(message);
         }
 
-        window.scrollTo(0, messagesDiv.body.scrollHeight);
+        window.scrollTo(0, messagesDiv.scrollHeight);
     }
 
     prependOldMessages() {
