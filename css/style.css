@@ -1865,5 +1865,10 @@ p {
     font-weight: 500;
 }
 
-/* REVIEW Cores dos botões */
+/* CHAT */
 
+.contact { 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

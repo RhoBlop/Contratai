@@ -115,7 +115,7 @@ class chaThiago {
             const userImg = document.createElement("img");
             userImg.src = imgUser ? imgUser : "images/temp/default-pic.png";
             // ADD TO CSS LATER
-            userImg.style.width = "50px";
+            userImg.style.width = "48px";
             
             const textDiv = document.createElement("div");
             textDiv.textContent = userName
