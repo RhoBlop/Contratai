@@ -1,5 +1,4 @@
-//TODO MANAGE NEW SOCKET MESSAGES BASED ON WHO SENT IT / PUSH MESSAGES TO EACH CONTACT;
-// VISUALIZED MESSAGES; STYLE CSS; ADD PAGINATION
+//TODO ADD CONVERSATIONS WITH NEW USERS; NEW MESSAGES BADGE; VISUALIZED MESSAGES; STYLE CSS; ADD PAGINATION
 
 class chaThiago {
     constructor(elementId, idUser, contacts) {
@@ -7,17 +6,13 @@ class chaThiago {
         this.idSender = idUser;
         this.contacts = {};
         this.currContactGuid = null;
-
-        this.getCurrUserId = () => this.contacts[this.currContactGuid]["idUser"];
-
+        this.socket = this.setChatSocket();
+        
         // HTML elements
         this.fetchMessageLoading = this.createMessageLoading();
         this.chat = this.createChatSkeleton(elementId, contacts);
         this.conversationBox = chat.querySelector(`${elementId} .conversation-box`);
         this.chatSidebar = chat.querySelector(`${elementId} .sidebar`);
-
-        // deal with sockets
-        this.socket = this.setChatSocket();
     }
 
     setChatSocket() {
@@ -36,13 +31,37 @@ class chaThiago {
         socket.emit("setSocketId", this.idSender);
         socket.on("newMessage", (messageJson) => {
             const { idSender, message, timestamp, sent } = messageJson
-            
-            this.appendNewMessages([ {
+            const msg = {
                 text: message,
                 time: timestamp,
                 sent: sent
-            } ]);
+            };
+
+            this.addContactMessages(idSender, [ msg ]);
+            
+            if (idSender === this.getCurrReceiverId()) {
+                this.appendNewMessages([ msg ]);
+            }
         });
+
+        socket.sendMessage = (message, timestamp) => {
+            socket.emit("sendMessage", {
+                idReceiver: this.getCurrReceiverId(),
+                message: message,
+                timestamp: timestamp
+            });
+        }
+
+        // socket.setStatus = (status) => {
+        //     allowedStatus = ["online", "offline", "digitando..."];
+        //     if (allowedStatus.includes(status)) {
+        //         if (status === "digitando...") {
+        //             socket.emit("digitando", this.getCurrReceiverId());
+        //         } else {
+        //             socket.emit(status);
+        //         }
+        //     }
+        // }
 
         return socket;
     }
@@ -78,27 +97,7 @@ class chaThiago {
         const sendMessageBtn = document.createElement("button");
         sendMessageBtn.innerHTML = "Send";
 
-        messagingForm.addEventListener("submit", async (event) => {
-            event.preventDefault();
-
-            const input = event.currentTarget.querySelector("input");
-            const message = input.value;
-            
-            if (message) {
-                const timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
-                console.log("sending message");
-                this.socket.emit("sendMessage", {
-                    idReceiver: this.getCurrUserId(),
-                    message: message,
-                    timestamp: timestamp
-                });
-                this.appendNewMessages([{ text: message, timestamp: timestamp, sent: true }]);
-
-                sendMessage(this.getCurrUserId(), message, timestamp);
-                console.log("message sent");
-                input.value = "";
-            }
-        })
+        messagingForm.addEventListener("submit", this.sendMessageForm);
 
         messagingForm.appendChild(messageInput);
         messagingForm.appendChild(sendMessageBtn);
@@ -115,7 +114,7 @@ class chaThiago {
         const sidebar = document.createElement("div");
         sidebar.classList.add("sidebar");
         for (let contact of contacts) {
-            let { idUser, userName, imgUser } = contact;
+            let { idUser, userName, imgUser, lastMessage, timestamp } = contact;
 
             const guid = guidGenerator();
             const contactDiv = document.createElement("div");
@@ -128,6 +127,8 @@ class chaThiago {
                 "imgUser": imgUser,
                 "messages": []
             };
+
+            // ADD LAST SENT MESSAGE
             
             const userImg = document.createElement("img");
             userImg.src = imgUser ? imgUser : "images/temp/default-pic.png";
@@ -157,13 +158,27 @@ class chaThiago {
         return sidebar;
     }
 
+    async sendMessageForm(event) {
+        event.preventDefault();
+
+        const input = event.currentTarget.querySelector("input");
+        const message = input.value;
+        
+        if (message) {
+            const timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
+            this.socket.sendMessage(message, timestamp);
+            this.appendNewMessages([{ text: message, timestamp: timestamp, sent: true }]);
+            saveMessageDB(this.getCurrReceiverId(), message, timestamp);
+            input.value = "";
+        }
+    }
+
     async changeContact(contactId) {
         if (contactId === this.currContactGuid) {
             return;
         }
 
         let { idUser, userName, imgUser, messages } = this.contacts[contactId];
-        let fetchMessages;
         this.currContactGuid = contactId;
         console.log(idUser, userName, imgUser, messages);
 
@@ -172,7 +187,7 @@ class chaThiago {
         this.appendNewMessages(messages);
 
         this.messageLoading();
-        fetchMessages = await getContactMessages(this.getCurrUserId());
+        let fetchMessages = await getContactMessages(this.getCurrReceiverId());
         this.clearMessageLoading();
 
         this.appendNewMessages(fetchMessages);
@@ -180,13 +195,13 @@ class chaThiago {
         this.contacts[contactId]["messages"] = messages;
     }
 
-    appendNewMessages(messages) {
-        if (!messages) {
+    appendNewMessages(messagesArr) {
+        if (!messagesArr) {
             return;
         }
 
         const messagesDiv = this.conversationBox.querySelector(".messages");
-        for (let msg of messages) {
+        for (let msg of messagesArr) {
             const { text, timestamp, sent } = msg;
             let message = document.createElement("div");
             message.textContent = text;
@@ -200,15 +215,43 @@ class chaThiago {
             messagesDiv.appendChild(message);
         }
 
+        // will this work?
         window.scrollTo(0, messagesDiv.scrollHeight);
     }
 
-    prependOldMessages() {
+    // prependOldMessages() {
+        
+    // }
+    
+    // changeNewMessagesBadge() {
 
-    }
+    // }
 
     clearMessages() {
         this.conversationBox.querySelector(".messages").innerHTML = "";
+    }
+
+    getCurrReceiverId() {
+        return this.contacts[this.currContactGuid]["idUser"];
+    }
+
+    getContactGuidByUserId(idUser) {
+        for (let guid in this.contacts) {
+            if (this.contacts[guid]["idUser"] === idUser) {
+                return guid;
+            }
+        }
+
+        return null;
+    }
+
+    // what if user is not in this.contacts? (socket.io)
+    addContactMessages(idUser, messagesArr) {
+        const contactGuid = this.getContactGuidByUserId(idUser);
+
+        if (contactGuid) {
+            this.contacts[contactGuid]["messages"] = [...this.contacts[contactGuid]["messages"], ...messagesArr];
+        }
     }
 
     createMessageLoading() {
@@ -222,6 +265,7 @@ class chaThiago {
     clearMessageLoading() {
         console.log("loaded");
     }
+
 }
 
 (async () => {
@@ -233,11 +277,13 @@ class chaThiago {
 /*
 getContacts()
 
+[idUser] => 2
 [0] => Array
     (
         [idUser] => 1
         [userName] => Mr White
         [imgUser] => null
+        [textoMensagem]
     )
 
 [1] => Array
@@ -289,7 +335,7 @@ const contacts = {
 };
 */
 
-async function sendMessage(idReceiver, message, timestamp) {
+async function saveMessageDB(idReceiver, message, timestamp) {
     let response = await fetch(
         `./php/post/chat/adicionarMensagem.php`,
         {
