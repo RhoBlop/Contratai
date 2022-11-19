@@ -14,16 +14,16 @@
                 $contacts = [];
 
                 $sql = <<<SQL
-                    SELECT iduser, nomeuser, imguser
+                    SELECT iduser, nomeuser, imguser, textoMensagem, timeCriacaoMensagem
                     FROM (
-                        SELECT usr.iduser, usr.nomeuser, usr.imguser, timecriacaomensagem,
-                            row_number() OVER (PARTITION BY usr.iduser ORDER BY timecriacaomensagem DESC) AS rn
+                        SELECT usr.iduser, usr.nomeuser, usr.imguser, textoMensagem, timeCriacaoMensagem,
+                            row_number() OVER (PARTITION BY usr.iduser ORDER BY timeCriacaoMensagem DESC) AS rn
                         FROM usuario AS usr
                         INNER JOIN mensagem AS msg ON (usr.iduser = msg.idremetente)
                         WHERE msg.iddestinatario = :idreceiver
                     ) AS t
                     WHERE rn = 1
-                    ORDER BY timecriacaomensagem DESC
+                    ORDER BY timeCriacaoMensagem DESC
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
@@ -34,12 +34,19 @@
                     $contact = [
                         "idUser" => $row["iduser"],
                         "userName" => $row["nomeuser"],
-                        "imgUser" => $row["imguser"]
+                        "imgUser" => $row["imguser"],
+                        "lastMessage" => $row["textomensagem"],
+                        "timestamp" => $row["timecriacaomensagem"]
                     ];
                     $contacts[] = $contact;
                 }
+
+                $result = [
+                    "idUser" => $this->idUser,
+                    "contacts" => $contacts
+                ];
     
-                return [ "dados" => $contacts ];
+                return [ "dados" => $result ];
             } catch (PDOException $e) {
                 echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
                 exit();

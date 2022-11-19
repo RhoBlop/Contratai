@@ -1,10 +1,14 @@
-//TODO INTEGRATE SOCKET.IO, VISUALIZED MESSAGES, STYLE CSS, ADD PAGINATION
+//TODO MANAGE NEW SOCKET MESSAGES BASED ON WHO SENT IT / PUSH MESSAGES TO EACH CONTACT;
+// VISUALIZED MESSAGES; STYLE CSS; ADD PAGINATION
 
 class chaThiago {
-    constructor(elementId, contacts) {
+    constructor(elementId, idUser, contacts) {
         // data
+        this.idSender = idUser;
         this.contacts = {};
         this.currContactGuid = null;
+
+        this.getCurrUserId = () => this.contacts[this.currContactGuid]["idUser"];
 
         // HTML elements
         this.fetchMessageLoading = this.createMessageLoading();
@@ -17,21 +21,27 @@ class chaThiago {
     }
 
     setChatSocket() {
-        let socket = io('http://localhost:3000', {
-            transports: ['websocket', 'polling', 'flashsocket'],
+        let socket = io('https://contrataiwsserver.up.railway.app', {
+            transports: ['websocket'],
             withCredentials: true,
         });
-        // get userId somewhere
-        socket.emit("setSocketId", 1);
 
-        socket.on("disconnect", function(reason) {
+        socket.on("connect", () => {
+            console.log("Socket connected");
+        })
+        socket.on("disconnect", (reason) => {
             console.log(reason);
         });
 
-        socket.on("newMessage", function(messageJson) {
-            console.log(messageJson);
+        socket.emit("setSocketId", this.idSender);
+        socket.on("newMessage", (messageJson) => {
+            const { idSender, message, timestamp, sent } = messageJson
             
-            appendNewMessages([ messageJson ]);
+            this.appendNewMessages([ {
+                text: message,
+                time: timestamp,
+                sent: sent
+            } ]);
         });
 
         return socket;
@@ -77,10 +87,13 @@ class chaThiago {
             if (message) {
                 const timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
                 console.log("sending message");
-
-                // SEND SOCKET
-                this.socket.emit("sendMessage");
+                this.socket.emit("sendMessage", {
+                    idReceiver: this.getCurrUserId(),
+                    message: message,
+                    timestamp: timestamp
+                });
                 this.appendNewMessages([{ text: message, timestamp: timestamp, sent: true }]);
+
                 sendMessage(this.getCurrUserId(), message, timestamp);
                 console.log("message sent");
                 input.value = "";
@@ -167,10 +180,6 @@ class chaThiago {
         this.contacts[contactId]["messages"] = messages;
     }
 
-    getCurrUserId() {
-        return this.contacts[this.currContactGuid]["idUser"];
-    }
-
     appendNewMessages(messages) {
         if (!messages) {
             return;
@@ -216,9 +225,9 @@ class chaThiago {
 }
 
 (async () => {
-    const contacts = await getContacts();
+    const [idUser, contacts] = await getContacts();
 
-    const chat = new chaThiago("#chat", contacts);
+    const chat = new chaThiago("#chat", idUser, contacts);
 })();
 
 /*
@@ -313,7 +322,7 @@ async function getContacts() {
     let data = await response.json();
     
     let { dados } = data;
-    return dados;
+    return [ dados.idUser, dados.contacts ];
 }
 
 async function getContactMessages(idReceiver) {
