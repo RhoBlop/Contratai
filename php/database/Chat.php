@@ -55,6 +55,25 @@
             }
         }
 
+        public function getNewUser($idUserContact) {
+            try {
+                $SQL = <<<SQL
+                    
+                SQL;
+                $stmt = Database::prepare($SQL);
+                $stmt->execute([
+                    ":idDestinatario" => $idUserContact
+                ]);
+
+                return [ "dados" => $stmt->fetchAll() ];
+            } catch (PDOException $e) {
+                echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+                exit();
+
+                return ["dados" => false];
+            }
+        }
+
         public function getContactMessages($idUserContact) {
             try {
                 $messages = [];

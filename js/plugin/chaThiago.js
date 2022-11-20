@@ -164,12 +164,15 @@ class chaThiago {
         const input = event.currentTarget.querySelector("input");
         const message = input.value;
         
-        if (message) {
+        if (message && this.contacts) {
+            const idUser = this.getCurrReceiverId();
             const timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
+            const msg = { text: message, timestamp: timestamp, sent: true };
+            this.addContactMessages(idUser, [ msg ]);
+            this.appendNewMessages([ msg ]);
             this.socket.sendMessage(message, timestamp);
-            this.appendNewMessages([{ text: message, timestamp: timestamp, sent: true }]);
-            saveMessageDB(this.getCurrReceiverId(), message, timestamp);
             input.value = "";
+            saveMessageDB(idUser, message, timestamp);
         }
     }
 
@@ -187,12 +190,11 @@ class chaThiago {
         this.appendNewMessages(messages);
 
         this.messageLoading();
-        let fetchMessages = await getContactMessages(this.getCurrReceiverId());
+        let fetchMessages = await getContactMessages(idUser);
         this.clearMessageLoading();
 
+        this.addContactMessages(idUser, fetchMessages)
         this.appendNewMessages(fetchMessages);
-        messages = [...messages, ...fetchMessages];
-        this.contacts[contactId]["messages"] = messages;
     }
 
     appendNewMessages(messagesArr) {
@@ -347,11 +349,9 @@ async function saveMessageDB(idReceiver, message, timestamp) {
             body: `idDestinatario=${idReceiver}&mensagem=${message}&timestamp=${timestamp}`,
         }
     );
-    let data = await response.text();
-    console.log(data);
+    let data = await response.json();
 
-    let { dados } = data;
-    return dados;
+    return data.dados;
 }
 
 async function getContacts() {
@@ -371,11 +371,11 @@ async function getContacts() {
     return [ dados.idUser, dados.contacts ];
 }
 
-async function getContactMessages(idReceiver) {
+async function getNewContact(idReceiver) {
     let response = await fetch(
         `./php/post/chat/getMensagensConversa.php`,
         {
-            method: "POST",
+            method: "GET",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
@@ -385,6 +385,22 @@ async function getContactMessages(idReceiver) {
     );
     let data = await response.json();
 
-    let { dados } = data;
-    return dados;
+    return data.dados;
+}
+
+async function getContactMessages(idReceiver) {
+    let response = await fetch(
+        `./php/post/chat/getMensagensConversa.php`,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            credentials: "same-origin",
+            body: `idDestinatario=${idReceiver}`,
+        }
+    );
+    let data = await response.json();
+
+    return data.dados;
 }

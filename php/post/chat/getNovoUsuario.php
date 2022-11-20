@@ -13,7 +13,7 @@
     $chat = new Chat($idSender);
 
     $idDestinatario = $_GET["idDestinatario"];
-    $result = $chat->getContactMessages($idDestinatario);
+    $result = $chat->getNewUser($idDestinatario);
 
     echo json_encode($result);
 ?>
