@@ -1,0 +1,139 @@
+:root {
+    --ct-primary: #0d5e68;
+    --ct-light: #15a0b0;
+    --ct-dark: #074a59;
+    --ct-grey: #ced4da;
+    --contact-img-gap: 10px;
+}
+
+body {
+    background-color: var(--ct-grey);
+}
+
+.chathiago * {
+    box-sizing: border-box;
+}
+
+.chathiago {
+    display: flex;
+    max-width: 1200px;
+    flex-direction: row;
+    height: 90vh;
+    border: 2px solid var(--ct-grey);
+    border-radius: 8px;
+    background-color: white;
+}
+
+.chathiago .sidebar {
+    min-width: 240px;
+    max-width: 300px;
+    flex-grow: 0.3;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.chathiago .sidebar .contact {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--contact-img-gap);
+    padding: 10px;
+    transition: all .1s;
+    border-radius: 2px;
+}
+
+.chathiago .sidebar .contact:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: var(--ct-primary);
+}
+
+.chathiago .sidebar .contact.active {
+    cursor: pointer;
+    color: #fff;
+    background-color: var(--ct-primary);
+}
+
+.chathiago .sidebar .contact img {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.chathiago .conversation-box {
+    --ct-header-height: 80px;
+    --ct-input-box-height: 60px;
+    flex-grow: 1;
+    min-width: 400px;
+    height: 100%;
+}
+
+.chathiago .conversation-box .conversation-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--contact-img-gap);
+    height: 80px;
+    padding: 10px;
+    background-color: var(--ct-primary);
+    color: white;
+    border-radius: 0 8px 0 0;
+}
+
+.chathiago .conversation-box .conversation-header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.chathiago .conversation-box .messages {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    height: calc(100% - (var(--ct-header-height) + var(--ct-input-box-height)));
+    overflow-y: auto;
+}
+
+.chathiago .conversation-box .messages div {
+    
+}
+
+.chathiago .conversation-box .messages .sent {
+    align-self: flex-end;
+}
+
+.chathiago .conversation-box .messages .received {
+    align-self: flex-start
+}
+
+.chathiago .conversation-box .texting-box form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    height: 60px;
+    border-radius: 0 0 8px 0;
+    padding: 10px 10px;
+    background: var(--ct-primary)
+}
+
+.chathiago .conversation-box .texting-box input {
+    width: calc(100% - 60px);
+    height: 40px;
+}
+
+.chathiago .conversation-box .texting-box button {
+    background-color: white;;
+	color: var(--ct-primary);
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}

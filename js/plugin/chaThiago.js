@@ -73,6 +73,7 @@ class chaThiago {
 
         container.appendChild(sidebar);
         container.appendChild(conversationBox);
+        container.classList.add("chathiago");
         
         return container;
     }
@@ -97,7 +98,23 @@ class chaThiago {
         const sendMessageBtn = document.createElement("button");
         sendMessageBtn.innerHTML = "Send";
 
-        messagingForm.addEventListener("submit", this.sendMessageForm);
+        messagingForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const input = event.currentTarget.querySelector("input");
+            const message = input.value;
+            
+            if (message && this.currContactGuid) {
+                const idUser = this.getCurrReceiverId();
+                const timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
+                const msg = { text: message, timestamp: timestamp, sent: true };
+                this.addContactMessages(idUser, [ msg ]);
+                this.appendNewMessages([ msg ]);
+                this.socket.sendMessage(message, timestamp);
+                input.value = "";
+                saveMessageDB(idUser, message, timestamp);
+            }
+        });
 
         messagingForm.appendChild(messageInput);
         messagingForm.appendChild(sendMessageBtn);
@@ -156,24 +173,6 @@ class chaThiago {
         }
 
         return sidebar;
-    }
-
-    async sendMessageForm(event) {
-        event.preventDefault();
-
-        const input = event.currentTarget.querySelector("input");
-        const message = input.value;
-        
-        if (message && this.contacts) {
-            const idUser = this.getCurrReceiverId();
-            const timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
-            const msg = { text: message, timestamp: timestamp, sent: true };
-            this.addContactMessages(idUser, [ msg ]);
-            this.appendNewMessages([ msg ]);
-            this.socket.sendMessage(message, timestamp);
-            input.value = "";
-            saveMessageDB(idUser, message, timestamp);
-        }
     }
 
     async changeContact(contactId) {
@@ -338,6 +337,12 @@ const contacts = {
 */
 
 async function saveMessageDB(idReceiver, message, timestamp) {
+    const urlEncoded = new URLSearchParams({
+        idDestinatario: idReceiver,
+        mensagem: message,
+        timestamp: timestamp
+    })
+
     let response = await fetch(
         `./php/post/chat/adicionarMensagem.php`,
         {
@@ -346,7 +351,7 @@ async function saveMessageDB(idReceiver, message, timestamp) {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
             credentials: "same-origin",
-            body: `idDestinatario=${idReceiver}&mensagem=${message}&timestamp=${timestamp}`,
+            body: urlEncoded,
         }
     );
     let data = await response.json();
@@ -372,15 +377,18 @@ async function getContacts() {
 }
 
 async function getNewContact(idReceiver) {
+    const queryString = new URLSearchParams({
+        idDestinatario: idReceiver
+    })
+
     let response = await fetch(
-        `./php/post/chat/getMensagensConversa.php`,
+        `./php/post/chat/getMensagensConversa.php?` + queryString,
         {
             method: "GET",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-            credentials: "same-origin",
-            body: `idDestinatario=${idReceiver}`,
+            credentials: "same-origin"
         }
     );
     let data = await response.json();
@@ -389,15 +397,18 @@ async function getNewContact(idReceiver) {
 }
 
 async function getContactMessages(idReceiver) {
+    const queryString = new URLSearchParams({
+        idDestinatario: idReceiver
+    })
+
     let response = await fetch(
-        `./php/post/chat/getMensagensConversa.php`,
+        `./php/post/chat/getMensagensConversa.php?` + queryString,
         {
             method: "GET",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-            credentials: "same-origin",
-            body: `idDestinatario=${idReceiver}`,
+            credentials: "same-origin"
         }
     );
     let data = await response.json();
