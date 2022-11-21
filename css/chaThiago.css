@@ -2,13 +2,14 @@
     --ct-primary: #0d5e68;
     --ct-light: #15a0b0;
     --ct-dark: #074a59;
+    --ct-light-grey: #eff3f6;
     --ct-grey: #ced4da;
     --contact-img-gap: 10px;
 }
 
-body {
-    background-color: var(--ct-grey);
-}
+/* body {
+    background-color: var(--ct-light-grey);
+} */
 
 .chathiago * {
     box-sizing: border-box;
@@ -18,14 +19,14 @@ body {
     display: flex;
     max-width: 1200px;
     flex-direction: row;
-    height: 90vh;
-    border: 2px solid var(--ct-grey);
-    border-radius: 8px;
+    height: 80vh;
+    border-radius: 15px;
     background-color: white;
+    box-shadow: 0 0 20px 5px var(--ct-grey);
 }
 
 .chathiago .sidebar {
-    min-width: 240px;
+    min-width: 280px;
     max-width: 300px;
     flex-grow: 0.3;
     height: 100%;
@@ -37,8 +38,9 @@ body {
     flex-direction: row;
     align-items: center;
     gap: var(--contact-img-gap);
+    height: 80px;
     padding: 10px;
-    transition: all .1s;
+    transition: all .15s;
     border-radius: 2px;
 }
 
@@ -67,6 +69,7 @@ body {
     flex-grow: 1;
     min-width: 400px;
     height: 100%;
+    background-color: var(--ct-light-grey);
 }
 
 .chathiago .conversation-box .conversation-header {
@@ -92,22 +95,73 @@ body {
 .chathiago .conversation-box .messages {
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    padding: 30px 50px;
     height: calc(100% - (var(--ct-header-height) + var(--ct-input-box-height)));
     overflow-y: auto;
 }
 
-.chathiago .conversation-box .messages div {
-    
+.chathiago .conversation-box .messages  > :first-child {
+    margin-top: auto !important;
+}
+
+.chathiago .conversation-box .messages .empty-chat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    height: 80%;
+}
+
+.chathiago .conversation-box .messages .empty-chat img {
+    width: 350px;
+}
+
+.chathiago .conversation-box .messages .sent,
+.chathiago .conversation-box .messages .received {
+    max-width: 60%;
+    padding: 10px 15px;
+    margin-bottom: 2px;
+    border-radius: 15px;
+    overflow-wrap: break-word;
 }
 
 .chathiago .conversation-box .messages .sent {
     align-self: flex-end;
+    background-color: var(--ct-primary);
+    color: white;
+    border-bottom-right-radius: 2px;
 }
 
 .chathiago .conversation-box .messages .received {
-    align-self: flex-start
+    align-self: flex-start;
+    background-color: white;
+    color: black;
 }
+
+.chathiago .conversation-box .messages div.sent + div.received,
+.chathiago .conversation-box .messages div.received + div.sent {
+    margin-top: 8px !important;
+}
+
+/* 
+.msg::before {
+  content: attr(data-time);
+  font-size: 0.8rem;
+  position: absolute;
+  bottom: 100%;
+  color: #888;
+  white-space: nowrap;
+  display: none;
+}
+
+.msg.sent::before {
+  right: 15px;
+}
+
+.msg.rcvd::before {
+  left: 15px;
+}
+*/
 
 .chathiago .conversation-box .texting-box form {
     display: flex;
@@ -123,10 +177,15 @@ body {
 .chathiago .conversation-box .texting-box input {
     width: calc(100% - 60px);
     height: 40px;
+    background-color: var(--ct-light-grey);
+    border-radius: 10px;
+    padding: 0 15px;
+    border:none;
+    outline: none;
 }
 
 .chathiago .conversation-box .texting-box button {
-    background-color: white;;
+    background-color: var(--ct-light-grey);
 	color: var(--ct-primary);
 	border: none;
 	padding: 0;

@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <?php require("components/head.php") ?>
+        <link rel="stylesheet" href="css/chaThiago.css">
     </head>
     <body>
         <?php include ("components/header-auth.php") ?>
@@ -10,10 +11,8 @@
 
         <main>
             <div id="chat">
-
             </div>
         </main>
-        <?php include ("components/footer.html")?>
     </body>
 
     
