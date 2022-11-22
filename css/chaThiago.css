@@ -99,8 +99,9 @@
     overflow-y: auto;
 }
 
-.chathiago .conversation-box .messages  > .sent:first-child,
-.chathiago .conversation-box .messages  > .received:first-child {
+.chathiago .conversation-box .messages > .sent:first-child,
+.chathiago .conversation-box .messages > .received:first-child,
+.chathiago .conversation-box .messages > .lds-dual-ring:first-child {
     margin-top: auto !important;
 }
 
@@ -197,3 +198,35 @@
     width: 40px;
     border-radius: 50%;
 }
+
+/* LOADING RING */
+.lds-dual-ring {
+    display: inline-block;
+    margin: 0 auto;
+    width: 80px;
+    height: 80px;
+}
+.lds-dual-ring + .sent,
+.lds-dual-ring + .received {
+    margin-top: 80px;
+}
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid var(--ct-primary);
+    border-color: var(--ct-primary) transparent var(--ct-primary) transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+  

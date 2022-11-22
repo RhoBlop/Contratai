@@ -58,14 +58,25 @@
         public function getNewUser($idUserContact) {
             try {
                 $SQL = <<<SQL
-                    
+                    SELECT iduser, nomeuser, imguser
+                        FROM usuario
+                        WHERE iduser = :idDestinatario
                 SQL;
                 $stmt = Database::prepare($SQL);
                 $stmt->execute([
                     ":idDestinatario" => $idUserContact
                 ]);
 
-                return [ "dados" => $stmt->fetchAll() ];
+                $user = $stmt->fetch();
+                $result = [
+                    "idUser" => $user['iduser'],
+                    "userName" => $user['nomeuser'],
+                    "imgUser" => $user['imguser'],
+                    "lastMessage" => "Nenhuma mensagem",
+                    "timestamp" => getCurrentTimestamp()
+                ];
+
+                return [ "dados" => $result ];
             } catch (PDOException $e) {
                 echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
                 exit();
@@ -74,7 +85,7 @@
             }
         }
 
-        public function getContactMessages($idUserContact) {
+        public function getContactMessages($idUserContact, $limit, $offset) {
             try {
                 $messages = [];
 
@@ -86,11 +97,15 @@
                     WHERE ((msg.iddestinatario = :iduser) AND (msg.idremetente = :idUserContact)) OR
                           ((msg.iddestinatario = :idUserContact) AND (msg.idremetente = :iduser))
                     ORDER BY timecriacaomensagem
+                    LIMIT :limit
+                    OFFSET :offset
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
                     ":iduser" => $this->idUser,
-                    ":idUserContact" => $idUserContact
+                    ":idUserContact" => $idUserContact,
+                    ":limit" => $limit,
+                    ":offset" => $offset
                 ]);
 
                 foreach ($stmt->fetchAll() AS $row) {

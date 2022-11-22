@@ -6,17 +6,18 @@ class chaThiago {
         this.idSender = idUser;
         this.contacts = {};
         this.currContactGuid = null;
-        // this.socket = this.setChatSocket();
+        this.maxMessagesPerFetch = 50;
+        this.socket = this.setChatSocket();
         
         // HTML elements
-        this.fetchMessageLoading = this.createMessageLoading();
+        this.messageLoadingRing = this.createMessageLoading();
         this.chat = this.createChatSkeleton(elementId, contacts);
         this.conversationBox = chat.querySelector(`${elementId} .conversation-box`);
         this.chatSidebar = chat.querySelector(`${elementId} .sidebar`);
     }
 
     setChatSocket() {
-        let socket = io('https://contrataiwsserver.up.railway.app', {
+        let socket = io('http://localhost:3000', {
             transports: ['websocket'],
             withCredentials: true,
         });
@@ -120,7 +121,8 @@ class chaThiago {
                 "userName": userName,
                 "idUser": idUser,
                 "imgUser": imgUser,
-                "messages": []
+                "messages": [],
+                "offset": 0
             };
 
             // ADD LAST SENT MESSAGE
@@ -133,7 +135,7 @@ class chaThiago {
             
             contactDiv.addEventListener("click", async (event) => {
                 const contactDiv = event.currentTarget;
-                const activeConversation = this.chatSidebar.querySelector("active");
+                const activeConversation = this.chatSidebar.querySelector(".active");
 
                 if (activeConversation) {
                     activeConversation.classList.remove("active");
@@ -152,7 +154,7 @@ class chaThiago {
     }
 
     addMessageForm() {
-        if (!this.conversationBox.querySelector("texting-box")) {
+        if (!this.conversationBox.querySelector(".texting-box")) {
             const textingBox = document.createElement("div");
             textingBox.classList.add("texting-box");
 
@@ -182,7 +184,7 @@ class chaThiago {
                     const msg = { text: message, timestamp: timestamp, sent: true };
                     this.addContactMessages(idUser, [ msg ]);
                     this.appendNewMessages([ msg ]);
-                    // this.socket.sendMessage(message, timestamp);
+                    this.socket.sendMessage(message, timestamp);
                     input.value = "";
                     saveMessageDB(idUser, message, timestamp);
                 }
@@ -201,10 +203,9 @@ class chaThiago {
             return;
         }
         
-        console.log(this);
         this.addMessageForm();
 
-        let { idUser, userName, imgUser, messages } = this.contacts[contactId];
+        let { idUser, userName, imgUser, messages, offset} = this.contacts[contactId];
         this.currContactGuid = contactId;
         console.log(idUser, userName, imgUser, messages);
 
@@ -214,14 +215,15 @@ class chaThiago {
         textDiv.innerHTML = userName;
         
         const headerDiv = this.conversationBox.querySelector(".conversation-header");
+        headerDiv.innerHTML = "";
         headerDiv.appendChild(img);
-        headerDiv.appendChild(textDiv)
+        headerDiv.appendChild(textDiv);
 
         this.clearMessages();
         this.appendNewMessages(messages);
 
         this.messageLoading();
-        let fetchMessages = await getContactMessages(idUser);
+        let fetchMessages = await getContactMessages(idUser, this.maxMessagesPerFetch, offset);
         this.clearMessageLoading();
 
         this.addContactMessages(idUser, fetchMessages)
@@ -231,7 +233,7 @@ class chaThiago {
     }
 
     appendNewMessages(messagesArr) {
-        if (!messagesArr) {
+        if (!messagesArr || messagesArr.length === 0) {
             return;
         }
 
@@ -282,21 +284,25 @@ class chaThiago {
     addContactMessages(idUser, messagesArr) {
         const contactGuid = this.getContactGuidByUserId(idUser);
 
-        if (contactGuid) {
+        if (contactGuid && messagesArr.length !== 0) {
             this.contacts[contactGuid]["messages"] = [...this.contacts[contactGuid]["messages"], ...messagesArr];
+            this.contacts[contactGuid]["offset"] += messagesArr.length;
         }
     }
 
     createMessageLoading() {
+        const loadingRing = document.createElement("div");
+        loadingRing.classList.add("lds-dual-ring");
 
+        return loadingRing;
     }
 
     messageLoading() {
-        console.log("loading...");
+        this.conversationBox.querySelector(".messages").prepend(this.messageLoadingRing);
     }
 
     clearMessageLoading() {
-        console.log("loaded");
+        this.messageLoadingRing.remove();
     }
 
     scrollToBottom() {
@@ -307,8 +313,108 @@ class chaThiago {
 (async () => {
     const [idUser, contacts] = await getContacts();
 
+    const newContact = await getNewContact();
+    if (newContact) {
+        contacts.push(newContact);
+    }
+
     const chat = new chaThiago("#chat", idUser, contacts);
 })();
+
+async function saveMessageDB(idReceiver, message, timestamp) {
+    const urlEncoded = new URLSearchParams({
+        idDestinatario: idReceiver,
+        mensagem: message,
+        timestamp: timestamp
+    })
+
+    let response = await fetch(
+        `./php/post/chat/adicionarMensagem.php`,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            credentials: "same-origin",
+            body: urlEncoded,
+        }
+    );
+    let data = await response.json();
+
+    return data.dados;
+}
+
+async function getContacts() {
+    let response = await fetch(
+        `./php/post/chat/getConversas.php`,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            credentials: "same-origin"
+        }
+    );
+    let data = await response.json();
+    
+    let { dados } = data;
+    return [ dados.idUser, dados.contacts ];
+}
+
+async function getNewContact() {
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+      });
+    let idReceiver = params.newChatId;
+
+    if (idReceiver) {
+        const queryString = new URLSearchParams({
+            idDestinatario: idReceiver
+        })
+    
+        // replace querystring
+        window.history.replaceState({}, document.title, "/" + "chat.php");
+        console.log(queryString);
+    
+        let response = await fetch(
+            `./php/post/chat/getNovoUsuario.php?` + queryString,
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                credentials: "same-origin"
+            }
+        );
+        let data = await response.json();
+    
+        return data.dados;
+    } else {
+        return null;
+    }
+}
+
+async function getContactMessages(idReceiver, limit, offset) {
+    const queryString = new URLSearchParams({
+        idDestinatario: idReceiver,
+        limit: limit,
+        offset: offset
+    })
+
+    let response = await fetch(
+        `./php/post/chat/getMensagensConversa.php?` + queryString,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            credentials: "same-origin"
+        }
+    );
+    let data = await response.json();
+
+    return data.dados;
+}
 
 /*
 getContacts()
@@ -370,83 +476,3 @@ const contacts = {
     }
 };
 */
-
-async function saveMessageDB(idReceiver, message, timestamp) {
-    const urlEncoded = new URLSearchParams({
-        idDestinatario: idReceiver,
-        mensagem: message,
-        timestamp: timestamp
-    })
-
-    let response = await fetch(
-        `./php/post/chat/adicionarMensagem.php`,
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            credentials: "same-origin",
-            body: urlEncoded,
-        }
-    );
-    let data = await response.json();
-
-    return data.dados;
-}
-
-async function getContacts() {
-    let response = await fetch(
-        `./php/post/chat/getConversas.php`,
-        {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            credentials: "same-origin"
-        }
-    );
-    let data = await response.json();
-    
-    let { dados } = data;
-    return [ dados.idUser, dados.contacts ];
-}
-
-async function getNewContact(idReceiver) {
-    const queryString = new URLSearchParams({
-        idDestinatario: idReceiver
-    })
-
-    let response = await fetch(
-        `./php/post/chat/getMensagensConversa.php?` + queryString,
-        {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            credentials: "same-origin"
-        }
-    );
-    let data = await response.json();
-
-    return data.dados;
-}
-
-async function getContactMessages(idReceiver) {
-    const queryString = new URLSearchParams({
-        idDestinatario: idReceiver
-    })
-
-    let response = await fetch(
-        `./php/post/chat/getMensagensConversa.php?` + queryString,
-        {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            credentials: "same-origin"
-        }
-    );
-    let data = await response.json();
-
-    return data.dados;
-}

@@ -5,7 +5,7 @@
     require ("../../utils.php");
         
     session_start();
-    verifyIsAuthenticated();
+    // verifyIsAuthenticated();
 
     $idSender = $_SESSION["iduser"];
 
