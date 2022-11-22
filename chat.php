@@ -26,5 +26,5 @@
     <!-- Socket.Io -->
     <script src="https://cdn.socket.io/4.5.3/socket.io.min.js" integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi" crossorigin="anonymous"></script>
     <!-- Chat -->
-    <script src="js/plugin/chaThiago.js"></script>
+    <script type="module" src="js/plugin/chaThiago.js"></script>
 </html>

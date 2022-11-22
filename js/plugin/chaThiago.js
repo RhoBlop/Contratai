@@ -1,4 +1,4 @@
-//TODO ADD CONVERSATIONS WITH NEW USERS; NEW MESSAGES BADGE; VISUALIZED MESSAGES; STYLE CSS; ADD PAGINATION
+//TODO ADD CONVERSATIONS WITH NEW USERS; NEW MESSAGES BADGE; VISUALIZED MESSAGES; FIX .messages HEIGHT WHEN CHAT IS INITIALIZED; STYLE CSS; ADD PAGINATION
 
 class chaThiago {
     constructor(elementId, idUser, contacts) {
@@ -6,7 +6,7 @@ class chaThiago {
         this.idSender = idUser;
         this.contacts = {};
         this.currContactGuid = null;
-        this.socket = this.setChatSocket();
+        // this.socket = this.setChatSocket();
         
         // HTML elements
         this.fetchMessageLoading = this.createMessageLoading();
@@ -88,12 +88,19 @@ class chaThiago {
         const messagesDiv = document.createElement("div");
         messagesDiv.classList.add("messages");
 
-        const textingBox = document.createElement("div");
-        textingBox.classList.add("texting-box");
+        const emptyChatDiv = document.createElement("div");
+        emptyChatDiv.classList.add("empty-chat");
+        const emptyImg = document.createElement("img");
+        emptyImg.src = "images/storyset/empty-chat.svg";
+        const emptyTextDiv = document.createElement("h5");
+        emptyTextDiv.innerHTML = "Entre em contato com qualquer usuário do Contrataí. Basta navegar pelos perfis de usuário e começar a negociar!";
+
+        emptyChatDiv.appendChild(emptyTextDiv);
+        emptyChatDiv.appendChild(emptyImg);
+        messagesDiv.appendChild(emptyChatDiv);
 
         conversationBox.appendChild(headerBox);
         conversationBox.appendChild(messagesDiv);
-        conversationBox.appendChild(textingBox);
 
         return conversationBox;
     };
@@ -145,18 +152,22 @@ class chaThiago {
     }
 
     addMessageForm() {
-        const textingBox = this.conversationBox.querySelector(".texting-box");
+        if (!this.conversationBox.querySelector("texting-box")) {
+            const textingBox = document.createElement("div");
+            textingBox.classList.add("texting-box");
 
-        if (!textingBox.querySelector("form")) {
             const messagingForm = document.createElement("form");
             messagingForm.setAttribute("action", "javascript:void(0);");
+
+            const emojiBtn = document.createElement("button");
+            emojiBtn.innerHTML = '<i class="fa-regular fa-face-grin-tongue-wink"></i>';
 
             const messageInput = document.createElement("input");
             messageInput.classList.add("message-input");
             messageInput.placeholder = "Digite sua mensagem...";
             messageInput.setAttribute("type", "text");
-            const sendMessageBtn = document.createElement("button");
 
+            const sendMessageBtn = document.createElement("button");
             sendMessageBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i>';
 
             messagingForm.addEventListener("submit", async (event) => {
@@ -171,15 +182,17 @@ class chaThiago {
                     const msg = { text: message, timestamp: timestamp, sent: true };
                     this.addContactMessages(idUser, [ msg ]);
                     this.appendNewMessages([ msg ]);
-                    this.socket.sendMessage(message, timestamp);
+                    // this.socket.sendMessage(message, timestamp);
                     input.value = "";
                     saveMessageDB(idUser, message, timestamp);
                 }
             });
 
             messagingForm.appendChild(messageInput);
+            messagingForm.appendChild(emojiBtn);
             messagingForm.appendChild(sendMessageBtn);
             textingBox.appendChild(messagingForm);
+            this.conversationBox.appendChild(textingBox);
         }
     }
 
