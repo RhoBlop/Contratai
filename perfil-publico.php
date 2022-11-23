@@ -83,7 +83,8 @@
                                 if ($_SESSION["iduser"] != $userId) {
                                     echo <<<ITEM
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#modal-contrato" class="btn btn-outline-green mt-3">Contratar</a>
-                                            <a href="chat.php?newChatId=${$_SESSION['iduser']}" class="btn btn-outline-green mt-3">Conversar</a>
+
+                                            <a href="chat.php?newChatId={$userId}" class="btn btn-outline-green mt-3">Conversar</a>
                                             ITEM;
                                 }
                                 ?>

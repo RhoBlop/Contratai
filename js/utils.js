@@ -3,7 +3,7 @@
 function timeoutConnection() {
     return setTimeout(() => {
         formErro("Algum erro ocorreu. Tente novamente mais tarde!");
-    }, 6000);
+    }, 8000);
 }
 
 // redireciona para o index e abre o modal de login

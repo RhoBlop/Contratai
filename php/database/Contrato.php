@@ -45,7 +45,7 @@ class Contrato extends Database
 
             // NOTIFICACAO
             //TODO - inserir os dados no texto diretamente no insert da notificação?
-            $this->insertNotificacao($solicitacaoStatus, $idContrato, $idContratante, $idContratado, "Nova solicitação de contrato", "O usuário {1} solicitou você para um contrato de {2}");
+            $this->insertNotificacao($solicitacaoStatus, $idContrato, $idContratante, $idContratado);
 
             $conn->commit();
             return ["dados" => true];
@@ -58,11 +58,15 @@ class Contrato extends Database
         }
     }
 
-    public function insertNotificacao($idstatus, $idContrato, $idRemetente, $idDestinatario, $titleNotific, $descrNotific) {
+    public function insertNotificacao($idstatus, $idContrato, $idRemetente, $idDestinatario) {
+        $titleNotific = null;
+        $descrNotific = null;
         try {
             switch ($idstatus) {
                 // solicitação de contrato
                 case 1:
+                    $titleNotific = "Nova solicitação de contrato";
+                    $descrNotific = "O usuário {1} solicitou você para um contrato de {2}";
                     break;
                 case 2:
                     break;
