@@ -293,31 +293,6 @@ class Usuario extends Database
         }
     }
 
-    public function selectNotificacoesDropdown($idUser) {
-        try {
-            $sql = <<<SQL
-                    SELECT *
-                    FROM usuario AS usr
-                    INNER JOIN notificacaocontrato as notific ON (usr.iduser = notific.iddestinatario)
-                    INNER JOIN contrato as contrt ON (notific.idcontrato = contrt.idcontrato)
-                    WHERE (notific.iddestinatario = :id) AND (isvisualizado = FALSE);
-                SQL;
-
-            $stmt = Database::prepare($sql);
-            $stmt->execute([
-                ":id" => $idUser
-            ]);
-
-            $result = $stmt->fetchAll();
-            return $result;
-        } catch (PDOException $e) {
-            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
-            exit();
-
-            return ["dados" => false];
-        }
-    }
-
     public function selectCalendario($idUser) {
         $conn = Database::getInstance();
 
