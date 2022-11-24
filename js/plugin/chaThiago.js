@@ -318,6 +318,7 @@ class chaThiago {
         contacts.push(newContact);
     }
 
+    console.log(contacts);
     const chat = new chaThiago("#chat", idUser, contacts);
 })();
 
@@ -356,6 +357,7 @@ async function getContacts() {
         }
     );
     let data = await response.json();
+    console.log(data);
     
     let { dados } = data;
     return [ dados.idUser, dados.contacts ];

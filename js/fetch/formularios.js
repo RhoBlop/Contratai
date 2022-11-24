@@ -267,6 +267,8 @@ async function sendAvaliacao(event) {
         const bsModal = bootstrap.Modal.getInstance(modalAvalia);
         bsModal.hide();
         modalAvalia.remove();
+        // TODO - Remove this later
+        window.location.reload();
     }
     clearTimeout(timeout);
 }

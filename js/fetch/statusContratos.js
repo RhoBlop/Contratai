@@ -2,7 +2,7 @@ async function aceitarContrato(event) {
     let btn = event.target;
     let contratoEl = findClosestAncestorByClass(btn, "id-contrato");
 
-    moveContrato(contratoEl, "#")
+    // moveContrato(contratoEl, "#")
     
     // deleta os botões de "aceitar" e "recusar" do card
     let buttons = contratoEl.querySelector(".contrato-buttons");
@@ -29,6 +29,7 @@ async function aceitarContrato(event) {
             "success-notify",
             idContrato
         );
+        window.location.reload();
     } else {
         createToast(
             "Erro na operação",
@@ -56,6 +57,7 @@ async function recusarContrato(event) {
             "success-notify",
             idContrato
         );
+        window.location.reload();
     } else {
         createToast(
             "Erro na operação",
@@ -83,6 +85,7 @@ async function solicitarFimContrato(event) {
             "success-notify",
             idContrato
         );
+        window.location.reload();
     } else {
         createToast(
             "Erro na operação",
@@ -110,6 +113,7 @@ async function aceitarFimContrato(event) {
             "success-notify",
             idContrato
         );
+        window.location.reload();
     } else {
         createToast(
             "Erro na operação",
@@ -153,4 +157,6 @@ function moveContrato(contrato, divId) {
     targetAccordion.appendChild(contrato);
 }
 
-function addButtonsContrato(contrato)
+function addButtonsContrato(contrato) {
+
+}
