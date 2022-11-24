@@ -13,7 +13,7 @@
     $usuarioClass = new Usuario();
     $user = $usuarioClass->selectBasicInfoById($_SESSION["iduser"]);
 
-    $notificacoes = $usuarioClass->selectNotificacoesDropdown($_SESSION["iduser"]);
+    // $notificacoes = $usuarioClass->selectNotificacoesDropdown($_SESSION["iduser"]);
 ?>
 <header>
     <nav class="navbar navbar-expand-md fixed-top bg-light">
@@ -49,33 +49,33 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link" data-bs-toggle="dropdown">
                     <?php
-                        $numNotific = count($notificacoes);
+                        // $numNotific = count($notificacoes);
 
-                        if ($numNotific > 0) {
-                            echo "<i class='fa-regular fa-bell notify-badge' data-count={$numNotific}></i>";
-                        } else {
-                            echo "<i class='fa-regular fa-bell'></i>";
-                        }
+                        // if ($numNotific > 0) {
+                        //     echo "<i class='fa-regular fa-bell notify-badge' data-count={$numNotific}></i>";
+                        // } else {
+                        //     echo "<i class='fa-regular fa-bell'></i>";
+                        // }
                     ?>  
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end text-small shadow">
                     <?php
-                        if ($numNotific < 1) {
-                            echo <<<HTML
-                            <li class="dropdown-item">
-                                Nenhuma notificação nova!
-                            </li>
-                            HTML;
-                        } else {
-                            foreach ($notificacoes as $notific):
-                                //TODO - Adicionar items de notificação do dropdown
-                                echo <<<HTML
-                                <li class="dropdown-item">
-                                  {$notific['descrnotific']}
-                                </li>
-                                HTML;
-                            endforeach;
-                        }
+                        // if ($numNotific < 1) {
+                        //     echo <<<HTML
+                        //     <li class="dropdown-item">
+                        //         Nenhuma notificação nova!
+                        //     </li>
+                        //     HTML;
+                        // } else {
+                        //     foreach ($notificacoes as $notific):
+                        //         //TODO - Adicionar items de notificação do dropdown
+                        //         echo <<<HTML
+                        //         <li class="dropdown-item">
+                        //           {$notific['descrnotific']}
+                        //         </li>
+                        //         HTML;
+                        //     endforeach;
+                        // }
                     ?>
 
                     <li><hr class="dropdown-divider"></li>
