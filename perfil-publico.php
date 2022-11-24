@@ -74,7 +74,7 @@
                                 <h3><?php echoDadosNotNull($perfnomeuser, "---"); ?></h3>
                                 <div class="body-text">
                                     <p><i class="fa-solid fa-briefcase fa-fw"></i><?php echo ucfirst(implode(", ", $perfEspecs)) ?></p>
-                                    <p><i class="fa-solid fa-location-dot fa-fw"></i>[Desenvolvimento no futuro]</p>
+                                    <!-- <p><i class="fa-solid fa-location-dot fa-fw"></i>[Desenvolvimento no futuro]</p> -->
                                     <p><i class="fa-solid fa-star fa-fw"></i><?php echoDadosNotNull($perfMediaAval, "---"); ?></p>
                                     <p><?php echo is_null($perfNumContrato) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
                                     <a href="#avaliacao" class="text-decoration-none"><?php echoDadosNotNull("{$numAval} avaliações recebidas", "---"); ?></a><br>

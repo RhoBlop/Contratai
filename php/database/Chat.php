@@ -14,27 +14,38 @@
                 $contacts = [];
 
                 $sql = <<<SQL
-                    SELECT iduser, nomeuser, imguser, textoMensagem, timeCriacaoMensagem
+                    SELECT *
                     FROM (
-                        SELECT usr.iduser, usr.nomeuser, usr.imguser, textoMensagem, timeCriacaoMensagem,
-                            row_number() OVER (PARTITION BY usr.iduser ORDER BY timeCriacaoMensagem DESC) AS rn
-                        FROM usuario AS usr
-                        INNER JOIN mensagem AS msg ON (usr.iduser = msg.idremetente)
-                        WHERE msg.iddestinatario = :idreceiver
+                        SELECT sender.iduser as "idSender", sender.nomeuser as "nomeSender", sender.imguser "imgSender", receiver.iduser as "idReceiver", receiver.nomeuser "nomeReceiver", receiver.imguser "imgReceiver", textoMensagem, timeCriacaoMensagem,
+                            CASE 
+                                WHEN sender.iduser = :idchatowner 
+                                    THEN row_number() OVER (PARTITION BY receiver.iduser ORDER BY timeCriacaoMensagem DESC)
+                                WHEN receiver.iduser = :idchatowner 
+                                    THEN row_number() OVER (PARTITION BY sender.iduser ORDER BY timeCriacaoMensagem DESC)
+                            END AS rn
+                        FROM mensagem AS msg
+                        INNER JOIN usuario AS sender ON (msg.idremetente = sender.iduser)
+                        INNER JOIN usuario AS receiver ON (msg.iddestinatario = receiver.iduser)
+                        WHERE (msg.iddestinatario = :idchatowner) OR (msg.idremetente = :idchatowner)
                     ) AS t
                     WHERE rn = 1
                     ORDER BY timeCriacaoMensagem DESC
                 SQL;
                 $stmt = Database::prepare($sql);
                 $stmt->execute([
-                    ":idreceiver" => $this->idUser
+                    ":idchatowner" => $this->idUser
                 ]);
 
                 foreach ($stmt->fetchAll() AS $row) {
+                    if ($row["idSender"] === $this->idUser) {
+                        $sufix = "Receiver";
+                    } else if ($row["idReceiver"] === $this->idUser) {
+                        $sufix = "Sender";
+                    }
                     $contact = [
-                        "idUser" => $row["iduser"],
-                        "userName" => $row["nomeuser"],
-                        "imgUser" => $row["imguser"],
+                        "idUser" => $row["id{$sufix}"],
+                        "userName" => $row["nome{$sufix}"],
+                        "imgUser" => $row["img{$sufix}"],
                         "lastMessage" => $row["textomensagem"],
                         "timestamp" => $row["timecriacaomensagem"]
                     ];

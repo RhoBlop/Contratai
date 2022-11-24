@@ -306,7 +306,7 @@
                                                         <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
                                                     </div>
                                                     <div class="text">
-                                                        <h8>O contrato com <b><?php echo $contrt["nomeuser"]; ?></b> foi finalizado em <?php echo $contrt["timefinalizacaocontrato"]; ?>. Agora você pode avaliá-lo pelo serviço!</h8>
+                                                        <h8>O contrato com <b><?php echo $contrt["nomeuser"]; ?></b> foi finalizado em <?php echoFullDate($contrt["timefinalizacaocontrato"]); ?>. Agora você pode avaliá-lo pelo serviço!</h8>
 
                                                         <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
                                                         <p class="text-muted">Dias agendados:</p>
@@ -621,7 +621,7 @@
                                                         <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
                                                     </div>
                                                     <div class="text">
-                                                        <h7 class="m-0">O contrato com <b><?php echo $contrt["nomeuser"]; ?></b> foi finalizado com sucesso em <?php echo $contrt["timefinalizacaocontrato"]; ?>!</h7>
+                                                        <h7 class="m-0">O contrato com <b><?php echo $contrt["nomeuser"]; ?></b> foi finalizado com sucesso em <?php echoFullDate($contrt["timefinalizacaocontrato"]); ?>!</h7>
                                                         
                                                         <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
                                                         <p>Dias agendados:</p>

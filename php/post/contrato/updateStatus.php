@@ -5,13 +5,13 @@ require("../verificacoes.php");
 require("../../utils.php");
 
 session_start();
-verifyIsAuthenticated();
+// verifyIsAuthenticated();
 
 // classe PDO para realização de operações no BD
 require("../../database/Contrato.php");
 $contrato = new Contrato();
 
-[$idContrato, $idStatus] = [$_POST["idContrato"], $_POST["idStatus"]];
+[$idContrato, $idStatus] = [28, 4];
 
 // inserção da especialização no usuário
 $result = $contrato->setStatusContrato($idContrato, $idStatus);
