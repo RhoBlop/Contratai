@@ -65,7 +65,7 @@ async function fetchGetEspecs(profId) {
     selectEspecsControl.inputState();
 
     try {
-        let response = await fetch(`./php/post/profissao/getProfEspecs.php`, {
+        let response = await fetch(`./php/post/profissao/getEspecs.php`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
@@ -113,11 +113,11 @@ async function fetchAddEspec(profId, descrProf, especId, descrEspec) {
 
         if (data.dados) {
             setOpenToast(
-                "#notifyToast",
                 "Modificação de Profissões",
-                "Sua profissão foi adicionada com sucesso"
+                "Sua profissão foi adicionada com sucesso",
+                "success-notify"
             );
-            window.location.reload();
+            //TODO: Fechar modal da profissão
         }
     } catch (error) {
         console.error(error);
@@ -266,9 +266,9 @@ async function deleteEspec(event) {
 
         if (!data.dados) {
             setOpenToast(
-                "#notifyToast",
                 "Modificação de Profissões",
-                "Erro ao deletar profissão"
+                "Erro ao deletar profissão",
+                "failure-notify"
             );
 
             window.location.reload();

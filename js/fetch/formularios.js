@@ -1,17 +1,22 @@
 var idDivFeedback = "#feedbackUsuario";
 
 function loading() {
-    let feedbackDiv = document.querySelector(idDivFeedback);
+    const feedbackDiv = document.querySelector(idDivFeedback);
     feedbackDiv.style.display = "block";
     feedbackDiv.style.backgroundColor = "#026773";
     feedbackDiv.innerText = "Aguarde um instante...";
 }
 
 function formErro(textErro) {
-    let feedbackDiv = document.querySelector(idDivFeedback);
+    const feedbackDiv = document.querySelector(idDivFeedback);
     feedbackDiv.style.display = "block";
     feedbackDiv.style.backgroundColor = "#cf1c0e";
     feedbackDiv.innerText = textErro;
+}
+
+function hideFeedback() {
+    const feedbackDiv = document.querySelector(idDivFeedback);
+    feedbackDiv.style.display = "none";
 }
 
 // função de formulário responsável por criar um novo usuário
@@ -106,9 +111,9 @@ async function sendUpdate(event) {
 
     if (data.dados) {
         setOpenToast(
-            "#notifyToast",
             "Edição de perfil",
-            "Edição de perfil realizada com sucesso"
+            "Edição de perfil realizada com sucesso",
+            "success-notify"
         );
         window.location.href = "perfil.php";
     }
@@ -147,9 +152,9 @@ async function sendUpdateSenha(event) {
 
         if (data.dados) {
             setOpenToast(
-                "#notifyToast",
                 "Edição de senha",
-                "Edição da senha realizada com sucesso"
+                "Edição da senha realizada com sucesso",
+                "success-notify"
             );
             window.location.href = "perfil.php";
         }
@@ -186,14 +191,57 @@ async function deleteUser() {
 
 async function sendSolicitacaoContrato(event) {
     event.preventDefault();
+    const form = event.target;
 
     // transforma os dados do formulário para o formato x-www-form-urlencoded
-    let formData = new URLSearchParams(new FormData(event.target)).toString();
+    let formData = new URLSearchParams(new FormData(form)).toString();
 
     loading();
     timeout = timeoutConnection();
 
-    let response = await fetch("./php/post/contrato/solicitacaoContrato.php", {
+    let response = await fetch("./php/post/contrato/solicitar.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        credentials: "same-origin",
+        body: formData,
+    });
+    let data = await response.json();
+    console.log(data);
+
+    if (data.erro) {
+        let { erro } = data;
+        formErro(erro);
+    }
+
+    if (data.dados) {
+        createToast(
+            "Contratação",
+            "Solicitação de contratatação enviada com sucesso",
+            "success-notify"
+        );
+
+        const modalContrato = findClosestAncestorByClass(form, "modal");
+        const bsModal = bootstrap.Modal.getInstance(modalContrato);
+        bsModal.hide();
+
+        hideFeedback();
+    }
+    clearTimeout(timeout);
+}
+
+async function sendAvaliacao(event) {
+    event.preventDefault();
+    const form = event.target;
+
+    // transforma os dados do formulário para o formato x-www-form-urlencoded
+    let formData = new URLSearchParams(new FormData(form)).toString();
+
+    loading();
+    timeout = timeoutConnection();
+
+    let response = await fetch("./php/post/contrato/avaliar.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -210,10 +258,16 @@ async function sendSolicitacaoContrato(event) {
 
     if (data.dados) {
         setOpenToast(
-            "#notifyToast",
-            "Contratação",
-            "Solicitação de contratatação enviada com sucesso"
+            "Avaliação",
+            "O contrato foi avaliado com sucesso e adicionado no perfil público do usuário",
+            "success-notify"
         );
+
+        const modalAvalia = findClosestAncestorByClass(form, "modal");
+        const bsModal = bootstrap.Modal.getInstance(modalAvalia);
+        bsModal.hide();
+        modalAvalia.remove();
+        // TODO - Remove this later
         window.location.reload();
     }
     clearTimeout(timeout);

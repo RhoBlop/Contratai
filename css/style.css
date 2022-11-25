@@ -13,8 +13,6 @@
     --blue-vertical-gradient: linear-gradient(180deg, #15a0b0, #074a59);
     --navbar-height: 72px;
     --font-family: "Montserrat", sans-serif;
-
-
 } /* VARIABLES */
 
 * {
@@ -78,10 +76,6 @@ h6 {
 
 h7 {
     font-size: 20px;
-}
-
-.text-muted {
-    font-weight: 500;
 }
 
 @media screen and (max-width: 992px) {
@@ -213,7 +207,9 @@ main h1.text-gradient {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
-.btn-login, .btn-link, .btn-close {
+.btn-login,
+.btn-link,
+.btn-close {
     box-shadow: none;
 }
 
@@ -279,6 +275,7 @@ main h1.text-gradient {
     background-color: var(--dark-green);
     border-color: var(--primary-green);
 }
+
 
 .login-banner {
     height: 280px;
@@ -395,17 +392,17 @@ ion-icon {
     display: none;
     flex-direction: row;
     align-items: center;
-    padding: 15px 5px;
+    padding: 1rem 1rem;
     background-color: white;
-    border: 1px solid var(--bootstrap-border);
-    border-top: none;
+    border-radius: 1rem 1rem 0 0 !important;
 }
 
 .active #searchBox {
     border-radius: 0.5rem 0 0 0;
 }
-.active #searchButton {
-    border-radius: 0 0.5rem 0 0;
+#searchButton {
+    border-radius: 0 0.5rem 0.5rem 0;
+    transform: none;
 }
 .active .filters-group {
     display: flex;
@@ -447,13 +444,13 @@ ion-icon {
 .search-filter + label {
     display: inline-block;
     user-select: none;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     padding: 3px 15px;
     margin: 0px 5px;
     color: var(--grey);
     border: 1px solid var(--grey);
-    border-radius: 15px;
+    border-radius: 1rem;
     background-color: white;
     transition: all 0.15s ease-in-out;
 }
@@ -608,7 +605,7 @@ ion-icon {
     text-align: center;
     vertical-align: center;
     position: static;
-    margin-left: 5px;
+    margin-bottom: 8px;
 }
 
 @keyframes drop-in {
@@ -744,7 +741,7 @@ footer i {
 .cadastro-side-image img {
     object-fit: cover;
     width: 100%;
-    height: 100%;
+    height: 100vh;
 }
 
 @media screen and (max-width: 1400px) {
@@ -754,15 +751,20 @@ footer i {
 }
 
 @media screen and (max-width: 768px) {
+
     .cadastro-side-image {
-        z-index: -1;
+        /*z-index: -1;
         min-height: 100vh;
-        position: absolute;
+        position: absolute;*/
+        display: none;
+    }
+    .form-row {
+        align-items: center;
     }
     .form-cadastro {
         background: #fff;
         border-radius: 12px;
-        padding: 50px;
+        align-self: center;
     }
 }
 
@@ -773,6 +775,11 @@ footer i {
     .imagem-trabalhador-home {
         display: none;
     }
+}
+
+.step {
+    display: none;
+    padding: 0;
 }
 
 /* Settings e Sidebar */
@@ -786,8 +793,7 @@ table .text-muted {
 }
 
 hr {
-    size: 1px;
-    color: solid rgba(0, 0, 0, 0.1);
+    opacity: 0.1;
 }
 
 .active-link {
@@ -799,24 +805,31 @@ hr {
     color: white !important;
 }
 
-
-#sidebar .nav-item {
-    transition: .15s ease-in-out;
+#sidebar .nav-link.link-secondary {
+    transition: 0.2s ease-in-out;
     transition-delay: 0s;
-}
-
-#sidebar .nav-item:hover {
-    transform: scale(1.02);
 }
 
 .nav-link {
     padding: 0.5rem 1rem;
     font-size: 16px;
-    transition-delay: .15s;
 }
 
 #sidebar {
     font-size: 20px;
+}
+
+#sidebar .nav-link.link-secondary:hover {
+    background: #0d5e68;
+    color: white !important;
+}
+
+#sidebar .nav-link.link-danger:hover {
+    background: #dc3545;
+}
+
+.nav-item {
+    margin-bottom: 0.2rem;
 }
 
 /* Editar Perfil */
@@ -827,7 +840,7 @@ textarea {
 
 label {
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .btn-link {
@@ -888,6 +901,13 @@ label {
     object-fit: cover;
 }
 
+.img-contrato {
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+}
 /* HOVER */
 
 #inputFileLabel {
@@ -931,7 +951,7 @@ label {
     font-weight: 700;
     text-align: center;
     padding: 10px 0;
-    margin: 20px 0 0 0;
+    margin: 1rem 0;
     border-radius: 8px;
     animation: fade-in 0.3s ease-in;
     /* max-height: 0;
@@ -1222,15 +1242,16 @@ p {
     align-self: center;
     width: 300px;
     overflow: hidden;
-    border: 1px solid var(--bootstrap-border);
+    border: .5px solid var(--primary-green);
 }
 
 .filter-tablist a {
-    color: inherit;
+    color: var(--primary-green);
     border: none;
     padding: 10px 20px;
-    font: inherit;
-    transition: background-color .2s ease-in-out, color .2s ease-in-out;
+    font-weight: 500;
+    font-size: 18px;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .filter-tablist a:nth-child(1) {
@@ -1239,7 +1260,7 @@ p {
 
 .filter-tablist a.active,
 .filter-tablist a:hover {
-    background: #015c67;
+    background: #02525c;
     color: white;
     cursor: pointer;
     outline: inherit;
@@ -1249,24 +1270,89 @@ p {
     transform: none;
 }
 
-/* Acordiões */ 
+/* Acordiões */
 
-.accordion { 
+#settingsContent > #tablist > #calendario-tab {
+    border-top: 1px solid var(--bootstrap-border);
+}
+
+.accordion {
     --bs-accordion-active-color: var(--dark-green);
     --bs-accordion-active-bg: #e2f3fa;
     --bs-accordion-btn-focus-box-shadow: none;
 }
 
 .accordion-flush .accordion-button {
-    box-shadow: none !important;
-    border-radius: .375rem !important;
+    border-radius: 0.375rem !important;
 }
 
-.accordion-item {
-    border: none;
+.accordion-body {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.accordion-body p {
+    font-size: 16px;
+}
+
+.accordion-body b {
+    font-weight: 500;
+}
+
+.accordion-button {
+    font-size: 20px;
+}
+
+.contrato-buttons {
+    position: relative;
+    z-index: 100;
+}
+
+.clickable-image {
+    position: relative;
+}
+
+.clickable-image img {
+    border-radius: 50%;
+    object-fit: cover;
+    display: inline;
+    width: 64px;
+    height: 64px;
+}
+
+/* Date Chips */
+
+.contract-dates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 
+.time {
+    min-width: 10%;
+}
+
+.date-chip {
+    display: inline-block;
+    background: var(--primary-green);
+    font-size: 12px;
+    font-weight: 500;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 1rem;
+    user-select: none;
+}
+
+.date-chip.expired {
+    background-color: #92130A;
+}
+
+.date-chip.outline {
+    background: white;
+    border: 1px solid var(--primary-green);
+    color: var(--primary-green);
+}
 
 /* DatePicker */
 
@@ -1695,4 +1781,94 @@ p {
     .daterangepicker .drp-calendar.left {
         clear: none !important;
     }
+}
+
+/* Badge com contagem para notificações/chat */
+.notify-badge:after{
+    content: attr(data-count);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background: var(--primary-green);
+    height: .9rem;
+    width: .9rem;
+    bottom: -.2rem;
+    right: -.2rem;
+    font-size: .5rem;
+    border-radius: 50%;
+    color:white;
+    border: 1px solid var(--primary-green);
+}
+
+
+
+
+/* CRUD / ADMIN */
+
+.crud .table-title {
+    color: white;
+    /* background-image: linear-gradient(to right, #074a59, #095e6f, #0c7385, #10899a, #15a0b0); */
+    background: var(--primary-green);
+    padding: 20px 25px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    vertical-align: middle;
+}
+
+.crud .table-title h4{
+    margin: 0;
+}
+
+.crud tbody {
+    font-size: 15px;
+}
+
+.crud .table-title .crud-buttons a{
+    font-size: 13px;
+    font-weight: 500
+}
+
+    /* Custom checkbox
+
+    .crud .table label {
+        position: relative;
+        display: block;
+    }
+    
+    .crud .table input[type="checkbox"] {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .crud .table .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 24px;
+        width: 24px;
+        background: #999;
+        border-radius: 4px;
+    }
+    
+    .crud .table #selectAll:hover input + .checkmark {
+        background: #999;
+    }
+
+    .crud .table #selectAll input:checked + .checkmark { 
+        background: var(--light-green);
+    } */
+
+.crud .table .action-buttons a{
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* CHAT */
+
+.contact { 
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }

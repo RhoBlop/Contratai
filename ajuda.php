@@ -6,7 +6,7 @@
   </head>
   <body>
     <!-- HOME PAGE HEADER -->
-    <?php include ("components/no-auth-header.php"); ?>
+    <?php include ("components/header-no-auth.php"); ?>
 
     <main>
         <div class="container p-3 my-3">

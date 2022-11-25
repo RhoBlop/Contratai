@@ -6,11 +6,11 @@
   </head>
   <body>
     <!-- HOME PAGE HEADER -->
-    <?php include ("components/no-auth-header.php"); ?>
+    <?php include ("components/header-no-auth.php"); ?>
 
     <main>
       <div class="container p-3">
-        <div class="row d-flex justify-content-center align-items-center my-3 py-3">
+        <div class="row d-flex justify-content-center align-items-center py-3">
             <div class="col-sm-5 p-5">
               <h2 class="mb-3">Quem somos?</h2>
               <p>Criado por um grupo de 3 alunos do curso técnico de informática do IFES Serra, 

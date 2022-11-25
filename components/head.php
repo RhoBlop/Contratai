@@ -1,14 +1,16 @@
 <?php
-    require("php/database/Usuario.php");
-    require("php/database/Profissao.php");
-    require("php/impressaoDados.php");
-    require("php/utils.php");
+date_default_timezone_set('America/Sao_Paulo');
+session_start();
+require("php/database/Usuario.php");
+require("php/database/Profissao.php");
+require("php/impressaoDados.php");
+require("php/utils.php");
 
-    if (isset($_SESSION["iduser"])) {
-        $auth = true;
-    } else {
-        $auth = false;
-    }
+if (isset($_SESSION["iduser"])) {
+    $auth = true;
+} else {
+    $auth = false;
+}
 ?>
 
 <meta charset="UTF-8">
@@ -19,19 +21,11 @@
 <link rel="icon" href="images/logo/favicon.svg" sizes="any" type="image/svg+xml">
 
 <!-- BOOTSTRAP CSS -->
-<link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-    crossorigin="anonymous"
-/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
 
 
 <!-- FONT AWESOME -->
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <script src="https://kit.fontawesome.com/d21e3e40d7.js" crossorigin="anonymous"></script>
 
 <!-- DAY.JS -->
@@ -52,3 +46,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
 
 <!-- REQUISIÇÕES PARA O BACKEND -->
 <script src="js/fetch/formularios.js"></script>
+
+<!-- INPUT MASKS --> 
+<script src="js/inputMasks.js"></script>

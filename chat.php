@@ -3,28 +3,20 @@
 <html lang="en">
     <head>
         <?php require("components/head.php") ?>
+        <link rel="stylesheet" href="css/chaThiago.css">
     </head>
     <body>
-        <?php include ("components/auth-header.php") ?>
+        <?php include ("components/header-auth.php") ?>
+
+        <input type="hidden" id="userId" value="<?php echo $_SESSION["iduser"]; ?>">
 
         <main>
-            <div class="container p-3 my-3">
-                <div class="row gx-5">
-                    
-                    
-
-                    <?php include("components/sidebar.php")?>
-
-                    <div class="col-8 px-3 flex-column text-center" id="settingsContent">
-                        <h3>Esta pagina está em desenvolvimento...</h3>
-                        <img src="images\storyset\Work time-pana.svg" width="55%" alt="">
-                    </div>
-                </div>
+            <div id="chat">
             </div>
         </main>
-
     </body>
 
+    
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
@@ -32,4 +24,8 @@
     ></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- Socket.Io -->
+    <script src="https://cdn.socket.io/4.5.3/socket.io.min.js" integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi" crossorigin="anonymous"></script>
+    <!-- Chat -->
+    <script type="module" src="js/plugin/chaThiago.js"></script>
 </html>

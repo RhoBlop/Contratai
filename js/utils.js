@@ -3,7 +3,7 @@
 function timeoutConnection() {
     return setTimeout(() => {
         formErro("Algum erro ocorreu. Tente novamente mais tarde!");
-    }, 6000);
+    }, 8000);
 }
 
 // redireciona para o index e abre o modal de login
@@ -12,8 +12,25 @@ function redirectLogin() {
     window.location.href = "index.php";
 }
 
+function redirectAval(idContrato) {
+    setOpenModal(`#modalAvaliacao-${idContrato}`);
+    window.location.href = "contratos.php";
+}
+
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// seta multiplos atributos para um elemento DOM
+function setAttributes(el, attrs) {
+    for (var key in attrs) {
+        el.setAttribute(key, attrs[key]);
+    }
+}
+
+function findClosestAncestorByClass(el, cls) {
+    while ((el = el.parentElement) && !el.classList.contains(cls));
+    return el;
 }
 
 // função executada sempre que uma imagem do input type=file é selecionada
@@ -56,4 +73,11 @@ function confirmarSenha(event, idDivSenha, idDivErro) {
             divErro.style.display = "none";
         }
     }
+}
+
+function guidGenerator() {
+    var S4 = function() {
+       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    };
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 }

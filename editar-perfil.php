@@ -6,7 +6,7 @@
         <script src="js/visualizarImg.js"></script>
     </head>
     <body>
-        <?php include ("components/auth-header.php") ?>
+        <?php include ("components/header-auth.php") ?>
 
         <main>
             <div class="container p-3 my-3">
@@ -16,7 +16,7 @@
 
                     <?php include("components/sidebar.php")?>
 
-                    <div class="col-8 px-3" id="settingsContent">
+                    <div class="col-8 px-4" id="settingsContent">
                         <div class="mb-4">
                             <h2>Editar perfil</h2>
                             <h6 class="text-muted">Edite os dados da sua conta</h6>
@@ -34,7 +34,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="nome" class="form-label">Nome Completo</label>
-                                <input type="text" class="form-control" id="nome" name="nome" required value="<?php echoDadosNotNull($user["nomuser"], null) ?>">
+                                <input type="text" class="form-control" id="nome" name="nome" required value="<?php echoDadosNotNull($user["nomeuser"], null) ?>">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="email" class="form-label">Email</label>

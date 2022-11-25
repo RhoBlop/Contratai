@@ -5,7 +5,7 @@
         <?php require("components/head.php") ?>
     </head>
     <body>
-        <?php include ("components/auth-header.php") ?>
+        <?php include ("components/header-auth.php") ?>
 
         <main>
             <div class="container p-3 my-3">
@@ -15,7 +15,7 @@
 
                     <?php include("components/sidebar.php")?>
 
-                    <div class="col-8 px-3" id="settingsContent">
+                    <div class="col-8 px-4" id="settingsContent">
                         <div class="mb-4">
                             <h2>Editar senha</h2>
                             <h6 class="text-muted">Altere a senha da sua conta</h6>

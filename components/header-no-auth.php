@@ -46,4 +46,4 @@
   </nav>
 </header>
 
-<?php include("components/modal-login.html"); ?>
+<?php include("components/modal-login.php"); ?>

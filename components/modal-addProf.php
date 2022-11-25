@@ -40,6 +40,7 @@
                     <option value="" selected>Selecione uma profissão primeiro</option>
                 </select>
             </div>
+
             <!-- div para comunicação com usuário -->
             <div id="feedbackUsuario"></div>
         </div>

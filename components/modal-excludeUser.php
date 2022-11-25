@@ -9,9 +9,9 @@
           <p>Você está prestes a excluir sua conta permanentemente.</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
           <button type="button" class="btn btn-danger" onclick="deleteUser()">Excluir</button>
         </div>
       </div>
     </div>
-  </div>
+</div>

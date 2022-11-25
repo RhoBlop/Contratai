@@ -40,6 +40,13 @@
                     <label for="multidate" class="form-label">Dias do contrato</label>
                     <input id="multidate" type="text" class="form-control" name="multidate" placeholder="Selecione os dias do contrato" required data-input>
                 </div>
+                
+                <!-- DESCRIÇÃO -->
+                <div class="form-group mb-3">
+                    <label for="descricao" class="form-label">Descrição</label>
+                    <textarea class="form-control" id="descricao" name="descricao" rows="4" style="white-space: pre-wrap;"></textarea>
+                </div>
+
 
                 <!-- div para comunicação com usuário -->
                 <div id="feedbackUsuario" class="collapse"></div>

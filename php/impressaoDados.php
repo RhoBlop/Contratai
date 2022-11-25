@@ -1,27 +1,52 @@
 <?php
-    // imprime o segundo parâmetro caso o primeiro seja nulo
-    function echoDadosNotNull($value, $backupValue) {
-        echo is_null($value) ? $backupValue : $value;
-    }
+// imprime o segundo parâmetro caso o primeiro seja nulo
+function echoDadosNotNull($value, $backupValue)
+{
+    echo is_null($value) ? $backupValue : $value;
+}
 
-    // substitui backslash por <br> para quebra de linhas no html
-    function echoDadosBreakLine($text) {
-        echo is_null($text) ? "---" : nl2br($text);
-    }
-    
-    // formata data para dd/mm/yyyy
-    function echoFormattedDate($date) {
-        echo is_null($date) ? "---" : date("d/m/Y", strtotime($date));
-    }
+// substitui backslash por <br> para quebra de linhas no html
+function echoDadosBreakLine($text)
+{
+    echo is_null($text) ? "---" : nl2br($text);
+}
 
-    // imprime a imagem de perfil padrão caso o parâmetro seja nulo
-    function echoProfileImage($img) {
-        echo is_null($img) ? "images/temp/default-pic.png" : $img;
-    }
+// formata data para dd/mm/yyyy
+function echoFormattedDate($date)
+{
+    echo is_null($date) ? "---" : date("d/m/Y", strtotime($date));
+}
 
-    // imprime a classe de acordo com a nota da avaliação
-    function echoAvaliacaoClass($nota) {
-        echo $nota > 4.5 ? "avaliacao-otima" : "avaliacao-media";
-    }
-    
-?>
+// 12 de outubro de 2022
+function echoFullDate($date)
+{
+    $locale = "pt_BR";
+    $dateType = IntlDateFormatter::LONG; //type of date formatting
+    $timeType = IntlDateFormatter::NONE; //type of time formatting setting to none, will give you date itself
+    $formatter = new IntlDateFormatter($locale, $dateType, $timeType);
+    $dateTime = new DateTime($date);
+    echo $formatter->format($dateTime);
+}
+
+// 12 de out. de 2022
+function echoMediumDate($date)
+{
+    $locale = "pt_BR";
+    $dateType = IntlDateFormatter::MEDIUM; //type of date formatting
+    $timeType = IntlDateFormatter::NONE; //type of time formatting setting to none, will give you date itself
+    $formatter = new IntlDateFormatter($locale, $dateType, $timeType);
+    $dateTime = new DateTime($date);
+    echo $formatter->format($dateTime);
+}
+
+// imprime a imagem de perfil padrão caso o parâmetro seja nulo
+function echoProfileImage($img)
+{
+    echo is_null($img) ? "images/temp/default-pic.png" : $img;
+}
+
+// imprime a classe de acordo com a nota da avaliação
+function echoAvaliacaoClass($nota)
+{
+    echo $nota > 4.5 ? "avaliacao-otima" : "avaliacao-media";
+}

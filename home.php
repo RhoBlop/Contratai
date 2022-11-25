@@ -5,11 +5,12 @@
         <?php require("components/head.php") ?>
     </head>
     <body>
-        <?php include ("components/auth-header.php") ?>
+        <?php include ("components/header-auth.php") ?>
         <main>
             <div class="container my-3">
                 <div class="row py-3 d-flex justify-content-center align-items-center mb-3">
                     <div class="col-md-12 search-bar">
+                        <!-- TODO Filtro de pesquisa -->
                         <form id="searchForm" onsubmit="return false">
                             <div class="input-group">
                                 <input id="searchBox" name="searchParam" type="text" class="form-control form-control-lg" autocomplete="off" placeholder="O que você está procurando?">
@@ -28,18 +29,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <!--
-                <div class="row row-cols-2 row-cols-lg-5 g-4 mb-5">
-                    <?php // for ($i=1; $i <= 10; $i++) { include("components/card-anuncio.html");} ?>
-                </div>
-                -->
-
-                <!-- <div class="row row-cols-2 row-cols-lg-4 g-3 mb-3">
-
-                    <?php //for($i=1; $i <=8; $i++) {include("components/card-perfil.html");}?>
-                                            
-                </div> -->
 
             </div>
 

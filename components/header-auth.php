@@ -12,6 +12,8 @@
 
     $usuarioClass = new Usuario();
     $user = $usuarioClass->selectBasicInfoById($_SESSION["iduser"]);
+
+    // $notificacoes = $usuarioClass->selectNotificacoesDropdown($_SESSION["iduser"]);
 ?>
 <header>
     <nav class="navbar navbar-expand-md fixed-top bg-light">
@@ -42,11 +44,49 @@
                 <li class="nav-item">
                   <a class="nav-link" href="contratos.php"><i class="fa-solid fa-address-book"></i></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="notificacoes.php"><i class="fa-regular fa-bell"></i></a>
+
+                <!-- NOTIFICAÇÕES DROPDOWN -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link" data-bs-toggle="dropdown">
+                    <?php
+                        // $numNotific = count($notificacoes);
+
+                        // if ($numNotific > 0) {
+                        //     echo "<i class='fa-regular fa-bell notify-badge' data-count={$numNotific}></i>";
+                        // } else {
+                        //     echo "<i class='fa-regular fa-bell'></i>";
+                        // }
+                    ?>  
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end text-small shadow">
+                    <?php
+                        // if ($numNotific < 1) {
+                        //     echo <<<HTML
+                        //     <li class="dropdown-item">
+                        //         Nenhuma notificação nova!
+                        //     </li>
+                        //     HTML;
+                        // } else {
+                        //     foreach ($notificacoes as $notific):
+                        //         //TODO - Adicionar items de notificação do dropdown
+                        //         echo <<<HTML
+                        //         <li class="dropdown-item">
+                        //           {$notific['descrnotific']}
+                        //         </li>
+                        //         HTML;
+                        //     endforeach;
+                        // }
+                    ?>
+
+                    <li><hr class="dropdown-divider"></li>
+                    <div class="text-center px-2">
+                        <a class="dropdown-item" href="notificacoes.php">Veja mais</a>
+                    </div>
+                  </ul>
                 </li>
+
                 <li class="nav-item">
-                  <a class="nav-link" href="#"><i class="fa-regular fa-comments"></i></a>
+                  <a class="nav-link" href="chat.php"><i class="fa-regular fa-comments"></i></a>
                 </li>
 
                 <?php 
@@ -59,13 +99,17 @@
                     endif;
                 ?>
 
+                <!-- USER DROPDOWN -->
                 <li class="nav-item dropdown p-2">
                   <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
                     <!-- define uma imagem padrão caso o usuário não tenha nenhuma -->
                     <img id="headerImgPerfil" src="<?php echoProfileImage($user["imguser"]) ?>" alt="Imagem de perfil">
                   </a>
+
                   <ul class="dropdown-menu dropdown-menu-end text-small shadow">
-                    <div class="text-center px-2">Olá, <?php echo $user["nomuser"] ?></div>
+                    <div class="text-center px-2">
+                        Olá, <?php echo $user["nomeuser"] ?>
+                    </div>
                     
                     <li><hr class="dropdown-divider"></li>
 
@@ -78,10 +122,11 @@
                     <?php
                         endif;
                     ?>
+                    <li><a class="dropdown-item" href="profissoes.php"><i class="fa-solid fa-user-tie fa-fw me-1"></i>Profissões</a></li>
 
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#"><i class="fa-regular fa-bell fa-lg pe-2"></i>Notificações</a></li>
                     <li><a class="dropdown-item" href="contratos.php"><i class="fa-solid fa-address-book fa-lg pe-2"></i>Contratos</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa-regular fa-bell fa-lg pe-2"></i>Notificações</a></li>
                     <li><a class="dropdown-item" href="#"><i class="fa-regular fa-comment fa-lg pe-2"></i>Mensagens</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket fa-lg pe-2"></i>Sair</a></li>
