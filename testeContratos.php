@@ -15,6 +15,10 @@
 <body>
     <?php include("components/header-auth.php");?>
 
+
+    <!-- ANCHOR Thiago só conseguirei mexer nisso amanhã (domingo), mas o modelo que vc pode usar é desse primeiro cartão (CONTRATEI -> ENVIADO)
+                Acho que ele é uma base boa pra vc fazer os outros, só adicionando botões e mudando os textos ;D-->
+
     <main>
         <div class="container p-3 my-3">
             <div class="row gx-5">
