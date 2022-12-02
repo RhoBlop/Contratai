@@ -53,8 +53,8 @@
                                                     <h8>Você enviou uma solicitação para <b>Nome</b>!</h8>
 
                                                     <p class="text-muted">Profissão:</p>
+                                                    <p>Dias agendados:</p>
                                                     <div class="contract-dates my-2">
-                                                        <p class="text-muted">Dias agendados:</p>
                                                         <div class="date-chip">
                                                             28 de agosto
                                                         </div>
