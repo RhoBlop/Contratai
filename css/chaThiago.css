@@ -23,6 +23,7 @@
     border-radius: 15px;
     background-color: white;
     box-shadow: 0 0 20px 5px var(--ct-grey);
+    margin: 1rem auto;
 }
 
 .chathiago .sidebar {
@@ -31,6 +32,7 @@
     flex-grow: 0.3;
     height: 100%;
     overflow-y: auto;
+    border-right: solid 1px var(--ct-light-grey);
 }
 
 .chathiago .sidebar .contact {
@@ -41,6 +43,10 @@
     height: 80px;
     padding: 10px;
     transition: all .15s;
+}
+
+.chathiago .sidebar .contact:first-child{
+    border-top-left-radius: 15px;
 }
 
 .chathiago .sidebar .contact:hover {
@@ -94,16 +100,17 @@
 .chathiago .conversation-box .messages {
     display: flex;
     flex-direction: column;
-    padding: 30px 50px;
+    padding: 16px 32px;
     height: calc(100% - (var(--ct-header-height) + var(--ct-input-box-height)));
     overflow-y: auto;
+    gap: 4px 0; 
 }
 
-.chathiago .conversation-box .messages > .sent:first-child,
+/* .chathiago .conversation-box .messages > .sent:first-child,
 .chathiago .conversation-box .messages > .received:first-child,
 .chathiago .conversation-box .messages > .lds-dual-ring:first-child {
     margin-top: auto !important;
-}
+} */
 
 .chathiago .conversation-box .messages .sent,
 .chathiago .conversation-box .messages .received {
@@ -173,13 +180,13 @@
     height: 60px;
     border-radius: 0 0 8px 0;
     padding: 10px 10px;
-    background: var(--ct-primary)
+    background: var(--ct-grey);
 }
 
 .chathiago .conversation-box .texting-box input {
     width: calc(100% - 100px);
     height: 40px;
-    background-color: var(--ct-light-grey);
+    background-color: white;
     border-radius: 10px;
     padding: 0 15px;
     border:none;
@@ -187,7 +194,7 @@
 }
 
 .chathiago .conversation-box .texting-box button {
-    background-color: var(--ct-light-grey);
+    background-color: white;
 	color: var(--ct-primary);
 	border: none;
 	padding: 0;

@@ -162,7 +162,7 @@ class chaThiago {
             messagingForm.setAttribute("action", "javascript:void(0);");
 
             const emojiBtn = document.createElement("button");
-            emojiBtn.innerHTML = '<i class="fa-regular fa-face-grin-tongue-wink"></i>';
+            emojiBtn.innerHTML = '<i class="fa-solid fa-paperclip"></i>';
 
             const messageInput = document.createElement("input");
             messageInput.classList.add("message-input");
