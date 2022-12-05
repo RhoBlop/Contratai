@@ -12,7 +12,8 @@
     require ("../../database/Chat.php");
     $chat = new Chat($idSender);
 
-    $result = $chat->getContacts();
+    $newUserId = $_GET["newUserId"] ?? null;
+    $result = $chat->getContacts($newUserId);
 
     echo json_encode($result);
 ?>
