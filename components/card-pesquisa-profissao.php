@@ -14,7 +14,7 @@
         <div class="card-text">
             <p>Total de <?php echo $numcontrato; ?> contratações como <?php echo ucfirst($descrprof); ?></p>
 
-            <p>Em nossa plataforma desde <?php echo echoFullDate($datacriacaouser); ?></p>
+            <p>Em nossa plataforma desde <?php echo getFullDate($datacriacaouser); ?></p>
 
             <a href="<?php echo "perfil-publico.php?id={$iduser}" ?>"><span class="clickable-card"></span></a>
         </div>

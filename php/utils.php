@@ -102,6 +102,24 @@ function getCurrentTimestamp() {
     return $timestamp;
 }
 
+function getFullDate($date) {
+    $locale = "pt_BR";
+    $dateType = IntlDateFormatter::LONG; //type of date formatting
+    $timeType = IntlDateFormatter::NONE; //type of time formatting setting to none, will give you date itself
+    $formatter = new IntlDateFormatter($locale, $dateType, $timeType);
+    $dateTime = new DateTime($date);
+    return $formatter->format($dateTime);
+}
+
+function getMediumDate($date) {
+    $locale = "pt_BR";
+    $dateType = IntlDateFormatter::MEDIUM; //type of date formatting
+    $timeType = IntlDateFormatter::NONE; //type of time formatting setting to none, will give you date itself
+    $formatter = new IntlDateFormatter($locale, $dateType, $timeType);
+    $dateTime = new DateTime($date);
+    return $formatter->format($dateTime);
+}
+
 /**
  * Returns true if date is past today
  * 

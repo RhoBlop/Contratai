@@ -61,6 +61,8 @@
                             }
                         }
 
+
+                        include "components/card-contrato.php";
                         ?>
 
                         <div class="accordion accordion-flush tab-pane fade show active" id="contratante-pane" role="tabpanel">
@@ -76,47 +78,24 @@
                                     <div>
                                         <?php
                                         if (empty($solicitacoesEnviadas)) :
-                                            echo <<<ERROR
-                                            <div class="empty-accordion accordion-body"><span class="text-muted">Nenhuma solicitação de contratação pendente.</span></div>
-                                        ERROR;
+                                            echo <<<HTML
+                                                <div class="empty-accordion accordion-body">
+                                                    <span class="text-muted">Nenhuma solicitação de contratação pendente.</span>
+                                                D</div>
+                                            HTML;
                                         else :
                                             foreach ($solicitacoesEnviadas as $contrt) :
-                                        ?> 
+                                                $idUsr = $contrt['iduser'];
+                                                $imgPerfil = $contrt["imguser"];
+                                                $headerMsg = "Você enviou uma solicitação para <b>{$contrt["nomeuser"]}</b>!";
+                                                $especializacao = ucfirst($contrt["descrespec"]);
+                                                $diasContrato = $contrt["diascontrato"];
+                                                $descrContrato = $contrt["descrcontrato"];
+                                                $botoes = [];
+                                                $aviso = "Aguarde o usuário aceitar ou rejeitar seu pedido";
+                                                $dataCriacao = $contrt["timecriacaocontrato"];
 
-                                                <div class="id-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid="<?php echo $contrt["idcontrato"]; ?>">
-                                                    <div class="d-flex gap-3">
-                                                        <div class="clickable-image">
-                                                            <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
-                                                            <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
-                                                        </div>
-                                                        <div class="text">
-                                                            <h8>Você enviou uma solicitação para <b><?php echo $contrt["nomeuser"] ?></b>!</h8>
-
-                                                            <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                            <p>Dias agendados:</p>
-                                                            <div class="contract-dates my-2">
-                                                                <?php
-                                                                    foreach ($contrt["diascontrato"] as $diacontrato) {
-                                                                        if (isDateExpired($diacontrato)) {
-                                                                            $class = " expired";
-                                                                        } else {
-                                                                            $class = "";
-                                                                        }
-                                                                        echo "<div class='date-chip{$class}'>";
-                                                                        echoMediumDate($diacontrato);
-                                                                        echo '</div>';
-                                                                    }
-                                                                ?>
-                                                            </div>
-                                                            <p>Aguarde o usuário aceitar ou rejeitar seu pedido</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="time text-end">
-                                                        <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
-                                                    </div>
-                                                </div>
-
-                                        <?php
+                                                echo constructContratoCard($idUsr, $imgPerfil, $headerMsg, $especializacao, $diasContrato, $descrContrato, $botoes, $aviso, $dataCriacao);
                                             endforeach;
                                         endif;
                                         ?>
