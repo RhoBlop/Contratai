@@ -9,9 +9,13 @@
             $this->idUser = $idUser;
         }
 
-        public function getContacts() {
+        public function getContacts($newUserId) {
+            $conn = Database::getInstance();
+            
+            $conn->beginTransaction();
             try {
                 $contacts = [];
+                $insertedIds = [];
 
                 $sql = <<<SQL
                     SELECT *
@@ -26,30 +30,73 @@
                         FROM mensagem AS msg
                         INNER JOIN usuario AS sender ON (msg.idremetente = sender.iduser)
                         INNER JOIN usuario AS receiver ON (msg.iddestinatario = receiver.iduser)
-                        WHERE (msg.iddestinatario = :idchatowner) OR (msg.idremetente = :idchatowner)
+                        WHERE ((msg.iddestinatario = :idchatowner) OR (msg.idremetente = :idchatowner))
                     ) AS t
                     WHERE rn = 1
                     ORDER BY timeCriacaoMensagem DESC
                 SQL;
-                $stmt = Database::prepare($sql);
+                $stmt = $conn->prepare($sql);
                 $stmt->execute([
                     ":idchatowner" => $this->idUser
                 ]);
 
                 foreach ($stmt->fetchAll() AS $row) {
-                    if ($row["idSender"] === $this->idUser) {
-                        $sufix = "Receiver";
-                    } else if ($row["idReceiver"] === $this->idUser) {
-                        $sufix = "Sender";
+                    if (!in_array($row["idSender"], $insertedIds) && !in_array($row["idReceiver"], $insertedIds)) {
+                        if ($row["idSender"] === $this->idUser) {
+                            $sufix = "Receiver";
+                            $insertedIds[] = $row["idReceiver"];
+                        } else if ($row["idReceiver"] === $this->idUser) {
+                            $sufix = "Sender";
+                            $insertedIds[] = $row["idSender"];
+                        }
+                        $contact = [
+                            "idUser" => $row["id{$sufix}"],
+                            "userName" => $row["nome{$sufix}"],
+                            "imgUser" => $row["img{$sufix}"],
+                            "lastMessage" => $row["textomensagem"],
+                            "timestamp" => $row["timecriacaomensagem"]
+                        ];
+                        $contacts[] = $contact;
                     }
-                    $contact = [
-                        "idUser" => $row["id{$sufix}"],
-                        "userName" => $row["nome{$sufix}"],
-                        "imgUser" => $row["img{$sufix}"],
-                        "lastMessage" => $row["textomensagem"],
-                        "timestamp" => $row["timecriacaomensagem"]
-                    ];
-                    $contacts[] = $contact;
+                }
+
+                // NEW CONTACT
+                if ($newUserId !== null && is_numeric($newUserId)) {
+                    $userExists = false;
+                    for ($i = 0; $i < count($contacts); $i++) {
+                        $cont = $contacts[$i];
+                        if ($cont["idUser"] === $newUserId) {
+                            // change contact order to first on array
+                            $out = array_splice($array, $i, 1);
+                            array_splice($array, 0, 0, $out);
+
+                            $userExists = true;
+                            break;
+                        }
+                    }
+
+                    if (!$userExists) {
+                        $sql = <<<SQL
+                            SELECT iduser, nomeuser, imguser
+                                FROM usuario
+                                WHERE iduser = :newUser
+                        SQL;
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute([
+                            ":newUser" => $newUserId
+                        ]);
+    
+                        $user = $stmt->fetch();
+                        $newContact = [
+                            "idUser" => $user['iduser'],
+                            "userName" => $user['nomeuser'],
+                            "imgUser" => $user['imguser'],
+                            "lastMessage" => "Nenhuma mensagem",
+                            "timestamp" => getCurrentTimestamp()
+                        ];
+
+                        array_splice($contacts, 0, 0, [$newContact]);
+                    }   
                 }
 
                 $result = [
@@ -57,8 +104,10 @@
                     "contacts" => $contacts
                 ];
     
+                $conn->commit();
                 return [ "dados" => $result ];
             } catch (PDOException $e) {
+                $conn->rollback();
                 echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
                 exit();
 
@@ -164,13 +213,5 @@
             }
         }
     }
-
-    // $chat = new Chat(1);
-    // var_dump($chat->getContactMessages(2));
-    // print_r($chat->sendMessage(2, "Nossa cara vou te dar um atiro amanhã"));
-
-    // $chat = new Chat(2);
-    // var_dump($chat->getContacts());
-    // print_r($chat->sendMessage(1, "Vou fazer merda nenhuma não cara"));
 ?>
 
