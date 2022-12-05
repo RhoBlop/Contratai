@@ -15,6 +15,10 @@
 <body>
     <?php include("components/header-auth.php");?>
 
+
+    <!-- ANCHOR Thiago só conseguirei mexer nisso amanhã (domingo), mas o modelo que vc pode usar é desse primeiro cartão (CONTRATEI -> ENVIADO)
+                Acho que ele é uma base boa pra vc fazer os outros, só adicionando botões e mudando os textos ;D-->
+
     <main>
         <div class="container p-3 my-3">
             <div class="row gx-5">
@@ -53,13 +57,15 @@
                                                     <h8>Você enviou uma solicitação para <b>Nome</b>!</h8>
 
                                                     <p class="text-muted">Profissão:</p>
+                                                    <!-- <p class="text-muted">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, sint."</p> -->
+                                                    <p>Dias agendados:</p>
                                                     <div class="contract-dates my-2">
-                                                        <p class="text-muted">Dias agendados:</p>
                                                         <div class="date-chip">
                                                             28 de agosto
                                                         </div>
                                                     </div>
-                                                    <p>Aguarde o usuário aceitar ou rejeitar seu pedido</p>
+                                                    <p>Descrição: <i class="text-muted">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, hic."</i></p>
+                                                    <p class="my-1 "><b>Aguarde o usuário aceitar ou rejeitar seu pedido</b></p>
                                                 </div>
                                             </div>
                                             <div class="time text-end">
