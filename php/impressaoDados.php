@@ -28,6 +28,16 @@ function echoFullDate($date)
     echo $formatter->format($dateTime);
 }
 
+function returnFullDate($date)
+{
+    $locale = "pt_BR";
+    $dateType = IntlDateFormatter::LONG; //type of date formatting
+    $timeType = IntlDateFormatter::NONE; //type of time formatting setting to none, will give you date itself
+    $formatter = new IntlDateFormatter($locale, $dateType, $timeType);
+    $dateTime = new DateTime($date);
+    return $formatter->format($dateTime);
+}
+
 // 12 de out. de 2022
 function echoMediumDate($date)
 {

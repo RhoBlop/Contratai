@@ -11,10 +11,11 @@
      * @param array $botoes
      * @param string $aviso
      * @param string $dataCriacao
+     * @param string $idContrato
      * 
      * @return string
      */
-    function constructContratoCard($idUser, $imgPerfil = null, $headerMsg = "", $especializacao = "", $diasContrato = [], $descrContrato = "", $botoes = [], $aviso = "", $dataCriacao = "") {
+    function constructContratoCard($idUser, $imgPerfil = null, $headerMsg = "", $especializacao = "", $diasContrato = [], $descrContrato = "", $botoes = [], $aviso = "", $dataCriacao = "", $idContrato = "") {
         $timeElapsed = timeElapsedString($dataCriacao);
         $imgSrc = $imgPerfil ?? "../images/temp/default-pic.png";
 
@@ -37,11 +38,20 @@
         if (!empty($botoes)) {
             if (isset($botoes[0])) {
                 $btn = $botoes[0];
-                $botoesString .= <<<HTML
-                    <div class="btn btn-green" onclick="{$btn[1]}">
-                        {$btn[0]}
-                    </div>
-                HTML;
+                if (isset($btn[2])) {
+                    $botoesString .= <<<HTML
+                        <div class="btn btn-green" onclick="{$btn[1]}" data-bs-toggle="{$btn[2]}" data-bs-target="#avaliacao{$idContrato}">
+                            {$btn[0]}
+                        </div>
+                    HTML;
+                }
+                else {
+                    $botoesString .= <<<HTML
+                        <div class="btn btn-green" onclick="{$btn[1]}">
+                            {$btn[0]}
+                        </div>
+                    HTML;
+                }
             }
 
             if (isset($botoes[1])) {

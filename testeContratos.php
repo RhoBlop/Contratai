@@ -26,7 +26,6 @@
                 <?php include("components/sidebar.php") ?>
 
                 <div class="col-10 px-4 d-flex flex-column" id="settingsContent">
-                    <!-- TODO Colocar a descrição dos contratos nos accordions e ajeitar as boxes de datas -->
                     <div class="mb-4">
                         <h2>Meus contratos</h2>
                         <h6 class="text-muted">Aceite solicitações de contratos, visualize os que estão em andamento e finalize-os</h6>
@@ -65,7 +64,7 @@
                                                         </div>
                                                     </div>
                                                     <p>Descrição: <i class="text-muted">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, hic."</i></p>
-                                                    <p class="my-1 "><b>Aguarde o usuário aceitar ou rejeitar seu pedido</b></p>
+                                                    <p class="my-1"><b>Aguarde o usuário aceitar ou rejeitar seu pedido</b></p>
                                                 </div>
                                             </div>
                                             <div class="time text-end">
