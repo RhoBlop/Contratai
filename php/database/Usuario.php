@@ -27,7 +27,34 @@ class Usuario extends Database
 
             return ["dados" => false];
         }
+    }
 
+    //seleciona todos os usuários da tabela usuário
+    public function selectAllUsersPagination($limit, $offset) 
+    {
+        try {
+            $sql = <<<SQL
+                    SELECT * 
+                    FROM usuario
+                    ORDER BY iduser
+                    OFFSET :offset
+                    LIMIT :limit    
+                SQL;
+            
+            $stmt = Database::prepare($sql);
+            $stmt->execute([
+                ":limit" => $limit,
+                ":offset" => $offset
+            ]);
+
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
     }
 
     // retorna usuário com o id passado por parâmetro

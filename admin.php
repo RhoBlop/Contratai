@@ -20,8 +20,11 @@
                         <h2>Administração do sistema</h2>
                     </div>
                         <?php 
-                        $users = $usuarioClass->selectAllUsers();
+                            $usersLimit = 10;
+                            $currPage = (isset($_GET["page"]) && is_numeric($_GET["page"])) ? $_GET["page"] : 1;
+                            $usersOffset = $usersLimit * ($currPage - 1);
 
+                            $users = $usuarioClass->selectAllUsersPagination($usersLimit, $usersOffset);
                         ?>
                           
                         <div class="crud">
@@ -67,7 +70,7 @@
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form id="updateUser<?php echo $user['iduser']?>" onsubmit="sendUpdate(event)">
+                                                            <form id="updateUser-<?php echo $user['iduser']?>" onsubmit="sendUpdateAdmin(event, <?php echo $user['iduser']?>)">
                                                                 <label id="inputFileLabel" for="inputImg" class="rounded-circle mb-4">
                                                                     <img src="<?php echoProfileImage($user['imguser']) ?>" id="imgPerfil" alt="">
                                                                     <div class="editar-hover">
@@ -103,7 +106,7 @@
                                                                 </div>
 
                                                                 <!-- div para comunicação com usuário -->
-                                                                <div id="feedbackUsuario"></div>
+                                                                <div id="feedbackUsuario-<?php echo $user['iduser']?>"></div>
                                                                 
                                                                 <div class="buttons d-flex justify-content-end align-items-center py-3">
                                                                     <a href="perfil.php" class="btn btn-link me-3">Cancelar</a>

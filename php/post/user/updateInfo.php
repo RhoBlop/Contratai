@@ -34,7 +34,13 @@
         $imgBase64 = "";
     }
 
-    $result = $user->updateInfo($_SESSION['iduser'], $nome, $email, $imgBase64, $nascimento, $telefone, $bio);
+    if (isset($_POST["idUser"]) && $_SESSION["admin"] === true) {
+        $idUser = $_POST["idUser"];
+    } else {
+        $idUser = $_SESSION['iduser'];
+    }
+
+    $result = $user->updateInfo($idUser, $nome, $email, $imgBase64, $nascimento, $telefone, $bio);
 
     $response = $result;
 

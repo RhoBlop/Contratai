@@ -89,7 +89,7 @@ async function sendLogin(event) {
 }
 
 // função que faz update das informações de usuário
-async function sendUpdate(event) {
+async function sendUpdate(event, idUser) {
     event.preventDefault();
 
     let formData = new FormData(event.target);
@@ -116,6 +116,41 @@ async function sendUpdate(event) {
             "success-notify"
         );
         window.location.href = "perfil.php";
+    }
+    clearTimeout(timeout);
+}
+
+async function sendUpdateAdmin(event, idUser) {
+    event.preventDefault();
+
+    let formData = new FormData(event.target);
+    if (idUser) {
+        formData.append("idUser", idUser);
+    }
+
+    loading();
+    timeout = timeoutConnection();
+
+    let response = await fetch("./php/post/user/updateInfo.php", {
+        method: "POST",
+        credentials: "same-origin",
+        body: formData,
+    });
+    let data = await response.json();
+    console.log(data);
+
+    if (data.erro) {
+        let { erro } = data;
+        formErro(erro);
+    }
+
+    if (data.dados) {
+        setOpenToast(
+            "Edição de perfil",
+            "Edição de perfil realizada com sucesso",
+            "success-notify"
+        );
+        window.location.reload();
     }
     clearTimeout(timeout);
 }
