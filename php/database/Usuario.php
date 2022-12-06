@@ -241,7 +241,7 @@ class Usuario extends Database
     {
         try {
             $sql = <<<SQL
-                  SELECT contrt.idcontrato, idcontratante, json_agg(diacontrato) AS diascontrato, statcontrt.idstatus, contrt.isavaliado, timecriacaocontrato, timefinalizacaocontrato, descrespec, usr.iduser, nomeuser, imguser
+                  SELECT contrt.idcontrato, idcontratante, contrt.descrcontrato, json_agg(diacontrato) AS diascontrato, statcontrt.idstatus, contrt.isavaliado, timecriacaocontrato, timefinalizacaocontrato, descrespec, usr.iduser, nomeuser, imguser
                   FROM contrato AS contrt
                   INNER JOIN diacontrato AS diacontrt ON (contrt.idcontrato = diacontrt.idcontrato)
                   INNER JOIN statuscontrato AS statcontrt ON (contrt.idStatus = statcontrt.idStatus)

@@ -96,4 +96,10 @@
             </div>
         HTML;
     }
+
+    function constructNullCard() {
+        echo <<<ERROR
+                <div class="empty-accordion accordion-body"><span class="text-muted">Nada por aqui.</span></div>
+            ERROR;
+    }
 ?>
