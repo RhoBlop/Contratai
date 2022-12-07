@@ -1865,6 +1865,14 @@ p {
     font-weight: 500;
 }
 
+.crud .pagination {
+    --bs-pagination-color: var(--primary-green);
+    --bs-pagination-hover-color: var(--dark-green);
+    --bs-pagination-focus-color: var(--primary-green);
+    --bs-pagination-active-border-color: var(--dark-green);
+    --bs-pagination-active-bg: var(--dark-green);
+}
+
 /* CHAT */
 
 .contact { 

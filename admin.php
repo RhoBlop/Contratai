@@ -20,8 +20,11 @@
                         <h2>Administração do sistema</h2>
                     </div>
                         <?php 
-                            $usersLimit = 10;
+                            $usersLimit = 5;
                             $currPage = (isset($_GET["page"]) && is_numeric($_GET["page"])) ? $_GET["page"] : 1;
+                            $allUsers = $usuarioClass->selectAllUsers();
+                            $totalUsers = count($allUsers);
+                            $totalPages = ceil($totalUsers / $usersLimit);
                             $usersOffset = $usersLimit * ($currPage - 1);
 
                             $users = $usuarioClass->selectAllUsersPagination($usersLimit, $usersOffset);
@@ -147,7 +150,49 @@
                                             ?>
                                 </tbody>
                             </table>
+                            <nav aria-label="Pagination">
+                                <ul class="pagination justify-content-center">
+                                    <?php 
+                                        //Botão de Anterior
+                                        if ($currPage >1) {
+                                            $prevPage = $currPage-1;
+                                            echo <<<HTML
+                                            <li class="page-item"><a class="page-link" href="admin.php?page={$prevPage}>">Anterior</a></li>
+                                            HTML;
+                                        }
+
+                                        else {
+                                            echo <<<HTML
+                                            <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+                                            HTML;
+                                        }
+
+                                        //Botões das páginas
+                                        for ($i = 1; $i<= $totalPages; $i++) {
+                                            echo <<<HTML
+                                                <li class="page-item"><a class="page-link" href="admin.php?page={$i}">$i</a></li>
+                                            HTML;
+                                        }
+
+
+                                        //Botão de Próximo
+                                        if ($currPage < $totalPages ) {
+                                            $nextPage = $currPage+1;
+                                            echo <<<HTML
+                                            <li class="page-item"><a class="page-link" href="admin.php?page={$nextPage}">Próximo</a></li>
+                                            HTML;
+                                        }
+
+                                        else {
+                                            echo <<<HTML
+                                            <li class="page-item"><a class="page-link" href="#">Próximo</a></li>
+                                            HTML;
+                                        }
+                                    ?>
+                                </ul>
+                            </nav>
                         </div>
+                        
                     </div>
                 </div>
             </div>
