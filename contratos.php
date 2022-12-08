@@ -37,6 +37,7 @@
 
                         <!-- SECTION - Contratante -->
                         <?php
+                        include "components/card-contrato.php";
                         $idUser = $_SESSION["iduser"];
 
                         $contratosSolicitados = $usuarioClass->selectContratosContratante($idUser);
@@ -67,7 +68,6 @@
                         }
 
 
-                        include "components/card-contrato.php";
                         ?>
 
                         <div class="accordion accordion-flush tab-pane fade show active" id="contratante-pane" role="tabpanel">
