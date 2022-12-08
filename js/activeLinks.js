@@ -37,4 +37,16 @@ window.addEventListener("DOMContentLoaded", (event) => {
             }
         }
     }
+
+    //linka da paginação
+    let pagination = document.querySelector("#pagination");
+    if (pagination) {
+        let links = document.querySelectorAll(".page-item");
+
+        for (link of [...links]) {
+            if (link.getAttribute("href").includes(current)) {
+                link.classList.add("active");
+            }
+        }
+    }
 });

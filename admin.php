@@ -69,7 +69,7 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                            <h1 class="modal-title fs-5 text-center" id="modalTitle">Mais informações</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
@@ -112,7 +112,7 @@
                                                                 <div id="feedbackUsuario-<?php echo $user['iduser']?>"></div>
                                                                 
                                                                 <div class="buttons d-flex justify-content-end align-items-center py-3">
-                                                                    <a href="perfil.php" class="btn btn-link me-3">Cancelar</a>
+                                                                    <a data-bs-dismiss="modal" class="btn btn-link me-3">Cancelar</a>
                                                                     <button type="submit" class="btn btn-outline-green">Salvar Alterações</button>
                                                                 </div>
                                                             </form>
@@ -151,7 +151,7 @@
                                 </tbody>
                             </table>
                             <nav aria-label="Pagination">
-                                <ul class="pagination justify-content-center">
+                                <ul class="pagination justify-content-center" id="pagination">
                                     <?php 
                                         //Botão de Anterior
                                         if ($currPage >1) {

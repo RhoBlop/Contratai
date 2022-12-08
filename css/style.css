@@ -1873,6 +1873,10 @@ p {
     --bs-pagination-active-bg: var(--dark-green);
 }
 
+.crud #inputFileLabel {
+    margin: 0 auto;
+}
+
 /* CHAT */
 
 .contact { 
