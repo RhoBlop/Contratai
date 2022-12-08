@@ -11,20 +11,19 @@
             $profsAv = $profissaoClass->selectMaisContratos($limit = 6);
             
             foreach ($profsAv as $prof): 
-                [$idprof, $descrprof, $numcontrato, $mediaAv] = [$prof["idprof"], $prof["descrprof"], $prof["numcontrato"], $prof["mediaavaliacao"]];
+                [$idprof, $descrprof, $numcontrato, $mediaAv, $imgProf] = [$prof["idprof"], $prof["descrprof"], $prof["numcontrato"], $prof["mediaavaliacao"], $prof["imgprof"]];
         ?>
 
             <!-- CARD PROFISSÃO -->
             <div class="carousel-item">
                 <div class="card card-categoria rounded-3 shadow-sm">
-                    <img src="images/temp/placeholder-card.jpg" class="card-img-top">
+                    <img src="<?php echoProfissaoImage($imgProf) ?>" class="card-img-top">
                     <span class="badge-avaliacao px-2 <?php echo echoAvaliacaoClass($mediaAv) ?>">
                         <!-- STAR ICON -->
                         <ion-icon name="star"></ion-icon>
                         <?php echo $mediaAv; ?>
                     </span>
                     <div class="card-body">
-                        <!-- FIXME plmdds ajeita essa merda thiago -->
                         <h4><?php echo ucfirst($descrprof); ?></h4>
                         <p class="mb-2"><?php echo $numcontrato; ?> contratações</p>
                         <a href="<?php echo "profissao.php?id={$idprof}" ?>" class="btn btn-outline-green">Ver mais</a>

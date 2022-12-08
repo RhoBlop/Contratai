@@ -113,8 +113,8 @@
         public function selectMaisCadastros($limit = 1) {
             try {
                 $sql = <<<SQL
-                    SELECT top.idprof, top.descrprof, top.numuser, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao 
-                    FROM (SELECT count(*) AS numuser, prof.idprof, prof.descrProf
+                    SELECT top.idprof, top.descrprof, top.numuser, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao, top.imgprof 
+                    FROM (SELECT count(*) AS numuser, prof.idprof, prof.descrProf, prof.imgprof
                         FROM profissao AS prof
                         INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
                         INNER JOIN userespec AS useres ON (espec.idespec = useres.idespec)
@@ -126,7 +126,7 @@
                     INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
                     INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                     WHERE (contrt.idstatus = 4)
-                    GROUP BY top.descrprof, top.numuser, top.idprof
+                    GROUP BY top.descrprof, top.numuser, top.idprof, top.imgprof
                     ORDER BY top.numuser DESC, mediaavaliacao DESC;
                 SQL;
                 
@@ -146,8 +146,8 @@
         public function selectMaisContratos($limit = 1) {
             try {
                 $sql = <<<SQL
-                    SELECT top.idprof, top.descrprof, top.numContrato, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
-                    FROM (SELECT prof.idprof, prof.descrprof, count(contrt.idcontrato) AS numContrato
+                    SELECT top.idprof, top.descrprof, top.numContrato, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao, top.imgprof
+                    FROM (SELECT prof.idprof, prof.descrprof, count(contrt.idcontrato) AS numContrato, prof.imgprof
                         FROM profissao AS prof
                         INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
                         INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
@@ -159,7 +159,7 @@
                     INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
                     INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                     WHERE contrt.idstatus = 4
-                    GROUP BY top.descrprof, top.idprof, top.numContrato
+                    GROUP BY top.descrprof, top.idprof, top.numContrato, top.imgprof
                     ORDER BY top.numContrato DESC, mediaavaliacao DESC;
                 SQL;
                 
