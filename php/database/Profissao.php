@@ -52,6 +52,31 @@
             }
         }
 
+        public function selectProfById($idprof) { 
+            try {
+                $sql = <<<SQL
+                    SELECT prof.idprof, prof.descrprof, prof.imgprof 
+                    FROM profissao AS prof
+                    WHERE prof.idprof = :id 
+                    ORDER BY descrprof
+                SQL;
+
+                $stmt = Database::prepare($sql);
+                $stmt->execute([
+                    ":id" => $idprof
+                ]);
+
+                $result = $stmt->fecthAll();
+                return ["dados" => $result];
+
+            } catch(PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
+                
+                return [ "dados" => false ];
+            }
+        }
+
         public function selectProfissaoMaiorAvaliacao($idprof, $limit = 1) {
             try {
                 $users = <<<SQL
@@ -155,7 +180,7 @@
         public function selectMaiorAvaliacao($limit = 1) {
             try {
                 $sql = <<<SQL
-                    SELECT prof.idprof, prof.descrprof, count(aval.idavaliacao) AS numAvaliacao, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
+                    SELECT prof.idprof, prof.descrprof, count(aval.idavaliacao) AS numAvaliacao, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao, prof.imgprof
                     FROM profissao AS prof
                     INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
                     INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)

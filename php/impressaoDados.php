@@ -55,6 +55,13 @@ function echoProfileImage($img)
     echo is_null($img) ? "images/temp/default-pic.png" : $img;
 }
 
+
+//mesma ideia da impressão de foto de perfil, só que com os banners de carrossel das profissões 
+function echoProfissaoImage($img) 
+{
+    echo is_null($img) ? "images/temp/placeholder-card.jpg" : $img;
+}
+
 // imprime a classe de acordo com a nota da avaliação
 function echoAvaliacaoClass($nota)
 {

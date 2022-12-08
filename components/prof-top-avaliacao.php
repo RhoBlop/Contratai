@@ -11,7 +11,7 @@
             $profsAv = $profissaoClass->selectMaiorAvaliacao($limit = 6);
             
             foreach ($profsAv as $prof): 
-                [$idprof, $descrprof, $numAv, $mediaAv] = [$prof["idprof"], $prof["descrprof"], $prof["numavaliacao"], $prof["mediaavaliacao"]];
+                [$idprof, $descrprof, $numAv, $mediaAv, $imgProf] = [$prof["idprof"], $prof["descrprof"], $prof["numavaliacao"], $prof["mediaavaliacao"], $prof["imgprof"]];
 
         ?>
 
@@ -20,7 +20,7 @@
             <!-- CARD PROFISSÃO -->
             <div class="carousel-item">
                 <div class="card card-categoria rounded-3 shadow-sm">
-                    <img src="images/temp/placeholder-card.jpg" class="card-img-top">
+                    <img src="<?php echoProfissaoImage($imgProf) ?>" class="card-img-top">
                     <div class="badge-avaliacao px-2 <?php echo echoAvaliacaoClass($mediaAv) ?>">
                         <!-- STAR ICON -->
                         <ion-icon name="star"></ion-icon>
