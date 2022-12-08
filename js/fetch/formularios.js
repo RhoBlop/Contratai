@@ -224,6 +224,20 @@ async function deleteUser() {
     }
 }
 
+async function deleteUserById(userId) {
+    let response = await fetch("./php/post/user/deletarbyid.php", {
+        method: "POST",
+        credentials: "same-origin",
+        body: `userId=${userId}`
+    });
+    let data = await response.text();
+    console.log(data);
+
+    if (data.dados) {
+        window.location.href = "admin.php";
+    }
+}
+
 async function sendSolicitacaoContrato(event) {
     event.preventDefault();
     const form = event.target;

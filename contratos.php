@@ -52,13 +52,18 @@
                                     $solicitacoesEnviadas[] = $contrt;
                                     break;
                                 case 2:
+                                    $emAndamentoEnviados[] = $contrt;
+                                    break;
                                 case 3:
+                                    $emAndamentoEnviados[] = $contrt;
+                                    break;
                                 case 5:
                                     $emAndamentoEnviados[] = $contrt;
                                     break;
                                 case 4:
                                     $finalizadosEnviados[] = $contrt;
                             }
+                            
                         }
 
 

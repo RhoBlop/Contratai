@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="hydrated">
     <head>
         <?php require("components/head.php") ?>
         <link rel="stylesheet" href="css/chaThiago.css">
@@ -17,7 +17,7 @@
                 <form onsubmit="sendUpdateProfissão(event)">
                     <div class="form-group mb-3">
                         <label for="especializacao" class="form-label">Profissão</label>
-                        <select name="profissao" id="Prof">
+                        <select name="profissao" id="prof">
                             <option value="" selected>Selecione uma profissão</option>
                             <?php 
                             $profissaoClass = new Profissao();
@@ -33,6 +33,8 @@
                                 
                             endforeach;
                             ?>
+
+                            
                         </select>
                     </div>
                 </form>
@@ -47,21 +49,35 @@
       crossorigin="anonymous"
     ></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script src="js/fetch/profissoes.js"></script>
     <script> 
-        let selectProfs = document.querySelector("#Prof");
+        let selectProfs = document.querySelector("#prof");
 
         selectProfs.onchange = async () => {
             let profid = selectProfs.value; 
             
-            if (profId !== "") {
-                let profInfos = await fetchGetProf(profid)
+            if (profid !== "") {
+                let profInfos = await fetchGetProf(profid);
+                let img = profInfos[0]['imgprof'];
 
-                if (profInfos) {
-                    for (let prof of profInfos) {
+            }
+        }
 
-                    }
+        async function fetchGetProf(profId) {
+            try {
+                let response = await fetch(`./php/post/profissao/getProf.php`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: `profId=${profId}`,
+                });
+                let data = await response.json();
+                
+                if (data.dados) {
+                    return data.dados;
                 }
+            } catch (error) {
+                console.error(error);
             }
         }
     </script>

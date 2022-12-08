@@ -85,6 +85,11 @@ async function fetchGetEspecs(profId) {
 }
 
 async function fetchGetProf(profId) {
+    if (especsAbortControl) {
+        especsAbortControl.abort();
+    }
+    especsAbortControl = new AbortController();
+
     try {
         let response = await fetch(`./php/post/profissao/getProf.php`, {
             method: "POST",

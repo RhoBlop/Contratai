@@ -66,8 +66,8 @@
                     ":id" => $idprof
                 ]);
 
-                $result = $stmt->fecthAll();
-                return ["dados" => $result];
+                $result = $stmt->fetchAll();
+                return [ "dados" => $result ];
 
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);

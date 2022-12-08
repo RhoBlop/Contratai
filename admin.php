@@ -62,10 +62,8 @@
                                         foreach($users as $user) :
 
                                     ?> 
-                                            <!-- TODO Imprimir todos os dados no modal -->
-                                            <!-- TODO Estilizar o modal -->
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="<?php echo 'modal'. $user['iduser']?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <!-- Modal de informações -->
+                                                <div class="modal fade" id="<?php echo 'modalInfo'. $user['iduser']?>" tabindex="-1" aria-labelledby="<?php echo 'modalInfo'. $user['iduser']?>" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -122,8 +120,24 @@
                                                 </div>
                                                 </div>
 
-
-
+                                                <!-- Modal de Exclusão-->
+                                                <div class="modal fade" id="<?php echo 'modalExclude'. $user['iduser']?>" tabindex="-1">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header text-center">
+                                                        <h3 class="modal-title w-100" id="modalExclude">Aviso</h3>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body text-center">
+                                                        <p>Você está prestes a excluir esta conta permanentemente.</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
+                                                        <button type="button" class="btn btn-danger" onclick="deleteUserById(<?php $user['iduser']?>)">Excluir</button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
 
                                             <?php
                                             $admin = ($user["isadminuser"] == true) ? "Sim" : "Não";
@@ -138,8 +152,8 @@
                                                     <td>$admin</td>
                                                     <td>
                                                         <div class="action-buttons d-flex justify-content-around">
-                                                            <a href="#modal{$user['iduser']}" data-bs-toggle="modal" data-bs-target="#modal{$user['iduser']}" id="infoButton" class="btn btn-green"><i class="fa-solid fa-circle-info"></i></a>
-                                                            <a href="#exlude" id="excludeButton" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                                            <a href="#modalInfo{$user['iduser']}" data-bs-toggle="modal" data-bs-target="#modalInfo{$user['iduser']}" id="infoButton" class="btn btn-green"><i class="fa-solid fa-circle-info"></i></a>
+                                                            <a href="#modalExclude{$user['iduser']}" data-bs-toggle="modal" data-bs-target="#modalExclude{$user['iduser']}" id="excludeButton" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -157,7 +171,7 @@
                                         if ($currPage >1) {
                                             $prevPage = $currPage-1;
                                             echo <<<HTML
-                                            <li class="page-item"><a class="page-link" href="admin.php?page={$prevPage}>">Anterior</a></li>
+                                            <li class="page-item"><a class="page-link" href="admin.php?page={$prevPage}">Anterior</a></li>
                                             HTML;
                                         }
 

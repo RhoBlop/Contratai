@@ -303,7 +303,8 @@ main h1.text-gradient {
     left: 1rem;
     min-width: 60px;
     border-radius: 20px;
-    backdrop-filter: blur(20px);
+    background-color: rgba(205, 254, 251, 0.3);
+    backdrop-filter: blur(5px);
 }
 
 ion-icon {
@@ -1190,7 +1191,7 @@ p {
 #modaladdProf button i {
     display: none;
     opacity: 0;
-    transition: all 0.3s;
+    transition: all .15s;
 }
 
 @media screen and (max-width: 768px) {

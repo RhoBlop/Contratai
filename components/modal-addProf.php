@@ -45,7 +45,7 @@
             <div id="feedbackUsuario"></div>
         </div>
         <div class="modal-footer d-flex justify-content-center">
-          <button id="addEspecBtn" class="btn btn-outline-green"><i class="fa-solid fa-arrow-right"></i></button>
+          <button id="addEspecBtn" class="btn btn-outline-green">Adicionar<i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </div>
   </div>
