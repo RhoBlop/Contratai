@@ -19,6 +19,8 @@
         $timeElapsed = timeElapsedString($dataCriacao);
         $imgSrc = $imgPerfil ?? "../images/temp/default-pic.png";
 
+        $descricao = $descrContrato !== "" ? "Descrição: <i class='text-muted'>'{$descrContrato}'</i>" : "";
+
         $diasString = "";
         foreach ($diasContrato as $dia) {
             if (isDateExpired($dia)) {
@@ -83,7 +85,7 @@
                         <div class="contract-dates my-2">
                             ${diasString}
                         </div>
-                        <p>Descrição: <i class="text-muted">"{$descrContrato}"</i></p>
+                        <p>{$descricao}</p>
                         <p class="my-1 "><b>{$aviso}</b></p>
                         <div class="contrato-buttons my-2 d-flex gap-2">
                             {$botoesString}
