@@ -59,6 +59,45 @@ async function sendCadastro(event) {
     }
 }
 
+//função para adicionar usuários (crud), bem parecida com a função de cadastro
+async function insertUsuario(event) {
+    event.preventDefault();
+
+    let senha = document.querySelector("#senha").value;
+    let confirmaSenha = document.querySelector("#confirmaSenha").value;
+
+    if (senha === confirmaSenha) {
+        // transforma os dados do formulário para o formato x-www-form-urlencoded
+        let formData = new URLSearchParams(
+            new FormData(event.target)
+        ).toString();
+
+        loading();
+        timeout = timeoutConnection();
+
+        let response = await fetch("./php/post/user/cadastro.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: formData,
+        });
+        let data = await response.json();
+
+        if (data.erro) {
+            let { erro } = data;
+            formErro(erro);
+        }
+
+        if (data.dados) {
+            window.location.reload();
+        }
+        clearTimeout(timeout);
+    } else {
+        formErro("As senhas não são iguais");
+    }
+}
+
 // função de formulário responsável por criar uma nova sessão de usuário
 async function sendLogin(event) {
     event.preventDefault();
