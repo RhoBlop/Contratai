@@ -21,6 +21,11 @@ for (input of document.querySelectorAll(".search-filter")) {
     };
 }
 
+searchBox.onclick = () => {
+    console.log(form);
+    form.classList.add("active");
+}
+
 // search button clicked
 searchButton.onclick = () => {
     searchResult.innerHTML = "";
@@ -38,6 +43,7 @@ async function search() {
         if (data) {
             if (data.dados) {
                 let { dados } = data;
+                console.log(data);
 
                 constructSearchCards(dados);
             } else {
@@ -64,7 +70,6 @@ async function ajaxSearch() {
 
     loading();
     try {
-        console.log("new request being made");
         let response = await fetch(
             `./php/post/pesquisa.php?limit=${limit}&offset=${offset}`,
             {
@@ -77,7 +82,6 @@ async function ajaxSearch() {
             }
         );
         let data = await response.json();
-        console.log(data);
 
         clearLoading();
 
@@ -113,7 +117,6 @@ function constructSearchCards(dados) {
 function createUserCard(user) {
     let card = document.createElement("div");
     card.classList.add("card", "card-hover", "card-pesquisa");
-    console.log(user);
     let {
         iduser,
         imguser,
@@ -165,6 +168,10 @@ function createUserCard(user) {
         </div>`;
 
     return card;
+}
+
+function createProfCard(prof) {
+
 }
 
 /* ========== USER FEEDBACK ========== */
