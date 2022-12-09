@@ -133,7 +133,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                         <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Cancelar</button>
-                                                        <button type="button" class="btn btn-danger" onclick="deleteUserById(<?php $user['iduser']?>)">Excluir</button>
+                                                        <button type="button" class="btn btn-danger" onclick="deleteUserById(<?php echo $user['iduser']?>)">Excluir</button>
                                                         </div>
                                                     </div>
                                                     </div>

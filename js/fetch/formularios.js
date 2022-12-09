@@ -228,13 +228,14 @@ async function deleteUserById(userId) {
     let response = await fetch("./php/post/user/deletarbyid.php", {
         method: "POST",
         credentials: "same-origin",
-        body: `userId=${userId}`
+        body: `userId=${userId}`,
     });
     let data = await response.text();
+    console.log(userId);
     console.log(data);
 
     if (data.dados) {
-        window.location.href = "admin.php";
+        window.location.reload();
     }
 }
 
