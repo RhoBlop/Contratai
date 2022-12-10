@@ -39,4 +39,6 @@ _Abra o localhost_<br><br>
 
 ## 😁 Tudo pronto
 
-Agora é só você criar sua conta, logar e **contratar**!
+Agora é só você criar sua conta, logar e **contratar**! <br>
+
+Se você caiu aqui de paraquedas, recomendo que acesse nosso outro repositório, que explica detalhadamente tudo envolvendo nosso projeto! É só clicar [aqui](https://github.com/RhoBlop/PlanejamentoProjetoIntegrador)!
