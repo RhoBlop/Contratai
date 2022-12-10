@@ -12,13 +12,8 @@ Primeiro, você deve baixar nosso repositório clicando em **<> Code** -> **Down
 Agora, você precisa de um webserver para rodar o apache localmente em seu computador. Recomendamos que você utilize o **Xampp**, mas você pode utilizar qualquer outro programa, como o USBwebserver. Após instalado, no caso do xampp, abra o arquivo **httpd.conf**, localizado em **Apache/conf**. Mude as seguintes linhas. <br>
 
     ...
-    #
-    # DocumentRoot: The directory out of which you will serve your
-    # documents. By default, all requests are taken from this directory, but
-    # symbolic links and aliases may be used to point to other locations.
-    #
-    DocumentRoot "C:\Users\20201TIIMI0179\Documents\GitHub\Contratai" -> Caminho do Contrata Ai
-    <Directory "C:\Users\20201TIIMI0179\Documents\GitHub\Contratai"> -> Caminho do Contrata Ai. 
+    DocumentRoot "[Caminho do repositório]" 
+    <Directory "[Caminho do repositório]"> 
     ...
 É também necessário editar o arquivo **php.ini**, localizado dentro da pasta **php** do sotfware utilizado. Dentro dele, descomente (retire o **;**) as seguintes linhas:
 
