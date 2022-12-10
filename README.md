@@ -31,8 +31,11 @@ Agora, você precisa de um webserver para rodar o apache localmente em seu compu
 
 Feito tudo isso, reinicie seu Xampp, aperte "Start", abra seu navegador e digite "_localhost_". <br>
 
-![Print do Xampp](images/readme/printXampp.png) <br>
-![Print do Navegador](images/readme/printNavegador.png)
+![Print do Xampp](https://github.com/RhoBlop/Contratai/blob/develop/images/readme/printXampp.png) <br>
+_Aperte Start_<br><br>
+
+![Print do Navegador](https://github.com/RhoBlop/Contratai/blob/develop/images/readme/printNavegador.png) <br>
+_Abra o localhost_<br><br>
 
 ## 😁 Tudo pronto
 
