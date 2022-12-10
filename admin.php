@@ -277,9 +277,18 @@
 
                                         //Botões das páginas
                                         for ($i = 1; $i<= $totalPages; $i++) {
-                                            echo <<<HTML
+                                            
+                                            if ($i == $currPage) {
+                                                echo <<<HTML
+                                                <li class="page-item"><a class="page-link active" href="admin.php?page={$i}">$i</a></li>
+                                                HTML;
+                                            }
+                                            else {
+                                                echo <<<HTML
                                                 <li class="page-item"><a class="page-link" href="admin.php?page={$i}">$i</a></li>
-                                            HTML;
+                                                HTML;
+                                            }
+                                            
                                         }
 
 
