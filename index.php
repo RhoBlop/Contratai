@@ -1,10 +1,4 @@
-<<<<<<< Updated upstream
 <?php session_start() ?>
-=======
-<?php 
-session_start(); 
-?>
->>>>>>> Stashed changes
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
