@@ -22,7 +22,6 @@ for (input of document.querySelectorAll(".search-filter")) {
 }
 
 searchBox.onclick = () => {
-    console.log(form);
     form.classList.add("active");
 }
 

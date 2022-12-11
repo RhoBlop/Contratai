@@ -1,5 +1,4 @@
 function loading(idDivFeedback = "#feedbackUsuario") {
-    console.log(idDivFeedback);
     const feedbackDiv = document.querySelector(idDivFeedback);
     feedbackDiv.style.display = "block";
     feedbackDiv.style.backgroundColor = "#026773";
@@ -173,7 +172,6 @@ async function sendUpdateAdmin(event, idUser) {
         body: formData,
     });
     let data = await response.json();
-    console.log(data);
 
     if (data.erro) {
         let { erro } = data;
@@ -295,7 +293,6 @@ async function sendSolicitacaoContrato(event) {
         body: formData,
     });
     let data = await response.json();
-    console.log(data);
 
     if (data.erro) {
         let { erro } = data;

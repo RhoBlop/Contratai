@@ -23,7 +23,6 @@ async function aceitarContrato(event) {
     // problemas de segurança, mas né... :/
     let idStatus = 2;
     let data = await updateStatusContrato(idContrato, idStatus);
-    console.log(data);
 
     if (data.dados) {
         createToast(
@@ -128,7 +127,6 @@ async function aceitarFimContrato(event) {
 }
 
 async function updateStatusContrato(idContrato, idStatus) {
-    console.log(idContrato, idStatus);
     try {
         let response = await fetch(
             `./php/post/contrato/updateStatus.php`,
