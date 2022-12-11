@@ -68,7 +68,7 @@
     
 
         return <<<HTML
-            <div class="id-contrato accordion-body d-flex align-items-start justify-content-between">
+            <div class="id-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid="{$idContrato}">
                 <div class="d-flex gap-3">
                     <div class="clickable-image">
                         <img src="{$imgSrc}">

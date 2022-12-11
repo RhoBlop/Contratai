@@ -11,7 +11,7 @@ session_start();
 require("../../database/Contrato.php");
 $contrato = new Contrato();
 
-[$idContrato, $idStatus] = [28, 4];
+[$idContrato, $idStatus] = [$_POST["idContrato"], $_POST["idStatus"]];
 
 // inserção da especialização no usuário
 $result = $contrato->setStatusContrato($idContrato, $idStatus);

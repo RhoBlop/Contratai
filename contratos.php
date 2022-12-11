@@ -95,8 +95,9 @@
                                                 $botoes = [];
                                                 $aviso = "Aguarde o usuário aceitar ou rejeitar seu pedido";
                                                 $dataCriacao = $contrt["timecriacaocontrato"];
+                                                $idContrato = $contrt["idcontrato"];
 
-                                                echo constructContratoCard($idUsr, $imgPerfil, $headerMsg, $especializacao, $diasContrato, $descrContrato, $botoes, $aviso, $dataCriacao);
+                                                echo constructContratoCard($idUsr, $imgPerfil, $headerMsg, $especializacao, $diasContrato, $descrContrato, $botoes, $aviso, $dataCriacao, $idContrato);
                                             endforeach;
                                         endif;
                                         ?>
@@ -125,6 +126,7 @@
                                                 $diasContrato = $contrt["diascontrato"];
                                                 $descrContrato = $contrt["descrcontrato"];
                                                 $dataCriacao = $contrt["timecriacaocontrato"];
+                                                $idContrato = $contrt["idcontrato"];
                                                 
                                                 if ($contrt["idstatus"] === 2):
                                                     $headerMsg = "O Contrato com <b>{$contrt["nomeuser"]}</b> está em andamento";
@@ -147,7 +149,7 @@
                                                 endif;
 
                                                 
-                                                echo constructContratoCard($idUsr, $imgPerfil, $headerMsg, $especializacao, $diasContrato, $descrContrato, $botoes, $aviso, $dataCriacao);
+                                                echo constructContratoCard($idUsr, $imgPerfil, $headerMsg, $especializacao, $diasContrato, $descrContrato, $botoes, $aviso, $dataCriacao, $idContrato);
 
                                             endforeach;
                                         endif;
@@ -254,7 +256,7 @@
                                             $dataCriacao = $contrt["timecriacaocontrato"];
                                             $idContrato = $contrt['idcontrato'];
 
-                                            echo constructContratoCard($idUsr, $imgPerfil, $headerMsg, $especializacao, $diasContrato, $descrContrato, $botoes, $aviso, $dataCriacao);
+                                            echo constructContratoCard($idUsr, $imgPerfil, $headerMsg, $especializacao, $diasContrato, $descrContrato, $botoes, $aviso, $dataCriacao, $idContrato);
                                         
                                         endforeach;
                                     endif;
@@ -283,6 +285,7 @@
                                                 $diasContrato = $contrt["diascontrato"];
                                                 $descrContrato = $contrt["descrcontrato"];
                                                 $dataCriacao = $contrt["timecriacaocontrato"];
+                                                $idContrato = $contrt["idcontrato"];
 
                                                 if ($contrt['idstatus'] === 2) :
                                                     $headerMsg = "O Contrato com <b>{$contrt["nomeuser"]}</b> está em andamento";
@@ -302,7 +305,7 @@
                                                     $aviso = "[Por enquanto não é possível realizar nenhuma ação enquanto o contrato está atrasado]";
                                                         
                                                 endif;
-                                                echo constructContratoCard($idUsr, $imgPerfil, $headerMsg, $especializacao, $diasContrato, $descrContrato, $botoes, $aviso, $dataCriacao);
+                                                echo constructContratoCard($idUsr, $imgPerfil, $headerMsg, $especializacao, $diasContrato, $descrContrato, $botoes, $aviso, $dataCriacao, $idContrato);
                                             endforeach;
                                         endif;
                                         ?>

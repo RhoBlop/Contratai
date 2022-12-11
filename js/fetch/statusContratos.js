@@ -2,18 +2,20 @@ async function aceitarContrato(event) {
     let btn = event.target;
     let contratoEl = findClosestAncestorByClass(btn, "id-contrato");
 
-    // moveContrato(contratoEl, "#")
+    contratoEl.remove();
     
-    // deleta os botões de "aceitar" e "recusar" do card
-    let buttons = contratoEl.querySelector(".contrato-buttons");
-    buttons.textContent = "";
+    // moveContrato(contratoEl, "emAndamentoContratado");
+    
+    // // deleta os botões de "aceitar" e "recusar" do card
+    // let buttons = contratoEl.querySelector(".contrato-buttons");
+    // buttons.textContent = "";
 
-    // adiciona o botão de "finalizar contrato" no card
-    let btnFinalizar = document.createElement("button");
-    btnFinalizar.classList.add("btn", "btn-green");
-    btnFinalizar.textContent = "O contrato foi realizado!";
-    btnFinalizar.addEventListener("click", solicitarFimContrato);
-    buttons.appendChild(btnFinalizar);
+    // // adiciona o botão de "finalizar contrato" no card
+    // let btnFinalizar = document.createElement("button");
+    // btnFinalizar.classList.add("btn", "btn-green");
+    // btnFinalizar.textContent = "O contrato foi realizado!";
+    // btnFinalizar.addEventListener("click", solicitarFimContrato);
+    // buttons.appendChild(btnFinalizar);
 
     
 
@@ -21,6 +23,7 @@ async function aceitarContrato(event) {
     // problemas de segurança, mas né... :/
     let idStatus = 2;
     let data = await updateStatusContrato(idContrato, idStatus);
+    console.log(data);
 
     if (data.dados) {
         createToast(
@@ -125,6 +128,7 @@ async function aceitarFimContrato(event) {
 }
 
 async function updateStatusContrato(idContrato, idStatus) {
+    console.log(idContrato, idStatus);
     try {
         let response = await fetch(
             `./php/post/contrato/updateStatus.php`,
@@ -145,7 +149,13 @@ async function updateStatusContrato(idContrato, idStatus) {
     }
 }
 
-function moveContrato(contrato, divId) {
+function moveContrato(contrato, divId, idStatus) {
+    switch (divId) {
+        case 2:
+            divId = "emAndamentoContratado";
+            break;
+
+    }
     let targetAccordion = document.querySelector(`#${divId}`);
     let isEmptyAccordion = targetDiv.querySelector(".empty-accordion");
 
