@@ -59,6 +59,12 @@
                                                     <label for="telefone" class="mb-1">Telefone</label>
                                                     <input type="text" class="form-control " id="telefone" name="telefone" placeholder="(__) ____-____" required oninput="setMask(this, maskTelefone)" maxlength="15">
                                                 </div>
+
+                                                <!-- BAIRRO --> 
+                                                <div class="form-group mb-2">
+                                                    <label for="bairro" class="mb-1">Telefone</label>
+                                                    <input type="text" class="form-control " id="bairro" name="bairro" required>
+                                                </div>
     
                                                 <!-- SENHA -->
                                                 <div class="form-group mb-2">
@@ -190,6 +196,14 @@
                                                                 <div class="form-group mb-3">
                                                                     <label for="telefone" class="form-label">Telefone</label>
                                                                     <input type="text" class="form-control" id="telefone" name="telefone" value="<?php echoDadosNotNull($user['telefoneuser'], null) ?>">
+                                                                </div>
+                                                                <div class="form-group mb-3">
+                                                                    <label for="bairro" class="form-label">Bairro</label>
+                                                                    <input type="bairro" class="form-control" id="bairro" name="bairro" value="<?php echoDadosNotNull($user['descrbairro'], null) ?>" readonly>
+                                                                </div>
+                                                                <div class="form-group mb-3">
+                                                                    <label for="cidade" class="form-label">Cidade</label>
+                                                                    <input type="cidade" class="form-control" id="cidade" name="cidade" value="<?php echoDadosNotNull($user['descrcidade'], null) ?>" readonly>
                                                                 </div>
                                                                 <div class="form-group mb-3">
                                                                     <label for="nascimento" class="form-label">Data de Nascimento</label>

@@ -11,8 +11,11 @@ class Usuario extends Database
     {
         try {
             $sql = <<<SQL
-                    SELECT * 
-                    FROM usuario
+                    SELECT usuario.*, bairro.descrbairro, cidade.descrcidade, estado.descrestado
+                    FROM usuario 
+                    INNER JOIN bairro ON (usuario.idbairro = bairro.idbairro)
+                    INNER JOIN cidade ON (bairro.idcidade = cidade.idcidade)
+                    INNER JOIN estado ON (cidade.idestado = estado.idestado)
                     ORDER BY iduser
                 SQL;
             
@@ -34,11 +37,14 @@ class Usuario extends Database
     {
         try {
             $sql = <<<SQL
-                    SELECT * 
-                    FROM usuario
+                    SELECT usuario.*, bairro.descrbairro, cidade.descrcidade, estado.descrestado
+                    FROM usuario 
+                    INNER JOIN bairro ON (usuario.idbairro = bairro.idbairro)
+                    INNER JOIN cidade ON (bairro.idcidade = cidade.idcidade)
+                    INNER JOIN estado ON (cidade.idestado = estado.idestado)
                     ORDER BY iduser
                     OFFSET :offset
-                    LIMIT :limit    
+                    LIMIT :limit  
                 SQL;
             
             $stmt = Database::prepare($sql);
@@ -369,12 +375,82 @@ class Usuario extends Database
             return ["dados" => false];
         }
     }
+
+    public function selectEstadoBySigla($siglaEstado) {
+        try {
+            $sql = <<<SQL
+                    SELECT * 
+                    FROM estado 
+                    WHERE siglaestado = :sigla
+                SQL;
+
+            $stmt = Database::prepare($sql);
+            $stmt->execute([
+                ":sigla" => $siglaEstado
+            ]);
+
+            $result = $stmt->fetch();
+            return $result;
+        } catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+    }
+
+    public function selectCidadeByNome($nomeCidade) {
+        try {
+            $sql = <<<SQL
+                    SELECT * 
+                    FROM cidade 
+                    WHERE descrcidade = :nome
+                SQL;
+
+            $stmt = Database::prepare($sql);
+            $stmt->execute([
+                ":nome" => $nomeCidade
+            ]);
+
+            $result = $stmt->fetch();
+            return $result;
+        } catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+    }
+
+    public function selectBairroByNome($nomeBairro) {
+        try {
+            $sql = <<<SQL
+                    SELECT * 
+                    FROM bairro 
+                    WHERE descrbairro = :nome
+                SQL;
+
+            $stmt = Database::prepare($sql);
+            $stmt->execute([
+                ":nome" => $nomeBairro
+            ]);
+
+            $result = $stmt->fetch();
+            return $result;
+        } catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+    }
+
     //!SECTION - SELECTS
 
 
     //SECTION - INSERTS
     // insere um usuário com as informações passadas por parâmetro
-    public function insertBasicInfo($nome, $email, $cpf, $telefone, $senha)
+    public function insertBasicInfo($nome, $email, $cpf, $telefone, $senha, $bairro, $nascimento)
     {
         try {
             // verifica se já existe um usuário cadastro com esse email
@@ -385,14 +461,16 @@ class Usuario extends Database
             // se não existem usuários cadastrados com esse email, segue para insert
             if ($verifyEmail->rowCount() < 1) {
                 // insert do novo usuário
-                $insertSQL = "INSERT INTO usuario(nomeuser, emailuser, cpfuser, telefoneuser, senhauser) VALUES (:nome, :email, :cpf, :telefone, :senha)";
+                $insertSQL = "INSERT INTO usuario(nomeuser, emailuser, cpfuser, telefoneuser, senhauser, idbairro, nascimentouser) VALUES (:nome, :email, :cpf, :telefone, :senha, :bairro, :nascimento)";
                 $insertSTMT = Database::prepare($insertSQL);
                 $insertSTMT->execute([
                     ":nome" => $nome,
                     ":email" => $email,
                     ":cpf" => $cpf,
                     ":telefone" => $telefone,
-                    ":senha" => $senha
+                    ":senha" => $senha,
+                    ":bairro" => $bairro,
+                    ":nascimento" => $nascimento
                 ]);
 
                 return ["dados" => true];
@@ -447,6 +525,52 @@ class Usuario extends Database
             return ["dados" => false];
         }
     }
+
+    public function insertCidade($nomeCidade, $idEstado) {
+        try {
+            $insertSQL = <<<SQL
+                        INSERT INTO cidade (descrCidade, idEstado) 
+                        VALUES (:nomeCidade, :idEstado)
+                    SQL;
+                $insertSTMT = Database::prepare($insertSQL);
+                $insertSTMT->execute([
+                    ":nomeCidade" => $nomeCidade,
+                    ":idEstado" => $idEstado
+                ]);
+
+                return ["dados" => true];
+        }
+        catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+    }
+
+    public function insertBairro($nomeBairro, $idCidade) {
+        try {
+            $insertSQL = <<<SQL
+                        INSERT INTO bairro (descrBairro, idCidade) 
+                        VALUES (:nomeBairro, :idCidade)
+                    SQL;
+                $insertSTMT = Database::prepare($insertSQL);
+                $insertSTMT->execute([
+                    ":nomeBairro" => $nomeBairro,
+                    ":idCidade" => $idCidade
+                ]);
+
+                return ["dados" => true];
+        }
+        catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+    }
+
+
     //!SECTION - INSERTS
 
 
