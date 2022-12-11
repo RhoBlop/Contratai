@@ -1,6 +1,6 @@
 <?php
     /**
-     * Devolve a string de um card de contrato
+     * Devolve a string HTML de um card de contrato
      * 
      * @param int $idUser
      * @param string $imgPerfil
@@ -100,8 +100,8 @@
     }
 
     function constructNullCard() {
-        echo <<<ERROR
+        echo <<<HTML
                 <div class="empty-accordion accordion-body"><span class="text-muted">Nada por aqui.</span></div>
-            ERROR;
+            HTML;
     }
 ?>

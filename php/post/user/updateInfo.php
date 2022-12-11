@@ -33,7 +33,7 @@
         $imgPath = $imgs[0];
         $_SESSION["profileImg"] = $imgPath;
     } else {
-        $imgBase64 = "";
+        $imgPath = null;
     }
 
     if (isset($_POST["idUser"]) && $_SESSION["admin"] === true) {
@@ -43,7 +43,6 @@
     }
 
     $result = $user->updateInfo($idUser, $nome, $email, $imgPath, $nascimento, $telefone, $bio);
-    $_SESSION["profileImg"] = $imgPath;
     $_SESSION["username"] = $nome;
 
     $response = $result;

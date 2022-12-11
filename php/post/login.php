@@ -21,11 +21,11 @@
 
 
     if (isset($result["dados"])) {
-        $iduser = $result["dados"]["iduser"];
-        $_SESSION["iduser"] = $iduser;
-
-        $admin = $result["dados"]["isadminuser"];
-        $_SESSION["admin"] = $admin;
+        $dados = $result["dados"];
+        $_SESSION["iduser"] = $dados["iduser"];
+        $_SESSION["profileImg"] = $dados["imguser"];
+        $_SESSION["username"] = $dados["nomeuser"];
+        $_SESSION["admin"] = $dados["isadminuser"];
 
         $result = [
             "dados" => true

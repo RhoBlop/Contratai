@@ -59,7 +59,7 @@ class chaThiago {
         //     allowedStatus = ["online", "offline", "digitando..."];
         //     if (allowedStatus.includes(status)) {
         //         if (status === "digitando...") {
-        //             socket.emit("digitando", this.getCurrReceiverId());
+        //             socket.emit("digitando", this.currContactId);
         //         } else {
         //             socket.emit(status);
         //         }
@@ -182,7 +182,7 @@ class chaThiago {
                 const message = input.value;
                 
                 if (message && this.currContactId) {
-                    const idUser = this.getCurrReceiverId();
+                    const idUser = this.currContactId;
                     const timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
                     const msg = { text: message, timestamp: timestamp, sent: true };
                     this.addContactMessages(idUser, [ msg ]);
