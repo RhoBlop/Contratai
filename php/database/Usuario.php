@@ -92,27 +92,51 @@ class Usuario extends Database
     public function selectPerfilPublicoById($userId)
     {
         try {
-            // tá feio :(
+            // general user info
             $sql = <<<SQL
-                    SELECT userinfo.iduser, round(avg(notaavaliacao), 1) AS mediaavaliacao, count(contrt.idcontrato) AS numcontrato, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
-                    FROM (SELECT usr.iduser, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
+                    SELECT userinfo.iduser, round(avg(notaavaliacao), 1) AS mediaavaliacao, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser, descrbairro, descrcidade, siglaestado
+                    FROM (SELECT usr.iduser, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser, descrbairro, descrcidade, siglaestado
                             FROM usuario AS usr
                             INNER JOIN userespec AS useres ON (useres.iduser = usr.iduser)
                             INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
+                            INNER JOIN bairro AS bair ON (usr.idbairro = bair.idbairro)
+                            INNER JOIN cidade AS cid ON (bair.idcidade = cid.idcidade)
+                            INNER JOIN estado AS es ON (cid.idestado = es.idestado)
                             WHERE usr.iduser = :id
-                            GROUP BY usr.iduser, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
                     ) AS userinfo
                     LEFT JOIN contrato AS contrt ON (userinfo.iduser = contrt.idcontratado)
                     LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    WHERE (contrt.idstatus = 4)
-                    GROUP BY userinfo.iduser, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
+                    GROUP BY userinfo.iduser, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser, descrbairro, descrcidade, siglaestado
                 SQL;
             $stmt = Database::prepare($sql);
             $stmt->execute([
                 ":id" => $userId
             ]);
+            $generalInfo = $stmt->fetch();
 
-            $result = $stmt->fetch();
+            // especializacoes
+            $especializacoes = $this->selectEspecsPerfPublicoById($userId);
+            $descrEspecs = [];
+            foreach ($especializacoes as $espec) {
+                $descrEspecs[] = $espec["descrespec"];
+            }
+            $stringEspecs = ucfirst(implode(", ", $descrEspecs));
+
+            // avaliacoes
+            $avals = $this->selectAvaliacoesById($userId);
+            $numAval = count($avals);
+            
+            [$bairro, $cidade, $estado] = [ucfirst($generalInfo["descrbairro"]), ucfirst($generalInfo["descrcidade"]), strtoupper($generalInfo["siglaestado"])];
+            $localizacao = "{$bairro}, {$cidade} - {$estado}";
+
+            $generatedData = [
+                "especializacoes" => $especializacoes,
+                "stringEspecs" => $stringEspecs,
+                "avaliacoes" => $avals,
+                "numAval" => $numAval,
+                "localizacao" => $localizacao,
+            ];
+            $result = array_merge($generalInfo, $generatedData);
 
             return $result;
         } catch (PDOException $e) {
@@ -195,11 +219,10 @@ class Usuario extends Database
                     INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
                     LEFT JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
                     LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    WHERE (usr.iduser = :id) AND (contrt.idstatus = 4)
+                    WHERE (usr.iduser = :id) AND (contrt.idcontratado = :id)
                     GROUP BY espec.idespec, descrespec
                     ORDER BY mediaavaliacao DESC NULLS LAST
                 SQL;
-
             $stmt = Database::prepare($sql);
             $stmt->execute([
                 ":id" => $userId
@@ -223,7 +246,7 @@ class Usuario extends Database
                     SELECT usr.iduser, usr.nomeuser, espec.idespec, descrespec, imguser, comentarioavaliacao, dataavaliacao, round(notaavaliacao, 1) as notaavaliacao
                     FROM avaliacao AS aval
                     INNER JOIN contrato AS contrt ON (aval.idcontrato = contrt.idcontrato)
-                    INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
+                    LEFT JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
                     INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.iduser)
                     WHERE (contrt.idcontratado = :id) AND (contrt.idstatus = 4)
                     ORDER BY aval.notaavaliacao DESC

@@ -65,21 +65,26 @@ function logout()
  * 
  * @return array array filled with image saved names.
  */
-function uploadImgsToServer($dir, $files) {
+function uploadImgsToServer($id, $dir, $files) {
     $imgsPaths = [];
     $folderPath = "../../../images/uploaded/" . $dir;
-    $iterator = 0;
     
     if (!file_exists($folderPath)) {
         mkdir($folderPath, 0777, true);
+    }
+
+    $userFiles = glob($folderPath . $id . '_*.*');
+    if ($userFiles) {
+        foreach($userFiles as $f) {
+            unlink($f);
+        }
     }
 
     foreach ($files as $f) {
         // caminho da imagem salva temporariamente no servidor
         $tmpPath = $f["tmp_name"];
         $sourceProps = getimagesize($tmpPath);
-        $fileNewName = time() . "-" . $iterator;
-        ++$iterator;
+        $fileNewName = $id . "_" . time() . "_" . uniqid();
 
         // extensão da imagem (sem o .) 
         $ext = pathinfo($f["name"], PATHINFO_EXTENSION);

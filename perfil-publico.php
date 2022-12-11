@@ -27,7 +27,7 @@
             <?php
             if ($_SESSION["iduser"] === $userId) :
             ?>
-                <a href="profissoes.php">Finalizar cadastro</a>
+                <a href="profissoes.php">Cadastrar Profissão</a>
             <?php
             endif;
             ?>
@@ -37,17 +37,10 @@
         exit();
     endif;
 
-    $especializacoes = $usuarioClass->selectEspecsPerfPublicoById($userId);
-    $avaliacoes = $usuarioClass->selectAvaliacoesById($userId);
+    $especializacoes = $perfPublico["especializacoes"];
+    $avaliacoes = $perfPublico["avaliacoes"];
 
-
-    $perfEspecs = [];
-    foreach ($especializacoes as $espec) {
-        $perfEspecs[] = $espec["descrespec"];
-    }
-
-    $numAval = count($avaliacoes);
-    [$perfnomeuser, $perfBiografiauser, $perfNumContrato, $perfMediaAval, $perfImguser] = [$perfPublico["nomeuser"], $perfPublico["biografiauser"], $perfPublico['numcontrato'], $perfPublico["mediaavaliacao"], $perfPublico["imguser"]];
+    [$stringEspecs, $numAval, $perfnomeuser, $perfBiografiauser, $perfMediaAval, $perfImguser] = [$perfPublico["stringEspecs"], $perfPublico["numAval"], $perfPublico["nomeuser"], $perfPublico["biografiauser"], $perfPublico["mediaavaliacao"], $perfPublico["imguser"]];
     ?>
 
     <?php include("components/header-auth.php") ?>
@@ -73,10 +66,9 @@
                             <div class="text px-3">
                                 <h3><?php echoDadosNotNull($perfnomeuser, "---"); ?></h3>
                                 <div class="body-text">
-                                    <p><i class="fa-solid fa-briefcase fa-fw"></i><?php echo ucfirst(implode(", ", $perfEspecs)) ?></p>
-                                    <!-- <p><i class="fa-solid fa-location-dot fa-fw"></i>[Desenvolvimento no futuro]</p> -->
+                                    <p><i class="fa-solid fa-briefcase fa-fw"></i><?php echo $stringEspecs ?></p>
+                                    <p><i class="fa-solid fa-location-dot fa-fw"></i><?php echoDadosNotNull($perfPublico["localizacao"], "---"); ?></p>
                                     <p><i class="fa-solid fa-star fa-fw"></i><?php echoDadosNotNull($perfMediaAval, "---"); ?></p>
-                                    <p><?php echo is_null($perfNumContrato) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; ?></p>
                                     <a href="#avaliacao" class="text-decoration-none"><?php echoDadosNotNull("{$numAval} avaliações recebidas", "---"); ?></a><br>
                                 </div>
                                 <?php
@@ -121,10 +113,6 @@
                                                     <?php echoDadosNotNull($mediaEspec, "---"); ?>
                                                 </span>
                                             </div>
-                                            <!-- <div class="card-text">
-                                                    <p>[ Não sei fazer o SQL ] <?php //echo is_null($perfPublico["numcontrato"]) ? "Ainda não foi contratado nenhuma vez" : "{$perfNumContrato} trabalhos realizados"; 
-                                                                                ?></p>
-                                                </div> -->
                                         </div>
                                     </div>
 
@@ -145,16 +133,17 @@
                                 <input type="radio" id="todos" class="search-filter" name="filterAval" value="todos" checked>
                                 <label for="todos">Todos</label>
                                 <?php
+                                // aval filters
                                 $noRepeat = [];
                                 foreach ($avaliacoes as $aval) {
                                     $especId = $aval["idespec"];
                                     $descrEspec = ucfirst($aval["descrespec"]);
 
                                     if (!in_array($descrEspec, $noRepeat)) {
-                                        echo <<<ITEM
+                                        echo <<<HTML
                                                     <input type="radio" id="{$especId}" class="search-filter" name="filterAval" value="{$especId}">
                                                     <label for="{$especId}">{$descrEspec}</label>
-                                                ITEM;
+                                                HTML;
                                     }
                                     $noRepeat[] = $descrEspec;
                                 }

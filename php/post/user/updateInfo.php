@@ -25,21 +25,21 @@
     // destructuring das variáveis
     [$nome, $email, $nascimento, $telefone, $bio] = [$_POST["nome"], $_POST["email"], $_POST["nascimento"], $_POST["telefone"], $_POST["bio"]];
 
+    if (isset($_POST["idUser"]) && $_SESSION["admin"] === true) {
+        $idUser = $_POST["idUser"];
+    } else {
+        $idUser = $_SESSION['iduser'];
+    }
+
     // apenas se um arquivo foi enviado juntamente à requisição
     if ($_FILES["imgPerfil"]["name"] !== "") {
         $dir = "user_profile/";
-        $imgs = uploadImgsToServer($dir, $_FILES);
+        $imgs = uploadImgsToServer($idUser, $dir, $_FILES);
 
         $imgPath = $imgs[0];
         $_SESSION["profileImg"] = $imgPath;
     } else {
         $imgPath = null;
-    }
-
-    if (isset($_POST["idUser"]) && $_SESSION["admin"] === true) {
-        $idUser = $_POST["idUser"];
-    } else {
-        $idUser = $_SESSION['iduser'];
     }
 
     $result = $user->updateInfo($idUser, $nome, $email, $imgPath, $nascimento, $telefone, $bio);
