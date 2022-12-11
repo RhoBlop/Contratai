@@ -2,10 +2,12 @@
 <html lang="en">
     <head>
         <?php require("components/head.php") ?>
-        <script src="js/visualizarImg.js"></script>
     </head>
     <body>
-        <?php include ("components/header-auth.php") ?>
+        <?php
+            include ("components/header-auth.php");
+            $user = $usuarioClass->selectBasicInfoById($_SESSION["iduser"]);
+        ?>
 
         <main>
             <div class="container p-3 my-3">
@@ -57,7 +59,7 @@
                             </div>
 
                             <!-- div para comunicação com usuário -->
-                            <div id="feedbackUsuario"></div>
+                            <div id="feedbackUsuario" class="feedbackUsuario"></div>
                             
                             <div class="buttons d-flex justify-content-end align-items-center py-3">
                                 <a href="perfil.php" class="btn btn-link me-3">Cancelar</a>

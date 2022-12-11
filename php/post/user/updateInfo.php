@@ -27,9 +27,11 @@
 
     // apenas se um arquivo foi enviado juntamente à requisição
     if ($_FILES["imgPerfil"]["name"] !== "") {
-        $imgs = generateImgBase64($_FILES);
+        $dir = "user_profile/";
+        $imgs = uploadImgsToServer($dir, $_FILES);
 
-        $imgBase64 = $imgs[0];
+        $imgPath = $imgs[0];
+        $_SESSION["profileImg"] = $imgPath;
     } else {
         $imgBase64 = "";
     }
@@ -40,7 +42,9 @@
         $idUser = $_SESSION['iduser'];
     }
 
-    $result = $user->updateInfo($idUser, $nome, $email, $imgBase64, $nascimento, $telefone, $bio);
+    $result = $user->updateInfo($idUser, $nome, $email, $imgPath, $nascimento, $telefone, $bio);
+    $_SESSION["profileImg"] = $imgPath;
+    $_SESSION["username"] = $nome;
 
     $response = $result;
 

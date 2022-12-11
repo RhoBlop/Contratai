@@ -27,7 +27,7 @@
                 </div>
 
                 <!-- div para comunicação com usuário -->
-                <div id="feedbackUsuario" class="collapse"></div>
+                <div id="feedbackUsuario" class="collapse feedbackUsuario"></div>
   
             </div>
             <div class="modal-footer d-flex justify-content-center">

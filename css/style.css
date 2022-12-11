@@ -959,6 +959,19 @@ label {
     transition: max-height 4s ease-in-out; */
 }
 
+.feedbackUsuario {
+    display: none;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 0;
+    margin: 1rem 0;
+    border-radius: 8px;
+    animation: fade-in 0.3s ease-in;
+    /* max-height: 0;
+    transition: max-height 4s ease-in-out; */
+}
+
 .inputErro {
     border-color: var(--danger-color);
 }

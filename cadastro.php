@@ -90,7 +90,7 @@
                         </div>
                         
                         <!-- div para comunicação com usuário -->
-                        <div id="feedbackUsuario" class="collapse"></div>
+                        <div id="feedbackUsuario" class="collapse feedbackUsuario"></div>
 
                         <!-- BOTÕES AÇÃO -->
                         <div class="buttons d-flex justify-content-center align-items-center gap-3 my-3">

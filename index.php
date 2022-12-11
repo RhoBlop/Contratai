@@ -54,13 +54,13 @@
       </div>
 
       <!-- CAROUSEL DAS PROFISSÕES COM MAIS CONTRATOS -->
-      <?php include ("components/prof-top-contrato.php") ?>
+      <?php //include ("components/prof-top-contrato.php") ?>
 
       <!-- CAROUSEL DAS PROFISSÕES COM AVALIAÇÕES MAIS ALTAS -->
-      <?php include ("components/prof-top-avaliacao.php") ?>
+      <?php //include ("components/prof-top-avaliacao.php") ?>
 
       <!-- GRID DE AVALIAÇÕES ESTÁTICAS -->
-      <?php include ("components/avaliacoes-index.html") ?>
+      <?php //include ("components/avaliacoes-index.html") ?>
 
       <!-- BANNER DE LOGIN -->
       <div class="login-banner d-flex flex-column align-items-center justify-content-center text-center mb-4 p-3">
