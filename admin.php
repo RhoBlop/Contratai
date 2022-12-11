@@ -4,23 +4,20 @@
         <?php require("components/head.php") ?>
     </head>
     <body>
-        <?php include ("components/header-auth.php") ?>
+        <?php include ("components/CRUD/header-admin.php") ?>
 
         <main>
             <div class="container p-3 my-3">
-                <div class="row gx-5">
-                    
-
-                    <?php include("components/sidebar.php")?>
+                <div class="row gx-5 justify-content-center">
 
                     <!-- REVIEW Deixar o template da tabela pronto para depois preenchê-la. -->
-                    <div class="col-10 px-4 flex-column" id="settingsContent">
+                    <div class="col-10 px-4 flex-column">
 
-                    <div class="mb-4">
+                    <div class="mb-4 text-center">
                         <h2>Administração do sistema</h2>
                     </div>
                         <?php 
-                            $usersLimit = 5;
+                            $usersLimit = 10;
                             $currPage = (isset($_GET["page"]) && is_numeric($_GET["page"])) ? $_GET["page"] : 1;
                             $allUsers = $usuarioClass->selectAllUsers();
                             $totalUsers = count($allUsers);
