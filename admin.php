@@ -215,7 +215,7 @@
                                                                 </div>
 
                                                                 <!-- div para comunicação com usuário -->
-                                                                <div id="feedbackUsuario-<?php echo $user['iduser']?>"></div>
+                                                                <div id="feedbackUsuario-<?php echo $user['iduser']?>" class="feedbackUsuario"></div>
                                                                 
                                                                 <div class="buttons d-flex justify-content-end align-items-center py-3">
                                                                     <a data-bs-dismiss="modal" class="btn btn-link me-3">Cancelar</a>

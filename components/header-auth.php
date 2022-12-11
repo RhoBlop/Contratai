@@ -11,7 +11,8 @@
     }
 
     $usuarioClass = new Usuario();
-    $user = $usuarioClass->selectBasicInfoById($_SESSION["iduser"]);
+    $profileImg = $_SESSION["profileImg"];
+    $username = $_SESSION["username"];
 
     // $notificacoes = $usuarioClass->selectNotificacoesDropdown($_SESSION["iduser"]);
 ?>
@@ -103,12 +104,12 @@
                 <li class="nav-item dropdown p-2">
                   <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
                     <!-- define uma imagem padrão caso o usuário não tenha nenhuma -->
-                    <img id="headerImgPerfil" src="<?php echoProfileImage($user["imguser"]) ?>" alt="Imagem de perfil">
+                    <img id="headerImgPerfil" src="<?php echoProfileImage($profileImg) ?>" alt="Imagem de perfil">
                   </a>
 
                   <ul class="dropdown-menu dropdown-menu-end text-small shadow">
                     <div class="text-center px-2">
-                        Olá, <?php echo $user["nomeuser"] ?>
+                        Olá, <?php echo $username ?>
                     </div>
                     
                     <li><hr class="dropdown-divider"></li>

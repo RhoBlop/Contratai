@@ -58,13 +58,98 @@ function logout()
 }
 
 /**
+ * Takes files as parameters and uploads them to provided directory inside images/uploaded/.
+ * 
+ * @param string $dir in which directory inside images/uploaded/ the images should be uploaded.
+ * @param array $files $_FILES superglobal.
+ * 
+ * @return array array filled with image saved names.
+ */
+function uploadImgsToServer($dir, $files) {
+    $imgsPaths = [];
+    $folderPath = "../../../images/uploaded/" . $dir;
+    $iterator = 0;
+    
+    if (!file_exists($folderPath)) {
+        mkdir($folderPath, 0777, true);
+    }
+
+    foreach ($files as $f) {
+        // caminho da imagem salva temporariamente no servidor
+        $tmpPath = $f["tmp_name"];
+        $sourceProps = getimagesize($tmpPath);
+        $fileNewName = time() . "-" . $iterator;
+        ++$iterator;
+
+        // extensão da imagem (sem o .) 
+        $ext = pathinfo($f["name"], PATHINFO_EXTENSION);
+        $imageType = $sourceProps[2];
+
+        switch ($imageType) {
+            case IMAGETYPE_PNG:
+                $imageResourceId = imagecreatefrompng($tmpPath); 
+                $targetLayer = imageResize($imageResourceId, $sourceProps[0], $sourceProps[1]);
+                imagepng($targetLayer, $folderPath. $fileNewName. "_resized.". $ext, 50);
+                break;
+      
+            case IMAGETYPE_GIF:
+                $imageResourceId = imagecreatefromgif($tmpPath); 
+                $targetLayer = imageResize($imageResourceId, $sourceProps[0], $sourceProps[1]);
+                imagegif($targetLayer, $folderPath. $fileNewName. "_resized.". $ext, 50);
+                break;
+      
+            case IMAGETYPE_JPEG:
+                $imageResourceId = imagecreatefromjpeg($tmpPath); 
+                $targetLayer = imageResize($imageResourceId, $sourceProps[0], $sourceProps[1]);
+                imagejpeg($targetLayer, $folderPath. $fileNewName. "_resized.". $ext, 50);
+                break;
+      
+            default:
+                $fileNewName = null;
+                break;
+        }
+
+        // move_uploaded_file($tmpPath, $folderPath. $fileNewName. ".". $ext);
+        $imgsPaths[] = "images/uploaded/" . $dir . $fileNewName. "_resized.". $ext;
+    }
+
+    return $imgsPaths;
+}
+
+/**
+ * Não vou mentir que só peguei da internet
+ */
+function imageResize($imageResourceId, $width, $height) {
+    // Make a fixed Width & Height but it might make the image look longer or wider
+    /*$targetWidth = 50;
+    $targetHeight = 50;*/
+    // Keep the Image Ratio of Width & Height
+    $maxDim = 300;
+    $ratio = $width/$height;
+    if( $ratio > 1) {
+        //$targetWidth = $maxDim;
+        //$targetHeight = $maxDim/$ratio;
+        $targetWidth = $width;
+        $targetHeight = $height;
+    } else {
+        // $targetWidth = $maxDim*$ratio;
+        // $targetHeight = $maxDim;
+        $targetWidth = $width;
+        $targetHeight = $height;
+    }
+    $targetLayer=imagecreatetruecolor($targetWidth,$targetHeight);
+    imagecopyresampled($targetLayer,$imageResourceId,0,0,0,0,$targetWidth,$targetHeight, $width,$height);
+    return $targetLayer;
+  }
+
+/**
  * Takes files as parameters and converts them into base64.
  * 
  * @param array $files $_FILES superglobal populated with one or more files.
  * 
  * @return array array filled with base64 for each object in $files.
  */
-function generateImgBase64($files)
+function generateImgsBase64($files)
 {
     $imgs = [];
 

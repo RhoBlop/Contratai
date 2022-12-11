@@ -6,7 +6,10 @@
 </head>
 
 <body>
-    <?php include("components/header-auth.php") ?>
+    <?php 
+        include("components/header-auth.php");
+        $user = $usuarioClass->selectBasicInfoById($_SESSION["iduser"]);
+    ?>
 
     <main>
         <div class="container p-3 my-3 mb-5">

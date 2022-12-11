@@ -35,13 +35,13 @@
 
 
             <!-- CAROUSEL DAS PROFISSÕES COM MAIS CONTRATOS -->
-            <?php include ("components/prof-top-contrato.php") ?>
+            <?php // include ("components/prof-top-contrato.php") ?>
 
             <!-- CAROUSEL DAS PROFISSÕES COM AVALIAÇÕES MAIS ALTAS -->
-            <?php include ("components/prof-top-avaliacao.php") ?>
+            <?php // include ("components/prof-top-avaliacao.php") ?>
 
             <!-- CAROUSEL DAS PROFISSÕES COM MAIS CADASTROS -->
-            <?php include ("components/prof-top-cadastro.php") ?>
+            <?php // include ("components/prof-top-cadastro.php") ?>
 
         </main>
         <?php include ("components/footer.html")?>

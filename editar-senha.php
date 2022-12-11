@@ -41,7 +41,7 @@
                             </div>
                             
                             <!-- div para comunicação com usuário -->
-                            <div id="feedbackUsuario"></div>
+                            <div id="feedbackUsuario" class="feedbackUsuario"></div>
                             
                             <div class="buttons d-flex justify-content-end align-items-center py-3">
                                 <a href="perfil.php" class="btn btn-link me-3">Cancelar</a>

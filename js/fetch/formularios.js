@@ -1,20 +1,19 @@
-var idDivFeedback = "#feedbackUsuario";
-
-function loading() {
+function loading(idDivFeedback = "#feedbackUsuario") {
+    console.log(idDivFeedback);
     const feedbackDiv = document.querySelector(idDivFeedback);
     feedbackDiv.style.display = "block";
     feedbackDiv.style.backgroundColor = "#026773";
     feedbackDiv.innerText = "Aguarde um instante...";
 }
 
-function formErro(textErro) {
+function formErro(textErro, idDivFeedback = "#feedbackUsuario") {
     const feedbackDiv = document.querySelector(idDivFeedback);
     feedbackDiv.style.display = "block";
     feedbackDiv.style.backgroundColor = "#cf1c0e";
     feedbackDiv.innerText = textErro;
 }
 
-function hideFeedback() {
+function hideFeedback(idDivFeedback = "#feedbackUsuario") {
     const feedbackDiv = document.querySelector(idDivFeedback);
     feedbackDiv.style.display = "none";
 }
@@ -128,7 +127,7 @@ async function sendLogin(event) {
 }
 
 // função que faz update das informações de usuário
-async function sendUpdate(event, idUser) {
+async function sendUpdate(event) {
     event.preventDefault();
 
     let formData = new FormData(event.target);
@@ -163,11 +162,9 @@ async function sendUpdateAdmin(event, idUser) {
     event.preventDefault();
 
     let formData = new FormData(event.target);
-    if (idUser) {
-        formData.append("idUser", idUser);
-    }
+    formData.append("idUser", idUser);
 
-    loading();
+    loading(`#feedbackUsuario-${idUser}`);
     timeout = timeoutConnection();
 
     let response = await fetch("./php/post/user/updateInfo.php", {
@@ -180,7 +177,7 @@ async function sendUpdateAdmin(event, idUser) {
 
     if (data.erro) {
         let { erro } = data;
-        formErro(erro);
+        formErro(erro, `#feedbackUsuario-${idUser}`);
     }
 
     if (data.dados) {
@@ -266,12 +263,13 @@ async function deleteUser() {
 async function deleteUserById(userId) {
     let response = await fetch("./php/post/user/deletarbyid.php", {
         method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
         credentials: "same-origin",
         body: `userId=${userId}`,
     });
-    let data = await response.text();
-    console.log(userId);
-    console.log(data);
+    let data = await response.json();
 
     if (data.dados) {
         window.location.reload();
