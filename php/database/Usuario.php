@@ -129,7 +129,7 @@ class Usuario extends Database
     {
         try {
             $sql = <<<SQL
-                    SELECT iduser, isadminuser
+                    SELECT iduser, isadminuser, imguser, nomeuser
                     FROM usuario 
                     WHERE (emailuser = :email) AND (senhauser = :senha)
                 SQL;
@@ -589,7 +589,7 @@ class Usuario extends Database
 
             if ($verifySTMT->rowCount() < 1) {
                 // SQLs diferentes para não deixar a foto vazia no banco de dados
-                if ($imgBase64 != "") {
+                if ($imgBase64 != null) {
                     $sql = <<<SQL
                         UPDATE usuario
                         SET nomeuser = :nome, emailuser = :email, imguser = :img, nascimentouser = :nascimento, telefoneuser = :telefone, biografiauser = :bio

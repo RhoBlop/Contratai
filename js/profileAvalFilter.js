@@ -13,7 +13,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
                 for (aval of avaliacoes) {
                     let avalId = aval.dataset.especid;
                     let notaAval = parseInt(aval.dataset.nota);
-                    console.log(notaAval);
                     if (filterId === "todos") {
                         aval.style.display = "block";
 

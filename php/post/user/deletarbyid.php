@@ -10,8 +10,7 @@
     // classe PDO para realização de operações no BD
     require ("../../database/Usuario.php");
     $user = new Usuario();
-
-    print_r($_POST);
+    
     $userId = $_POST['userId'];
     $result = $user->deleteById($userId);
 

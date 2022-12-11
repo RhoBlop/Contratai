@@ -32,3 +32,7 @@
 </ul>
 
 <?php include("components/modal-excludeUser.php"); ?>
+
+<script>
+    sidebarActiveLinks();
+</script>

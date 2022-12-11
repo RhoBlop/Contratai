@@ -47,3 +47,7 @@
 </header>
 
 <?php include("components/modal-login.php"); ?>
+
+<script>
+    headerActiveLinks();
+</script>
