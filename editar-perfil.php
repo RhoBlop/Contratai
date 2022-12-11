@@ -47,7 +47,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="telefone" class="form-label">Telefone</label>
-                                <input type="text" class="form-control" id="telefone" name="telefone" value="<?php echoDadosNotNull($user["telefoneuser"], null) ?>">
+                                <input type="text" class="form-control" id="telefone" name="telefone" placeholder="(__) ____-____" required oninput="setMask(this, maskTelefone)" maxlength="15" value="<?php echoDadosNotNull($user["telefoneuser"], null) ?>">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="nascimento" class="form-label">Data de Nascimento</label>

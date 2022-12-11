@@ -39,13 +39,19 @@
                     $result[$i]["especsuser"] = json_decode($result[$i]["especsuser"]);
                 }
                 
-                return ["dados"=>$result];
+                return ["dados"=> [
+                    $result
+                ]];
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();
                 
                 return [ "dados" => false ];
             }
+        }
+
+        public function searchProf($search, $limit = 1, $offset = 0) {
+            return [ "dados" => "iai" ];
         }
     }
 ?>

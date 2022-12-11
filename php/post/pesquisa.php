@@ -15,12 +15,13 @@
 
     if ($filterTable == "usuario") {
         $response = $search->searchUser($searchParam, $limit = $searchLimit, $offset = $searchOffset);
-
-        echo json_encode($response);
+    } else if ($filterTable == "profissao") {
+        $response = $search->searchProf($searchParam, $limit = $searchLimit, $offset = $searchOffset);
     } else {
-        echo json_encode([
-            "erro" => "Ainda em desenvolvimento"
-        ]);
+        $response = [
+            "erro" => "filtro inválido"
+        ];
     }
 
+    echo json_encode($response);
 ?>
