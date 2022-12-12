@@ -7,34 +7,40 @@
     <body>
         <?php include ("components/header-auth.php") ?>
 
-        <input type="hidden" id="userId" value="<?php echo $_SESSION["iduser"]; ?>">
-
         <main>
-            <div class="container">
-                <h3 class="my-3">Sim, fiz uma página para adicionar/alterar as imagens das profissões.</h3>
+        <div class="container p-3 my-3">
+                <div class="row gx-5 justify-content-center">
+
+                    <!-- REVIEW Deixar o template da tabela pronto para depois preenchê-la. -->
+                    <div class="col-10 px-4 flex-column">
+
+                        <div class="mb-4 text-center">
+                            <h2>Administração do sistema</h2>
+                        </div>
                 
-                <label for="prof" class="form-label">Profissão</label>
-                <select name="profissao" id="prof">
-                    <option value="" selected>Selecione uma profissão</option>
-                    <?php 
-                    $profissaoClass = new Profissao();
-                    $profissoes = $profissaoClass->selectAll()["dados"];
+                            <label for="prof" class="form-label">Profissão</label>
+                            <select name="profissao" id="prof">
+                                <option value="" selected>Selecione uma profissão</option>
+                                <?php 
+                                    $profissaoClass = new Profissao();
+                                    $profissoes = $profissaoClass->selectAll()["dados"];
 
-                    foreach ($profissoes as $prof):
+                                    foreach ($profissoes as $prof):
 
-                        [$idprof, $descrprof] = [$prof['idprof'], ucfirst($prof['descrprof'])];
+                                        [$idprof, $descrprof] = [$prof['idprof'], ucfirst($prof['descrprof'])];
 
-                        echo <<<ITEM
-                        <option value="{$idprof}">{$descrprof}</option>
-                        ITEM;
-                        
-                    endforeach;
-                    ?>
+                                        echo <<<HTML
+                                        <option value="{$idprof}">{$descrprof}</option>
+                                        HTML;
+                                        
+                                    endforeach;
+                                ?>
+                                
+                            </select>
 
-                    
-                </select>
-
-                <form id="updateProf"></form>
+                            <form id="updateProf"></form>
+                    </div>
+                </div>
             </div>
         </main>
     </body>

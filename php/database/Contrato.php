@@ -47,7 +47,7 @@ class Contrato extends Database
             }
 
             // NOTIFICACAO
-            $this->insertNotificacao($idContrato, $idContratante, $idContratado);
+            $this->insertNotificacao($idContrato, $idContratante, $idContratado, 1);
 
             $conn->commit();
             return ["dados" => true];

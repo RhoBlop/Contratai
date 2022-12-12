@@ -14,7 +14,7 @@
     $profileImg = $_SESSION["profileImg"];
     $username = $_SESSION["username"];
 
-    // $notificacoes = $usuarioClass->selectNotificacoesDropdown($_SESSION["iduser"]);
+    $numNotific = $usuarioClass->selectNumNotificacoes($_SESSION["iduser"])["numnotific"];
 ?>
 <header>
     <nav class="navbar navbar-expand-md fixed-top bg-light">
@@ -47,19 +47,17 @@
                 </li>
 
                 <!-- NOTIFICAÇÕES DROPDOWN -->
-                <li class="nav-item dropdown">
-                  <a class="nav-link" data-bs-toggle="dropdown">
+                <li class="nav-item">
+                  <a class="nav-link" href="notificacoes.php">
                     <?php
-                        // $numNotific = count($notificacoes);
-
-                        // if ($numNotific > 0) {
-                        //     echo "<i class='fa-regular fa-bell notify-badge' data-count={$numNotific}></i>";
-                        // } else {
-                        //     echo "<i class='fa-regular fa-bell'></i>";
-                        // }
+                        if ($numNotific > 0) {
+                            echo "<i class='fa-regular fa-bell notify-badge' data-count={$numNotific}></i>";
+                        } else {
+                            echo "<i class='fa-regular fa-bell'></i>";
+                        }
                     ?>  
                   </a>
-                  <ul class="dropdown-menu dropdown-menu-end text-small shadow">
+                  <!-- <ul class="dropdown-menu dropdown-menu-end text-small shadow"> -->
                     <?php
                         // if ($numNotific < 1) {
                         //     echo <<<HTML
@@ -79,11 +77,11 @@
                         // }
                     ?>
 
-                    <li><hr class="dropdown-divider"></li>
+                    <!-- <li><hr class="dropdown-divider"></li>
                     <div class="text-center px-2">
                         <a class="dropdown-item" href="notificacoes.php">Veja mais</a>
                     </div>
-                  </ul>
+                  </ul> -->
                 </li>
 
                 <li class="nav-item">
