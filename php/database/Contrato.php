@@ -60,6 +60,27 @@ class Contrato extends Database
         }
     }
 
+    public function selectLegendaCalendario() {
+        try {
+            $sql = <<<SQL
+                    SELECT descrstatus, corcalendario
+                    FROM statuscontrato
+                    ORDER BY idstatus
+                SQL;
+            
+            $stmt = Database::prepare($sql);
+            $stmt->execute();
+
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+    }
+
     public function setStatusContrato($idContrato, $idStatus)
     {
         $conn = Database::getInstance();

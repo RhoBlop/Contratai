@@ -378,24 +378,21 @@
                             
                             <!-- SECTION - Legenda --> 
                             <h5>Legenda</h5>
-                            <div class="item">
-                                <div class="square" style="background-color:#BEFBFF"></div><p>Solicitado para contratação</p>
-                            </div>
-                            <div class="item">
-                                <div class="square" style="background-color:#008784"></div><p>Em andamento</p>
-                            </div>
-                            <div class="item">
-                                <div class="square" style="background-color:#6BC682"></div><p>Solicitado para finalização</p>
-                            </div>
-                            <div class="item">
-                                <div class="square" style="background-color:#2EA888"></div><p>Finalizado</p>
-                            </div>
-                            <div class="item">
-                                <div class="square" style="background-color:#000000"></div><p>Recusado</p>
-                            </div>
-                            <div class="item">
-                                <div class="square" style="background-color:#FF8D3E"></div><p>Atrasado</p>
-                            </div>
+                            <?php
+                                require("php/database/Contrato.php");
+                                $contratoClass = new Contrato();
+                                $legenda = $contratoClass->selectLegendaCalendario();
+
+                                foreach($legenda as $status) {
+                                    $descr = ucfirst($status['descrstatus']);
+                                    echo <<<HTML
+                                        <div class="item">
+                                            <div class="square" style="background-color:{$status['corcalendario']}"></div>
+                                            <p>{$descr}</p>
+                                        </div>
+                                    HTML;
+                                }
+                            ?>
                             <!-- !SECTION - Legenda -->
                         </div>
                         <!-- !SECTION Agenda -->
