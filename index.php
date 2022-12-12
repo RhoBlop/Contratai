@@ -64,7 +64,7 @@
 
       <!-- BANNER DE LOGIN -->
       <div class="login-banner d-flex flex-column align-items-center justify-content-center text-center mb-4 p-3">
-        <h2 class="text-white mb-3">Gostou? Então não perca mais tempo!</h2>
+        <h2 class="text-white mb-3 hidden">Gostou? Então não perca mais tempo!</h2>
         <a href="cadastro.php" class="btn btn-dark btn-lg mt-3">Comece já</a>
       </div> <!-- /BANNER DE LOGIN -->
     </main>
