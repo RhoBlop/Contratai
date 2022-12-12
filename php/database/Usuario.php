@@ -292,6 +292,7 @@ class Usuario extends Database
             // converte json_agg() [String] para array associativa
             for ($i = 0; $i < count($result); $i++) {
                 $result[$i]["diascontrato"] = json_decode($result[$i]["diascontrato"]);
+                var_dump($result[$i]["diascontrato"]);
             }
             
             // ordena as datas do contrato
