@@ -23,48 +23,6 @@
               <img src="images\storyset\design-team-animate.svg" width="100%" alt="">
             </div>
           </div>
-          <div class="row d-flex justify-content-center align-items-center py-3 hidden">
-            <div class="col-sm-5 p-5">
-              <h2 class="mb-3">O que é?</h2>
-              <p>Criado por um grupo de 3 alunos do curso técnico de informática do IFES Serra, 
-              o Contrata Aí é um site que conecta clientes e profissionais capacitados, com o objetivo 
-              de facilitar a comunicação entre eles.</p>
-              <p>Acreditamos que, o que era pra ser um Projeto de conclusão de curso, possa ajudar milhares 
-                de pessoas ao redor do país, quem dirá do mundo! 
-              </p>
-            </div>
-            <div class="col-sm-5 col-xxl-7 p-3">
-              <img src="images\storyset\design-team-animate.svg" width="100%" alt="">
-            </div>
-          </div>
-          <div class="row d-flex justify-content-center align-items-center py-3 hidden">
-            <div class="col-sm-5 p-5">
-              <h2 class="mb-3">O que é?</h2>
-              <p>Criado por um grupo de 3 alunos do curso técnico de informática do IFES Serra, 
-              o Contrata Aí é um site que conecta clientes e profissionais capacitados, com o objetivo 
-              de facilitar a comunicação entre eles.</p>
-              <p>Acreditamos que, o que era pra ser um Projeto de conclusão de curso, possa ajudar milhares 
-                de pessoas ao redor do país, quem dirá do mundo! 
-              </p>
-            </div>
-            <div class="col-sm-5 col-xxl-7 p-3">
-              <img src="images\storyset\design-team-animate.svg" width="100%" alt="">
-            </div>
-          </div>
-          <div class="row d-flex justify-content-center align-items-center py-3 hidden">
-            <div class="col-sm-5 p-5">
-              <h2 class="mb-3">O que é?</h2>
-              <p>Criado por um grupo de 3 alunos do curso técnico de informática do IFES Serra, 
-              o Contrata Aí é um site que conecta clientes e profissionais capacitados, com o objetivo 
-              de facilitar a comunicação entre eles.</p>
-              <p>Acreditamos que, o que era pra ser um Projeto de conclusão de curso, possa ajudar milhares 
-                de pessoas ao redor do país, quem dirá do mundo! 
-              </p>
-            </div>
-            <div class="col-sm-5 col-xxl-7 p-3">
-              <img src="images\storyset\design-team-animate.svg" width="100%" alt="">
-            </div>
-          </div>
           
           <div class="row hidden">
             <div class="col-12 p-3" id="teamSection">
