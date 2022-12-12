@@ -119,13 +119,13 @@ h7 {
 }
 
 .hidden {
-    opacity: 0 !important;
+    opacity: 0;
     transform: translateY(-25%);
     transition: all 1s;
 }
 
 .show {
-    opacity: 1 !important;
+    opacity: 1;
     transform: translateX(0); 
 }
 
@@ -1335,7 +1335,7 @@ p {
     justify-content: center;
     align-items: center;
     align-self: center;
-    width: 300px;
+    min-width: 300px;
     overflow: hidden;
     border: .5px solid var(--primary-green);
 }
@@ -1363,6 +1363,10 @@ p {
 
 .filter-tablist .nav-link {
     transform: none;
+}
+
+.filter-tablist.notificacao {
+    min-width: 380px;
 }
 
 /* Acordiões */

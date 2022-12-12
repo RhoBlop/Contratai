@@ -16,7 +16,7 @@
         $timeElapsed = timeElapsedString($dataCriacao);
 
         return <<<HTML
-            <div class="card card-profissao card-notificacao shadow-sm rounded-4 my-3" data-notificacaoid="{$idNotificacao}">
+            <div class="card card-profissao card-notificacao shadow-sm rounded-4 mb-3" data-notificacaoid="{$idNotificacao}">
                 <div class="card-body d-flex justify-content-between align-items-center px-4 py-3">
 
                     <div class="card-text pe-3">

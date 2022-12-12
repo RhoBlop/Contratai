@@ -17,9 +17,9 @@
                             <h6 class="text-muted">Veja as notificações de seus contratos</h6>
                         </div>
 
-                        <div class="row d-flex flex-column align-items-center">
+                        <div class="d-flex flex-column align-items-center">
                             
-                            <div class="nav nav-justified filter-tablist rounded-3 mb-3" id="tablist" role="tablist">
+                            <div class="nav nav-justified filter-tablist notificacao rounded-3 mb-3" id="tablist" role="tablist">
                                 <a class="nav-link active" id="naoVisualizado-tab" data-bs-toggle="tab" type="button" data-bs-target="#naoVisualizado-pane" role="tab">Não visualizado</a>
                                 <a class="nav-link" id="visualizado-tab" data-bs-toggle="tab" type="button" data-bs-target="#visualizado-pane" role="tab">Visualizado</a>
                             </div>
@@ -29,7 +29,7 @@
                                 [$naoVisualizado, $visualizado] = $usuarioClass->selectNotificacoes($_SESSION["iduser"]);
                             ?>
 
-                            <div class="tab-content col-8 d-flex flex-column justify-content-center">
+                            <div class="tab-content my-3 col-8 d-flex flex-column justify-content-center">
                                 <div id="naoVisualizado-pane" class="tab-pane fade show active">
                                     <?php
 
