@@ -293,6 +293,7 @@ async function sendSolicitacaoContrato(event) {
         body: formData,
     });
     let data = await response.json();
+    console.log(data);
 
     if (data.erro) {
         let { erro } = data;

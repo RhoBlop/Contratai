@@ -15,16 +15,6 @@
         <a class="nav-link" href="editar-senha.php"><i class="fa-solid fa-lock fa-fw me-1"></i>Editar Senha</a>
     </li>
 
-    <?php
-    if ($admin === true) :
-    ?>
-        <li class="nav-item">
-            <a class="nav-link" href="admin.php"><i class="fa-solid fa-screwdriver-wrench fa-fw me-1"></i>Admin</a>
-        </li>
-    <?php
-    endif;
-    ?>
-
     <hr>
     <li class="nav-item">
         <a href="#modal-exclude" class="nav-link link-danger" data-bs-toggle="modal" data-bs-target="#modal-exclude"><i class="fa-solid fa-trash fa-fw me-1"></i>Excluir Conta</a>

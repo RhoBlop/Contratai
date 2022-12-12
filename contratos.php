@@ -180,12 +180,18 @@
                                                 $especializacao = ucfirst($contrt["descrespec"]);
                                                 $diasContrato = $contrt["diascontrato"];
                                                 $descrContrato = $contrt["descrcontrato"];
-                                                $botoes = [
-                                                    ["Avaliar", "", "modal"]
-                                                ];
-                                                $aviso = "";
                                                 $dataCriacao = $contrt["timecriacaocontrato"];
                                                 $idContrato = $contrt['idcontrato'];
+
+                                                if (!$contrt["isavaliado"]) :
+                                                    $botoes = [
+                                                        ["Avaliar", "", "modal"]
+                                                    ];
+                                                    $aviso = "";
+                                                else :
+                                                    $botoes = [];
+                                                    $aviso = "O contrato já foi avaliado!";
+                                                endif;
 
                                                 echo constructContratoCard($idUsr, $imgPerfil, $headerMsg, $especializacao, $diasContrato, $descrContrato, $botoes, $aviso, $dataCriacao, $idContrato);
                                             

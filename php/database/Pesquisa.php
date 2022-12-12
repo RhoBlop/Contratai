@@ -8,7 +8,7 @@
                 $search = "{$search}%";
 
                 $sql = <<<SQL
-                    SELECT top.iduser, nomeuser, imguser, datacriacaouser, array_to_json(especsuser) AS especsuser, round(avg(notaavaliacao), 1) AS mediaavaliacao, count(contrt.idcontrato) AS numcontrato
+                    SELECT top.iduser, nomeuser, imguser, datacriacaouser, array_to_json(especsuser) AS especsuser, round(avg(notaavaliacao), 1) AS mediaavaliacao, count(aval.idavaliacao) AS numcontrato
                     FROM ( SELECT usr.iduser, nomeuser, imguser, datacriacaouser, array_agg(espec.descrespec) AS especsuser
                         FROM usuario AS usr
                         INNER JOIN userespec AS useres ON (usr.iduser = useres.iduser)
@@ -16,11 +16,11 @@
                         WHERE usr.nomeuser ILIKE :search OR espec.descrespec ILIKE :search
                         GROUP BY usr.iduser, nomeuser, imguser, datacriacaouser
                     ) AS top
-                    FULL OUTER JOIN contrato AS contrt ON (top.iduser = contrt.idcontratado)
-                    FULL OUTER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    WHERE (contrt.idcontratado = top.iduser) AND (contrt.idstatus = 4)
+                    LEFT JOIN contrato AS contrt ON (top.iduser = contrt.idcontratado)
+                    LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    WHERE (contrt.idcontratado = top.iduser)
                     GROUP BY top.iduser, nomeuser, imguser, datacriacaouser, especsuser
-                    ORDER BY mediaavaliacao DESC
+                    ORDER BY mediaavaliacao DESC NULLS LAST
                     LIMIT :limit
                     OFFSET :offset
                 SQL;
@@ -39,9 +39,7 @@
                     $result[$i]["especsuser"] = json_decode($result[$i]["especsuser"]);
                 }
                 
-                return ["dados"=> [
-                    $result
-                ]];
+                return ["dados"=> $result];
             } catch(PDOException $e) {
                 echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
                 exit();

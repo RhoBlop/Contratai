@@ -187,7 +187,7 @@
                     INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                     WHERE (contrt.idstatus = 4)
                     GROUP BY prof.descrprof, prof.idprof
-                    ORDER BY mediaavaliacao DESC
+                    ORDER BY mediaavaliacao DESC NULLS LAST
                     LIMIT :limit
                 SQL;
                 

@@ -1835,6 +1835,9 @@ p {
     }
 }
 
+.notify-badge {
+    position: relative;
+}
 /* Badge com contagem para notificações/chat */
 .notify-badge:after{
     content: attr(data-count);
@@ -1845,8 +1848,8 @@ p {
     background: var(--primary-green);
     height: .9rem;
     width: .9rem;
-    bottom: -.2rem;
-    right: -.2rem;
+    bottom: -.5rem;
+    right: -.5rem;
     font-size: .5rem;
     border-radius: 50%;
     color:white;

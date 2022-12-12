@@ -1,10 +1,10 @@
 <?php
 require_once "Database.php";
+require_once "NotificacaoContrato.php";
 
 class Usuario extends Database
 {
-
-    //SECTION - 
+    use NotificacaoContrato;
     
     //seleciona todos os usuários da tabela usuário
     public function selectAllUsers() 
@@ -239,7 +239,7 @@ class Usuario extends Database
     }
 
 
-    public function selectAvaliacoesById($userId, $filterNota = "DESC")
+    public function selectAvaliacoesById($userId)
     {
         try {
             $sql = <<<SQL

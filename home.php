@@ -16,10 +16,10 @@
                                 <button id="searchButton" class="btn btn-green"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </div>
                             <div class="filters-group">
-                                <input type="radio" id="profissao" class="search-filter" name="filterTable" value="profissao">
+                                <input type="radio" id="profissao" class="search-filter" name="filterTable" value="profissao" checked>
                                 <label for="profissao">Profissão</label>
 
-                                <input type="radio" id="usuario" class="search-filter" name="filterTable" value="usuario" checked>
+                                <input type="radio" id="usuario" class="search-filter" name="filterTable" value="usuario">
                                 <label for="usuario">Usuário</label>
                             </div>
                         </form>
