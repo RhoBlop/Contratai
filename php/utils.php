@@ -182,6 +182,33 @@ function generateImgsBase64($files)
     return $imgs;
 }
 
+function base64Resize($base64) {
+    $percent = 1;
+
+    // Content type
+    header('Content-Type: image/jpeg');
+
+    $data = base64_decode($base64);
+    $imString = imagecreatefromstring($data);
+    $width = imagesx($imString);
+    $height = imagesy($imString);
+    $newWidth = $width * $percent;
+    $newHeight = $height * $percent;
+
+    $thumb = imagecreatetruecolor($newWidth, $newHeight);
+
+    // Resize
+    imagecopyresampled($thumb, $imString, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+    // Opens buffer to store file
+    ob_start();
+    imagejpeg($thumb, null);
+    $img = ob_get_clean();
+    $base64 = base64_encode($img);
+
+    return $base64;
+}
+
 /**
  * Returns current time in string SQL formatted
  * 
