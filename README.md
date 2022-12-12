@@ -16,11 +16,11 @@ Agora, você precisa de um webserver para rodar o apache localmente em seu compu
     <Directory "[Caminho do repositório]"> 
     ...
 É também necessário editar o arquivo **php.ini**, localizado dentro da pasta **php** do sotfware utilizado. Dentro dele, descomente (retire o **;**) as seguintes linhas:
-
+    
+    extension=gd
+    ...
     extension=intl
-    .
-    .
-    .
+    ...
     extension=pdo_pgsql
     extension=pgsql
 
