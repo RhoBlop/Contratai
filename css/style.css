@@ -1335,6 +1335,22 @@ p {
     font-weight: 500;
 }
 
+/* Legendas */
+.square {
+    width: 20px;
+    height: 20px;
+}
+
+.agenda .item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.agenda .item p{
+    font-size: 18px;
+}
+
 .accordion-button {
     font-size: 20px;
 }
