@@ -99,9 +99,10 @@
             try {
                 let response = await fetch(`./php/post/profissao/updateProf.php`, {
                     method: "POST",
+                    credentials: "same-origin",
                     body: formData,
                 });
-                let data = await response.json();
+                let data = await response.text();
                 console.log(data);
                 
                 if (data.dados) {

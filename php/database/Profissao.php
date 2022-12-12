@@ -255,5 +255,46 @@
                 return [ "dados" => false ];
             }
         }
+
+        public function updateProf($idProf, $descrProf, $imgPath) {
+            try {
+                // SQLs diferentes para não deixar a foto vazia no banco de dados
+                if ($imgPath != null) {
+                    $sql = <<<SQL
+                        UPDATE profissao
+                        SET descrprof = :descrProf,
+                        imgprof = :imgPath
+                        WHERE idprof = :id
+                        SQL;
+
+                    $stmt = Database::prepare($sql);
+                    $stmt->execute([
+                        ":id" => $idProf,
+                        ":descrProf" => $descrProf,
+                        ":imgPath" => $imgPath,  
+                    ]);
+                } else {
+                    $sql = <<<SQL
+                        UPDATE profissao
+                        SET descrprof = :descrProf
+                        WHERE idprof = :id
+                        SQL;
+
+                    $stmt = Database::prepare($sql);
+                    $stmt->execute([
+                        ":id" => $idProf,
+                        ":descrProf" => $descrProf
+                    ]);
+                }
+
+
+                return ["dados" => true];
+            } catch (PDOException $e) {
+                echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+                exit();
+    
+                return ["dados" => false];
+            }
+        }
     }
 ?>

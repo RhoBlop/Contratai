@@ -599,7 +599,7 @@ class Usuario extends Database
 
     //SECTION - UPDATES
     // altera as informações de um usuário com id para os dados recebidos por parâmetro
-    public function updateInfo($userId, $nome, $email, $imgBase64, $nascimento, $telefone, $bio)
+    public function updateInfo($userId, $nome, $email, $imgPath, $nascimento, $telefone, $bio)
     {
         try {
             // verifica se não existe nenhum email idêntico cadastrado (desconsiderando o email do próprio usuário)
@@ -612,7 +612,7 @@ class Usuario extends Database
 
             if ($verifySTMT->rowCount() < 1) {
                 // SQLs diferentes para não deixar a foto vazia no banco de dados
-                if ($imgBase64 != null) {
+                if ($imgPath != null) {
                     $sql = <<<SQL
                         UPDATE usuario
                         SET nomeuser = :nome, emailuser = :email, imguser = :img, nascimentouser = :nascimento, telefoneuser = :telefone, biografiauser = :bio
@@ -624,7 +624,7 @@ class Usuario extends Database
                         ":id" => $userId,  // INT
                         ":nome" => $nome,  // STRING
                         ":email" => $email,  // STRING
-                        ":img" => $imgBase64,  // STRING
+                        ":img" => $imgPath,  // STRING
                         ":nascimento" => $nascimento,  // ?
                         ":telefone" => $telefone,  // STRING
                         ":bio" => $bio
