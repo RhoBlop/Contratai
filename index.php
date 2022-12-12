@@ -9,7 +9,7 @@
 
     <main>
       <div class="container my-lg-3">
-        <div class="row d-flex align-items-center flex-wrap justify-content-center" id="fContent">
+        <div class="row d-flex align-items-center flex-wrap justify-content-center hidden" id="fContent">
           <div class="top-content col-12 col-lg-7 mb-4 mb-md-0">
           <div class="title my-3">
             <h1>Ajudando você</h1> 
@@ -54,17 +54,17 @@
       </div>
 
       <!-- CAROUSEL DAS PROFISSÕES COM MAIS CONTRATOS -->
-      <?php //include ("components/prof-top-contrato.php") ?>
+      <?php include ("components/prof-top-contrato.php") ?>
 
       <!-- CAROUSEL DAS PROFISSÕES COM AVALIAÇÕES MAIS ALTAS -->
-      <?php //include ("components/prof-top-avaliacao.php") ?>
+      <?php include ("components/prof-top-avaliacao.php") ?>
 
       <!-- GRID DE AVALIAÇÕES ESTÁTICAS -->
-      <?php //include ("components/avaliacoes-index.html") ?>
+      <?php include ("components/avaliacoes-index.html") ?>
 
       <!-- BANNER DE LOGIN -->
       <div class="login-banner d-flex flex-column align-items-center justify-content-center text-center mb-4 p-3">
-        <h2 class="text-white mb-3">Gostou? Então não perca mais tempo!</h2>
+        <h2 class="text-white mb-3 hidden">Gostou? Então não perca mais tempo!</h2>
         <a href="cadastro.php" class="btn btn-dark btn-lg mt-3">Comece já</a>
       </div> <!-- /BANNER DE LOGIN -->
     </main>
@@ -86,6 +86,7 @@
       // isso é usado, por exemplo, quando uma pessoa realiza o cadastro e é redirecionada ao index
       checkForOpenModal();
     </script>
+    <script src="js/scrolling.js"></script>
   </body>
 </html>
  

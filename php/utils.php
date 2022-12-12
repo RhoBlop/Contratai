@@ -94,19 +94,19 @@ function uploadImgsToServer($id, $dir, $files) {
             case IMAGETYPE_PNG:
                 $imageResourceId = imagecreatefrompng($tmpPath); 
                 $targetLayer = imageResize($imageResourceId, $sourceProps[0], $sourceProps[1]);
-                imagepng($targetLayer, $folderPath. $fileNewName. "_resized.". $ext, 50);
+                imagepng($targetLayer, $folderPath. $fileNewName. "_resized.". $ext, 20);
                 break;
       
             case IMAGETYPE_GIF:
                 $imageResourceId = imagecreatefromgif($tmpPath); 
                 $targetLayer = imageResize($imageResourceId, $sourceProps[0], $sourceProps[1]);
-                imagegif($targetLayer, $folderPath. $fileNewName. "_resized.". $ext, 50);
+                imagegif($targetLayer, $folderPath. $fileNewName. "_resized.". $ext, 20);
                 break;
       
             case IMAGETYPE_JPEG:
                 $imageResourceId = imagecreatefromjpeg($tmpPath); 
                 $targetLayer = imageResize($imageResourceId, $sourceProps[0], $sourceProps[1]);
-                imagejpeg($targetLayer, $folderPath. $fileNewName. "_resized.". $ext, 50);
+                imagejpeg($targetLayer, $folderPath. $fileNewName. "_resized.". $ext, 20);
                 break;
       
             default:

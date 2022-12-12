@@ -1,4 +1,4 @@
-<div class="container align-items-center mb-5">
+<div class="container align-items-center mb-5 hidden">
     <div class="mb-4">
         <h2>Maiores categorias</h2>
         <h6 class="text-muted">Veja quais são as categorias com mais usuários cadastrados</h6>
