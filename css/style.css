@@ -164,6 +164,28 @@ header .dropdown-item:active {
     }
 }
 
+/* Sobre */
+
+.teamIntegrant p{
+    font-size: 20px;
+}
+
+.teamIntegrant {
+    margin: 0;
+}
+
+.teamIntegrant .integrant-img {
+    width: 240px;
+    height: 240px;
+}
+
+.teamIntegrant .integrant-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 /* Filtros de Serviço */
 
 .item-pesquisa {
