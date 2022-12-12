@@ -1366,7 +1366,44 @@ p {
 
 
 .time {
-    min-width: 10%;
+    display: flex;
+    justify-content: end;
+    min-width: 18%;
+    position: relative;
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+
+.card-notificacao .time p {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+}
+
+.card-notificacao .time .fa-trash-can {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.card-notificacao:hover .time p {
+    opacity: 0;
+}
+
+.card-notificacao:hover .time .fa-trash-can {
+    opacity: 1;
 }
 
 .date-chip {
@@ -1922,4 +1959,8 @@ p {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.card {
+    position: relative;
 }

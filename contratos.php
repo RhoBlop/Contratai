@@ -32,9 +32,8 @@
                         <a class="nav-link active" id="contratante-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratante-pane" role="tab">Contratei</a>
                         <a class="nav-link" id="contratado-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratado-pane" role="tab">Contratado</a>
                     </div>
+                    
                     <div class="tab-content">
-
-
                         <!-- SECTION - Contratante -->
                         <?php
                         include "components/card-contrato.php";
@@ -298,7 +297,7 @@
                                                     $botoes = [
                                                         ["Contrato realizado!", "solicitarFimContrato(event)"]
                                                     ];
-                                                    $aviso = "Clique no botão acima caso o serviço tenha sido finalizado.";
+                                                    $aviso = "Clique no botão abaixo caso o serviço tenha sido finalizado.";
                                                 
                                                 elseif ($contrt['idstatus'] === 3 ) :
                                                     $headerMsg = "Você enviou uma solicitação ao contratante <b>{$contrt["nomeuser"]}</b> para finalizar o contrato.";
