@@ -1,4 +1,4 @@
-<div class="container align-items-center mb-5">
+<div class="container align-items-center mb-5 hidden">
     <div class="mb-4">
         <h2>Categorias mais bem avaliadas</h2>
         <h6 class="text-muted">Veja quais são as categorias com médias de avaliações mais altas</h6>

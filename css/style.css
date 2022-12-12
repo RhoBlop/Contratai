@@ -117,6 +117,34 @@ h7 {
     }
 }
 
+.hidden {
+    opacity: 0 !important;
+    transform: translateY(-25%);
+    transition: all 1s;
+}
+
+.show {
+    opacity: 1 !important;
+    transform: translateX(0); 
+}
+
+.col.hidden {
+    transform: translateY(0);
+    transform: translateX(-50%);
+}
+
+.col.show {
+    transform: translateX(0%);
+}
+
+.col.hidden:nth-child(2) {
+    transition-delay: 1s;
+}
+
+.col.hidden:nth-child(3) {
+    transition-delay: 2s;
+}
+
 /* Header */
 
 header {
