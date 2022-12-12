@@ -364,6 +364,8 @@
                         <!-- !SECTION - Profissional -->
 
                         <!-- SECTION Agenda  -->
+
+                        
                         <?php
                             $eventos = json_encode($usuarioClass->selectCalendario($idUser));
                         ?>

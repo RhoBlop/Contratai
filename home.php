@@ -10,7 +10,7 @@
                 <div class="row py-3 d-flex justify-content-center align-items-center mb-3">
                     <div class="col-md-12 search-bar">
                         <!-- TODO Filtro de pesquisa -->
-                        <form id="searchForm" onsubmit="return false">
+                        <form id="searchForm" onsubmit="return false" class="hidden">
                             <div class="input-group">
                                 <input id="searchBox" name="searchParam" type="text" class="form-control form-control-lg" autocomplete="off" placeholder="O que você está procurando?">
                                 <button id="searchButton" class="btn btn-green"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -35,13 +35,13 @@
 
 
             <!-- CAROUSEL DAS PROFISSÕES COM MAIS CONTRATOS -->
-            <?php // include ("components/prof-top-contrato.php") ?>
+            <?php include ("components/prof-top-contrato.php") ?>
 
             <!-- CAROUSEL DAS PROFISSÕES COM AVALIAÇÕES MAIS ALTAS -->
-            <?php // include ("components/prof-top-avaliacao.php") ?>
+            <?php include ("components/prof-top-avaliacao.php") ?>
 
             <!-- CAROUSEL DAS PROFISSÕES COM MAIS CADASTROS -->
-            <?php // include ("components/prof-top-cadastro.php") ?>
+            <?php include ("components/prof-top-cadastro.php") ?>
 
         </main>
         <?php include ("components/footer.html")?>
@@ -61,4 +61,7 @@
     
     <!-- Sliding do carousel com animação -->
     <script src="js/multitemCarousel.js"></script>
+
+    <!-- Scrolling -->
+    <script src="js/scrolling.js"></script>
 </html>

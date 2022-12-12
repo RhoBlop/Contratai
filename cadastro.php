@@ -61,17 +61,18 @@
                                 <input type="text" class="form-control form-control-lg" id="cpf" name="cpf" placeholder="___.____.___-__" required oninput="setMask(this, maskCPF)" maxlength="14">
                             </div>
                             
+                            <!-- NASCIMENTO -->
+                            <div class="form-group mb-2" id="dateWrapper">
+                                <label for="nascimento" class="mb-1">Data de Nascimento</label>
+                                <input type="date" class="form-control form-control-lg" id="nascimento" name="nascimento">
+                            </div>
+                            
                             <!-- CEP -->
                             <div class="form-group mb-2">
                                 <label for="cep" class="mb-1">CEP</label>
                                 <input type="text" class="form-control form-control-lg" id="cep" name="cep" placeholder="_____-___" required oninput="setMask(this, maskCEP)" maxlength="9" onchange="pesquisaCEP(this.value);">
                             </div>
 
-                            <!-- NASCIMENTO -->
-                            <div class="form-group mb-2" id="dateWrapper">
-                                <label for="nascimento" class="mb-1">Data de Nascimento</label>
-                                <input type="date" class="form-control form-control-lg" id="nascimento" name="nascimento">
-                            </div>
 
                             <!-- BAIRRO -->
                             <div class="form-group mb-2">

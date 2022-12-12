@@ -114,7 +114,7 @@ function uploadImgsToServer($id, $dir, $files) {
                 break;
         }
 
-        // move_uploaded_file($tmpPath, $folderPath. $fileNewName. ".". $ext);
+        move_uploaded_file($tmpPath, $folderPath. $fileNewName. ".". $ext);
         $imgsPaths[] = "images/uploaded/" . $dir . $fileNewName. "_resized.". $ext;
     }
 
@@ -126,19 +126,19 @@ function uploadImgsToServer($id, $dir, $files) {
  */
 function imageResize($imageResourceId, $width, $height) {
     // Make a fixed Width & Height but it might make the image look longer or wider
-    /*$targetWidth = 50;
-    $targetHeight = 50;*/
+    $targetWidth = 50;
+    $targetHeight = 50;
     // Keep the Image Ratio of Width & Height
-    $maxDim = 300;
+    $maxDim = 800;
     $ratio = $width/$height;
     if( $ratio > 1) {
-        //$targetWidth = $maxDim;
-        //$targetHeight = $maxDim/$ratio;
+        $targetWidth = $maxDim;
+        $targetHeight = $maxDim/$ratio;
         $targetWidth = $width;
         $targetHeight = $height;
     } else {
-        // $targetWidth = $maxDim*$ratio;
-        // $targetHeight = $maxDim;
+        $targetWidth = $maxDim*$ratio;
+        $targetHeight = $maxDim;
         $targetWidth = $width;
         $targetHeight = $height;
     }

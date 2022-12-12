@@ -86,6 +86,8 @@
       // isso é usado, por exemplo, quando uma pessoa realiza o cadastro e é redirecionada ao index
       checkForOpenModal();
     </script>
+
+    <!-- Scrolling -->
     <script src="js/scrolling.js"></script>
   </body>
 </html>
