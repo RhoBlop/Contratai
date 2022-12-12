@@ -11,39 +11,51 @@
                 <div class="row gx-5">
                     <?php include("components/sidebar.php")?>
 
-                    <div class="col-10 px-4 flex-column" id="settingsContent">
+                    <div class="col-10 px-4 d-flex flex-column" id="settingsContent">
                         <div class="mb-4">
                             <h2>Minhas notificações</h2>
                             <h6 class="text-muted">Veja as notificações de seus contratos</h6>
                         </div>
 
-                        <div class="row justify-content-center">
-                            <div class="col-8 d-flex flex-column justify-content-center">
-                                <?php
-                                    $notificacaoes = $usuarioClass->selectNotificacoes($_SESSION["iduser"]);
-                                    foreach ($notificacaoes as $notific):
-                                ?>
+                        <div class="row d-flex flex-column align-items-center">
+                            
+                            <div class="nav nav-justified filter-tablist rounded-3 mb-3" id="tablist" role="tablist">
+                                <a class="nav-link active" id="naoVisualizado-tab" data-bs-toggle="tab" type="button" data-bs-target="#naoVisualizado-pane" role="tab">Não visualizado</a>
+                                <a class="nav-link" id="visualizado-tab" data-bs-toggle="tab" type="button" data-bs-target="#visualizado-pane" role="tab">Visualizado</a>
+                            </div>
 
-                                    <div class="card card-profissao shadow-sm rounded-4 my-3">
-                                        <div class="card-body d-flex justify-content-between align-items-center px-4">
+                            <?php
+                                include ("components/card-notificacao.php");
+                                [$naoVisualizado, $visualizado] = $usuarioClass->selectNotificacoes($_SESSION["iduser"]);
+                            ?>
 
-                                            <div class="card-text pe-4">
-                                                <h5 class="mb-0"><?php echo $notific["title"] ?></h5>
-                                                <p class="text-muted"><?php echo $notific["text"] ?></p>
-                                            </div>
+                            <div class="tab-content col-8 d-flex flex-column justify-content-center">
+                                <div id="naoVisualizado-pane" class="tab-pane fade show active">
+                                    <?php
 
-                                            <div class="time exclude">
-                                                <p><?php echo timeElapsedString($notific["timecriacao"]) ?></p>
-                                            </div>
+                                        if (count($naoVisualizado) < 1) {
+                                            echo constructEmptyCard();
+                                        } else {
+                                            foreach ($naoVisualizado as $notific):
+                                                echo constructNotificacaoCard($notific['idnotific'], $notific["title"], $notific["text"], $notific["descrcontrato"], $notific["timecriacao"]);
+                                            endforeach;
+                                        }
 
-                                        </div>
+                                    ?>
+                                </div>
 
-                                        <a class="stretched-link" href="contratos.php">
-                                    </div>
+                                <div id="visualizado-pane" class="tab-pane fade">
+                                    <?php
 
-                                <?php
-                                    endforeach;
-                                ?>
+                                        if (count($visualizado) < 1) {
+                                            echo constructEmptyCard();
+                                        } else {
+                                            foreach ($visualizado as $notific):
+                                                echo constructNotificacaoCard($notific['idnotific'], $notific["title"], $notific["text"], $notific["descrcontrato"], $notific["timecriacao"]);
+                                            endforeach;
+                                        }
+                                    ?>
+                                </div>
                             <div>
                         <div>
                     </div>

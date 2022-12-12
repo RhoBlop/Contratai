@@ -18,7 +18,6 @@
                     ) AS top
                     LEFT JOIN contrato AS contrt ON (top.iduser = contrt.idcontratado)
                     LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    WHERE (contrt.idcontratado = top.iduser)
                     GROUP BY top.iduser, nomeuser, imguser, datacriacaouser, especsuser
                     ORDER BY mediaavaliacao DESC NULLS LAST
                     LIMIT :limit

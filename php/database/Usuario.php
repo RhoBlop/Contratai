@@ -217,9 +217,9 @@ class Usuario extends Database
                     FROM usuario AS usr
                     INNER JOIN userespec AS useres ON (usr.iduser = useres.iduser)
                     INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
-                    LEFT JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+                    LEFT JOIN contrato AS contrt ON (espec.idespec = contrt.idespec AND contrt.idcontratado = :id)
                     LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    WHERE (usr.iduser = :id) AND (contrt.idcontratado = :id)
+                    WHERE (usr.iduser = :id)
                     GROUP BY espec.idespec, descrespec
                     ORDER BY mediaavaliacao DESC NULLS LAST
                 SQL;

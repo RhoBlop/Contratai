@@ -25,7 +25,7 @@ async function aceitarContrato(event) {
     let data = await updateStatusContrato(idContrato, idStatus);
 
     if (data.dados) {
-        createToast(
+        setOpenToast(
             "Status do contrato atualizado",
             "O contrato foi aceito com sucesso! Agora é hora de pôr a mão na massa",
             "success-notify",
@@ -33,7 +33,7 @@ async function aceitarContrato(event) {
         );
         window.location.reload();
     } else {
-        createToast(
+        setOpenToast(
             "Erro na operação",
             "Não foi possível atualizar o status do contrato, recarregue a página e tente novamente",
             "failure-notify",
@@ -53,7 +53,7 @@ async function recusarContrato(event) {
     let data = await updateStatusContrato(idContrato, idStatus);
 
     if (data.dados) {
-        createToast(
+        setOpenToast(
             "Status do contrato atualizado",
             "O contrato foi recusado com sucesso",
             "success-notify",
@@ -61,7 +61,7 @@ async function recusarContrato(event) {
         );
         window.location.reload();
     } else {
-        createToast(
+        setOpenToast(
             "Erro na operação",
             "Não foi possível atualizar o status do contrato, recarregue a página e tente novamente",
             "failure-notify",
@@ -81,7 +81,7 @@ async function solicitarFimContrato(event) {
     let data = await updateStatusContrato(idContrato, idStatus);
 
     if (data.dados) {
-        createToast(
+        setOpenToast(
             "Status do contrato atualizado",
             "Uma solicitação foi enviada ao próximo usuário",
             "success-notify",
@@ -89,7 +89,7 @@ async function solicitarFimContrato(event) {
         );
         window.location.reload();
     } else {
-        createToast(
+        setOpenToast(
             "Erro na operação",
             "Não foi possível atualizar o status do contrato, recarregue a página e tente novamente",
             "failure-notify",
@@ -109,7 +109,7 @@ async function aceitarFimContrato(event) {
     let data = await updateStatusContrato(idContrato, idStatus);
 
     if (data.dados) {
-        createToast(
+        setOpenToast(
             "Status do contrato atualizado",
             "O contrato foi finalizado com sucesso",
             "success-notify",
@@ -117,7 +117,7 @@ async function aceitarFimContrato(event) {
         );
         window.location.reload();
     } else {
-        createToast(
+        setOpenToast(
             "Erro na operação",
             "Não foi possível atualizar o status do contrato, recarregue a página e tente novamente",
             "failure-notify",

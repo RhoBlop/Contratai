@@ -357,3 +357,35 @@ async function sendAvaliacao(event) {
     }
     clearTimeout(timeout);
 }
+
+async function deleteNotificacao(event) {
+    let button = event.target.parentNode;
+    let cardNotificacao = findClosestAncestorByClass(button, "card-notificacao");
+    let idNotific = cardNotificacao.dataset.notificacaoid;
+
+    cardNotificacao.remove();
+
+    try {
+        let response = await fetch(`./php/post/contrato/deletarNotificacao.php`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            credentials: "same-origin",
+            body: `notificId=${idNotific}`,
+        });
+        let data = await response.json();
+
+        if (!data.dados) {
+            setOpenToast(
+                "Deletar Notificação",
+                "Erro ao deletar notificação",
+                "failure-notify"
+            );
+
+            window.location.reload();
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
