@@ -11,7 +11,7 @@
               <!-- EMAIL -->
               <div class="form-group mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" autocomplete="off" required>
               </div>
   
               <!-- SENHA -->

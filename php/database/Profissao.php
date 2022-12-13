@@ -120,11 +120,11 @@
                         INNER JOIN userespec AS useres ON (espec.idespec = useres.idespec)
                         INNER JOIN usuario AS usr ON (useres.iduser = usr.iduser)
                         GROUP BY prof.idprof, prof.descrProf
-                        ORDER BY numuser DESC
+                        ORDER BY numuser DESC NULLS LAST
                         LIMIT :limit) AS top
                     INNER JOIN especializacao AS espec ON (top.idprof = espec.idprof)
-                    INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
-                    INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    LEFT JOIN contrato AS contrt ON (espec.idespec = contrt.idespec AND contrt.idstatus = 4)
+                    LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                     WHERE (contrt.idstatus = 4)
                     GROUP BY top.descrprof, top.numuser, top.idprof, top.imgprof
                     ORDER BY top.numuser DESC, mediaavaliacao DESC;

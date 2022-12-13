@@ -955,7 +955,7 @@ label {
 }
 
 /* FILE INPUT UPDATE FORM */
-#inputImg {
+input[id^="inputImg"] {
     display: none;
 }
 
@@ -971,7 +971,7 @@ label {
     overflow: hidden;
 }
 
-#imgPerfil {
+img[id^="imgPerfil"] {
     width: 148px;
     height: 148px;
     border-radius: 50%;

@@ -43,9 +43,6 @@
             <!-- CAROUSEL DAS PROFISSÕES COM AVALIAÇÕES MAIS ALTAS -->
             <?php include ("components/prof-top-avaliacao.php") ?>
 
-            <!-- CAROUSEL DAS PROFISSÕES COM MAIS CADASTROS -->
-            <?php include ("components/prof-top-cadastro.php") ?>
-
         </main>
         <?php include ("components/footer.html")?>
     </body>

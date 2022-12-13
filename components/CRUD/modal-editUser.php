@@ -7,14 +7,18 @@
         </div>
         <div class="modal-body">
             <form id="updateUser-<?php echo $user['iduser']?>" onsubmit="sendUpdateAdmin(event, <?php echo $user['iduser']?>)">
-                <label id="inputFileLabel" for="inputImg" class="rounded-circle mb-4">
-                    <img src="<?php echoProfileImage($user['imguser']) ?>" id="imgPerfil" alt="">
+                <?php 
+                    $imgId = "imgPerfil-{$user['iduser']}";
+                    $labelId = "inputImg-{$user['iduser']}";
+                ?>
+                <label id="inputFileLabel" for="<?php echo $labelId ?>" class="rounded-circle mb-4">
+                    <img src="<?php echoProfileImage($user['imguser']) ?>" id="<?php echo $imgId ?>" alt="">
                     <div class="editar-hover">
                         <i class="fa-solid fa-pen"></i>
                         <p>Editar Foto</p>
                     </div>
                 </label>
-                <input id="inputImg" type="file" name="imgPerfil" onchange="showSelectedImg(event, '#imgPerfil')">
+                <input id="<?php echo $labelId ?>" type="file" name="imgPerfil" onchange="showSelectedImg(event, '#<?php echo $imgId ?>')">
 
                 <div class="form-group mb-3">
                     <label for="nome" class="form-label">Nome Completo</label>
