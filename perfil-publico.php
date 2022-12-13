@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!-- <?php
+        //if (!isset($_GET["id"])) {
+        //    header("Location: 500.php");
+        //}
+        ?> -->
+
+<head>
     <?php include("components/head.php") ?>
     <script src="js/profileAvalFilter.js"></script>
 </head>

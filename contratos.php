@@ -1,9 +1,15 @@
-    <?php require("components/head.php") ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
     <!-- EVO CALENDAR CSS -->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css" /> -->
     <link rel="stylesheet" type="text/css" href="css/evo-calendar.css" />
     
+    <?php require("components/head.php") ?>
     <script src="js/fetch/statusContratos.js"></script>
+
 </head>
 
 <body>
