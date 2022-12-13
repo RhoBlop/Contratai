@@ -19,7 +19,7 @@ class chaThiago {
     }
 
     setChatSocket() {
-        let socket = io('http://localhost:3000', {
+        let socket = io('https://contratai-chat.up.railway.app/', {
             transports: ['websocket'],
             withCredentials: true,
         });
@@ -254,8 +254,6 @@ class chaThiago {
 
             message.classList.add(sent ? "sent" : "received");
 
-            // add timestamp styling
-            console.log(`Text: ${text}\nTime: ${timestamp}\nSent: ${sent}`);
             
             messagesDiv.appendChild(message);
         }
