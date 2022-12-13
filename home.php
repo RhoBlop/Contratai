@@ -1,6 +1,8 @@
-<?php session_start() ?>
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
     <head>
         <?php require("components/head.php") ?>
     </head>
@@ -11,16 +13,16 @@
                 <div class="row py-3 d-flex justify-content-center align-items-center mb-3">
                     <div class="col-md-12 search-bar">
                         <!-- TODO Filtro de pesquisa -->
-                        <form id="searchForm" onsubmit="return false">
+                        <form id="searchForm" onsubmit="return false" class="hidden">
                             <div class="input-group">
                                 <input id="searchBox" name="searchParam" type="text" class="form-control form-control-lg" autocomplete="off" placeholder="O que você está procurando?">
                                 <button id="searchButton" class="btn btn-green"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </div>
                             <div class="filters-group">
-                                <input type="radio" id="profissao" class="search-filter" name="filterTable" value="profissao">
+                                <input type="radio" id="profissao" class="search-filter" name="filterTable" value="profissao" checked>
                                 <label for="profissao">Profissão</label>
 
-                                <input type="radio" id="usuario" class="search-filter" name="filterTable" value="usuario" checked>
+                                <input type="radio" id="usuario" class="search-filter" name="filterTable" value="usuario">
                                 <label for="usuario">Usuário</label>
                             </div>
                         </form>
@@ -62,4 +64,7 @@
     
     <!-- Sliding do carousel com animação -->
     <script src="js/multitemCarousel.js"></script>
+
+    <!-- Scrolling -->
+    <script src="js/scrolling.js"></script>
 </html>

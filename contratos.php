@@ -1,16 +1,15 @@
-<?php session_start() ?>
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
-
+    <?php require("components/head.php") ?>
     <!-- EVO CALENDAR CSS -->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css" /> -->
     <link rel="stylesheet" type="text/css" href="css/evo-calendar.css" />
-    
-    <?php require("components/head.php") ?>
-    <script src="js/fetch/statusContratos.js"></script>
 
+    <script src="js/fetch/statusContratos.js"></script>
 </head>
 
 <body>
@@ -33,11 +32,11 @@
                         <a class="nav-link active" id="contratante-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratante-pane" role="tab">Contratei</a>
                         <a class="nav-link" id="contratado-tab" data-bs-toggle="tab" type="button" data-bs-target="#contratado-pane" role="tab">Contratado</a>
                     </div>
+                    
                     <div class="tab-content">
-
-
                         <!-- SECTION - Contratante -->
                         <?php
+                        include "components/card-contrato.php";
                         $idUser = $_SESSION["iduser"];
 
                         $contratosSolicitados = $usuarioClass->selectContratosContratante($idUser);
@@ -53,14 +52,20 @@
                                     $solicitacoesEnviadas[] = $contrt;
                                     break;
                                 case 2:
+                                    $emAndamentoEnviados[] = $contrt;
+                                    break;
                                 case 3:
+                                    $emAndamentoEnviados[] = $contrt;
+                                    break;
                                 case 5:
                                     $emAndamentoEnviados[] = $contrt;
                                     break;
                                 case 4:
                                     $finalizadosEnviados[] = $contrt;
                             }
+                            
                         }
+
 
                         ?>
 
@@ -77,47 +82,21 @@
                                     <div>
                                         <?php
                                         if (empty($solicitacoesEnviadas)) :
-                                            echo <<<ERROR
-                                            <div class="empty-accordion accordion-body"><span class="text-muted">Nenhuma solicitação de contratação pendente.</span></div>
-                                        ERROR;
+                                            constructNullCard();
                                         else :
                                             foreach ($solicitacoesEnviadas as $contrt) :
-                                        ?> 
+                                                $idUsr = $contrt['iduser'];
+                                                $imgPerfil = $contrt["imguser"];
+                                                $headerMsg = "Você enviou uma solicitação para <b>{$contrt["nomeuser"]}</b>!";
+                                                $especializacao = ucfirst($contrt["descrespec"]);
+                                                $diasContrato = $contrt["diascontrato"];
+                                                $descrContrato = $contrt["descrcontrato"];
+                                                $botoes = [];
+                                                $aviso = "Aguarde o usuário aceitar ou rejeitar seu pedido";
+                                                $dataCriacao = $contrt["timecriacaocontrato"];
+                                                $idContrato = $contrt["idcontrato"];
 
-                                                <div class="id-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid="<?php echo $contrt["idcontrato"]; ?>">
-                                                    <div class="d-flex gap-3">
-                                                        <div class="clickable-image">
-                                                            <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
-                                                            <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
-                                                        </div>
-                                                        <div class="text">
-                                                            <h8>Você enviou uma solicitação para <b><?php echo $contrt["nomeuser"] ?></b>!</h8>
-
-                                                            <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                            <p>Dias agendados:</p>
-                                                            <div class="contract-dates my-2">
-                                                                <?php
-                                                                    foreach ($contrt["diascontrato"] as $diacontrato) {
-                                                                        if (isDateExpired($diacontrato)) {
-                                                                            $class = " expired";
-                                                                        } else {
-                                                                            $class = "";
-                                                                        }
-                                                                        echo "<div class='date-chip{$class}'>";
-                                                                        echoMediumDate($diacontrato);
-                                                                        echo '</div>';
-                                                                    }
-                                                                ?>
-                                                            </div>
-                                                            <p>Aguarde o usuário aceitar ou rejeitar seu pedido</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="time text-end">
-                                                        <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
-                                                    </div>
-                                                </div>
-
-                                        <?php
+                                                echo constructContratoCard($idUsr, $imgPerfil, $headerMsg, $especializacao, $diasContrato, $descrContrato, $botoes, $aviso, $dataCriacao, $idContrato);
                                             endforeach;
                                         endif;
                                         ?>
@@ -137,144 +116,40 @@
                                     <div>
                                         <?php
                                         if (empty($emAndamentoEnviados)) :
-                                            echo <<<ERROR
-                                                <div class="empty-accordion accordion-body"><span class="text-muted">Nenhum contrato por aqui.</span></div>
-                                            ERROR;
+                                            constructNullCard();
                                         else :
                                             foreach ($emAndamentoEnviados as $contrt) :
-                                        ?>
-
-                                                <?php
-                                                    if ($contrt["idstatus"] === 2):
-                                                ?> 
-
-                                                    <div class="id-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid="<?php echo $contrt["idcontrato"]; ?>">
-                                                        <div class="d-flex gap-3">
-                                                            <div class="clickable-image">
-                                                                <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
-                                                                <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h8>O contrato com <b><?php echo $contrt["nomeuser"] ?></b> está em andamento.</h8>
-
-                                                                <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                                <p>Dias agendados:</p>
-                                                                <div class="contract-dates my-2">
-                                                                    <?php
-                                                                    foreach ($contrt["diascontrato"] as $diacontrato) {
-                                                                        echo '<div class="date-chip">';
-                                                                        echoMediumDate($diacontrato);
-                                                                        echo '</div>';
-                                                                    }
-                                                                    ?>
-                                                                </div>
-
-                                                                <p>Após o usuário contratado finalizar o contrato você poderá avaliá-lo!</p>
-                                                            </div>
-                                                        </div>
-
-                                                        <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
-                                                    </div>
-
-                                                <?php
-                                                    elseif ($contrt["idstatus"] === 3):
-                                                ?>
-
-                                                    <div class="id-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid="<?php echo $contrt["idcontrato"]; ?>">
-                                                        <div class="d-flex gap-3">
-                                                            <div class="clickable-image">
-                                                                <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
-                                                                <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h8>O contratado <b><?php echo $contrt["nomeuser"] ?></b> solicitou o fim do contrato. Caso ele tenha cumprido o serviço oferecido, clique no botão abaixo.</h8>
-                                                    
-                                                                <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                                <p class="text-muted">Dias agendados:</p>
-                                                                <div class="contract-dates my-1">
-                                                                    <?php
-                                                                        foreach ($contrt["diascontrato"] as $diacontrato) {
-                                                                            if (isDateExpired($diacontrato)) {
-                                                                                $class = " expired";
-                                                                            } else {
-                                                                                $class = "";
-                                                                            }
-                                                                            echo "<div class='date-chip{$class}'>";
-                                                                            echoMediumDate($diacontrato);
-                                                                            echo '</div>';
-                                                                        }
-                                                                    ?>
-                                                                </div>
-                                                                
-                                                                <div class="contrato-buttons my-2 d-flex gap-2">
-                                                                    <button class="btn btn-outline-green" onclick="aceitarFimContrato(event)">O contrato foi realizado!</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
-                                                    </div>
-
-                                                <?php
-                                                    elseif ($contrt["idstatus"] === 5):
-                                                ?>
+                                                $idUsr = $contrt['iduser'];
+                                                $imgPerfil = $contrt["imguser"];
+                                                $especializacao = ucfirst($contrt["descrespec"]);
+                                                $diasContrato = $contrt["diascontrato"];
+                                                $descrContrato = $contrt["descrcontrato"];
+                                                $dataCriacao = $contrt["timecriacaocontrato"];
+                                                $idContrato = $contrt["idcontrato"];
                                                 
-                                                    <div class="id-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid="<?php echo $contrt["idcontrato"]; ?>">
-                                                        <div class="d-flex gap-3">
-                                                            <div class="clickable-image">
-                                                                <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
-                                                                <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h8>Infelizmente as datas do contrato com <b><?php echo $contrt["nomeuser"] ?></b> expiraram e o contrato não foi finalizado pelo contratado. Caso isso não tenha sido combinado entre os dois, você pode agora avaliá-lo.</h8>
-                                                    
-                                                                <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                                <p class="text-muted">Dias agendados:</p>
-                                                                <div class="contract-dates my-1">
-                                                                    <?php
-                                                                        foreach ($contrt["diascontrato"] as $diacontrato) {
-                                                                            if (isDateExpired($diacontrato)) {
-                                                                                $class = " expired";
-                                                                            } else {
-                                                                                $class = "";
-                                                                            }
-                                                                            echo "<div class='date-chip{$class}'>";
-                                                                            echoMediumDate($diacontrato);
-                                                                            echo '</div>';
-                                                                        }
-                                                                    ?>
-                                                                </div>
-                                                                
-                                                                <div class="contrato-buttons my-2 d-flex gap-2">
-                                                                    <?php
-                                                                        if (!$contrt["isavaliado"]):
-                                                                    ?>
+                                                if ($contrt["idstatus"] === 2):
+                                                    $headerMsg = "O Contrato com <b>{$contrt["nomeuser"]}</b> está em andamento";
+                                                    $botoes = [];
+                                                    $aviso = "Após o usuário contratado finalizar o contrato você poderá avaliá-lo!";
 
-                                                                        <button type="button" class="btn btn-green px-2" data-bs-toggle="modal" data-bs-target="#<?php echo "avaliacao{$contrt['idcontrato']}"; ?>">Avaliar</button>
+                                                elseif ($contrt["idstatus"] === 3):
+                                                    $headerMsg = "<b>{$contrt["nomeuser"]}</b> solicitou o fim do contrato. Clique no botão abaixo caso o serviço tenha sido cumprido.";
+                                                    $botoes = [
+                                                        ["O Contrato foi finalizado!", "aceitarFimContrato(event)"]
+                                                    ];
+                                                    $aviso = "";
 
-                                                                    <?php
-                                                                        else:
-                                                                    ?>
+                                                elseif ($contrt["idstatus"] === 5):
+                                                    $headerMsg = "Infelizmente as datas do contrato com <b>{$contrt["nomeuser"]}</b> expiraram e o contrato não foi finalizado pelo contratado. Caso isso não tenha sido combinado entre os dois, você pode agora avaliá-lo.";
+                                                    $botoes = [
+                                                        ["Avaliar", "", "modal"]
+                                                    ];
+                                                    $aviso = "";
+                                                endif;
 
-                                                                        <p class="text-muted">Você já avaliou esse contrato.</p>
+                                                
+                                                echo constructContratoCard($idUsr, $imgPerfil, $headerMsg, $especializacao, $diasContrato, $descrContrato, $botoes, $aviso, $dataCriacao, $idContrato);
 
-                                                                    <?php endif; ?>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
-                                                    </div>
-
-                                                    <!-- MODAL DE AVALIAÇÃO -->
-                                                    <?php
-                                                        include("components/modal-avaliacao.php");
-                                                    ?>
-
-                                                <?php
-                                                    endif;
-                                                ?>
-                                        <?php
                                             endforeach;
                                         endif;
                                         ?>
@@ -294,64 +169,33 @@
                                     <div>
                                         <?php
                                         if (empty($finalizadosEnviados)) :
-                                            echo <<<ERROR
-                                                <div class="empty-accordion accordion-body"><span class="text-muted">Nenhum contrato por aqui.</span>.</div>
-                                            ERROR;
+                                            constructNullCard();
                                         else :
                                             foreach ($finalizadosEnviados as $contrt) :
-                                        ?>
+                                                $idUsr = $contrt['iduser'];
+                                                $imgPerfil = $contrt["imguser"];
+                                                $dataFinalizado = returnFullDate($contrt["timefinalizacaocontrato"]);
+                                                $headerMsg = "O Contrato com <b>{$contrt["nomeuser"]}</b> foi finalizado em {$dataFinalizado}.";
+                                                $especializacao = ucfirst($contrt["descrespec"]);
+                                                $diasContrato = $contrt["diascontrato"];
+                                                $descrContrato = $contrt["descrcontrato"];
+                                                $dataCriacao = $contrt["timecriacaocontrato"];
+                                                $idContrato = $contrt['idcontrato'];
 
-                                                <div class="id-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
-                                                    <div class="clickable-image">
-                                                        <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
-                                                        <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
-                                                    </div>
-                                                    <div class="text">
-                                                        <h8>O contrato com <b><?php echo $contrt["nomeuser"]; ?></b> foi finalizado em <?php echoFullDate($contrt["timefinalizacaocontrato"]); ?>. Agora você pode avaliá-lo pelo serviço!</h8>
+                                                if (!$contrt["isavaliado"]) :
+                                                    $botoes = [
+                                                        ["Avaliar", "", "modal"]
+                                                    ];
+                                                    $aviso = "";
+                                                else :
+                                                    $botoes = [];
+                                                    $aviso = "O contrato já foi avaliado!";
+                                                endif;
 
-                                                        <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                        <p class="text-muted">Dias agendados:</p>
-                                                        <div class="contract-dates my-1">
-                                                            <?php
-                                                                foreach ($contrt["diascontrato"] as $diacontrato) {
-                                                                    if (isDateExpired($diacontrato)) {
-                                                                        $class = " expired";
-                                                                    } else {
-                                                                        $class = "";
-                                                                    }
-                                                                    echo "<div class='date-chip{$class}'>";
-                                                                    echoMediumDate($diacontrato);
-                                                                    echo '</div>';
-                                                                }
-                                                            ?>
-                                                        </div>
-
-                                                        <div class="contrato-buttons my-2 d-flex gap-2">
-                                                            <?php
-                                                                if (!$contrt["isavaliado"]):
-                                                            ?>
-
-                                                                <a type="button" class="btn btn-green px-2" data-bs-toggle="modal" data-bs-target="#<?php echo "avaliacao{$contrt['idcontrato']}"; ?>">Avaliar</a>
-
-                                                            <?php
-                                                                else:
-                                                            ?>
-
-                                                                <p class="text-muted">Você já avaliou esse contrato!</p>
-
-                                                            <?php endif; ?>
-                                                        </div>
-                                                    </div>
-
-                                                    <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
-                                                </div>
-
-                                                <!-- MODAL DE AVALIAÇÃO -->
-                                                <?php
-                                                    include("components/modal-avaliacao.php");
-                                                ?>
-
-                                        <?php
+                                                echo constructContratoCard($idUsr, $imgPerfil, $headerMsg, $especializacao, $diasContrato, $descrContrato, $botoes, $aviso, $dataCriacao, $idContrato);
+                                            
+                                                include("components/modal-avaliacao.php");
+                                            
                                             endforeach;
                                         endif;
                                         ?>
@@ -400,50 +244,25 @@
                                 <div id="solicitacoesContratado" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#contratado-pane">
                                     <?php
                                     if (empty($solicitacoesRecebidas)) :
-                                        echo <<<ERROR
-                                            <div class="empty-accordion accordion-body"><span class="text-muted">Nenhuma solicitação de contratação pendente.<span></div>
-                                        ERROR;
+                                        constructNullCard();
                                     else :
                                         foreach ($solicitacoesRecebidas as $contrt) :
-                                    ?>
+                                            $idUsr = $contrt['iduser'];
+                                            $imgPerfil = $contrt["imguser"];
+                                            $headerMsg = "<b>{$contrt["nomeuser"]}</b> quer te contratar!";
+                                            $especializacao = ucfirst($contrt["descrespec"]);
+                                            $diasContrato = $contrt["diascontrato"];
+                                            $descrContrato = $contrt["descrcontrato"];
+                                            $botoes = [
+                                                ["Aceitar", "aceitarContrato(event)"],
+                                                ["Recusar", "recusarContrato(event)"]
+                                            ];
+                                            $aviso = "";
+                                            $dataCriacao = $contrt["timecriacaocontrato"];
+                                            $idContrato = $contrt['idcontrato'];
 
-                                            <div class="id-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
-                                                <div class="d-flex gap-3">
-                                                    <div class="clickable-image">
-                                                        <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
-                                                        <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
-                                                    </div>
-                                                    <div class="text">
-                                                        <h8><b><?php echo $contrt["nomeuser"] ?></b> quer te contratar!</h8>
-    
-                                                        <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                        <p>Dias agendados:</p>
-                                                        <div class="contract-dates my-2">
-                                                            <?php
-                                                                foreach ($contrt["diascontrato"] as $diacontrato) {
-                                                                    if (isDateExpired($diacontrato)) {
-                                                                        $class = " expired";
-                                                                    } else {
-                                                                        $class = "";
-                                                                    }
-                                                                    echo "<div class='date-chip{$class}'>";
-                                                                    echoMediumDate($diacontrato);
-                                                                    echo '</div>';
-                                                                }
-                                                            ?>
-                                                        </div>
-    
-                                                        <div class="contrato-buttons my-3 d-flex gap-2">
-                                                            <button class="btn btn-green" onclick="aceitarContrato(event)">Aceitar</button>
-                                                            <button class="btn btn-outline-dark" onclick="recusarContrato(event)">Recusar</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
-                                            </div>
-
-                                    <?php
+                                            echo constructContratoCard($idUsr, $imgPerfil, $headerMsg, $especializacao, $diasContrato, $descrContrato, $botoes, $aviso, $dataCriacao, $idContrato);
+                                        
                                         endforeach;
                                     endif;
                                     ?>
@@ -462,134 +281,36 @@
                                     <div>
                                         <?php
                                         if (empty($emAndamentoRecebidos)) :
-                                            echo <<<ERROR
-                                            <div class="empty-accordion accordion-body"><span class="text-muted">Nenhum contrato por aqui.</span></div>
-                                        ERROR;
+                                            constructNullCard();
                                         else :
                                             foreach ($emAndamentoRecebidos as $contrt) :
-                                        ?>
+                                                $idUsr = $contrt['iduser'];
+                                                $imgPerfil = $contrt["imguser"];
+                                                $especializacao = ucfirst($contrt["descrespec"]);
+                                                $diasContrato = $contrt["diascontrato"];
+                                                $descrContrato = $contrt["descrcontrato"];
+                                                $dataCriacao = $contrt["timecriacaocontrato"];
+                                                $idContrato = $contrt["idcontrato"];
 
-                                                <?php
-                                                    if ($contrt["idstatus"] === 2): 
-                                                ?>
-
-                                                    <div class="id-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
-                                                        <div class="d-flex gap-3">
-                                                            <div class="clickable-image">
-                                                                <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
-                                                                <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h8 class="m-0">O contrato com <b><?php echo $contrt["nomeuser"] ?></b> está em andamento! Quando você terminar o serviço, clique no botão abaixo para solicitar o fim do contrato ao usuário.</h8>
-                                                                
-                                                                <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                                <p>Dias agendados:</p>
-                                                                <div class="contract-dates my-2">
-                                                                    <?php
-                                                                        foreach ($contrt["diascontrato"] as $diacontrato) {
-                                                                            if (isDateExpired($diacontrato)) {
-                                                                                $class = " expired";
-                                                                            } else {
-                                                                                $class = "";
-                                                                            }
-                                                                            echo "<div class='date-chip{$class}'>";
-                                                                            echoMediumDate($diacontrato);
-                                                                            echo '</div>';
-                                                                        }
-                                                                    ?>
-                                                                </div>
-    
-                                                                <div class="contrato-buttons my-2 d-flex gap-2">
-                                                                    <button onclick="solicitarFimContrato(event)" class="btn btn-outline-green">O contrato foi realizado!</button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="time text-end">
-                                                                <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
-                                                            </div>
-                                                        </div>
-    
-                                                    <?php
-                                                        elseif ($contrt["idstatus"] === 3): 
-                                                    ?>
-    
-                                                        <div class="id-contrato accordion-body d-flex align-items-start justify-content-between" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
-                                                            <div class="d-flex gap-3">
-                                                                <div class="clickable-image">
-                                                                    <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
-                                                                    <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
-                                                                </div>
-                                                                <div class="text">
-                                                                    <h8 class="m-0">Você enviou uma solicitação ao contratante <b><?php echo $contrt["nomeuser"] ?></b> para finalizar o contrato.</h8>
-                                                                    
-                                                                    <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                                    <p>Dias agendados:</p>
-                                                                    <div class="contract-dates my-2">
-                                                                        <?php
-                                                                            foreach ($contrt["diascontrato"] as $diacontrato) {
-                                                                                if (isDateExpired($diacontrato)) {
-                                                                                    $class = " expired";
-                                                                                } else {
-                                                                                    $class = "";
-                                                                                }
-                                                                                echo "<div class='date-chip{$class}'>";
-                                                                                echoMediumDate($diacontrato);
-                                                                                echo '</div>';
-                                                                            }
-                                                                        ?>
-                                                                    </div>
-        
-                                                                    <p>Aguarde o contratante aceitar sua solicitação</p>
-                                                                </div>
-
-                                                            </div>
-                                                            <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
-                                                        </div>
-    
-                                                    <?php
-                                                        elseif ($contrt["idstatus"] === 5):
-                                                    ?>
-    
-                                                        <div class="id-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
-                                                            <div class="clickable-image">
-                                                                <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
-                                                                <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
-                                                            </div>
-                                                            <div class="text">
-                                                                <h8 class="m-0">Você não finalizou o contrato com <b><?php echo $contrt["nomeuser"] ?></b> dentro da data prevista. O usuário contratante pode agora avaliá-lo por seu serviço.</h8>
-                                                                
-                                                                <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                                <p>Dias agendados:</p>
-                                                                <div class="contract-dates my-2">
-                                                                    <?php
-                                                                        foreach ($contrt["diascontrato"] as $diacontrato) {
-                                                                            if (isDateExpired($diacontrato)) {
-                                                                                $class = " expired";
-                                                                            } else {
-                                                                                $class = "";
-                                                                            }
-                                                                            echo "<div class='date-chip{$class}'>";
-                                                                            echoMediumDate($diacontrato);
-                                                                            echo '</div>';
-                                                                        }
-                                                                    ?>
-                                                                </div>
-    
-                                                                <div class="contrato-buttons my-2 d-flex gap-2">
-                                                                    [Por enquanto não é possível realizar nenhuma ação enquanto o contrato está atrasado]
-                                                                    <!-- <button onclick="solicitarFimContrato(event)" class="btn btn-green">O contrato foi realizado!</button> -->
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="time text-end">
-                                                            <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
-                                                        </div>
-                                                    </div>
-
-                                                <?php
-                                                    endif; 
-                                                ?>
-
-                                        <?php
+                                                if ($contrt['idstatus'] === 2) :
+                                                    $headerMsg = "O Contrato com <b>{$contrt["nomeuser"]}</b> está em andamento";
+                                                    $botoes = [
+                                                        ["Contrato realizado!", "solicitarFimContrato(event)"]
+                                                    ];
+                                                    $aviso = "Clique no botão abaixo caso o serviço tenha sido finalizado.";
+                                                
+                                                elseif ($contrt['idstatus'] === 3 ) :
+                                                    $headerMsg = "Você enviou uma solicitação ao contratante <b>{$contrt["nomeuser"]}</b> para finalizar o contrato.";
+                                                    $botoes = [];
+                                                    $aviso = "Aguarde o contratante aceitar sua solicitação";
+                                                
+                                                elseif ($contrt['idstatus'] === 5) :
+                                                    $headerMsg = "Você não finalizou o contrato com <b>{$contrt["nomeuser"]}</b> dentro da data prevista. O contrante agora pode avaliar seu serviço.";
+                                                    $botoes = [];
+                                                    $aviso = "[Por enquanto não é possível realizar nenhuma ação enquanto o contrato está atrasado]";
+                                                        
+                                                endif;
+                                                echo constructContratoCard($idUsr, $imgPerfil, $headerMsg, $especializacao, $diasContrato, $descrContrato, $botoes, $aviso, $dataCriacao, $idContrato);
                                             endforeach;
                                         endif;
                                         ?>
@@ -609,62 +330,27 @@
                                     <div>
                                         <?php
                                         if (empty($finalizadosRecebidos)) :
-                                            echo <<<ERROR
-                                            <div class="empty-accordion accordion-body"><span class="text-muted">Nenhum contrato por aqui.</span></div>
-                                        ERROR;
+                                            constructNullCard();
                                         else :
                                             foreach ($finalizadosRecebidos as $contrt) :
-                                        ?>
+                                                $idUsr = $contrt['iduser'];
+                                                $imgPerfil = $contrt["imguser"];
+                                                $dataFinalizado = returnFullDate($contrt["timefinalizacaocontrato"]);
+                                                $headerMsg = "O Contrato com <b>{$contrt["nomeuser"]}</b> foi finalizado em <b>{$dataFinalizado}</b>.";
+                                                $especializacao = ucfirst($contrt["descrespec"]);
+                                                $diasContrato = $contrt["diascontrato"];
+                                                $descrContrato = $contrt["descrcontrato"];
+                                                $botoes = [];
+                                                $dataCriacao = $contrt["timecriacaocontrato"];
+                                                $idContrato = $contrt['idcontrato'];
 
-                                                <div class="id-contrato accordion-body d-flex align-items-start gap-3" data-contratoid=<?php echo $contrt["idcontrato"]; ?>>
-                                                    <div class="clickable-image">
-                                                        <img src="<?php echoProfileImage($contrt["imguser"]); ?>">
-                                                        <a href="<?php echo "perfil-publico.php?id={$contrt['iduser']}"; ?>" class="stretched-link"></a>
-                                                    </div>
-                                                    <div class="text">
-                                                        <h7 class="m-0">O contrato com <b><?php echo $contrt["nomeuser"]; ?></b> foi finalizado com sucesso em <?php echoFullDate($contrt["timefinalizacaocontrato"]); ?>!</h7>
-                                                        
-                                                        <p class="text-muted">Profissão: <?php echo ucfirst($contrt["descrespec"]); ?></p>
-                                                        <p>Dias agendados:</p>
-                                                        <div class="contract-dates my-2">
-                                                            <?php
-                                                                foreach ($contrt["diascontrato"] as $diacontrato) {
-                                                                    if (isDateExpired($diacontrato)) {
-                                                                        $class = " expired";
-                                                                    } else {
-                                                                        $class = "";
-                                                                    }
-                                                                    echo "<div class='date-chip{$class}'>";
-                                                                    echoMediumDate($diacontrato);
-                                                                    echo '</div>';
-                                                                }
-                                                            ?>
-                                                        </div>
-
-                                                        <div class="contrato-buttons my-2 d-flex gap-2">
-                                                            <?php
-                                                                if (!$contrt["isavaliado"]):
-                                                            ?>
-
-                                                                <p class="text-muted">O contrante pode agora avaliar o contrato!</p>
-
-                                                            <?php
-                                                                else:
-                                                            ?>
-
-                                                                <p class="text-muted">O contrato já foi avaliado!</p>
-                                                                //TODO - Adicionar modal com a avaliação feita pelo usuário
-
-                                                            <?php endif; ?>
-                                                        </div>
-
-                                                        
-                                                    </div>
-
-                                                    <p class="text-muted"><?php echo timeElapsedString($contrt["timecriacaocontrato"]); ?></p>
-                                                </div>
-
-                                        <?php
+                                                if (!$contrt["isavaliado"]) :
+                                                    $aviso = "O Contratante agora pode avaliar o contrato, aguarde até que ele faça isso.";
+                                                else :
+                                                    $aviso = "O Contrato já foi avaliado!";
+                                                endif;
+                                                echo constructContratoCard($idUsr, $imgPerfil, $headerMsg, $especializacao, $diasContrato, $descrContrato, $botoes, $aviso, $dataCriacao, $idContrato);
+                                            
                                             endforeach;
                                         endif;
                                         ?>
@@ -678,6 +364,8 @@
                         <!-- !SECTION - Profissional -->
 
                         <!-- SECTION Agenda  -->
+
+                        
                         <?php
                             $eventos = json_encode($usuarioClass->selectCalendario($idUser));
                         ?>
@@ -689,6 +377,25 @@
                             <!-- SECTION - Calendário -->
                             <div id="calendar" class="my-4"></div>
                             <!-- !SECTION - Calendário -->
+                            
+                            <!-- SECTION - Legenda --> 
+                            <h5>Legenda</h5>
+                            <?php
+                                require("php/database/Contrato.php");
+                                $contratoClass = new Contrato();
+                                $legenda = $contratoClass->selectLegendaCalendario();
+
+                                foreach($legenda as $status) {
+                                    $descr = ucfirst($status['descrstatus']);
+                                    echo <<<HTML
+                                        <div class="item">
+                                            <div class="square" style="background-color:{$status['corcalendario']}"></div>
+                                            <p>{$descr}</p>
+                                        </div>
+                                    HTML;
+                                }
+                            ?>
+                            <!-- !SECTION - Legenda -->
                         </div>
                         <!-- !SECTION Agenda -->
                     </div>

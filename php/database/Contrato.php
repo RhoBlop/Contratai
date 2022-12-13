@@ -47,7 +47,7 @@ class Contrato extends Database
             }
 
             // NOTIFICACAO
-            $this->insertNotificacao($idContrato, $idContratante, $idContratado);
+            $this->insertNotificacao($idContrato, $idContratante, $idContratado, $solicitacaoStatus);
 
             $conn->commit();
             return ["dados" => true];
@@ -60,38 +60,96 @@ class Contrato extends Database
         }
     }
 
-    public function setStatusContrato($idcontrato, $idstatus)
-    {
+    public function selectLegendaCalendario() {
         try {
+            $sql = <<<SQL
+                    SELECT descrstatus, corcalendario
+                    FROM statuscontrato
+                    ORDER BY idstatus
+                SQL;
+            
+            $stmt = Database::prepare($sql);
+            $stmt->execute();
+
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+    }
+
+    public function setStatusContrato($idContrato, $idStatus)
+    {
+        $conn = Database::getInstance();
+        try {
+            $conn->beginTransaction();
             // checar se o usuário realmente pode fazer essa alteração
             $sql = <<<SQL
                     UPDATE contrato
                     SET idstatus = :idstatus
                     WHERE idcontrato = :idcontrato
+                    RETURNING idcontratante, idcontratado
                 SQL;
 
-            $stmt = Database::prepare($sql);
+            $stmt = $conn->prepare($sql);
             $stmt->execute([
-                ":idstatus" => $idstatus,
-                ":idcontrato" => $idcontrato
+                ":idstatus" => $idStatus,
+                ":idcontrato" => $idContrato
             ]);
 
+            $fetch = $stmt->fetch();
+            $remetente = null;
+            $destinatario = null;
 
-            if ($idstatus === 4) {
-                $sql = <<<SQL
-                    UPDATE contrato
-                    SET timefinalizacaocontrato = :timestamp
-                    WHERE idcontrato = :idcontrato
-                SQL;
-                $stmt = Database::prepare($sql);
-                $stmt->execute([
-                    ":idcontrato" => $idcontrato,
-                    ":timestamp" => getCurrentTimestamp()
-                ]);
+            switch ($idStatus) {
+                case 2:
+                    $remetente = $fetch["idcontratado"];
+                    $destinatario = $fetch["idcontratante"];
+                    break;
+
+                case 3:
+                    $remetente = $fetch["idcontratado"];
+                    $destinatario = $fetch["idcontratante"];
+                    break;
+
+                case 4:
+                    $remetente = $fetch["idcontratante"];
+                    $destinatario = $fetch["idcontratado"];
+                    // timestamp finalização do contrato
+                    $sql = <<<SQL
+                        UPDATE contrato
+                        SET timefinalizacaocontrato = :timestamp
+                        WHERE idcontrato = :idcontrato
+                    SQL;
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute([
+                        ":idcontrato" => $idContrato,
+                        ":timestamp" => getCurrentTimestamp()
+                    ]);
+                    break;
+
+                case 5:
+                    $remetente = $fetch["idcontratado"];
+                    $destinatario = $fetch["idcontratante"];
+                    break;
+
+                case 6:
+                    $this->insertNotificacao($idContrato, $fetch["idcontratante"], $fetch["idcontratado"], $idStatus);
+                    $this->insertNotificacao($idContrato, $fetch["idcontratado"], $fetch["idcontratante"], $idStatus);
+                    break;
             }
 
+            if (!is_null($remetente) && !is_null($destinatario)) {
+                $this->insertNotificacao($idContrato, $remetente, $destinatario, $idStatus);
+            }
+
+            $conn->commit();
             return ["dados" => true];
         } catch (PDOException $e) {
+            $conn->rollback();
             echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
             exit();
 
@@ -126,11 +184,16 @@ class Contrato extends Database
                     UPDATE contrato
                     SET isavaliado = TRUE
                     WHERE idcontrato = :idcontrato
+                    RETURNING idcontratante, idcontratado
                 SQL;
                 $stmt = $conn->prepare($sql);
                 $stmt->execute([
                     ":idcontrato" => $idContrato
                 ]);
+
+                $fetch = $stmt->fetch();
+
+                $this->insertNotificacao($idContrato, $fetch["idcontratante"], $fetch["idcontratado"], -1);
     
                 $conn->commit();
                 return ["dados" => true];

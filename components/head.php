@@ -1,6 +1,5 @@
 <?php
 date_default_timezone_set('America/Sao_Paulo');
-session_start();
 require("php/database/Usuario.php");
 require("php/database/Profissao.php");
 require("php/impressaoDados.php");

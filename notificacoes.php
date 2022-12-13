@@ -1,6 +1,8 @@
-<?php session_start() ?>
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
     <head>
         <?php require("components/head.php") ?>
     </head>
@@ -10,14 +12,55 @@
         <main>
             <div class="container p-3 my-3">
                 <div class="row gx-5">
-                    
-                    
-
                     <?php include("components/sidebar.php")?>
 
-                    <div class="col-4 px-3 flex-column text-center" id="settingsContent">
-                        <h3>Esta pagina está em desenvolvimento...</h3>
-                        <img src="images\storyset\Work time-pana.svg" width="55%" alt="">
+                    <div class="col-10 px-4 d-flex flex-column" id="settingsContent">
+                        <div class="mb-4">
+                            <h2>Minhas notificações</h2>
+                            <h6 class="text-muted">Veja as notificações de seus contratos</h6>
+                        </div>
+
+                        <div class="d-flex flex-column align-items-center">
+                            
+                            <div class="nav nav-justified filter-tablist notificacao rounded-3 mb-3" id="tablist" role="tablist">
+                                <a class="nav-link active" id="naoVisualizado-tab" data-bs-toggle="tab" type="button" data-bs-target="#naoVisualizado-pane" role="tab">Não visualizado</a>
+                                <a class="nav-link" id="visualizado-tab" data-bs-toggle="tab" type="button" data-bs-target="#visualizado-pane" role="tab">Visualizado</a>
+                            </div>
+
+                            <?php
+                                include ("components/card-notificacao.php");
+                                [$naoVisualizado, $visualizado] = $usuarioClass->selectNotificacoes($_SESSION["iduser"]);
+                            ?>
+
+                            <div class="tab-content my-3 col-8 d-flex flex-column justify-content-center">
+                                <div id="naoVisualizado-pane" class="tab-pane fade show active">
+                                    <?php
+
+                                        if (count($naoVisualizado) < 1) {
+                                            echo constructEmptyCard();
+                                        } else {
+                                            foreach ($naoVisualizado as $notific):
+                                                echo constructNotificacaoCard($notific['idnotific'], $notific["title"], $notific["text"], $notific["descrcontrato"], $notific["timecriacao"]);
+                                            endforeach;
+                                        }
+
+                                    ?>
+                                </div>
+
+                                <div id="visualizado-pane" class="tab-pane fade">
+                                    <?php
+
+                                        if (count($visualizado) < 1) {
+                                            echo constructEmptyCard();
+                                        } else {
+                                            foreach ($visualizado as $notific):
+                                                echo constructNotificacaoCard($notific['idnotific'], $notific["title"], $notific["text"], $notific["descrcontrato"], $notific["timecriacao"]);
+                                            endforeach;
+                                        }
+                                    ?>
+                                </div>
+                            <div>
+                        <div>
                     </div>
                 </div>
             </div>

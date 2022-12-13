@@ -1,18 +1,21 @@
 <?php
 require_once "Database.php";
+require_once "NotificacaoContrato.php";
 
 class Usuario extends Database
 {
-
-    //SECTION - 
+    use NotificacaoContrato;
     
     //seleciona todos os usuários da tabela usuário
     public function selectAllUsers() 
     {
         try {
             $sql = <<<SQL
-                    SELECT * 
-                    FROM usuario
+                    SELECT usuario.*, bairro.descrbairro, cidade.descrcidade, estado.descrestado
+                    FROM usuario 
+                    INNER JOIN bairro ON (usuario.idbairro = bairro.idbairro)
+                    INNER JOIN cidade ON (bairro.idcidade = cidade.idcidade)
+                    INNER JOIN estado ON (cidade.idestado = estado.idestado)
                     ORDER BY iduser
                 SQL;
             
@@ -27,7 +30,37 @@ class Usuario extends Database
 
             return ["dados" => false];
         }
+    }
 
+    //seleciona todos os usuários da tabela usuário
+    public function selectAllUsersPagination($limit, $offset) 
+    {
+        try {
+            $sql = <<<SQL
+                    SELECT usuario.*, bairro.descrbairro, cidade.descrcidade, estado.descrestado
+                    FROM usuario 
+                    INNER JOIN bairro ON (usuario.idbairro = bairro.idbairro)
+                    INNER JOIN cidade ON (bairro.idcidade = cidade.idcidade)
+                    INNER JOIN estado ON (cidade.idestado = estado.idestado)
+                    ORDER BY iduser
+                    OFFSET :offset
+                    LIMIT :limit  
+                SQL;
+            
+            $stmt = Database::prepare($sql);
+            $stmt->execute([
+                ":limit" => $limit,
+                ":offset" => $offset
+            ]);
+
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
     }
 
     // retorna usuário com o id passado por parâmetro
@@ -59,27 +92,51 @@ class Usuario extends Database
     public function selectPerfilPublicoById($userId)
     {
         try {
-            // tá feio :(
+            // general user info
             $sql = <<<SQL
-                    SELECT userinfo.iduser, round(avg(notaavaliacao), 1) AS mediaavaliacao, count(contrt.idcontrato) AS numcontrato, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
-                    FROM (SELECT usr.iduser, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
+                    SELECT userinfo.iduser, round(avg(notaavaliacao), 1) AS mediaavaliacao, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser, descrbairro, descrcidade, siglaestado
+                    FROM (SELECT usr.iduser, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser, descrbairro, descrcidade, siglaestado
                             FROM usuario AS usr
                             INNER JOIN userespec AS useres ON (useres.iduser = usr.iduser)
                             INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
+                            INNER JOIN bairro AS bair ON (usr.idbairro = bair.idbairro)
+                            INNER JOIN cidade AS cid ON (bair.idcidade = cid.idcidade)
+                            INNER JOIN estado AS es ON (cid.idestado = es.idestado)
                             WHERE usr.iduser = :id
-                            GROUP BY usr.iduser, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
                     ) AS userinfo
                     LEFT JOIN contrato AS contrt ON (userinfo.iduser = contrt.idcontratado)
                     LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    WHERE (contrt.idstatus = 4)
-                    GROUP BY userinfo.iduser, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser
+                    GROUP BY userinfo.iduser, nomeuser, emailuser, cpfuser, imguser, nascimentouser, telefoneuser, biografiauser, descrbairro, descrcidade, siglaestado
                 SQL;
             $stmt = Database::prepare($sql);
             $stmt->execute([
                 ":id" => $userId
             ]);
+            $generalInfo = $stmt->fetch();
 
-            $result = $stmt->fetch();
+            // especializacoes
+            $especializacoes = $this->selectEspecsPerfPublicoById($userId);
+            $descrEspecs = [];
+            foreach ($especializacoes as $espec) {
+                $descrEspecs[] = $espec["descrespec"];
+            }
+            $stringEspecs = ucfirst(implode(", ", $descrEspecs));
+
+            // avaliacoes
+            $avals = $this->selectAvaliacoesById($userId);
+            $numAval = count($avals);
+            
+            [$bairro, $cidade, $estado] = [ucfirst($generalInfo["descrbairro"]), ucfirst($generalInfo["descrcidade"]), strtoupper($generalInfo["siglaestado"])];
+            $localizacao = "{$bairro}, {$cidade} - {$estado}";
+
+            $generatedData = [
+                "especializacoes" => $especializacoes,
+                "stringEspecs" => $stringEspecs,
+                "avaliacoes" => $avals,
+                "numAval" => $numAval,
+                "localizacao" => $localizacao,
+            ];
+            $result = array_merge($generalInfo, $generatedData);
 
             return $result;
         } catch (PDOException $e) {
@@ -96,7 +153,7 @@ class Usuario extends Database
     {
         try {
             $sql = <<<SQL
-                    SELECT iduser, isadminuser
+                    SELECT iduser, isadminuser, imguser, nomeuser
                     FROM usuario 
                     WHERE (emailuser = :email) AND (senhauser = :senha)
                 SQL;
@@ -160,13 +217,12 @@ class Usuario extends Database
                     FROM usuario AS usr
                     INNER JOIN userespec AS useres ON (usr.iduser = useres.iduser)
                     INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
-                    LEFT JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
+                    LEFT JOIN contrato AS contrt ON (espec.idespec = contrt.idespec AND contrt.idcontratado = :id)
                     LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    WHERE (usr.iduser = :id) AND (contrt.idstatus = 4)
+                    WHERE (usr.iduser = :id)
                     GROUP BY espec.idespec, descrespec
                     ORDER BY mediaavaliacao DESC NULLS LAST
                 SQL;
-
             $stmt = Database::prepare($sql);
             $stmt->execute([
                 ":id" => $userId
@@ -183,14 +239,14 @@ class Usuario extends Database
     }
 
 
-    public function selectAvaliacoesById($userId, $filterNota = "DESC")
+    public function selectAvaliacoesById($userId)
     {
         try {
             $sql = <<<SQL
                     SELECT usr.iduser, usr.nomeuser, espec.idespec, descrespec, imguser, comentarioavaliacao, dataavaliacao, round(notaavaliacao, 1) as notaavaliacao
                     FROM avaliacao AS aval
                     INNER JOIN contrato AS contrt ON (aval.idcontrato = contrt.idcontrato)
-                    INNER JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
+                    LEFT JOIN especializacao AS espec ON (contrt.idespec = espec.idespec)
                     INNER JOIN usuario AS usr ON (contrt.idcontratante = usr.iduser)
                     WHERE (contrt.idcontratado = :id) AND (contrt.idstatus = 4)
                     ORDER BY aval.notaavaliacao DESC
@@ -214,7 +270,7 @@ class Usuario extends Database
     {
         try {
             $sql = <<<SQL
-                  SELECT contrt.idcontrato, idcontratante, json_agg(diacontrato) AS diascontrato, statcontrt.idstatus, contrt.isavaliado, timecriacaocontrato, timefinalizacaocontrato, descrespec, usr.iduser, nomeuser, imguser
+                  SELECT contrt.idcontrato, idcontratante, contrt.descrcontrato, json_agg(diacontrato) AS diascontrato, statcontrt.idstatus, contrt.isavaliado, timecriacaocontrato, timefinalizacaocontrato, descrespec, usr.iduser, nomeuser, imguser
                   FROM contrato AS contrt
                   INNER JOIN diacontrato AS diacontrt ON (contrt.idcontrato = diacontrt.idcontrato)
                   INNER JOIN statuscontrato AS statcontrt ON (contrt.idStatus = statcontrt.idStatus)
@@ -257,7 +313,7 @@ class Usuario extends Database
     {
         try {
             $sql = <<<SQL
-                    SELECT contrt.idcontrato, idcontratado, json_agg(diacontrato) AS diascontrato, statcontrt.idstatus, contrt.isavaliado, timecriacaocontrato, timefinalizacaocontrato, descrespec, usr.iduser, nomeuser, imguser
+                    SELECT contrt.idcontrato, idcontratado, contrt.descrcontrato, json_agg(diacontrato) AS diascontrato, statcontrt.idstatus, contrt.isavaliado, timecriacaocontrato, timefinalizacaocontrato, descrespec, usr.iduser, nomeuser, imguser
                     FROM contrato AS contrt
                     INNER JOIN diacontrato AS diacontrt ON (contrt.idcontrato = diacontrt.idcontrato)
                     INNER JOIN statuscontrato AS statcontrt ON (contrt.idStatus = statcontrt.idStatus)
@@ -342,12 +398,82 @@ class Usuario extends Database
             return ["dados" => false];
         }
     }
+
+    public function selectEstadoBySigla($siglaEstado) {
+        try {
+            $sql = <<<SQL
+                    SELECT * 
+                    FROM estado 
+                    WHERE siglaestado = :sigla
+                SQL;
+
+            $stmt = Database::prepare($sql);
+            $stmt->execute([
+                ":sigla" => $siglaEstado
+            ]);
+
+            $result = $stmt->fetch();
+            return $result;
+        } catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+    }
+
+    public function selectCidadeByNome($nomeCidade) {
+        try {
+            $sql = <<<SQL
+                    SELECT * 
+                    FROM cidade 
+                    WHERE descrcidade = :nome
+                SQL;
+
+            $stmt = Database::prepare($sql);
+            $stmt->execute([
+                ":nome" => $nomeCidade
+            ]);
+
+            $result = $stmt->fetch();
+            return $result;
+        } catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+    }
+
+    public function selectBairroByNome($nomeBairro) {
+        try {
+            $sql = <<<SQL
+                    SELECT * 
+                    FROM bairro 
+                    WHERE descrbairro = :nome
+                SQL;
+
+            $stmt = Database::prepare($sql);
+            $stmt->execute([
+                ":nome" => $nomeBairro
+            ]);
+
+            $result = $stmt->fetch();
+            return $result;
+        } catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+    }
+
     //!SECTION - SELECTS
 
 
     //SECTION - INSERTS
     // insere um usuário com as informações passadas por parâmetro
-    public function insertBasicInfo($nome, $email, $cpf, $telefone, $senha)
+    public function insertBasicInfo($nome, $email, $cpf, $telefone, $senha, $bairro, $nascimento)
     {
         try {
             // verifica se já existe um usuário cadastro com esse email
@@ -358,14 +484,16 @@ class Usuario extends Database
             // se não existem usuários cadastrados com esse email, segue para insert
             if ($verifyEmail->rowCount() < 1) {
                 // insert do novo usuário
-                $insertSQL = "INSERT INTO usuario(nomeuser, emailuser, cpfuser, telefoneuser, senhauser) VALUES (:nome, :email, :cpf, :telefone, :senha)";
+                $insertSQL = "INSERT INTO usuario(nomeuser, emailuser, cpfuser, telefoneuser, senhauser, idbairro, nascimentouser) VALUES (:nome, :email, :cpf, :telefone, :senha, :bairro, :nascimento)";
                 $insertSTMT = Database::prepare($insertSQL);
                 $insertSTMT->execute([
                     ":nome" => $nome,
                     ":email" => $email,
                     ":cpf" => $cpf,
                     ":telefone" => $telefone,
-                    ":senha" => $senha
+                    ":senha" => $senha,
+                    ":bairro" => $bairro,
+                    ":nascimento" => $nascimento
                 ]);
 
                 return ["dados" => true];
@@ -420,12 +548,58 @@ class Usuario extends Database
             return ["dados" => false];
         }
     }
+
+    public function insertCidade($nomeCidade, $idEstado) {
+        try {
+            $insertSQL = <<<SQL
+                        INSERT INTO cidade (descrCidade, idEstado) 
+                        VALUES (:nomeCidade, :idEstado)
+                    SQL;
+                $insertSTMT = Database::prepare($insertSQL);
+                $insertSTMT->execute([
+                    ":nomeCidade" => $nomeCidade,
+                    ":idEstado" => $idEstado
+                ]);
+
+                return ["dados" => true];
+        }
+        catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+    }
+
+    public function insertBairro($nomeBairro, $idCidade) {
+        try {
+            $insertSQL = <<<SQL
+                        INSERT INTO bairro (descrBairro, idCidade) 
+                        VALUES (:nomeBairro, :idCidade)
+                    SQL;
+                $insertSTMT = Database::prepare($insertSQL);
+                $insertSTMT->execute([
+                    ":nomeBairro" => $nomeBairro,
+                    ":idCidade" => $idCidade
+                ]);
+
+                return ["dados" => true];
+        }
+        catch (PDOException $e) {
+            echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+            exit();
+
+            return ["dados" => false];
+        }
+    }
+
+
     //!SECTION - INSERTS
 
 
     //SECTION - UPDATES
     // altera as informações de um usuário com id para os dados recebidos por parâmetro
-    public function updateInfo($userId, $nome, $email, $imgBase64, $nascimento, $telefone, $bio)
+    public function updateInfo($userId, $nome, $email, $imgPath, $nascimento, $telefone, $bio)
     {
         try {
             // verifica se não existe nenhum email idêntico cadastrado (desconsiderando o email do próprio usuário)
@@ -438,7 +612,7 @@ class Usuario extends Database
 
             if ($verifySTMT->rowCount() < 1) {
                 // SQLs diferentes para não deixar a foto vazia no banco de dados
-                if ($imgBase64 != "") {
+                if ($imgPath != null) {
                     $sql = <<<SQL
                         UPDATE usuario
                         SET nomeuser = :nome, emailuser = :email, imguser = :img, nascimentouser = :nascimento, telefoneuser = :telefone, biografiauser = :bio
@@ -450,7 +624,7 @@ class Usuario extends Database
                         ":id" => $userId,  // INT
                         ":nome" => $nome,  // STRING
                         ":email" => $email,  // STRING
-                        ":img" => $imgBase64,  // STRING
+                        ":img" => $imgPath,  // STRING
                         ":nascimento" => $nascimento,  // ?
                         ":telefone" => $telefone,  // STRING
                         ":bio" => $bio

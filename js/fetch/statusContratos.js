@@ -2,18 +2,20 @@ async function aceitarContrato(event) {
     let btn = event.target;
     let contratoEl = findClosestAncestorByClass(btn, "id-contrato");
 
-    // moveContrato(contratoEl, "#")
+    contratoEl.remove();
     
-    // deleta os botões de "aceitar" e "recusar" do card
-    let buttons = contratoEl.querySelector(".contrato-buttons");
-    buttons.textContent = "";
+    // moveContrato(contratoEl, "emAndamentoContratado");
+    
+    // // deleta os botões de "aceitar" e "recusar" do card
+    // let buttons = contratoEl.querySelector(".contrato-buttons");
+    // buttons.textContent = "";
 
-    // adiciona o botão de "finalizar contrato" no card
-    let btnFinalizar = document.createElement("button");
-    btnFinalizar.classList.add("btn", "btn-green");
-    btnFinalizar.textContent = "O contrato foi realizado!";
-    btnFinalizar.addEventListener("click", solicitarFimContrato);
-    buttons.appendChild(btnFinalizar);
+    // // adiciona o botão de "finalizar contrato" no card
+    // let btnFinalizar = document.createElement("button");
+    // btnFinalizar.classList.add("btn", "btn-green");
+    // btnFinalizar.textContent = "O contrato foi realizado!";
+    // btnFinalizar.addEventListener("click", solicitarFimContrato);
+    // buttons.appendChild(btnFinalizar);
 
     
 
@@ -23,7 +25,7 @@ async function aceitarContrato(event) {
     let data = await updateStatusContrato(idContrato, idStatus);
 
     if (data.dados) {
-        createToast(
+        setOpenToast(
             "Status do contrato atualizado",
             "O contrato foi aceito com sucesso! Agora é hora de pôr a mão na massa",
             "success-notify",
@@ -31,7 +33,7 @@ async function aceitarContrato(event) {
         );
         window.location.reload();
     } else {
-        createToast(
+        setOpenToast(
             "Erro na operação",
             "Não foi possível atualizar o status do contrato, recarregue a página e tente novamente",
             "failure-notify",
@@ -51,7 +53,7 @@ async function recusarContrato(event) {
     let data = await updateStatusContrato(idContrato, idStatus);
 
     if (data.dados) {
-        createToast(
+        setOpenToast(
             "Status do contrato atualizado",
             "O contrato foi recusado com sucesso",
             "success-notify",
@@ -59,7 +61,7 @@ async function recusarContrato(event) {
         );
         window.location.reload();
     } else {
-        createToast(
+        setOpenToast(
             "Erro na operação",
             "Não foi possível atualizar o status do contrato, recarregue a página e tente novamente",
             "failure-notify",
@@ -79,7 +81,7 @@ async function solicitarFimContrato(event) {
     let data = await updateStatusContrato(idContrato, idStatus);
 
     if (data.dados) {
-        createToast(
+        setOpenToast(
             "Status do contrato atualizado",
             "Uma solicitação foi enviada ao próximo usuário",
             "success-notify",
@@ -87,7 +89,7 @@ async function solicitarFimContrato(event) {
         );
         window.location.reload();
     } else {
-        createToast(
+        setOpenToast(
             "Erro na operação",
             "Não foi possível atualizar o status do contrato, recarregue a página e tente novamente",
             "failure-notify",
@@ -107,7 +109,7 @@ async function aceitarFimContrato(event) {
     let data = await updateStatusContrato(idContrato, idStatus);
 
     if (data.dados) {
-        createToast(
+        setOpenToast(
             "Status do contrato atualizado",
             "O contrato foi finalizado com sucesso",
             "success-notify",
@@ -115,7 +117,7 @@ async function aceitarFimContrato(event) {
         );
         window.location.reload();
     } else {
-        createToast(
+        setOpenToast(
             "Erro na operação",
             "Não foi possível atualizar o status do contrato, recarregue a página e tente novamente",
             "failure-notify",
@@ -145,7 +147,13 @@ async function updateStatusContrato(idContrato, idStatus) {
     }
 }
 
-function moveContrato(contrato, divId) {
+function moveContrato(contrato, divId, idStatus) {
+    switch (divId) {
+        case 2:
+            divId = "emAndamentoContratado";
+            break;
+
+    }
     let targetAccordion = document.querySelector(`#${divId}`);
     let isEmptyAccordion = targetDiv.querySelector(".empty-accordion");
 

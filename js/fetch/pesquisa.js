@@ -5,6 +5,7 @@ let searchBox = document.querySelector("#searchBox");
 let searchButton = document.querySelector("#searchButton");
 let searchResult = document.querySelector("#searchResult");
 let form = searchBox.form;
+let filterTable;
 
 // pagination
 let itemsNumToBeDisplayed = 2;
@@ -19,6 +20,10 @@ for (input of document.querySelectorAll(".search-filter")) {
         offset = 0;
         search();
     };
+}
+
+searchBox.onclick = () => {
+    form.classList.add("active");
 }
 
 // search button clicked
@@ -38,6 +43,7 @@ async function search() {
         if (data) {
             if (data.dados) {
                 let { dados } = data;
+                console.log(dados);
 
                 constructSearchCards(dados);
             } else {
@@ -60,11 +66,11 @@ async function ajaxSearch() {
     let limit = itemsNumToBeDisplayed + 1;
 
     // converts formData to x-www-form-urlencoded
-    formData = new URLSearchParams(new FormData(form)).toString();
+    formData = new FormData(form);
+    filterTable = formData.get("filterTable");
 
     loading();
     try {
-        console.log("new request being made");
         let response = await fetch(
             `./php/post/pesquisa.php?limit=${limit}&offset=${offset}`,
             {
@@ -73,11 +79,10 @@ async function ajaxSearch() {
                     "Content-Type": "application/x-www-form-urlencoded",
                 },
                 signal: searchAbortControl.signal,
-                body: formData,
+                body: new URLSearchParams(formData).toString(),
             }
         );
         let data = await response.json();
-        console.log(data);
 
         clearLoading();
 
@@ -94,10 +99,15 @@ function constructSearchCards(dados) {
     if (dados.length > 0) {
         for (let i = 0; i < dados.length && i < itemsNumToBeDisplayed; i++) {
             let object = dados[i];
-            let profCard = createUserCard(object);
-            profCard.style.animationDelay = `${i * 0.2}s`;
+            let searchCard;
+            if (filterTable === "profissao") {
+                searchCard = createProfCard(object);
+            } else if (filterTable === "usuario") {
+                searchCard = createUserCard(object);
+            }
+            searchCard.style.animationDelay = `${i * 0.2}s`;
 
-            searchResult.append(profCard);
+            searchResult.append(searchCard);
         }
 
         // in case one item above itemsToBeDisplayed has returned from search, the user can add more items to search
@@ -109,11 +119,57 @@ function constructSearchCards(dados) {
     }
 }
 
+function createProfCard(prof) {
+    let card = document.createElement("div");
+    card.classList.add("card", "card-hover", "card-pesquisa", "py-1");
+    let {
+        idprof,
+        imgprof,
+        especsprof,
+        descrprof,
+        mediaavaliacao
+    } = prof;
+
+    card.innerHTML = `
+        <div class="search-profile-pic ps-3">
+            <img src="${
+                imgprof || "images/temp/default-pic.png"
+            }" alt="Imagem de perfil">
+        </div>
+        <div class="card-body">
+            <div class="card-title">
+                <h6>${capitalizeFirstLetter(descrprof)}</h6>
+                <span class="badge-avaliacao ${
+                    mediaavaliacao > 4.5 ? "avaliacao-otima" : "avaliacao-media"
+                }">
+                    <!-- STAR ICON -->
+                    <ion-icon name="star"></ion-icon>
+                    ${mediaavaliacao == null ? "---" : mediaavaliacao}
+                </span>
+            </div>
+            <div class="card-text">
+                <p class="mb-1">Especializações:</p>
+                <div class="contract-dates">
+                        ${(function generateEspecChips(especs){
+                            let string = "";
+                            for (espec of especs) {
+                                string += `<div class="date-chip">${capitalizeFirstLetter(espec)}</div>`;
+                            }
+                            return string;
+                        })(especsprof)}
+                </div>
+
+                <a href="profissao.php?id=${idprof}"><span class="clickable-card"></span></a>
+            </div>
+        </div>`;
+
+    return card;
+}
+
 // returns DOM element for a user card
 function createUserCard(user) {
     let card = document.createElement("div");
     card.classList.add("card", "card-hover", "card-pesquisa");
-    console.log(user);
     let {
         iduser,
         imguser,

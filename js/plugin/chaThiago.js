@@ -2,12 +2,14 @@
 
 class chaThiago {
     constructor(elementId, idUser, contacts) {
+        this.liveChat = true;
+
         // data
         this.idSender = idUser;
         this.contacts = {};
-        this.currContactGuid = null;
+        this.currContactId = null;
         this.maxMessagesPerFetch = 50;
-        this.socket = this.setChatSocket();
+        this.socket = this.liveChat ? this.setChatSocket() : null;
         
         // HTML elements
         this.messageLoadingRing = this.createMessageLoading();
@@ -17,7 +19,7 @@ class chaThiago {
     }
 
     setChatSocket() {
-        let socket = io('http://localhost:3000', {
+        let socket = io('https://contratai-chat.up.railway.app', {
             transports: ['websocket'],
             withCredentials: true,
         });
@@ -40,14 +42,14 @@ class chaThiago {
 
             this.addContactMessages(idSender, [ msg ]);
             
-            if (idSender === this.getCurrReceiverId()) {
+            if (parseInt(idSender) === parseInt(this.currContactId)) {
                 this.appendNewMessages([ msg ]);
             }
         });
 
         socket.sendMessage = (message, timestamp) => {
             socket.emit("sendMessage", {
-                idReceiver: this.getCurrReceiverId(),
+                idReceiver: this.currContactId,
                 message: message,
                 timestamp: timestamp
             });
@@ -57,7 +59,7 @@ class chaThiago {
         //     allowedStatus = ["online", "offline", "digitando..."];
         //     if (allowedStatus.includes(status)) {
         //         if (status === "digitando...") {
-        //             socket.emit("digitando", this.getCurrReceiverId());
+        //             socket.emit("digitando", this.currContactId);
         //         } else {
         //             socket.emit(status);
         //         }
@@ -117,12 +119,13 @@ class chaThiago {
             contactDiv.id = guid;
             contactDiv.classList.add("contact");
 
-            this.contacts[guid] = {
+            this.contacts[idUser] = {
                 "userName": userName,
-                "idUser": idUser,
+                "elementGuid": guid,
                 "imgUser": imgUser,
                 "messages": [],
-                "offset": 0
+                "offset": 0,
+                "fetched": false
             };
 
             // ADD LAST SENT MESSAGE
@@ -142,12 +145,12 @@ class chaThiago {
                 }
 
                 contactDiv.classList.add("active");
-                await this.changeContact(contactDiv.id);
+                await this.changeContact(this.getContactUserIdByGuid(contactDiv.id));
             })
 
             contactDiv.appendChild(userImg);
             contactDiv.appendChild(textDiv);
-            sidebar.prepend(contactDiv);
+            sidebar.append(contactDiv);
         }
 
         return sidebar;
@@ -162,7 +165,7 @@ class chaThiago {
             messagingForm.setAttribute("action", "javascript:void(0);");
 
             const emojiBtn = document.createElement("button");
-            emojiBtn.innerHTML = '<i class="fa-regular fa-face-grin-tongue-wink"></i>';
+            emojiBtn.innerHTML = '<i class="fa-solid fa-paperclip"></i>';
 
             const messageInput = document.createElement("input");
             messageInput.classList.add("message-input");
@@ -178,13 +181,15 @@ class chaThiago {
                 const input = event.currentTarget.querySelector("input");
                 const message = input.value;
                 
-                if (message && this.currContactGuid) {
-                    const idUser = this.getCurrReceiverId();
+                if (message && this.currContactId) {
+                    const idUser = this.currContactId;
                     const timestamp = dayjs().format('YYYY-MM-DD HH:mm:ss');
                     const msg = { text: message, timestamp: timestamp, sent: true };
                     this.addContactMessages(idUser, [ msg ]);
                     this.appendNewMessages([ msg ]);
-                    this.socket.sendMessage(message, timestamp);
+                    if (this.liveChat) {
+                        this.socket.sendMessage(message, timestamp);
+                    }
                     input.value = "";
                     saveMessageDB(idUser, message, timestamp);
                 }
@@ -199,15 +204,15 @@ class chaThiago {
     }
 
     async changeContact(contactId) {
-        if (contactId === this.currContactGuid) {
+        console.log(this.contacts);
+        if (contactId === this.currContactId) {
             return;
         }
         
         this.addMessageForm();
 
-        let { idUser, userName, imgUser, messages, offset} = this.contacts[contactId];
-        this.currContactGuid = contactId;
-        console.log(idUser, userName, imgUser, messages);
+        let { elementGuid, userName, imgUser, messages, offset, fetched } = this.contacts[contactId];
+        this.currContactId = contactId;
 
         const img = document.createElement("img");
         img.src = imgUser ? imgUser : "images/temp/default-pic.png";
@@ -222,14 +227,18 @@ class chaThiago {
         this.clearMessages();
         this.appendNewMessages(messages);
 
-        this.messageLoading();
-        let fetchMessages = await getContactMessages(idUser, this.maxMessagesPerFetch, offset);
-        this.clearMessageLoading();
+        if (!fetched) {
+            this.messageLoading();
+            let fetchMessages = await getContactMessages(contactId, this.maxMessagesPerFetch, offset);
+            this.contacts[contactId]["fetched"] = true;
+            this.clearMessageLoading();
 
-        this.addContactMessages(idUser, fetchMessages)
-        this.appendNewMessages(fetchMessages);
-        
-        this.scrollToBottom();
+            this.addContactMessages(contactId, fetchMessages)
+            this.appendNewMessages(fetchMessages);
+            
+            this.scrollToBottom();
+        }
+
     }
 
     appendNewMessages(messagesArr) {
@@ -244,9 +253,6 @@ class chaThiago {
             message.textContent = text;
 
             message.classList.add(sent ? "sent" : "received");
-
-            // add timestamp styling
-            console.log(`Text: ${text}\nTime: ${timestamp}\nSent: ${sent}`);
             
             messagesDiv.appendChild(message);
         }
@@ -266,14 +272,14 @@ class chaThiago {
         this.conversationBox.querySelector(".messages").innerHTML = "";
     }
 
-    getCurrReceiverId() {
-        return this.contacts[this.currContactGuid]["idUser"];
+    getCurrReceiverGuid() {
+        return this.contacts[this.currContactId]["elementGuid"];
     }
 
-    getContactGuidByUserId(idUser) {
-        for (let guid in this.contacts) {
-            if (this.contacts[guid]["idUser"] === idUser) {
-                return guid;
+    getContactUserIdByGuid(guid) {
+        for (let idUser in this.contacts) {
+            if (this.contacts[idUser]["elementGuid"] === guid) {
+                return idUser;
             }
         }
 
@@ -282,11 +288,9 @@ class chaThiago {
 
     // what if user is not in this.contacts? (socket.io)
     addContactMessages(idUser, messagesArr) {
-        const contactGuid = this.getContactGuidByUserId(idUser);
-
-        if (contactGuid && messagesArr.length !== 0) {
-            this.contacts[contactGuid]["messages"] = [...this.contacts[contactGuid]["messages"], ...messagesArr];
-            this.contacts[contactGuid]["offset"] += messagesArr.length;
+        if (idUser && messagesArr.length !== 0) {
+            this.contacts[idUser]["messages"] = [...this.contacts[idUser]["messages"], ...messagesArr];
+            this.contacts[idUser]["offset"] += messagesArr.length;
         }
     }
 
@@ -312,11 +316,6 @@ class chaThiago {
 
 (async () => {
     const [idUser, contacts] = await getContacts();
-
-    const newContact = await getNewContact();
-    if (newContact) {
-        contacts.push(newContact);
-    }
 
     console.log(contacts);
     const chat = new chaThiago("#chat", idUser, contacts);
@@ -346,8 +345,24 @@ async function saveMessageDB(idReceiver, message, timestamp) {
 }
 
 async function getContacts() {
+    // checks in URL querystring for new contact
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+      });
+    let idReceiver = parseInt(params.newChatId);
+
+    let queryString = "";
+    if (idReceiver) {
+        queryString = new URLSearchParams({
+            "newUserId": idReceiver
+        });
+
+        // replace querystring from browser URL
+        window.history.replaceState({}, document.title, "/" + "chat.php");
+    }
+
     let response = await fetch(
-        `./php/post/chat/getConversas.php`,
+        `./php/post/chat/getConversas.php?` + queryString,
         {
             method: "GET",
             headers: {
@@ -361,39 +376,6 @@ async function getContacts() {
     
     let { dados } = data;
     return [ dados.idUser, dados.contacts ];
-}
-
-async function getNewContact() {
-    const params = new Proxy(new URLSearchParams(window.location.search), {
-        get: (searchParams, prop) => searchParams.get(prop),
-      });
-    let idReceiver = params.newChatId;
-
-    if (idReceiver) {
-        const queryString = new URLSearchParams({
-            idDestinatario: idReceiver
-        })
-    
-        // replace querystring
-        window.history.replaceState({}, document.title, "/" + "chat.php");
-        console.log(queryString);
-    
-        let response = await fetch(
-            `./php/post/chat/getNovoUsuario.php?` + queryString,
-            {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                credentials: "same-origin"
-            }
-        );
-        let data = await response.json();
-    
-        return data.dados;
-    } else {
-        return null;
-    }
 }
 
 async function getContactMessages(idReceiver, limit, offset) {

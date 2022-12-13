@@ -1,4 +1,4 @@
-<div class="container align-items-center mb-5">
+<div class="container align-items-center mb-5 hidden">
     <div class="mb-4">
         <h2>Maiores categorias</h2>
         <h6 class="text-muted">Veja quais são as categorias com mais usuários cadastrados</h6>
@@ -11,13 +11,13 @@
             $profsAv = $profissaoClass->selectMaisCadastros($limit = 6);
             
             foreach ($profsAv as $prof): 
-                [$idprof, $descrprof, $numuser, $mediaAv] = [$prof["idprof"], $prof["descrprof"], $prof["numuser"], $prof["mediaavaliacao"]];
+                [$idprof, $descrprof, $numuser, $mediaAv, $imgProf] = [$prof["idprof"], $prof["descrprof"], $prof["numuser"], $prof["mediaavaliacao"], $prof["imgprof"]];
         ?>
 
             <!-- CARD PROFISSÃO -->
             <div class="carousel-item active">
                 <div class="card card-categoria rounded-3 shadow-sm">
-                    <img src="images/temp/placeholder-card.jpg" class="card-img-top">
+                    <img src="<?php echoProfissaoImage($imgProf) ?>" class="card-img-top">
                     <div class="badge-avaliacao px-2 <?php echo echoAvaliacaoClass($mediaAv) ?>">
                         <!-- STAR ICON -->
                         <ion-icon name="star"></ion-icon>

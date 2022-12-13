@@ -3,11 +3,11 @@ date_default_timezone_set('America/Sao_Paulo');
 
 // classe que controla a conexão com o banco de dados
 class Database {
-    private static $host = "jelani.db.elephantsql.com";
+    private static $host = "kesavan.db.elephantsql.com";
     private static $port = "5432";
-    private static $dbname = "vrhxmjgv";
-    private static $user = "vrhxmjgv";
-    private static $password = "7Y_li5Y6yiSmQ7yupEe9B1UJ0F49Lfdw";
+    private static $dbname = "aphiampg";
+    private static $user = "aphiampg";
+    private static $password = "cubgU9swQ4jDFG6hJUKzT_C5Z7VeO_NL";
     private static $conn;  // connection
 
     public static function getInstance() {

@@ -32,9 +32,6 @@
             <li class="nav-item">
               <a class="nav-link" href="sobre.php">Sobre</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="ajuda.php">Ajuda</a>
-            </li>
           </ul>
           <div class="header-buttons d-flex justify-content-end align-items-center gap-3 flex-grow 1">
             <a type="button" class="btn btn-login px-2" data-bs-toggle="modal" data-bs-target="#modal-login">Login</a>
@@ -47,3 +44,7 @@
 </header>
 
 <?php include("components/modal-login.php"); ?>
+
+<script>
+    headerActiveLinks();
+</script>

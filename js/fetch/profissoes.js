@@ -84,6 +84,32 @@ async function fetchGetEspecs(profId) {
     }
 }
 
+async function fetchGetProf(profId) {
+    if (especsAbortControl) {
+        especsAbortControl.abort();
+    }
+    especsAbortControl = new AbortController();
+
+    try {
+        let response = await fetch(`./php/post/profissao/getProf.php`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            signal: especsAbortControl.signal,
+            body: `profId=${profId}`,
+        });
+        let data = await response.json();
+        clearLoading();
+
+        if (data.dados) {
+            return data.dados;
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 async function fetchAddEspec(profId, descrProf, especId, descrEspec) {
     // aborts previous fetch if it exists and creates a new one
     if (especsAbortControl) {

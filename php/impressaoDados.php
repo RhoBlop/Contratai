@@ -28,6 +28,16 @@ function echoFullDate($date)
     echo $formatter->format($dateTime);
 }
 
+function returnFullDate($date)
+{
+    $locale = "pt_BR";
+    $dateType = IntlDateFormatter::LONG; //type of date formatting
+    $timeType = IntlDateFormatter::NONE; //type of time formatting setting to none, will give you date itself
+    $formatter = new IntlDateFormatter($locale, $dateType, $timeType);
+    $dateTime = new DateTime($date);
+    return $formatter->format($dateTime);
+}
+
 // 12 de out. de 2022
 function echoMediumDate($date)
 {
@@ -43,6 +53,13 @@ function echoMediumDate($date)
 function echoProfileImage($img)
 {
     echo is_null($img) ? "images/temp/default-pic.png" : $img;
+}
+
+
+//mesma ideia da impressão de foto de perfil, só que com os banners de carrossel das profissões 
+function echoProfissaoImage($img) 
+{
+    echo is_null($img) ? "images/temp/placeholder-card.jpg" : $img;
 }
 
 // imprime a classe de acordo com a nota da avaliação

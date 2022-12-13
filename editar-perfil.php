@@ -1,12 +1,16 @@
-<?php session_start() ?>
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
     <head>
         <?php require("components/head.php") ?>
-        <script src="js/visualizarImg.js"></script>
     </head>
     <body>
-        <?php include ("components/header-auth.php") ?>
+        <?php
+            include ("components/header-auth.php");
+            $user = $usuarioClass->selectBasicInfoById($_SESSION["iduser"]);
+        ?>
 
         <main>
             <div class="container p-3 my-3">
@@ -46,7 +50,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="telefone" class="form-label">Telefone</label>
-                                <input type="text" class="form-control" id="telefone" name="telefone" value="<?php echoDadosNotNull($user["telefoneuser"], null) ?>">
+                                <input type="text" class="form-control" id="telefone" name="telefone" placeholder="(__) ____-____" required oninput="setMask(this, maskTelefone)" maxlength="15" value="<?php echoDadosNotNull($user["telefoneuser"], null) ?>">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="nascimento" class="form-label">Data de Nascimento</label>
@@ -58,7 +62,7 @@
                             </div>
 
                             <!-- div para comunicação com usuário -->
-                            <div id="feedbackUsuario"></div>
+                            <div id="feedbackUsuario" class="feedbackUsuario"></div>
                             
                             <div class="buttons d-flex justify-content-end align-items-center py-3">
                                 <a href="perfil.php" class="btn btn-link me-3">Cancelar</a>

@@ -1,13 +1,17 @@
-<?php session_start() ?>
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
     <?php require("components/head.php") ?>
 </head>
 
 <body>
-    <?php include("components/header-auth.php") ?>
+    <?php 
+        include("components/header-auth.php");
+        $user = $usuarioClass->selectBasicInfoById($_SESSION["iduser"]);
+    ?>
 
     <main>
         <div class="container p-3 my-3 mb-5">

@@ -1,6 +1,22 @@
 window.addEventListener("DOMContentLoaded", (event) => {
     let current = location.pathname.replace(/\//g, "");
 
+    //linka da paginação
+    let pagination = document.querySelector("#pagination");
+    if (pagination) {
+        let links = document.querySelectorAll(".page-item");
+
+        for (link of [...links]) {
+            if (link.getAttribute("href").includes(current)) {
+                link.classList.add("active");
+            }
+        }
+    }
+});
+
+function sidebarActiveLinks() {
+    let current = location.pathname.replace(/\//g, "");
+
     // links da sidebar na tela de perfil
     let sidebar = document.querySelector("#sidebar");
     if (sidebar) {
@@ -16,6 +32,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
             }
         }
     }
+}
+
+function headerActiveLinks() {
+    let current = location.pathname.replace(/\//g, "");
 
     // links do header não logado
     let header = document.querySelector("#mainHeader");
@@ -37,4 +57,4 @@ window.addEventListener("DOMContentLoaded", (event) => {
             }
         }
     }
-});
+}

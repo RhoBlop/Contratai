@@ -1,20 +1,18 @@
-var idDivFeedback = "#feedbackUsuario";
-
-function loading() {
+function loading(idDivFeedback = "#feedbackUsuario") {
     const feedbackDiv = document.querySelector(idDivFeedback);
     feedbackDiv.style.display = "block";
     feedbackDiv.style.backgroundColor = "#026773";
     feedbackDiv.innerText = "Aguarde um instante...";
 }
 
-function formErro(textErro) {
+function formErro(textErro, idDivFeedback = "#feedbackUsuario") {
     const feedbackDiv = document.querySelector(idDivFeedback);
     feedbackDiv.style.display = "block";
     feedbackDiv.style.backgroundColor = "#cf1c0e";
     feedbackDiv.innerText = textErro;
 }
 
-function hideFeedback() {
+function hideFeedback(idDivFeedback = "#feedbackUsuario") {
     const feedbackDiv = document.querySelector(idDivFeedback);
     feedbackDiv.style.display = "none";
 }
@@ -52,6 +50,45 @@ async function sendCadastro(event) {
         if (data.dados) {
             setOpenModal("#modal-login");
             window.location.href = "index.php";
+        }
+        clearTimeout(timeout);
+    } else {
+        formErro("As senhas não são iguais");
+    }
+}
+
+//função para adicionar usuários (crud), bem parecida com a função de cadastro
+async function insertUsuario(event) {
+    event.preventDefault();
+
+    let senha = document.querySelector("#senha").value;
+    let confirmaSenha = document.querySelector("#confirmaSenha").value;
+
+    if (senha === confirmaSenha) {
+        // transforma os dados do formulário para o formato x-www-form-urlencoded
+        let formData = new URLSearchParams(
+            new FormData(event.target)
+        ).toString();
+
+        loading();
+        timeout = timeoutConnection();
+
+        let response = await fetch("./php/post/user/cadastro.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: formData,
+        });
+        let data = await response.json();
+
+        if (data.erro) {
+            let { erro } = data;
+            formErro(erro);
+        }
+
+        if (data.dados) {
+            window.location.reload();
         }
         clearTimeout(timeout);
     } else {
@@ -116,6 +153,38 @@ async function sendUpdate(event) {
             "success-notify"
         );
         window.location.href = "perfil.php";
+    }
+    clearTimeout(timeout);
+}
+
+async function sendUpdateAdmin(event, idUser) {
+    event.preventDefault();
+
+    let formData = new FormData(event.target);
+    formData.append("idUser", idUser);
+
+    loading(`#feedbackUsuario-${idUser}`);
+    timeout = timeoutConnection();
+
+    let response = await fetch("./php/post/user/updateInfo.php", {
+        method: "POST",
+        credentials: "same-origin",
+        body: formData,
+    });
+    let data = await response.json();
+
+    if (data.erro) {
+        let { erro } = data;
+        formErro(erro, `#feedbackUsuario-${idUser}`);
+    }
+
+    if (data.dados) {
+        setOpenToast(
+            "Edição de perfil",
+            "Edição de perfil realizada com sucesso",
+            "success-notify"
+        );
+        window.location.reload();
     }
     clearTimeout(timeout);
 }
@@ -186,6 +255,22 @@ async function deleteUser() {
 
     if (data.dados) {
         window.location.href = "excluido.php";
+    }
+}
+
+async function deleteUserById(userId) {
+    let response = await fetch("./php/post/user/deletarbyid.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        credentials: "same-origin",
+        body: `userId=${userId}`,
+    });
+    let data = await response.json();
+
+    if (data.dados) {
+        window.location.reload();
     }
 }
 
@@ -271,4 +356,36 @@ async function sendAvaliacao(event) {
         window.location.reload();
     }
     clearTimeout(timeout);
+}
+
+async function deleteNotificacao(event) {
+    let button = event.target.parentNode;
+    let cardNotificacao = findClosestAncestorByClass(button, "card-notificacao");
+    let idNotific = cardNotificacao.dataset.notificacaoid;
+
+    cardNotificacao.remove();
+
+    try {
+        let response = await fetch(`./php/post/contrato/deletarNotificacao.php`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            credentials: "same-origin",
+            body: `notificId=${idNotific}`,
+        });
+        let data = await response.json();
+
+        if (!data.dados) {
+            setOpenToast(
+                "Deletar Notificação",
+                "Erro ao deletar notificação",
+                "failure-notify"
+            );
+
+            window.location.reload();
+        }
+    } catch (error) {
+        console.error(error);
+    }
 }

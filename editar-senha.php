@@ -1,6 +1,8 @@
-<?php session_start() ?>
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
     <head>
         <?php require("components/head.php") ?>
     </head>
@@ -10,9 +12,6 @@
         <main>
             <div class="container p-3 my-3">
                 <div class="row gx-5">
-                    
-                    
-
                     <?php include("components/sidebar.php")?>
 
                     <div class="col-8 px-4" id="settingsContent">
@@ -42,7 +41,7 @@
                             </div>
                             
                             <!-- div para comunicação com usuário -->
-                            <div id="feedbackUsuario"></div>
+                            <div id="feedbackUsuario" class="feedbackUsuario"></div>
                             
                             <div class="buttons d-flex justify-content-end align-items-center py-3">
                                 <a href="perfil.php" class="btn btn-link me-3">Cancelar</a>

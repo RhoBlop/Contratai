@@ -17,7 +17,7 @@
                 <!-- NOTA DA AVALIAÇÃO -->
                 <div class="form-group mb-3">
                     <label for="nota" class="form-label">Nota</label>
-                    <input type="number" name="nota" min="0" max="5" step="0.1" id="nota">
+                    <input type="number" name="nota" min="0" max="5" step="1" id="nota">
                 </div>
                 
                 <!-- DESCRIÇÃO -->
@@ -27,7 +27,7 @@
                 </div>
 
                 <!-- div para comunicação com usuário -->
-                <div id="feedbackUsuario" class="collapse"></div>
+                <div id="feedbackUsuario" class="collapse feedbackUsuario"></div>
   
             </div>
             <div class="modal-footer d-flex justify-content-center">

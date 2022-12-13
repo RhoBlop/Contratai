@@ -1,7 +1,8 @@
-<?php session_start() ?>
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
     <?php require("components/head.php") ?>
 </head>
@@ -59,7 +60,13 @@
                             <!-- CPF -->
                             <div class="form-group mb-2">
                                 <label for="cpf" class="mb-1">CPF</label>
-                                <input type="text" class="form-control form-control-lg" id="cpf" name="cpf" placeholder="___.____.___-__" required oninput="setMask(this, maskCPF)" maxlength="14" onchange  ="validaCPF(this.value)">
+                                <input type="text" class="form-control form-control-lg" id="cpf" name="cpf" placeholder="___.____.___-__" required oninput="setMask(this, maskCPF)" onchange="validaCPF(this.value)" maxlength="14">
+                            </div>
+                            
+                            <!-- NASCIMENTO -->
+                            <div class="form-group mb-2" id="dateWrapper">
+                                <label for="nascimento" class="mb-1">Data de Nascimento</label>
+                                <input type="date" class="form-control form-control-lg" id="nascimento" name="nascimento">
                             </div>
                             
                             <!-- CEP -->
@@ -68,30 +75,31 @@
                                 <input type="text" class="form-control form-control-lg" id="cep" name="cep" placeholder="_____-___" required oninput="setMask(this, maskCEP)" maxlength="9" onchange="pesquisaCEP(this.value);">
                             </div>
 
+
                             <!-- BAIRRO -->
                             <div class="form-group mb-2">
                                 <label for="bairro" class="mb-1">Bairro</label>
-                                <input type="text" class="form-control form-control-lg" id="bairro" name="bairro" placeholder="---" disabled>
+                                <input type="text" class="form-control form-control-lg" id="bairro" name="bairro" placeholder="---" readonly>
                             </div>
 
                             <div class="row">
                                 <!-- CIDADE -->
                                 <div class="form-group mb-2 col-8">
                                     <label for="cidade" class="mb-1">Cidade</label>
-                                    <input type="text" class="form-control form-control-lg" id="cidade" name="cidade" placeholder="---" disabled>
+                                    <input type="text" class="form-control form-control-lg" id="cidade" name="cidade" placeholder="---" readonly>
                                 </div>
     
                                 <!-- ESTADO -->
                                 <div class="form-group mb-2 col-4">
                                     <label for="estado" class="mb-1">Estado</label>
-                                    <input type="text" class="form-control form-control-lg" id="estado" name="estado" placeholder="---" disabled>
+                                    <input type="text" class="form-control form-control-lg" id="estado" name="estado" placeholder="---" readonly>
                                 </div>
                             </div>
 
                         </div>
                         
                         <!-- div para comunicação com usuário -->
-                        <div id="feedbackUsuario" class="collapse"></div>
+                        <div id="feedbackUsuario" class="collapse feedbackUsuario"></div>
 
                         <!-- BOTÕES AÇÃO -->
                         <div class="buttons d-flex justify-content-center align-items-center gap-3 my-3">
@@ -103,7 +111,7 @@
                     </form>
                 </div>
 
-                <div class="cadastro-side-image col-md-6 px-0"><img src="images\teste2.jpg" alt=""></div>
+                <div class="cadastro-side-image col-md-6 px-0"><img src="images\side-cadastro.jpg" alt=""></div>
             </div>
     </main>
 
@@ -113,7 +121,26 @@
     <!-- SCRIPT PARA CEP -->
     <script src="js/buscaCEP.js"></script>
 
+    <!-- VALIDAÇÃO DE CPF -->
     <script src="js/validaCPF.js"></script>
+
+    <!-- SCRIPT PARA CALENDÁRIO -->
+    <script>
+        const dateInputWrapper = document.querySelector("#dateWrapper");
+        let configs = {
+            locale: "pt",
+            mode: "multiple",
+            wrap: true,
+            dateFormat: "Y-m-d",
+            altInput: true,
+            altFormat: "j \\d\\e M, Y",
+            conjunction: " || ",
+            minDate: "today",
+            maxDate: new Date().fp_incr(150),
+        }
+
+        const datePicker = flatpickr(dateInputWrapper, configs);
+    </script>
 
 </body>
 

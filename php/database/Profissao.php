@@ -52,6 +52,31 @@
             }
         }
 
+        public function selectProfById($idprof) { 
+            try {
+                $sql = <<<SQL
+                    SELECT prof.idprof, prof.descrprof, prof.imgprof 
+                    FROM profissao AS prof
+                    WHERE prof.idprof = :id 
+                    ORDER BY descrprof
+                SQL;
+
+                $stmt = Database::prepare($sql);
+                $stmt->execute([
+                    ":id" => $idprof
+                ]);
+
+                $result = $stmt->fetchAll();
+                return [ "dados" => $result ];
+
+            } catch(PDOException $e) {
+                echo json_encode([ "resposta" => "Query SQL Falhou: {$e->getMessage()}" ]);
+                exit();
+                
+                return [ "dados" => false ];
+            }
+        }
+
         public function selectProfissaoMaiorAvaliacao($idprof, $limit = 1) {
             try {
                 $users = <<<SQL
@@ -60,11 +85,11 @@
                     INNER JOIN userEspec AS useres ON (usr.iduser = useres.iduser)
                     INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
                     INNER JOIN profissao AS prof ON (espec.idprof = prof.idprof)
-                    INNER JOIN contrato AS contrt ON (usr.iduser = contrt.idcontratado AND contrt.idespec = espec.idespec)
-                    INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    WHERE (prof.idprof = :id) AND (contrt.idstatus = 4)
+                    LEFT JOIN contrato AS contrt ON (usr.iduser = contrt.idcontratado AND contrt.idespec = espec.idespec AND contrt.idstatus = 4)
+                    LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    WHERE (prof.idprof = :id)
                     GROUP BY usr.iduser, prof.descrprof
-                    ORDER BY mediaavaliacao DESC
+                    ORDER BY mediaavaliacao DESC NULLS LAST
                     LIMIT :limit
                 SQL;
                 
@@ -88,8 +113,8 @@
         public function selectMaisCadastros($limit = 1) {
             try {
                 $sql = <<<SQL
-                    SELECT top.idprof, top.descrprof, top.numuser, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao 
-                    FROM (SELECT count(*) AS numuser, prof.idprof, prof.descrProf
+                    SELECT top.idprof, top.descrprof, top.numuser, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao, top.imgprof 
+                    FROM (SELECT count(*) AS numuser, prof.idprof, prof.descrProf, prof.imgprof
                         FROM profissao AS prof
                         INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
                         INNER JOIN userespec AS useres ON (espec.idespec = useres.idespec)
@@ -101,7 +126,7 @@
                     INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
                     INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                     WHERE (contrt.idstatus = 4)
-                    GROUP BY top.descrprof, top.numuser, top.idprof
+                    GROUP BY top.descrprof, top.numuser, top.idprof, top.imgprof
                     ORDER BY top.numuser DESC, mediaavaliacao DESC;
                 SQL;
                 
@@ -121,8 +146,8 @@
         public function selectMaisContratos($limit = 1) {
             try {
                 $sql = <<<SQL
-                    SELECT top.idprof, top.descrprof, top.numContrato, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
-                    FROM (SELECT prof.idprof, prof.descrprof, count(contrt.idcontrato) AS numContrato
+                    SELECT top.idprof, top.descrprof, top.numContrato, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao, top.imgprof
+                    FROM (SELECT prof.idprof, prof.descrprof, count(contrt.idcontrato) AS numContrato, prof.imgprof
                         FROM profissao AS prof
                         INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
                         INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
@@ -134,7 +159,7 @@
                     INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
                     INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                     WHERE contrt.idstatus = 4
-                    GROUP BY top.descrprof, top.idprof, top.numContrato
+                    GROUP BY top.descrprof, top.idprof, top.numContrato, top.imgprof
                     ORDER BY top.numContrato DESC, mediaavaliacao DESC;
                 SQL;
                 
@@ -155,14 +180,14 @@
         public function selectMaiorAvaliacao($limit = 1) {
             try {
                 $sql = <<<SQL
-                    SELECT prof.idprof, prof.descrprof, count(aval.idavaliacao) AS numAvaliacao, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao
+                    SELECT prof.idprof, prof.descrprof, count(aval.idavaliacao) AS numAvaliacao, round(avg(aval.notaavaliacao), 1) AS mediaavaliacao, prof.imgprof
                     FROM profissao AS prof
                     INNER JOIN especializacao AS espec ON (prof.idprof = espec.idprof)
                     INNER JOIN contrato AS contrt ON (espec.idespec = contrt.idespec)
                     INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
                     WHERE (contrt.idstatus = 4)
                     GROUP BY prof.descrprof, prof.idprof
-                    ORDER BY mediaavaliacao DESC
+                    ORDER BY mediaavaliacao DESC NULLS LAST
                     LIMIT :limit
                 SQL;
                 
@@ -228,6 +253,47 @@
                 exit();
                 
                 return [ "dados" => false ];
+            }
+        }
+
+        public function updateProf($idProf, $descrProf, $imgPath) {
+            try {
+                // SQLs diferentes para não deixar a foto vazia no banco de dados
+                if ($imgPath != null) {
+                    $sql = <<<SQL
+                        UPDATE profissao
+                        SET descrprof = :descrProf,
+                        imgprof = :imgPath
+                        WHERE idprof = :id
+                        SQL;
+
+                    $stmt = Database::prepare($sql);
+                    $stmt->execute([
+                        ":id" => $idProf,
+                        ":descrProf" => $descrProf,
+                        ":imgPath" => $imgPath,  
+                    ]);
+                } else {
+                    $sql = <<<SQL
+                        UPDATE profissao
+                        SET descrprof = :descrProf
+                        WHERE idprof = :id
+                        SQL;
+
+                    $stmt = Database::prepare($sql);
+                    $stmt->execute([
+                        ":id" => $idProf,
+                        ":descrProf" => $descrProf
+                    ]);
+                }
+
+
+                return ["dados" => true];
+            } catch (PDOException $e) {
+                echo json_encode(["resposta" => "Query SQL Falhou: {$e->getMessage()}"]);
+                exit();
+    
+                return ["dados" => false];
             }
         }
     }

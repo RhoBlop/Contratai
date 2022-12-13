@@ -1,29 +1,38 @@
-<?php session_start() ?>
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
     <head>
         <?php require("components/head.php") ?>
     </head>
     <body>
-        <?php include ("components/header-auth.php") ?>
+        <?php include ("components/CRUD/header-admin.php") ?>
 
         <main>
             <div class="container p-3 my-3">
-                <div class="row gx-5">
-                    
-
-                    <?php include("components/sidebar.php")?>
+                <div class="row gx-5 justify-content-center">
 
                     <!-- REVIEW Deixar o template da tabela pronto para depois preenchê-la. -->
-                    <div class="col-10 px-4 flex-column" id="settingsContent">
+                    <div class="col-10 px-4 flex-column">
 
-                    <div class="mb-4">
+                    <div class="mb-4 text-center">
                         <h2>Administração do sistema</h2>
                     </div>
                         <?php 
-                        $users = $usuarioClass->selectAllUsers();
+                            $usersLimit = 10;
+                            $currPage = (isset($_GET["page"]) && is_numeric($_GET["page"])) ? $_GET["page"] : 1;
+                            $allUsers = $usuarioClass->selectAllUsers();
+                            $totalUsers = count($allUsers);
+                            $totalPages = ceil($totalUsers / $usersLimit);
+                            $usersOffset = $usersLimit * ($currPage - 1);
 
-                        ?>
+                            $users = $usuarioClass->selectAllUsersPagination($usersLimit, $usersOffset);
+
+                            //Modal de Inserts
+                            include ("components/CRUD/modal-addUser.php");
+                            ?>
+
                           
                         <div class="crud">
                             <div class="table-title">
@@ -33,8 +42,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="crud-buttons d-flex gap-3 justify-content-end">
-                                            <!-- TODO Adicionar modal para adicionar um usuário-->
-                                            <a href="#add" class="btn btn-success">Adicionar [item]</a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddUser" class="btn btn-success">Adicionar novo usuário</a>
                                         </div>
                                     </div>
                                 </div>
@@ -57,68 +65,11 @@
                                         foreach($users as $user) :
 
                                     ?> 
-                                            <!-- TODO Imprimir todos os dados no modal -->
-                                            <!-- TODO Estilizar o modal -->
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="<?php echo 'modal'. $user['iduser']?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form id="updateUser<?php echo $user['iduser']?>" onsubmit="sendUpdate(event)">
-                                                                <label id="inputFileLabel" for="inputImg" class="rounded-circle mb-4">
-                                                                    <img src="<?php echoProfileImage($user['imguser']) ?>" id="imgPerfil" alt="">
-                                                                    <div class="editar-hover">
-                                                                        <i class="fa-solid fa-pen"></i>
-                                                                        <p>Editar Foto</p>
-                                                                    </div>
-                                                                </label>
-                                                                <input id="inputImg" type="file" name="imgPerfil" onchange="showSelectedImg(event, '#imgPerfil')">
+                                                <!-- Modal de informações -->
+                                                <?php include ("components/CRUD/modal-editUser.php")?>
 
-                                                                <div class="form-group mb-3">
-                                                                    <label for="nome" class="form-label">Nome Completo</label>
-                                                                    <input type="text" class="form-control" id="nome" name="nome" required value="<?php echoDadosNotNull($user['nomeuser'], null) ?>">
-                                                                </div>
-                                                                <div class="form-group mb-3">
-                                                                    <label for="email" class="form-label">Email</label>
-                                                                    <input type="email" class="form-control" id="email" name="email" required value="<?php echoDadosNotNull($user['emailuser'], null) ?>">
-                                                                </div>
-                                                                <div class="form-group mb-3">
-                                                                    <label for="cpf" class="form-label">CPF</label>
-                                                                    <input type="text" class="form-control" id="cpf" placeholder="" disabled value="<?php echoDadosNotNull($user['cpfuser'], null) ?>">
-                                                                </div>
-                                                                <div class="form-group mb-3">
-                                                                    <label for="telefone" class="form-label">Telefone</label>
-                                                                    <input type="text" class="form-control" id="telefone" name="telefone" value="<?php echoDadosNotNull($user['telefoneuser'], null) ?>">
-                                                                </div>
-                                                                <div class="form-group mb-3">
-                                                                    <label for="nascimento" class="form-label">Data de Nascimento</label>
-                                                                    <input type="date" class="form-control" id="nascimento" name="nascimento" value="<?php echoDadosNotNull($user['nascimentouser'], null) ?>">
-                                                                </div>
-                                                                <div class="form-group mb-3">
-                                                                    <label for="bio" class="form-label">Bio</label>
-                                                                    <textarea class="form-control" id="bio" name="bio" rows="5" style="white-space: pre-wrap;"><?php echoDadosNotNull($user['biografiauser'], null) ?></textarea>
-                                                                </div>
-
-                                                                <!-- div para comunicação com usuário -->
-                                                                <div id="feedbackUsuario"></div>
-                                                                
-                                                                <div class="buttons d-flex justify-content-end align-items-center py-3">
-                                                                    <a href="perfil.php" class="btn btn-link me-3">Cancelar</a>
-                                                                    <button type="submit" class="btn btn-outline-green">Salvar Alterações</button>
-                                                                </div>
-                                                            </form>
-                                                        
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                </div>
-
-
-
+                                                <!-- Modal de Exclusão-->
+                                                <?php include ("components/CRUD/modal-excludeUser.php") ?>
 
                                             <?php
                                             $admin = ($user["isadminuser"] == true) ? "Sim" : "Não";
@@ -133,8 +84,8 @@
                                                     <td>$admin</td>
                                                     <td>
                                                         <div class="action-buttons d-flex justify-content-around">
-                                                            <a href="#modal{$user['iduser']}" data-bs-toggle="modal" data-bs-target="#modal{$user['iduser']}" id="infoButton" class="btn btn-green"><i class="fa-solid fa-circle-info"></i></a>
-                                                            <a href="#exlude" id="excludeButton" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                                                            <a href="#modalInfo{$user['iduser']}" data-bs-toggle="modal" data-bs-target="#modalInfo{$user['iduser']}" id="infoButton" class="btn btn-green"><i class="fa-solid fa-circle-info"></i></a>
+                                                            <a href="#modalExclude{$user['iduser']}" data-bs-toggle="modal" data-bs-target="#modalExclude{$user['iduser']}" id="excludeButton" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -145,7 +96,58 @@
                                             ?>
                                 </tbody>
                             </table>
+                            <nav aria-label="Pagination">
+                                <ul class="pagination justify-content-center" id="pagination">
+                                    <?php 
+                                        //Botão de Anterior
+                                        if ($currPage >1) {
+                                            $prevPage = $currPage-1;
+                                            echo <<<HTML
+                                            <li class="page-item"><a class="page-link" href="admin.php?page={$prevPage}">Anterior</a></li>
+                                            HTML;
+                                        }
+
+                                        else {
+                                            echo <<<HTML
+                                            <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+                                            HTML;
+                                        }
+
+                                        //Botões das páginas
+                                        for ($i = 1; $i<= $totalPages; $i++) {
+                                            
+                                            if ($i == $currPage) {
+                                                echo <<<HTML
+                                                <li class="page-item"><a class="page-link active" href="admin.php?page={$i}">$i</a></li>
+                                                HTML;
+                                            }
+                                            else {
+                                                echo <<<HTML
+                                                <li class="page-item"><a class="page-link" href="admin.php?page={$i}">$i</a></li>
+                                                HTML;
+                                            }
+                                            
+                                        }
+
+
+                                        //Botão de Próximo
+                                        if ($currPage < $totalPages ) {
+                                            $nextPage = $currPage+1;
+                                            echo <<<HTML
+                                            <li class="page-item"><a class="page-link" href="admin.php?page={$nextPage}">Próximo</a></li>
+                                            HTML;
+                                        }
+
+                                        else {
+                                            echo <<<HTML
+                                            <li class="page-item"><a class="page-link" href="#">Próximo</a></li>
+                                            HTML;
+                                        }
+                                    ?>
+                                </ul>
+                            </nav>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -160,4 +162,6 @@
     ></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- FORM STEPS -->
+    <script src="js/stepForm.js"></script>
 </html>
