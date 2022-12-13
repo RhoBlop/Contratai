@@ -126,7 +126,12 @@ h7 {
 
 .show {
     opacity: 1;
-    transform: translateX(0); 
+    transform: translateY(0); 
+}
+
+div.accordion-collapse.show,
+div.accordion {
+    transform: none;
 }
 
 .col.hidden {
