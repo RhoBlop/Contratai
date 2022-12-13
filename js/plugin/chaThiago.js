@@ -2,7 +2,7 @@
 
 class chaThiago {
     constructor(elementId, idUser, contacts) {
-        this.liveChat = false;
+        this.liveChat = true;
 
         // data
         this.idSender = idUser;

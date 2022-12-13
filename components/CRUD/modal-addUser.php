@@ -51,7 +51,7 @@
                         <!-- CPF -->
                         <div class="form-group mb-2">
                             <label for="cpf" class="mb-1">CPF</label>
-                            <input type="text" class="form-control " id="cpf" name="cpf" placeholder="___.____.___-__" required oninput="setMask(this, maskCPF)" maxlength="14" onchange  ="validaCPF(this.value)">
+                            <input type="text" class="form-control " id="cpf" name="cpf" placeholder="___.____.___-__" required oninput="setMask(this, maskCPF)" maxlength="14" onchange="validaCPF(this.value)">
                         </div>
                         
                         <!-- CEP -->
