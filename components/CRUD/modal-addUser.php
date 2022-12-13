@@ -27,12 +27,6 @@
                             <input type="text" class="form-control " id="telefone" name="telefone" placeholder="(__) ____-____" required oninput="setMask(this, maskTelefone)" maxlength="15">
                         </div>
 
-                        <!-- BAIRRO --> 
-                        <div class="form-group mb-2">
-                            <label for="bairro" class="mb-1">Telefone</label>
-                            <input type="text" class="form-control " id="bairro" name="bairro" required>
-                        </div>
-
                         <!-- SENHA -->
                         <div class="form-group mb-2">
                             <label for="senha" class="mb-1">Senha</label>
@@ -53,6 +47,12 @@
                             <label for="cpf" class="mb-1">CPF</label>
                             <input type="text" class="form-control " id="cpf" name="cpf" placeholder="___.____.___-__" required oninput="setMask(this, maskCPF)" maxlength="14" onchange="validaCPF(this.value)">
                         </div>
+
+                        <!-- NASCIMENTO -->
+                        <div class="form-group mb-2" id="dateWrapper">
+                                <label for="nascimento" class="mb-1">Data de Nascimento</label>
+                                <input type="date" class="form-control" id="nascimento" name="nascimento">
+                        </div>
                         
                         <!-- CEP -->
                         <div class="form-group mb-2">
@@ -63,20 +63,20 @@
                         <!-- BAIRRO -->
                         <div class="form-group mb-2">
                             <label for="bairro" class="mb-1">Bairro</label>
-                            <input type="text" class="form-control " id="bairro" name="bairro" placeholder="---" disabled>
+                            <input type="text" class="form-control " id="bairro" name="bairro" placeholder="---" readonly>
                         </div>
 
                         <div class="row">
                             <!-- CIDADE -->
                             <div class="form-group mb-2 col-8">
                                 <label for="cidade" class="mb-1">Cidade</label>
-                                <input type="text" class="form-control " id="cidade" name="cidade" placeholder="---" disabled>
+                                <input type="text" class="form-control " id="cidade" name="cidade" placeholder="---" readonly>
                             </div>
 
                             <!-- ESTADO -->
                             <div class="form-group mb-2 col-4">
                                 <label for="estado" class="mb-1">Estado</label>
-                                <input type="text" class="form-control " id="estado" name="estado" placeholder="---" disabled>
+                                <input type="text" class="form-control " id="estado" name="estado" placeholder="---" readonly>
                             </div>
                         </div>
 

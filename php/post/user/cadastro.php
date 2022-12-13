@@ -15,6 +15,8 @@
     //TODO: adicionar verificação do CEP e insert no cadastro
     // destructuring das variáveis recebidas pelo POST request
     [$nome, $email, $cpf, $telefone, $nascimento, $senha, $confirmaSenha, $nomeBairro, $nomeCidade, $siglaEstado] = [$_POST["nome"], $_POST["email"], $_POST["cpf"], $_POST["telefone"],  $_POST["nascimento"], $_POST["senha"], $_POST["confirmaSenha"], $_POST["bairro"], $_POST["cidade"], $_POST["estado"]];
+
+    
     
     $selectBairro = $user->selectBairroByNome($nomeBairro);
     $selectCidade = $user->selectCidadeByNome($nomeCidade);

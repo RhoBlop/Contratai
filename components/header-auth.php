@@ -11,8 +11,9 @@
     }
 
     $usuarioClass = new Usuario();
-    $profileImg = $_SESSION["profileImg"];
-    $username = $_SESSION["username"];
+    $profInfo = $usuarioClass->selectBasicInfoById($_SESSION["iduser"]);
+    $profileImg = $profInfo["imguser"];
+    $username = $profInfo["nomeuser"];
 
     $numNotific = $usuarioClass->selectNumNotificacoes($_SESSION["iduser"])["numnotific"];
 ?>

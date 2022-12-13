@@ -401,6 +401,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </main>
 
     <!-- Add jQuery library (required) -->

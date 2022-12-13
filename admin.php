@@ -162,6 +162,13 @@
     ></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
     <!-- FORM STEPS -->
     <script src="js/stepForm.js"></script>
+
+    <!-- SCRIPT PARA CEP -->
+    <script src="js/buscaCEP.js"></script>
+
+    <!-- VALIDAÇÃO DE CPF -->
+    <script src="js/validaCPF.js"></script>
 </html>
