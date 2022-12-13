@@ -1,5 +1,8 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
-<html lang="en" class="hydrated">
+<html lang="pt-BR">
     <head>
         <?php require("components/head.php") ?>
         <link rel="stylesheet" href="css/chaThiago.css">
