@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
     <?php require("components/head.php") ?>
   </head>
   <body>

@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
         <?php require("components/head.php") ?>
         <link rel="stylesheet" href="css/chaThiago.css">
     </head>
