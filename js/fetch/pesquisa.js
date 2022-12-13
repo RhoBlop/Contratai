@@ -121,7 +121,7 @@ function constructSearchCards(dados) {
 
 function createProfCard(prof) {
     let card = document.createElement("div");
-    card.classList.add("card", "card-hover", "card-pesquisa", "py-2");
+    card.classList.add("card", "card-hover", "card-pesquisa", "py-1");
     let {
         idprof,
         imgprof,
@@ -148,7 +148,8 @@ function createProfCard(prof) {
                 </span>
             </div>
             <div class="card-text">
-                <div class="contract-dates mt-4">
+                <p class="mb-1">Especializações:</p>
+                <div class="contract-dates">
                         ${(function generateEspecChips(especs){
                             let string = "";
                             for (espec of especs) {
