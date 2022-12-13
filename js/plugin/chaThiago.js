@@ -19,7 +19,7 @@ class chaThiago {
     }
 
     setChatSocket() {
-        let socket = io('https://contratai-chat.up.railway.app/', {
+        let socket = io('https://contratai-chat.up.railway.app', {
             transports: ['websocket'],
             withCredentials: true,
         });
@@ -42,7 +42,8 @@ class chaThiago {
 
             this.addContactMessages(idSender, [ msg ]);
             
-            if (idSender === this.currContactId) {
+            console.log(idSender, this.currContactId);
+            if (parseInt(idSender) === parseInt(this.currContactId)) {
                 this.appendNewMessages([ msg ]);
             }
         });
@@ -204,6 +205,7 @@ class chaThiago {
     }
 
     async changeContact(contactId) {
+        // console.log(this.contacts);
         if (contactId === this.currContactId) {
             return;
         }
@@ -212,7 +214,6 @@ class chaThiago {
 
         let { elementGuid, userName, imgUser, messages, offset, fetched } = this.contacts[contactId];
         this.currContactId = contactId;
-        console.log(contactId, userName, imgUser, messages);
 
         const img = document.createElement("img");
         img.src = imgUser ? imgUser : "images/temp/default-pic.png";
@@ -242,6 +243,7 @@ class chaThiago {
     }
 
     appendNewMessages(messagesArr) {
+        console.log(messagesArr);
         if (!messagesArr || messagesArr.length === 0) {
             return;
         }
@@ -253,7 +255,6 @@ class chaThiago {
             message.textContent = text;
 
             message.classList.add(sent ? "sent" : "received");
-
             
             messagesDiv.appendChild(message);
         }
@@ -373,6 +374,7 @@ async function getContacts() {
         }
     );
     let data = await response.json();
+    // console.log(data);
     
     let { dados } = data;
     return [ dados.idUser, dados.contacts ];
