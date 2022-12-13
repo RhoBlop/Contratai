@@ -12,9 +12,6 @@
         <main>
             <div class="container p-3 my-3">
                 <div class="row gx-5">
-                    
-                    
-
                     <?php include("components/sidebar.php")?>
 
                     <div class="col-8 px-4" id="settingsContent">

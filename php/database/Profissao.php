@@ -87,9 +87,9 @@
                     INNER JOIN profissao AS prof ON (espec.idprof = prof.idprof)
                     LEFT JOIN contrato AS contrt ON (usr.iduser = contrt.idcontratado AND contrt.idespec = espec.idespec AND contrt.idstatus = 4)
                     LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    WHERE (prof.idprof = :id) AND ()
+                    WHERE (prof.idprof = :id)
                     GROUP BY usr.iduser, prof.descrprof
-                    ORDER BY mediaavaliacao DESC
+                    ORDER BY mediaavaliacao DESC NULLS LAST
                     LIMIT :limit
                 SQL;
                 
