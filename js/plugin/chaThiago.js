@@ -42,7 +42,6 @@ class chaThiago {
 
             this.addContactMessages(idSender, [ msg ]);
             
-            console.log(idSender, this.currContactId);
             if (parseInt(idSender) === parseInt(this.currContactId)) {
                 this.appendNewMessages([ msg ]);
             }
@@ -205,7 +204,7 @@ class chaThiago {
     }
 
     async changeContact(contactId) {
-        // console.log(this.contacts);
+        console.log(this.contacts);
         if (contactId === this.currContactId) {
             return;
         }
@@ -243,7 +242,6 @@ class chaThiago {
     }
 
     appendNewMessages(messagesArr) {
-        console.log(messagesArr);
         if (!messagesArr || messagesArr.length === 0) {
             return;
         }
@@ -351,7 +349,7 @@ async function getContacts() {
     const params = new Proxy(new URLSearchParams(window.location.search), {
         get: (searchParams, prop) => searchParams.get(prop),
       });
-    let idReceiver = params.newChatId;
+    let idReceiver = parseInt(params.newChatId);
 
     let queryString = "";
     if (idReceiver) {
@@ -374,7 +372,7 @@ async function getContacts() {
         }
     );
     let data = await response.json();
-    // console.log(data);
+    console.log(data);
     
     let { dados } = data;
     return [ dados.idUser, dados.contacts ];

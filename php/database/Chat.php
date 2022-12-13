@@ -62,18 +62,20 @@
 
                 // NEW CONTACT
                 if ($newUserId !== null && is_numeric($newUserId)) {
+                    $newUserId = intval($newUserId);
                     $userExists = false;
                     for ($i = 0; $i < count($contacts); $i++) {
                         $cont = $contacts[$i];
                         if ($cont["idUser"] === $newUserId) {
                             // change contact order to first on array
-                            $out = array_splice($array, $i, 1);
-                            array_splice($array, 0, 0, $out);
+                            $out = array_splice($contacts, $i, 1);
+                            array_splice($contacts, 0, 0, $out);
 
                             $userExists = true;
                             break;
                         }
                     }
+                    
 
                     if (!$userExists) {
                         $sql = <<<SQL

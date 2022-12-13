@@ -85,9 +85,9 @@
                     INNER JOIN userEspec AS useres ON (usr.iduser = useres.iduser)
                     INNER JOIN especializacao AS espec ON (useres.idespec = espec.idespec)
                     INNER JOIN profissao AS prof ON (espec.idprof = prof.idprof)
-                    INNER JOIN contrato AS contrt ON (usr.iduser = contrt.idcontratado AND contrt.idespec = espec.idespec)
-                    INNER JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
-                    WHERE (prof.idprof = :id) AND (contrt.idstatus = 4)
+                    LEFT JOIN contrato AS contrt ON (usr.iduser = contrt.idcontratado AND contrt.idespec = espec.idespec AND contrt.idstatus = 4)
+                    LEFT JOIN avaliacao AS aval ON (contrt.idcontrato = aval.idcontrato)
+                    WHERE (prof.idprof = :id) AND ()
                     GROUP BY usr.iduser, prof.descrprof
                     ORDER BY mediaavaliacao DESC
                     LIMIT :limit
