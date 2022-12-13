@@ -146,6 +146,8 @@ h7 {
     transition-delay: .6s;
 }
 
+
+
 /* Header */
 
 header {
@@ -1366,7 +1368,7 @@ p {
 }
 
 .filter-tablist.notificacao {
-    min-width: 380px;
+    min-width: 380px; 
 }
 
 /* Acordiões */

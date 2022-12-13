@@ -50,7 +50,7 @@
                 <img src="images\sobre\matheus.jpeg" alt="Matheus Magnago" id="matheus">
               </div>
               <h3 class="m-0">Matheus Magnago</h3>
-              <p>Idealizador do projeto e Arquiteto de Dados<p>
+              <p>Idealizador do projeto<p>
             </div>
           </div>
     </div>
